@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://torpedo/skin/instruction.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
+
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		title="&instructionheader;"
+		onload="onLoad();">
+	
+	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js"></script>
+	
+	<vbox style="padding: 2px; width: 35px;">
+		<image id="instructionPic" flex="0" align="start" />
+	</vbox>
+</window>

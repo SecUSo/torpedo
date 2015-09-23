@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+				   
+    <em:id>torpedo@tu-darmstadt.de</em:id>
+    <em:version>1.0</em:version>
+    <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
+    <em:description>placeholder</em:description>
+    <em:creator>TU Darmstadt SecUSo</em:creator>
+    <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
+	<em:optionsURL>chrome://torpedo/content/options.xul</em:optionsURL>
+    <em:type>2</em:type>
+	
+	<em:localized>
+      <Description>
+        <em:locale>de</em:locale>
+        <em:creator>TU Darmstadt - SecUSo</em:creator>
+        <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
+        <em:description>Beschreibung Platzhalter</em:description>
+        <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
+      </Description>
+    </em:localized>
+	
+    <em:localized>
+      <Description>
+        <em:locale>en-GB</em:locale>
+        <em:creator>TU Darmstadt - SecUSo</em:creator>
+        <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
+        <em:description>Description placeholder</em:description>
+        <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
+      </Description>
+    </em:localized>
+	
+    <em:localized>
+      <Description>
+        <em:locale>en-US</em:locale>
+        <em:creator>TU Darmstadt - SecUSo</em:creator>
+        <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
+        <em:description>Description placeholder</em:description>
+        <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
+      </Description>
+    </em:localized>
+		
+    <em:targetApplication>
+      <Description>
+        <!-- thunderbird -->
+        <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+        <em:minVersion>26.0</em:minVersion>
+        <em:maxVersion>39.0</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+	<em:targetApplication>
+      <Description>
+        <!-- firefox -->
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>26.0</em:minVersion>
+        <em:maxVersion>39.0</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+	
+  </Description>
+</RDF>

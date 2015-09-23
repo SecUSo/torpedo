@@ -1,0 +1,54 @@
+span #baseDomain
+{
+	font-weight:bold;
+	margin: 0px;
+}
+
+span
+{
+	margin-top: 10px;
+	max-width: 220px;
+    display: block;
+	float:left;
+	/*-ms-word-break: break-all;*/
+	word-break: break-all;
+	white-space: normal
+
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+}
+
+
+span #url1,span #url2
+{
+	margin: 0px;
+}
+
+#tooltippanel
+{
+	-moz-appearance: none !important;
+	background-color: #FFFFFF !important;
+	border: 1px solid !important;
+	color: black !important;
+	outline-color: black;	
+}
+
+.mainBox
+{
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+#info-pic
+{
+    width: 32px;
+    height: 32px;
+}
+
+#info-box
+{
+    margin-left: 15px;
+}

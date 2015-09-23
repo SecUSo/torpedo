@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://torpedo/skin/tooltippanel.css" type="text/css"?>
+
+<overlay
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-1.10.2.js"/>
+	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/responsecollator.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/XMLHttpRequestManager.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/main.js"/>
+	
+	<popupset>
+        <panel id="tooltippanel">
+			<hbox class="mainBox">
+				<vbox>
+					<hbox id="url-box">
+						<span id="te">
+							<span id="url1" />
+							<span id="baseDomain" />
+							<span id="url2" />
+						</span>
+					</hbox>
+					<hbox id="description-box">
+						<span id="description"> </span>						
+					</hbox>
+					<hbox>
+						<span id="countdown"></span>							
+					</hbox>
+				</vbox>
+				<vbox id="info-box">
+					<spacer flex="1"/>
+					<hbox>
+						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
+					</hbox>
+				</vbox>
+			</hbox>		
+        </panel>
+    </popupset>
+	
+	<stringbundleset id="stringbundleset">
+        <stringbundle id="string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
+    </stringbundleset>
+</overlay>

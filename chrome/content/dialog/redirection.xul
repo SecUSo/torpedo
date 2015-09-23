@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://torpedo/skin/redirection.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/main.dtd">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		id="yesnodialog"
+		title="&windowheader;"
+		persist="screenX screenY width height"
+        buttons="accept,cancel"
+		buttonlabelcancel="&no;"
+		buttonlabelaccept="&yes;"
+		onload="onLoad();"
+        ondialogaccept="return pressedOK();"
+        ondialogcancel="return true;"
+		windowtype="myDialogWindowType">
+		
+		<script type="application/javascript"  src="chrome://torpedo/content/dialog/redirection.js"></script>
+		
+		<span id="description" />
+		<span>
+			<span id="url1" class="url" />
+			<span id="baseDomain" class="url" />
+			<span id="url2" class="url" />
+		</span>
+		<span id="question" />
+</dialog>

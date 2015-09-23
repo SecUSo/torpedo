@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<prefwindow title="TOrPeDO Einstellungen" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+    <prefpane label="Option">
+	
+		<preferences>
+			<preference id="firefox-unblocking-timer"
+						name="extensions.torpedo.unblockingTimer" type="int"/>
+		</preferences>
+	
+        <tabbox>
+            <tabs>
+                <tab label="Option"/>
+            </tabs>
+			<tabpanels>
+				<tabpanel id="maintab" orient="vertical">
+                    <groupbox>
+                        <caption label="Timer"/>
+						<grid>
+                            <rows>
+                                <row>
+                                    <textbox type="number" id="find-text" preference="firefox-unblocking-timer" />
+                                    <label value="Sekunden"/>
+                                </row>
+                            </rows>
+                        </grid>					
+                    </groupbox>				
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+    </prefpane>
+
+</prefwindow>
