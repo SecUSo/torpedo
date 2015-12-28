@@ -21,7 +21,7 @@ torpedo.prefs = function () {
 		
         addonUninstallingListener: function () 
 		{
-			let listener = 
+			var listener =
 			{
 				onUninstalling: function(addon) 
 				{
@@ -31,7 +31,7 @@ torpedo.prefs = function () {
 						torpedo.prefs.resetPrefs();
 					}
 				}
-			}
+			};
 			
 			try 
 			{
@@ -46,11 +46,9 @@ torpedo.prefs = function () {
 		
 		resetPrefs: function () 
 		{
-            // TODO this is not yet implemented by firefox raises "NS_ERROR_NOT_IMPLEMENTED"
-            //prefManager.resetBranch("");
-
-            // TODO hence we reset all prefs manually
+            // reset all prefs manually
 			prefManager.clearUserPref("firstrun");
+			prefManager.clearUserPref("blockingTimer");
 		}		
     };
 }();

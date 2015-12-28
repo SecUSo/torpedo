@@ -9,7 +9,7 @@ torpedo.handler.MouseLeavetimer;
 torpedo.handler.mouseOverTooltipPane = function (event) 
 {
 	clearTimeout(torpedo.handler.MouseLeavetimer);
-}
+};
 
 torpedo.handler.mouseDownTooltipPane = function (event) 
 {	
@@ -28,7 +28,7 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 			clearTimeout(clickTimer);
 		}
 	}, 400); 
-}		
+};
 
 torpedo.handler.mouseOverHref = function (event) 
 {
@@ -43,7 +43,7 @@ torpedo.handler.mouseOverHref = function (event)
 	
 	if(countDownTimer == null)
 	{
-		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("unblockingTimer"),'countdown');
+		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown');
 		
 		clickTimer = setTimeout(function()
 		{
@@ -54,9 +54,9 @@ torpedo.handler.mouseOverHref = function (event)
 			}
 			$(tempTarget).unbind('click', torpedo.handler.mouseClickHref);
 			
-		}, torpedo.prefs.getIntPref("unblockingTimer")*1000);
+		}, torpedo.prefs.getIntPref("blockingTimer")*1000);
 	}
-}
+};
 
 torpedo.handler.mouseDownHref = function (event) 
 {
@@ -75,7 +75,7 @@ torpedo.handler.mouseDownHref = function (event)
 			clearTimeout(clickTimer);
 		}
 	}, 400); 
-}
+};
 
 torpedo.handler.mouseClickHref = function (event) 
 {
@@ -88,35 +88,9 @@ torpedo.handler.mouseClickHref = function (event)
 	panel.openPopup(tempTarget, "after_start", 0, 0, false, false);
 
 	return false;		
-}
+};
 
 torpedo.handler.mouseClickInfoButton = function (event) 
 {
 	torpedo.dialogmanager.createInstruction(800,460);
-}
-
-torpedo.handler.mouseClickHrefRedirection = function (event) 
-{
-	event.preventDefault();	
-	var tempTarget = torpedo.functions.findParentTagTarget(event,'A');
-	var result;
-	
-	var href = tempTarget.getAttribute("redirection_url");
-	if(href != null)
-	{
-		result = torpedo.dialogmanager.createRedirection(600,120,tempTarget.getAttribute("tooltiptext"),href,torpedo.stringsBundle.getString('response_url_redirect_question'));
-	}
-	else
-	{
-		result = torpedo.dialogmanager.createRedirection(600,120,tempTarget.getAttribute("tooltiptext"),"","");
-	}
-	
-	if(result)
-	{
-		$(tempTarget).unbind('click', torpedo.handler.mouseClickHrefRedirection);
-		tempTarget.setAttribute("redirection_accept","true");
-		openUILink(""+href, event, false, true);
-	}
-
-	return false;		
-}
+};
