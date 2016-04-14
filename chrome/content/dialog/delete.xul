@@ -7,7 +7,7 @@
 		buttons="accept,cancel"
 		buttonlabelcancel="&no;"
 		buttonlabelaccept="&yes;"
-		ondialogaccept="torpedo.dialogmanager.deleteEntry(true, '');"
+		ondialogaccept="torpedo.dialogmanager.deleteEntry(true);"
 		ondialogcancel="return true;">
 	
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />

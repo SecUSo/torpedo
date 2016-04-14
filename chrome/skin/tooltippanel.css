@@ -28,8 +28,7 @@ span #url1,span #url2
 {
 	-moz-appearance: none !important;
 	background-color: #FFFFFF !important;
-	border-style: solid;
-	border-width: 2px;
+	border: solid 2px red;
 }
 
 .mainBox

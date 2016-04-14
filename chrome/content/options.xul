@@ -54,7 +54,7 @@
                                     <label value="List of user links:" style="font-weight:bold; color:orange;"/>
                                 </row>
                                 <row>
-                                    <button id="editSecond" label="Edit entries" />
+                                    <button id="editSecond" label="Edit entries" onclick="torpedo.handler.mouseClickEditButton();"/>
                                     <button id="deleteSecond" label="Clear all entries" onclick="torpedo.handler.mouseClickDeleteButton();"/>
                                 </row>
                             </rows>

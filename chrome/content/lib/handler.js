@@ -94,7 +94,8 @@ torpedo.handler.mouseClickInfoButton = function (event)
 
 torpedo.handler.mouseClickDeleteButton = function(event){
 	Application.console.log("delete clicked");
-	torpedo.dialogmanager.createDelete(880,495);
+	var dimension = torpedo.functions.calcWindowPosition(300,80);
+	torpedo.dialogmanager.createDelete(300,80, dimension);
 };
 
 torpedo.handler.mouseClickEditButton = function(event){

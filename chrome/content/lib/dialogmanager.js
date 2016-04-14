@@ -14,18 +14,18 @@ torpedo.dialogmanager.createDelete = function (windowWidth,windowHeight, dimensi
 };
 
 torpedo.dialogmanager.createEdit = function () {
-	//window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome, dialog,resizable=yes, modal");
+	window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
 };
 
-torpedo.dialogmanager.deleteEntry = function (all,website) {
+torpedo.dialogmanager.deleteEntry = function (all) {
 	torpedo.stringsBundle = document.getElementById("string-bundle");
 	if(all) {
 		torpedo.db.deleteAllSecond();
 		alert(torpedo.stringsBundle.getString('entries_gone'));
+		return true;
 	}
 	else {
-		torpedo.db.deleteSomeSecond(website);
-		alert(website + torpedo.stringsBundle.getString('one_gone'));
+		alert(torpedo.db.deleteSomeSecond()+ " " + torpedo.stringsBundle.getString('one_gone'));
+		return false;
 	}
-	return true;
 };

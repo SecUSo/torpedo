@@ -3,14 +3,14 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		title="&editEntries;"
+		title="Edit Entries"
 		buttons="accept,cancel"
-		buttonlabelcancel="&no;"
-		buttonlabelaccept="&yes;"
-		ondialogaccept="torpedo.dialogmanager.deleteEntry(true, '');"
-		ondialogcancel="return true;">
-	
-	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
+		buttonlabelcancel="Close"
+		buttonlabelaccept="Delete"
+		ondialogaccept="torpedo.dialogmanager.deleteEntry(false);"
+		ondialogcancel="return true;"
+		onload="torpedo.db.getSecond();">
+
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/urls.js"/>
 
@@ -18,7 +18,15 @@
         <stringbundle id="string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
 
-	<vbox>
-		<label id="sure" value="&sure;"/>
-	</vbox>
+		<vbox>
+			<label value="Pick your edit" />
+			<listbox id="theList" width="400" onselect="torpedo.db.select(this.selectedIndex);">
+			  <listhead>
+			    <listheader label="URLs" width="400"/>
+			  </listhead>
+			  <listcols>
+			    <listcol flex="1"/>
+			  </listcols>
+			</listbox>
+		</vbox>
 </dialog>

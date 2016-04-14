@@ -107,7 +107,10 @@ var jsonUrls = {
 						{"url" : "tripadvisor.de"},
 						{"url" : "ardmediathek.de"}
 					],
-	"secondClickUrls" : [],
+	"secondClickUrls" : [{"url" : "secuso.org"}, 
+						{"url" : "dawanda.com"},
+						{"url" : "tripadvisor.de"},
+						{"url" : "ardmediathek.de"}],
 	"firstClickUrls" : []
 };
 
@@ -152,7 +155,9 @@ torpedo.db.pushUrl = function (website)
 		jsonUrls.secondClickUrls.push({"url" : website});
 		var jsonString = JSON.stringify(jsonUrls);
 		Application.console.log(jsonString);
-		delete jsonUrls.firstClickUrls[first].url;
+
+		jsonUrls.firstClickUrls.splice(first,1);
+		
 		var jsonString = JSON.stringify(jsonUrls);
 		Application.console.log(jsonString);
 		return 3;
@@ -208,6 +213,9 @@ torpedo.db.inFirstClick = function (website){
 	return -1;
 };
 
+
+var selected;
+
 torpedo.db.deleteAllSecond = function () {
 	var jsonString = JSON.stringify(jsonUrls);
 	var urlArray = JSON.parse(jsonString);
@@ -219,20 +227,31 @@ torpedo.db.deleteAllSecond = function () {
 	Application.console.log(jsonString);
 };
 
-torpedo.db.deleteSomeSecond = function (website) {
+torpedo.db.deleteSomeSecond = function () {
 	var jsonString = JSON.stringify(jsonUrls);
 	var urlArray = JSON.parse(jsonString);
-	if(!(torpedo.db.inSecondClick(website))) return false;
 
-	var counter = 0;
-	for(counter = 0; urlArray.secondClickUrls[counter] != null; counter++){
-		if(urlArray.secondClickUrls[counter].url == website) {
-			delete jsonUrls.secondClickUrls[counter].url;
-			break;
-		}
-	}
+	var website = jsonUrls.secondClickUrls[selected].url;
+	delete jsonUrls.secondClickUrls[selected].url;
+	document.getElementById('theList').removeItemAt(selected);
 	jsonString = JSON.stringify(jsonUrls);
 	Application.console.log(jsonString);
+	return website;
+};
 
-	return true;
+torpedo.db.getSecond = function () {
+	var theList = document.getElementById('theList');
+	Application.console.log("getSecond called");
+	var jsonString = JSON.stringify(jsonUrls);
+	var urlArray = JSON.parse(jsonString);
+	var i = 0;
+	for (i = 0; jsonUrls.secondClickUrls[i] != null; i++) {
+	    var row = document.createElement('listitem');
+	    row.setAttribute('label', jsonUrls.secondClickUrls[i].url);
+	    theList.appendChild(row);
+	}
+};
+
+torpedo.db.select = function(index){
+	selected = index;
 };
