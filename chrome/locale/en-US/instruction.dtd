@@ -2,4 +2,8 @@
 <!ENTITY observationtext "ONLY consider the highlighted part in the URL displayed in the Tooltip.">
 <!ENTITY appendixtext "PS: Long ULRs can be authentic, too. Only the <html:b>highlighted</html:b> part is important">
 <!ENTITY maindescriptiontext "IGNORE everything else: ignore subject, sender, content, HTTPS, Logos, and design. <html:b>Thus, ignore the information about the sender of the email</html:b>. All this can be easily faked. The remaining parts of the URL can also be easily faked.">
- 
+<!ENTITY deleteEntries "Delete all entries">
+<!ENTITY windowheader "TOrPeDO - Tooltip Phish Detection">
+<!ENTITY yes "Yes">
+<!ENTITY no "No">
+<!ENTITY sure "Do you really want to delete all entries?">

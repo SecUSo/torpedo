@@ -3,11 +3,14 @@
 <prefwindow title="TOrPeDO Einstellungen" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+    <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
+    <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+    <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
+
     <prefpane label="Option">
 	
 		<preferences>
-			<preference id="firefox-unblocking-timer"
-						name="extensions.torpedo.unblockingTimer" type="int"/>
+			<preference id="firefox-blocking-timer" name="extensions.torpedo.blockingTimer" type="int"/>
 		</preferences>
 	
         <tabbox>
@@ -21,12 +24,42 @@
 						<grid>
                             <rows>
                                 <row>
-                                    <textbox type="number" id="find-text" preference="firefox-unblocking-timer" />
-                                    <label value="Sekunden"/>
+                                    <textbox type="number" id="countdown" preference="firefox-blocking-timer" style="margin-right:10px; max-width:100px"/>
+                                    <label value="Sekunden" style="margin-top:10px"/>
+                                </row>
+                                <row>
+                                    <label value="" />
                                 </row>
                             </rows>
                         </grid>					
-                    </groupbox>				
+                    </groupbox>
+                    <groupbox>
+                        <caption label="Lists"/>
+                        <grid>
+                            <rows>
+                                <row>
+                                    <label value="List of default links:" style="font-weight:bold; color:green"/>
+                                </row>
+                                <row>
+                                    <checkbox id="greenlist" label="Default list activated" checked="true" />
+                                </row>
+                                <row>
+                                    <label value="" />
+                                </row>
+                            </rows>
+                        </grid>
+                         <grid>
+                            <rows>
+                                <row>
+                                    <label value="List of user links:" style="font-weight:bold; color:orange;"/>
+                                </row>
+                                <row>
+                                    <button id="editSecond" label="Edit entries" />
+                                    <button id="deleteSecond" label="Clear all entries" onclick="torpedo.handler.mouseClickDeleteButton();"/>
+                                </row>
+                            </rows>
+                        </grid>                 
+                    </groupbox>     			
 				</tabpanel>
 			</tabpanels>
 		</tabbox>

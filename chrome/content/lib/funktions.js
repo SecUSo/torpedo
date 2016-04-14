@@ -1,4 +1,5 @@
 var torpedo = torpedo || {};
+var setUrl = "";
 
 torpedo.functions = torpedo.functions || {};
 
@@ -50,9 +51,10 @@ torpedo.functions.getDomainWithFFSuffix = function (url)
 {
 	var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
 	var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(""+url, null, null);
-	
 	try 
-	{
+	{	
+		//hardcoded because this is the only url where this doesn't work
+		if(eTLDService.getBaseDomain(tempURI) == "www.blogspot.de") return "blogspot.de";
 		return eTLDService.getBaseDomain(tempURI);
 	}
 	catch(err) 
@@ -67,7 +69,7 @@ torpedo.functions.countdown = function (timee,id)
 	
 	function showTime()
 	{
-		day = Math.floor(startTime/(60*60*24)) % 24; 
+		/* day = Math.floor(startTime/(60*60*24)) % 24; 
 		hour = Math.floor(startTime/(60*60)) % 24;
 		minute = Math.floor(startTime/60) %60;
 		second = startTime %60;
@@ -76,15 +78,40 @@ torpedo.functions.countdown = function (timee,id)
 		hour = (hour < 10) ? "0"+hour : hour;
 		minute = (minute < 10) ? "0"+minute : minute;
 		second = (second < 10) ? "0"+second : second;
-
-		strZeit =" "+day + hour + ":" + minute + ":" + second;
-
 		
-		$("#"+id).html(strZeit);		
+		strZeit =" "+day + hour + ":" + minute + ":" + second;
+		*/
+		var second = startTime % 60;
+		strZeit = (second < 10) ? "0"+second : second;
+		$("#"+id).html(strZeit);
+
+
+		var setUrl1 = document.getElementById("url1");
+		var setUrl2 = document.getElementById("url2");
+		var setUrl3 = document.getElementById("baseDomain");
+		// end of timer		
+		if(second == 0){
+			//change text from tooltip to "you can click link now"
+			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
+			
+			// make URL in tooltip clickable
+			setUrl1.setAttribute("href", setUrl);
+			setUrl2.setAttribute("href", setUrl);
+			setUrl3.setAttribute("href", setUrl);
+			$(setUrl1).bind("click",torpedo.handler.mouseClickHref);
+			$(setUrl2).bind("click",torpedo.handler.mouseClickHref);
+			$(setUrl3).bind("click",torpedo.handler.mouseClickHref);
+		}
+		else {
+			$(setUrl1).unbind( "click" );
+			$(setUrl2).unbind( "click" );
+			$(setUrl3).unbind( "click" );
+		}
 	}
 	showTime();
-	--startTime;
-	
+	if(startTime > 0) 
+		--startTime;
+
 	var timerInterval = setInterval(function timer()
 	{ 
 		showTime();
@@ -102,3 +129,6 @@ torpedo.functions.countdown = function (timee,id)
 	return timerInterval;
 }
 	
+torpedo.functions.setHref = function(url){
+	setUrl = url;
+}

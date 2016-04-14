@@ -1,6 +1,7 @@
 var torpedo = torpedo || {};
-var clickTimer = null;
-var countDownTimer = null;
+var clickTimer = null, countDownTimer = null;
+var tempTarget;
+var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.handler = torpedo.handler || {};
 
@@ -12,7 +13,7 @@ torpedo.handler.mouseOverTooltipPane = function (event)
 };
 
 torpedo.handler.mouseDownTooltipPane = function (event) 
-{	
+{		
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e) 
 	{
 		document.getElementById("tooltippanel").hidePopup();
@@ -27,20 +28,17 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 400); 
+	}, 200); 
 };
 
 torpedo.handler.mouseOverHref = function (event) 
 {
 	clearTimeout(torpedo.handler.MouseLeavetimer);
-	
+
 	var panel = document.getElementById("tooltippanel");
-	var tempTarget = torpedo.functions.findParentTagTarget(event,'A');
+	tempTarget = torpedo.functions.findParentTagTarget(event,'A');
 	var tempTargetc = event.target || event.srcElement;
-	
-	torpedo.updateTooltip(tempTarget.href,tempTarget);
-	panel.openPopup(tempTarget, "after_start", 0, 0, false, false);
-	
+
 	if(countDownTimer == null)
 	{
 		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown');
@@ -52,10 +50,11 @@ torpedo.handler.mouseOverHref = function (event)
 			{
 				clearTimeout(clickTimer);
 			}
-			$(tempTarget).unbind('click', torpedo.handler.mouseClickHref);
-			
 		}, torpedo.prefs.getIntPref("blockingTimer")*1000);
 	}
+	torpedo.updateTooltip(tempTarget.href,tempTarget);
+	panel.openPopup(tempTarget, "topcenter", 0, -40, false, false);
+	
 };
 
 torpedo.handler.mouseDownHref = function (event) 
@@ -74,23 +73,30 @@ torpedo.handler.mouseDownHref = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 400); 
+	}, 10); 
 };
 
 torpedo.handler.mouseClickHref = function (event) 
 {
-	event.preventDefault();
-	var panel = document.getElementById("tooltippanel");
-	var tempTarget = torpedo.functions.findParentTagTarget(event,'A');
-	var tempTargetc = event.target || event.srcElement;
-	
-	torpedo.updateTooltip(tempTarget.href,tempTarget);
-	panel.openPopup(tempTarget, "after_start", 0, 0, false, false);
-
-	return false;		
+	var url = tempTarget.href;
+	if(tempTarget.getAttribute('redirection_url') != null)
+	{
+		url = tempTarget.getAttribute('redirection_url');
+	}
+	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
+	torpedo.db.pushUrl(baseDomain);
 };
 
 torpedo.handler.mouseClickInfoButton = function (event) 
 {
-	torpedo.dialogmanager.createInstruction(800,460);
+	torpedo.dialogmanager.createInstruction(450,260);
+};
+
+torpedo.handler.mouseClickDeleteButton = function(event){
+	Application.console.log("delete clicked");
+	torpedo.dialogmanager.createDelete(880,495);
+};
+
+torpedo.handler.mouseClickEditButton = function(event){
+	torpedo.dialogmanager.createEdit();
 };

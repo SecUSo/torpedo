@@ -9,23 +9,21 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/main.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/urls.js"/>
 	
 	<popupset>
         <panel id="tooltippanel">
 			<hbox class="mainBox">
 				<vbox>
-					<hbox id="url-box">
-						<span id="te">
-							<span id="url1" />
-							<span id="baseDomain" />
-							<span id="url2" />
-						</span>
-					</hbox>
-					<hbox id="description-box">
-						<span id="description"> </span>						
-					</hbox>
-					<hbox>
-						<span id="countdown"></span>							
+					<span id="url-box">
+						<label id="url1" class="text-link" href="" />
+						<label id="baseDomain" class="text-link" href=""/>
+						<label id="url2" class="text-link" href="" />
+					</span>
+					<label id="description"/>		
+					<hbox id="seconds-box">
+							<label id="countdown"/>
+							<label id="secs" />	
 					</hbox>
 				</vbox>
 				<vbox id="info-box">

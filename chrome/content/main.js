@@ -1,5 +1,7 @@
 var torpedo = torpedo || {};
 var lastBrowserStatus;
+var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Ci.steelIApplication);
+
 torpedo.instructionSize = {width: 800,height: 460};	
 
 torpedo.updateTooltip = function (url,element) 
@@ -7,14 +9,31 @@ torpedo.updateTooltip = function (url,element)
 	if(element.getAttribute('redirection_url') != null)
 	{
 		url = element.getAttribute('redirection_url');
+		document.getElementById("tooltippanel").style.borderColor = "none";
 	}
 	
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var urlsplit = url.split(""+baseDomain);
-	
+
 	document.getElementById("url1").textContent = urlsplit[0];
 	document.getElementById("baseDomain").textContent = baseDomain;
-	
+	document.getElementById("secs").textContent = torpedo.stringsBundle.getString('second_show');
+
+	if(torpedo.db.inDefault(baseDomain)){
+		document.getElementById("tooltippanel").style.borderColor = "green";
+	}
+	else if(torpedo.db.inSecondClick(baseDomain)){
+		document.getElementById("tooltippanel").style.borderColor = "orange";
+	}
+	else{
+		document.getElementById("tooltippanel").style.borderColor = "red";
+	}
+	// make link unclickable when countdown isn’t null
+	document.getElementById("url1").setAttribute("href", "");
+	document.getElementById("url2").setAttribute("href", "");
+	document.getElementById("baseDomain").setAttribute("href", "");
+
+	torpedo.functions.setHref(url);
 	if(urlsplit.length>1)
 	{
 		document.getElementById("url2").textContent = urlsplit[1];
@@ -36,9 +55,15 @@ torpedo.processDOM = function ()
 	{
         var appcontent = document.getElementById("appcontent"); // browser app content
 		var panel = document.getElementById("tooltippanel");
+
+		torpedo.db.initDB();
+		document.getElementById("tooltippanel").style.borderColor = "red";
+
 		$(panel).bind("mouseover",torpedo.handler.mouseOverTooltipPane);
 		$(panel).bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
 		$(document.getElementById("info-pic")).bind("click",torpedo.handler.mouseClickInfoButton);
+		$(document.getElementById("deleteSecond")).bind("click",torpedo.handler.mouseClickDeleteButton);
+		$(document.getElementById("editSecond")).bind("click",torpedo.handler.mouseClickEditButton);
 
         if (appcontent) 
 		{
@@ -49,7 +74,7 @@ torpedo.processDOM = function ()
         if(messagepane) 
 		{
 			messagepane.addEventListener("load", function(event) { onPageLoad(event); }, true);
-        }		
+        }	
 	}
 	
 	function onPageLoad(event)
@@ -79,7 +104,7 @@ torpedo.processDOM = function ()
 						
 						if(torpedo.functions.isURL(hrefValue))
 						{	
-							$(aElement).bind("click",torpedo.handler.mouseClickHref);
+							//$(aElement).bind("click",torpedo.handler.mouseClickHref);
 							$(aElement).bind("mouseover",torpedo.handler.mouseOverHref);
 							$(aElement).bind("mouseleave",torpedo.handler.mouseDownHref);
 							
