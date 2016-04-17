@@ -3,9 +3,9 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		title="Default Lists"
+		title="&defaultLists;"
 		buttons="cancel"
-		buttonlabelcancel="Close"
+		buttonlabelcancel="&close;"
 		ondialogcancel="return true;"
 		onload="torpedo.db.getDefaults();">
 

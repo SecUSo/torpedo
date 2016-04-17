@@ -107,7 +107,8 @@ var jsonUrls = {
 						{"url" : "tripadvisor.de"},
 						{"url" : "ardmediathek.de"}
 					],
-	"secondClickUrls" : [],
+	"secondClickUrls" : [{"url" : "tripadvisor.de"},
+						{"url" : "ardmediathek.de"}],
 	"firstClickUrls" : []
 };
 var FileUtils = Components.utils.import("resource://gre/modules/FileUtils.jsm").FileUtils;
@@ -214,7 +215,9 @@ torpedo.db.deleteAllSecond = function () {
 
 	jsonString = JSON.stringify(jsonUrls);
 	Application.console.log(jsonString);
-	//torpedo.stringsBundle = document.getElementById('string-bundle'); torpedo.stringsBundle.getString('entries_gone');
+
+	torpedo.stringsBundle = document.getElementById("string-bundle");
+	alert(torpedo.stringsBundle.getString('entries_gone'));
 };
 
 torpedo.db.deleteSomeSecond = function () {
@@ -229,6 +232,7 @@ torpedo.db.deleteSomeSecond = function () {
 	
 	jsonString = JSON.stringify(jsonUrls);
 	Application.console.log(jsonString);
+
 };
 
 torpedo.db.getSecond = function () {

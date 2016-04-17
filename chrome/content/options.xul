@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
-<prefwindow title="TOrPeDO Einstellungen" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<prefwindow title="TOrPeDO &settings;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        buttons="cancel"
+        buttonlabelcancel="&close;">
 
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
@@ -12,15 +14,18 @@
         <stringbundle id="string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
     
-    <prefpane label="Option">
+    <prefpane>
 	
 		<preferences>
 			<preference id="firefox-blocking-timer" name="extensions.torpedo.blockingTimer" type="int"/>
-		</preferences>
-	
+            <preference id="firefox-checked-greenlist" name="extensions.torpedo.checkedGreenList" type="bool"/>
+            <preference id="firefox-checked-greenlistactivated" name="extensions.torpedo.activatedGreenList" type="bool"/>
+            <preference id="firefox-checked-orangelistactivated" name="extensions.torpedo.activatedOrangeList" type="bool"/>
+	   </preferences>
+
         <tabbox>
             <tabs>
-                <tab label="Option"/>
+                <tab label="&option;"/>
             </tabs>
 			<tabpanels>
 				<tabpanel id="maintab" orient="vertical">
@@ -43,24 +48,28 @@
                         <grid>
                             <rows>
                                 <row>
-                                    <label value="List of default links:" style="font-weight:bold; color:green"/>
+                                    <label value="&listofdefaults;" style="font-weight:bold; color:green"/>
                                 </row>
                                 <row>
-                                    <checkbox id="greenlist" label="&activated;" checked="true" />
+                                    <checkbox id="greenlist" label="&activated;" checked="true" preference="firefox-checked-greenlist" oncommand="torpedo.handler.changeChecked();" />
+                                </row>
+                                <row>
+                                    <checkbox id="greenlistactivated" label="&activatedgreen;" checked="true" preference="firefox-checked-greenlistactivated" oncommand="torpedo.handler.changeActivatedGreen();" />
                                 </row>
                                 <row>
                                     <button id="showDefaults" label="&showdefaults;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
                                 </row>
-                            </rows>
-                        </grid>
-                         <grid>
-                            <rows>
                                 <row>
-                                    <label value="&userlinks;" style="font-weight:bold; color:orange;"/>
+                                    <label id="userlinks" value="&userlinks;" style="font-weight:bold; color:orange; margin-top:20px;"/>
                                 </row>
                                 <row>
-                                    <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();"/>
-                                    <button id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();"/>
+                                    <checkbox id="orangelistactivated" label="&activatedorange;" checked="true" preference="firefox-checked-orangelistactivated" oncommand="torpedo.handler.changeActivatedOrange();" />
+                                </row>
+                                <row>
+                                    <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
+                                </row>
+                                <row>
+                                    <button id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();" />
                                 </row>
                             </rows>
                         </grid>                 

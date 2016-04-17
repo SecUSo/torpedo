@@ -2,7 +2,6 @@
 <!ENTITY observationtext "Betrachte NUR den Teil der URL, der im Tooltip in fett hervorgehoben ist.">
 <!ENTITY appendixtext "PS: Lange ULRs können auch echt sein. Wichtig ist nur, dass der in <html:b>fett</html:b> hervorgehobene Bereich stimmt">
 <!ENTITY maindescriptiontext " IGNORIERE alles andere: ignoriere Betreff, Logos, Absender, https und Design. Dies kann alles ganz einfach gefälscht werden. <html:b>Daher ignorieren Sie die Angabe von wem Sie die E-Mail erhalten haben</html:b>. Auch die anderen Teile der URL können einfach gefälscht werden.">
-<!ENTITY deleteEntries "Löschen aller Einträge">
 <!ENTITY windowheader "TOrPeDO - Tooltip Phish Detection">
 <!ENTITY yes "Ja">
 <!ENTITY no "Nein">
@@ -13,4 +12,14 @@
 <!ENTITY userlinks "Liste der User-Links">
 <!ENTITY editentries "Einträge bearbeiten">
 <!ENTITY clearentries "Alle Einträge löschen">
-<!ENTITY showdefaults "Zeige Standardliste">
+<!ENTITY showdefaults "Zeige Standardlinks">
+<!ENTITY deleteEntries "Einträge löschen">
+<!ENTITY pickEdit "Welchen der Einträge möchten Sie löschen?">
+<!ENTITY option "Optionen">
+<!ENTITY close "Schließen">
+<!ENTITY listofdefaults "Liste der Standardlinks">
+<!ENTITY delete "Löschen">
+<!ENTITY defaultLists "Standardlinks">
+<!ENTITY settings "Einstellungen">
+<!ENTITY activatedgreen "Timer bei Standardliste aktiviert
+<!ENTITY activatedorange "Timer bei User-Liste aktiviert">

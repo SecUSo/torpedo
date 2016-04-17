@@ -68,6 +68,14 @@ torpedo.functions.getDomainWithFFSuffix = function (url)
 torpedo.functions.countdown = function (timee,id, url)
 {
 	var startTime = timee;
+	
+	var setUrl = document.getElementById("url-box");
+	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
+	if((!torpedo.handler.isChecked("greenActivated") && torpedo.db.inDefault(baseDomain)) || (!torpedo.handler.isChecked("orangeActivated") && torpedo.db.inSecondClick(baseDomain))){
+		startTime = 0;
+		document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');	
+		setUrl.style.color = "blue";
+	}
 
 	function showTime()
 	{
@@ -87,21 +95,20 @@ torpedo.functions.countdown = function (timee,id, url)
 		strZeit = (second < 10) ? "0"+second : second;
 		$("#"+id).html(strZeit);
 
-		var setUrl1 = document.getElementById("url-box");
-		// end of timer		
 		if(second == 0){
 			//change text from tooltip to "you can click link now"
 			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
 			
 			// make URL in tooltip clickable
-			$(setUrl1).bind("click",torpedo.handler.mouseClickHref);
-			setUrl1.style.color = "blue";
+			$(setUrl).bind("click",torpedo.handler.mouseClickHref);
+			setUrl.style.color = "blue";
 		}
 		else {
-			$(setUrl1).unbind( "click" );
-			setUrl1.style.color = "black";
+			$(setUrl).unbind( "click" );
+			setUrl.style.color = "black";
 		}
 	}
+	
 	showTime();
 	if(startTime > 0) {
 		--startTime;

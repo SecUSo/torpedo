@@ -3,11 +3,11 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		title="Edit Entries"
+		title="&editentries;"
 		buttons="accept,cancel"
-		buttonlabelcancel="Close"
-		buttonlabelaccept="Delete"
-		ondialogaccept="torpedo.db.deleteSomeSecond();"
+		buttonlabelcancel="&close;"
+		buttonlabelaccept="&delete;"
+		ondialogaccept="torpedo.db.deleteSomeSecond(); return false;"
 		ondialogcancel="return true;"
 		onload="torpedo.db.getSecond();">
 
@@ -19,7 +19,7 @@
     </stringbundleset>
 
 		<vbox>
-			<label value="Pick your edit" />
+			<label value="&pickEdit;" />
 			<listbox id="theList" width="400" onselect="torpedo.db.select(this.selectedIndex);">
 			  <listhead>
 			    <listheader label="URLs" width="400"/>

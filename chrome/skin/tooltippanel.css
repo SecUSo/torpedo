@@ -17,7 +17,7 @@ span
 	white-space: normal
 }
 
-#greenlist{
+#greenlist {
 	margin-bottom: 5px;
 }
 
@@ -27,6 +27,11 @@ span #url1,span #url2
 	text-decoration: underline;
 }
 
+#showDefaults
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 #url-box
 {
 	margin-bottom: 5px;

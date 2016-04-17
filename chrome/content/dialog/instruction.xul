@@ -7,7 +7,7 @@
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&instructionheader;"
 		buttons="cancel"
-		buttonlabelcancel="Close"
+		buttonlabelcancel="&close;"
 		ondialogcancel="return true;"
 		onload="onLoad();">
 	

@@ -19,7 +19,7 @@ torpedo.updateTooltip = function (url,element)
 	document.getElementById("baseDomain").textContent = baseDomain;
 	document.getElementById("secs").textContent = torpedo.stringsBundle.getString('second_show');
 
-	if(torpedo.db.inDefault(baseDomain)){
+	if(torpedo.handler.isChecked("green") && torpedo.db.inDefault(baseDomain)){
 		document.getElementById("tooltippanel").style.borderColor = "green";
 	}
 	else if(torpedo.db.inSecondClick(baseDomain)){

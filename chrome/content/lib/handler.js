@@ -37,16 +37,43 @@ torpedo.handler.mouseOverHref = function (event)
 	var panel = document.getElementById("tooltippanel");
 	tempTarget = torpedo.functions.findParentTagTarget(event,'A');
 	var tempTargetc = event.target || event.srcElement;
-
 	torpedo.handler.setCountDownTimer();
 
+
 	torpedo.updateTooltip(tempTarget.href,tempTarget);
+
 	panel.openPopup(tempTarget, "after_start", 0, 0, true, false);
 	
 };
+
+var a = torpedo.prefs.getBoolPref("checkedGreenList");
+var b = torpedo.prefs.getBoolPref("activatedGreenList");
+var c = torpedo.prefs.getBoolPref("activatedOrangeList");
+
+torpedo.handler.isChecked = function (color){
+	if(color == "green") return torpedo.prefs.getBoolPref("checkedGreenList");
+	if(color == "greenActivated") return torpedo.prefs.getBoolPref("activatedGreenList");
+	if(color == "orangeActivated") return torpedo.prefs.getBoolPref("activatedOrangeList");
+};
+
+torpedo.handler.changeChecked = function (){
+	a = !a;
+	torpedo.prefs.setBoolPref("checkedGreenlist", a);
+};
+
+torpedo.handler.changeActivatedGreen = function (){
+	b = !b;
+	torpedo.prefs.setBoolPref("activatedGreenlist", b);
+};
+
+torpedo.handler.changeActivatedOrange = function (){
+	c = !c;
+	torpedo.prefs.setBoolPref("activatedOrangelist", c);
+};
+
 torpedo.handler.setCountDownTimer = function () {
 	if(countDownTimer == null){
-		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown');
+		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown', tempTarget.href);
 		
 		clickTimer = setTimeout(function()
 		{
