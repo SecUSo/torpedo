@@ -1,6 +1,8 @@
 var torpedo = torpedo || {};
 var setUrl = "";
 
+var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
+
 torpedo.functions = torpedo.functions || {};
 
 torpedo.functions.calcWindowPosition = function (windowWidth,windowHeight) 
@@ -63,10 +65,10 @@ torpedo.functions.getDomainWithFFSuffix = function (url)
 	}
 }
 
-torpedo.functions.countdown = function (timee,id)
+torpedo.functions.countdown = function (timee,id, url)
 {
 	var startTime = timee;
-	
+
 	function showTime()
 	{
 		/* day = Math.floor(startTime/(60*60*24)) % 24; 
@@ -85,32 +87,25 @@ torpedo.functions.countdown = function (timee,id)
 		strZeit = (second < 10) ? "0"+second : second;
 		$("#"+id).html(strZeit);
 
-
-		var setUrl1 = document.getElementById("url1");
-		var setUrl2 = document.getElementById("url2");
-		var setUrl3 = document.getElementById("baseDomain");
+		var setUrl1 = document.getElementById("url-box");
 		// end of timer		
 		if(second == 0){
 			//change text from tooltip to "you can click link now"
 			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
 			
 			// make URL in tooltip clickable
-			setUrl1.setAttribute("href", setUrl);
-			setUrl2.setAttribute("href", setUrl);
-			setUrl3.setAttribute("href", setUrl);
 			$(setUrl1).bind("click",torpedo.handler.mouseClickHref);
-			$(setUrl2).bind("click",torpedo.handler.mouseClickHref);
-			$(setUrl3).bind("click",torpedo.handler.mouseClickHref);
+			setUrl1.style.color = "blue";
 		}
 		else {
 			$(setUrl1).unbind( "click" );
-			$(setUrl2).unbind( "click" );
-			$(setUrl3).unbind( "click" );
+			setUrl1.style.color = "black";
 		}
 	}
 	showTime();
-	if(startTime > 0) 
+	if(startTime > 0) {
 		--startTime;
+	}
 
 	var timerInterval = setInterval(function timer()
 	{ 
@@ -131,4 +126,8 @@ torpedo.functions.countdown = function (timee,id)
 	
 torpedo.functions.setHref = function(url){
 	setUrl = url;
+	torpedo.handler.resetCountDownTimer();
+}
+torpedo.functions.getHref = function(){
+	return setUrl;
 }

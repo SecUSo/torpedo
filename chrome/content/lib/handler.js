@@ -28,33 +28,48 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 200); 
+	}, 10); 
 };
 
 torpedo.handler.mouseOverHref = function (event) 
 {
 	clearTimeout(torpedo.handler.MouseLeavetimer);
-
 	var panel = document.getElementById("tooltippanel");
 	tempTarget = torpedo.functions.findParentTagTarget(event,'A');
 	var tempTargetc = event.target || event.srcElement;
 
-	if(countDownTimer == null)
-	{
+	torpedo.handler.setCountDownTimer();
+
+	torpedo.updateTooltip(tempTarget.href,tempTarget);
+	panel.openPopup(tempTarget, "after_start", 0, 0, true, false);
+	
+};
+torpedo.handler.setCountDownTimer = function () {
+	if(countDownTimer == null){
 		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown');
 		
 		clickTimer = setTimeout(function()
 		{
-			
 			if(clickTimer != null)
 			{
 				clearTimeout(clickTimer);
 			}
 		}, torpedo.prefs.getIntPref("blockingTimer")*1000);
 	}
-	torpedo.updateTooltip(tempTarget.href,tempTarget);
-	panel.openPopup(tempTarget, "topcenter", 0, -40, false, false);
-	
+};
+
+torpedo.handler.resetCountDownTimer = function (){
+	if(countDownTimer != null)
+		{
+			clearInterval(countDownTimer);
+			countDownTimer = null;
+		}
+
+		if(clickTimer != null)
+		{
+			clearTimeout(clickTimer);
+		}
+	torpedo.handler.setCountDownTimer();
 };
 
 torpedo.handler.mouseDownHref = function (event) 
@@ -85,11 +100,22 @@ torpedo.handler.mouseClickHref = function (event)
 	}
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	torpedo.db.pushUrl(baseDomain);
+
+	var ioservice = Components.classes["@mozilla.org/network/io-service;1"]
+                          .getService(Components.interfaces.nsIIOService);
+
+	var uriToOpen = ioservice.newURI(url, null, null);
+
+	var extps = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"]
+	                      .getService(Components.interfaces.nsIExternalProtocolService);
+
+	// now, open it!
+	extps.loadURI(uriToOpen, null);
 };
 
 torpedo.handler.mouseClickInfoButton = function (event) 
 {
-	torpedo.dialogmanager.createInstruction(450,260);
+	torpedo.dialogmanager.createInstruction(800,450);
 };
 
 torpedo.handler.mouseClickDeleteButton = function(event){
@@ -100,4 +126,8 @@ torpedo.handler.mouseClickDeleteButton = function(event){
 
 torpedo.handler.mouseClickEditButton = function(event){
 	torpedo.dialogmanager.createEdit();
+};
+
+torpedo.handler.mouseClickDefaultsButton = function (event) {
+	torpedo.dialogmanager.showDefaults();
 };

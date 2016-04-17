@@ -17,11 +17,20 @@ span
 	white-space: normal
 }
 
+#greenlist{
+	margin-bottom: 5px;
+}
 
 span #url1,span #url2
 {
 	margin: 0px;
 	text-decoration: underline;
+}
+
+#url-box
+{
+	margin-bottom: 5px;
+	margin-left: 5px;
 }
 
 #tooltippanel

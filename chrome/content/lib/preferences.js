@@ -49,6 +49,7 @@ torpedo.prefs = function () {
             // reset all prefs manually
 			prefManager.clearUserPref("firstrun");
 			prefManager.clearUserPref("blockingTimer");
+			//prefManager.clearUserPref("urlList");
 		}		
     };
 }();

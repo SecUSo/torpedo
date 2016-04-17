@@ -107,26 +107,23 @@ var jsonUrls = {
 						{"url" : "tripadvisor.de"},
 						{"url" : "ardmediathek.de"}
 					],
-	"secondClickUrls" : [{"url" : "secuso.org"}, 
-						{"url" : "dawanda.com"},
-						{"url" : "tripadvisor.de"},
-						{"url" : "ardmediathek.de"}],
+	"secondClickUrls" : [],
 	"firstClickUrls" : []
 };
+var FileUtils = Components.utils.import("resource://gre/modules/FileUtils.jsm").FileUtils;
+var directoryService = Components.classes["@mozilla.org/file/directory_service;1"].
+      getService(Components.interfaces.nsIProperties);
 
 torpedo.db.getLocalDirectory = function ()
 {
-	  let directoryService =
-    Cc["@mozilla.org/file/directory_service;1"].
-      getService(Ci.nsIProperties);
   // this is a reference to the profile dir (ProfD) now.
-  let localDir = directoryService.get("ProfD", Ci.nsIFile);
+  let localDir = directoryService.get("ProfD", Components.interfaces.nsIFile);
 
   localDir.append("torpedo");
 
   if (!localDir.exists() || !localDir.isDirectory()) {
     // read and write permissions to owner and group, read-only for others.
-    localDir.create(Ci.nsIFile.DIRECTORY_TYPE, 0774);
+    localDir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0774);
  	Application.console.log("localDir created");
   }
   return localDir;
@@ -142,8 +139,6 @@ torpedo.db.pushUrl = function (website)
 {
 	var first = torpedo.db.inFirstClick(website);
 	if (torpedo.db.inDefault(website)){
-		var jsonString = JSON.stringify(jsonUrls);
-		Application.console.log(jsonString);
 		return 1;
 	}
 	else if (torpedo.db.inSecondClick(website)){
@@ -157,7 +152,7 @@ torpedo.db.pushUrl = function (website)
 		Application.console.log(jsonString);
 
 		jsonUrls.firstClickUrls.splice(first,1);
-		
+
 		var jsonString = JSON.stringify(jsonUrls);
 		Application.console.log(jsonString);
 		return 3;
@@ -168,10 +163,6 @@ torpedo.db.pushUrl = function (website)
 		Application.console.log(jsonString);
 		return 4;
 	}
-	/*
-	var restoredSession = JSON.parse(jsonString);
-	Application.console.log(restoredSession.defaultUrls[0].url);
-	*/
 };
 
 torpedo.db.inDefault = function (website){
@@ -188,7 +179,6 @@ torpedo.db.inDefault = function (website){
 
 torpedo.db.inSecondClick = function (website){
 	var jsonString = JSON.stringify(jsonUrls);
-	Application.console.log(jsonString);
 	var urlArray = JSON.parse(jsonString);
 	var counter = 0;
 	for(counter = 0; urlArray.secondClickUrls[counter] != null; counter++){
@@ -219,12 +209,12 @@ var selected;
 torpedo.db.deleteAllSecond = function () {
 	var jsonString = JSON.stringify(jsonUrls);
 	var urlArray = JSON.parse(jsonString);
-	var counter = 0;
-	for(counter = 0; urlArray.secondClickUrls[counter] != null; counter++){
-		delete jsonUrls.secondClickUrls[counter].url;
-	}
+
+	jsonUrls.secondClickUrls.splice(0,urlArray.length);
+
 	jsonString = JSON.stringify(jsonUrls);
 	Application.console.log(jsonString);
+	//torpedo.stringsBundle = document.getElementById('string-bundle'); torpedo.stringsBundle.getString('entries_gone');
 };
 
 torpedo.db.deleteSomeSecond = function () {
@@ -232,21 +222,25 @@ torpedo.db.deleteSomeSecond = function () {
 	var urlArray = JSON.parse(jsonString);
 
 	var website = jsonUrls.secondClickUrls[selected].url;
-	delete jsonUrls.secondClickUrls[selected].url;
-	document.getElementById('theList').removeItemAt(selected);
+	jsonUrls.secondClickUrls.splice(selected, 1);
+
+	var theList = document.getElementById('theList');
+	theList.removeChild(theList.getItemAtIndex(selected));
+	
 	jsonString = JSON.stringify(jsonUrls);
 	Application.console.log(jsonString);
-	return website;
 };
 
 torpedo.db.getSecond = function () {
 	var theList = document.getElementById('theList');
-	Application.console.log("getSecond called");
 	var jsonString = JSON.stringify(jsonUrls);
 	var urlArray = JSON.parse(jsonString);
+	
 	var i = 0;
 	for (i = 0; jsonUrls.secondClickUrls[i] != null; i++) {
-	    var row = document.createElement('listitem');
+	    
+		Application.console.log(jsonUrls.secondClickUrls[i].url);
+		var row = document.createElement('listitem');
 	    row.setAttribute('label', jsonUrls.secondClickUrls[i].url);
 	    theList.appendChild(row);
 	}
@@ -255,3 +249,16 @@ torpedo.db.getSecond = function () {
 torpedo.db.select = function(index){
 	selected = index;
 };
+
+torpedo.db.getDefaults = function (){
+	var defaultList = document.getElementById('defaultList');
+	var jsonString = JSON.stringify(jsonUrls);
+	var urlArray = JSON.parse(jsonString);
+	
+	var i = 0;
+	for (i = 0; jsonUrls.defaultUrls[i] != null; i++) {
+		var row = document.createElement('listitem');
+	    row.setAttribute('label', jsonUrls.defaultUrls[i].url);
+	    defaultList.appendChild(row);
+	}
+}

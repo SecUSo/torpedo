@@ -1,6 +1,6 @@
 var torpedo = torpedo || {};
 var lastBrowserStatus;
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Ci.steelIApplication);
+var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.instructionSize = {width: 800,height: 460};	
 
@@ -28,12 +28,11 @@ torpedo.updateTooltip = function (url,element)
 	else{
 		document.getElementById("tooltippanel").style.borderColor = "red";
 	}
-	// make link unclickable when countdown isn’t null
-	document.getElementById("url1").setAttribute("href", "");
-	document.getElementById("url2").setAttribute("href", "");
-	document.getElementById("baseDomain").setAttribute("href", "");
 
 	torpedo.functions.setHref(url);
+	if(torpedo.functions.getHref() != url){
+		torpedo.handler.resetCountDownTimer();
+	}
 	if(urlsplit.length>1)
 	{
 		document.getElementById("url2").textContent = urlsplit[1];
@@ -57,9 +56,8 @@ torpedo.processDOM = function ()
 		var panel = document.getElementById("tooltippanel");
 
 		torpedo.db.initDB();
-		document.getElementById("tooltippanel").style.borderColor = "red";
-
-		$(panel).bind("mouseover",torpedo.handler.mouseOverTooltipPane);
+		
+		$(panel).bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
 		$(panel).bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
 		$(document.getElementById("info-pic")).bind("click",torpedo.handler.mouseClickInfoButton);
 		$(document.getElementById("deleteSecond")).bind("click",torpedo.handler.mouseClickDeleteButton);

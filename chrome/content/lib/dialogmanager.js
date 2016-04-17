@@ -17,15 +17,6 @@ torpedo.dialogmanager.createEdit = function () {
 	window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
 };
 
-torpedo.dialogmanager.deleteEntry = function (all) {
-	torpedo.stringsBundle = document.getElementById("string-bundle");
-	if(all) {
-		torpedo.db.deleteAllSecond();
-		alert(torpedo.stringsBundle.getString('entries_gone'));
-		return true;
-	}
-	else {
-		alert(torpedo.db.deleteSomeSecond()+ " " + torpedo.stringsBundle.getString('one_gone'));
-		return false;
-	}
+torpedo.dialogmanager.showDefaults = function(){
+	window.openDialog("chrome://torpedo/content/dialog/defaults.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
 };

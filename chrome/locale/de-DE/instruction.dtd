@@ -7,3 +7,10 @@
 <!ENTITY yes "Ja">
 <!ENTITY no "Nein">
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
+<!ENTITY seconds "Sekunde(n)">
+<!ENTITY lists "Listen">
+<!ENTITY activated "Standardliste aktiviert">
+<!ENTITY userlinks "Liste der User-Links">
+<!ENTITY editentries "Einträge bearbeiten">
+<!ENTITY clearentries "Alle Einträge löschen">
+<!ENTITY showdefaults "Zeige Standardliste">

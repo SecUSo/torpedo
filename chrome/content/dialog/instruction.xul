@@ -4,8 +4,11 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 
-<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&instructionheader;"
+		buttons="cancel"
+		buttonlabelcancel="Close"
+		ondialogcancel="return true;"
 		onload="onLoad();">
 	
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js"></script>
@@ -13,4 +16,4 @@
 	<vbox style="padding: 2px; width: 880px; height: 495px;">
 		<image id="instructionPic" flex="0" align="start" width="880" height="495"/>
 	</vbox>
-</window>
+</dialog>

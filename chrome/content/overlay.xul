@@ -16,9 +16,9 @@
 			<hbox class="mainBox">
 				<vbox>
 					<span id="url-box">
-						<label id="url1" class="text-link" href="" />
-						<label id="baseDomain" class="text-link" href=""/>
-						<label id="url2" class="text-link" href="" />
+						<label id="url1" />
+						<label id="baseDomain" />
+						<label id="url2"  />
 					</span>
 					<label id="description"/>		
 					<hbox id="seconds-box">

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 <prefwindow title="TOrPeDO Einstellungen" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
@@ -7,6 +8,10 @@
     <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
+    </stringbundleset>
+    
     <prefpane label="Option">
 	
 		<preferences>
@@ -25,7 +30,7 @@
                             <rows>
                                 <row>
                                     <textbox type="number" id="countdown" preference="firefox-blocking-timer" style="margin-right:10px; max-width:100px"/>
-                                    <label value="Sekunden" style="margin-top:10px"/>
+                                    <label value="&seconds;" style="margin-top:10px"/>
                                 </row>
                                 <row>
                                     <label value="" />
@@ -34,28 +39,28 @@
                         </grid>					
                     </groupbox>
                     <groupbox>
-                        <caption label="Lists"/>
+                        <caption label="&lists;"/>
                         <grid>
                             <rows>
                                 <row>
                                     <label value="List of default links:" style="font-weight:bold; color:green"/>
                                 </row>
                                 <row>
-                                    <checkbox id="greenlist" label="Default list activated" checked="true" />
+                                    <checkbox id="greenlist" label="&activated;" checked="true" />
                                 </row>
                                 <row>
-                                    <label value="" />
+                                    <button id="showDefaults" label="&showdefaults;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
                                 </row>
                             </rows>
                         </grid>
                          <grid>
                             <rows>
                                 <row>
-                                    <label value="List of user links:" style="font-weight:bold; color:orange;"/>
+                                    <label value="&userlinks;" style="font-weight:bold; color:orange;"/>
                                 </row>
                                 <row>
-                                    <button id="editSecond" label="Edit entries" onclick="torpedo.handler.mouseClickEditButton();"/>
-                                    <button id="deleteSecond" label="Clear all entries" onclick="torpedo.handler.mouseClickDeleteButton();"/>
+                                    <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();"/>
+                                    <button id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();"/>
                                 </row>
                             </rows>
                         </grid>                 
