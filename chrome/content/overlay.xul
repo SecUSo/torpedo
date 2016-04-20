@@ -3,7 +3,7 @@
 
 <overlay
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-1.10.2.js"/>
+	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-1.12.3.min.js"/>
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
@@ -36,7 +36,7 @@
         </panel>
     </popupset>
 	
-	<stringbundleset id="stringbundleset">
-        <stringbundle id="string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
+	<stringbundleset>
+        <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
 </overlay>

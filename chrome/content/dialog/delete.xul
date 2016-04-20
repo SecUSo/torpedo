@@ -13,9 +13,10 @@
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/urls.js"/>
+	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 
-	<stringbundleset id="stringbundleset">
-        <stringbundle id="string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
+	<stringbundleset>
+        <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
 
 	<vbox>

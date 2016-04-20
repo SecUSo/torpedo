@@ -20,3 +20,10 @@ torpedo.dialogmanager.createEdit = function () {
 torpedo.dialogmanager.showDefaults = function(){
 	window.openDialog("chrome://torpedo/content/dialog/defaults.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
 };
+
+torpedo.dialogmanager.createWelcome = function(windowWidth, windowHeight)
+{
+	var dimension = torpedo.functions.calcWindowPosition(windowWidth,windowHeight);
+	window.openDialog("chrome://torpedo/content/dialog/welcome.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen, top='+dimension.top+',left='+dimension.left+', width='+windowWidth+',height='+windowHeight+'");
+
+};

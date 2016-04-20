@@ -52,7 +52,9 @@ torpedo.prefs = function () {
 			prefManager.clearUserPref("checkedGreenList");
 			prefManager.clearUserPref("activatedGreenList");
 			prefManager.clearUserPref("activatedOrangeList");
-			//prefManager.clearUserPref("urlList");
+			prefManager.clearUserPref("URLDefaultList");
+			prefManager.clearUserPref("URLSecondList");
+			prefManager.clearUserPref("URLFirstList");
 		}		
     };
 }();

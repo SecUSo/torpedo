@@ -6,10 +6,11 @@
 				   
     <em:id>torpedo@tu-darmstadt.de</em:id>
     <em:version>1.0</em:version>
-    <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
-    <em:description>placeholder</em:description>
+    <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+    <em:description>Welcome!</em:description>
     <em:creator>TU Darmstadt SecUSo</em:creator>
     <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
+    <em:icon64URL>chrome://torpedo/skin/icon64.png</em:icon64URL>
 	<em:optionsURL>chrome://torpedo/content/options.xul</em:optionsURL>
     <em:type>2</em:type>
 	
@@ -17,9 +18,11 @@
       <Description>
         <em:locale>de</em:locale>
         <em:creator>TU Darmstadt - SecUSo</em:creator>
-        <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
-        <em:description>Beschreibung Platzhalter</em:description>
+        <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:description>Herzlich Willkommen!</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
+        <em:icon64URL>chrome://torpedo/skin/icon64.png</em:icon64URL>
+        <em:optionsURL>chrome://torpedo/content/options.xul</em:optionsURL>
       </Description>
     </em:localized>
 	
@@ -27,8 +30,8 @@
       <Description>
         <em:locale>en-GB</em:locale>
         <em:creator>TU Darmstadt - SecUSo</em:creator>
-        <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
-        <em:description>Description placeholder</em:description>
+        <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:description>Welcome!</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
       </Description>
     </em:localized>
@@ -37,8 +40,8 @@
       <Description>
         <em:locale>en-US</em:locale>
         <em:creator>TU Darmstadt - SecUSo</em:creator>
-        <em:name>TOrPeDO - Tooltip Phish Detection</em:name>
-        <em:description>Description placeholder</em:description>
+        <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:description>Welcome!</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
       </Description>
     </em:localized>

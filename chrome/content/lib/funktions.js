@@ -1,5 +1,5 @@
 var torpedo = torpedo || {};
-var setUrl = "";
+var Url = "";
 
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
@@ -69,12 +69,17 @@ torpedo.functions.countdown = function (timee,id, url)
 {
 	var startTime = timee;
 	
-	var setUrl = document.getElementById("url-box");
+	var setBaseDomain = document.getElementById("baseDomain");
+	var setUrl1 = document.getElementById("url1");
+	var setUrl2 = document.getElementById("url2");
+
+	setUrl2.style.color = "#808080";
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-	if((!torpedo.handler.isChecked("greenActivated") && torpedo.db.inDefault(baseDomain)) || (!torpedo.handler.isChecked("orangeActivated") && torpedo.db.inSecondClick(baseDomain))){
+	if((!torpedo.handler.isChecked("greenActivated") && torpedo.db.inList(baseDomain, "URLDefaultList")) || (!torpedo.handler.isChecked("orangeActivated") && torpedo.db.inList(baseDomain, "URLSecondList"))){
 		startTime = 0;
 		document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');	
-		setUrl.style.color = "blue";
+		setUrl1.style.color = "#0066cc";
+		setBaseDomain.style.color = "#0066cc";
 	}
 
 	function showTime()
@@ -100,12 +105,14 @@ torpedo.functions.countdown = function (timee,id, url)
 			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
 			
 			// make URL in tooltip clickable
-			$(setUrl).bind("click",torpedo.handler.mouseClickHref);
-			setUrl.style.color = "blue";
+			$(document.getElementById("url-box")).bind("click",torpedo.handler.mouseClickHref);
+			setUrl1.style.color = "#0066cc";
+			setBaseDomain.style.color = "#0066cc";
 		}
 		else {
-			$(setUrl).unbind( "click" );
-			setUrl.style.color = "black";
+			$(document.getElementById("url-box")).unbind( "click" );
+			setUrl1.style.color = "#404040";
+			setBaseDomain.style.color = "#404040";
 		}
 	}
 	
@@ -132,9 +139,9 @@ torpedo.functions.countdown = function (timee,id, url)
 }
 	
 torpedo.functions.setHref = function(url){
-	setUrl = url;
+	Url = url;
 	torpedo.handler.resetCountDownTimer();
 }
 torpedo.functions.getHref = function(){
-	return setUrl;
+	return Url;
 }

@@ -19,10 +19,10 @@ torpedo.updateTooltip = function (url,element)
 	document.getElementById("baseDomain").textContent = baseDomain;
 	document.getElementById("secs").textContent = torpedo.stringsBundle.getString('second_show');
 
-	if(torpedo.handler.isChecked("green") && torpedo.db.inDefault(baseDomain)){
+	if(torpedo.handler.isChecked("green") && torpedo.db.inList(baseDomain, "URLDefaultList")){
 		document.getElementById("tooltippanel").style.borderColor = "green";
 	}
-	else if(torpedo.db.inSecondClick(baseDomain)){
+	else if(torpedo.db.inList(baseDomain, "URLSecondList")){
 		document.getElementById("tooltippanel").style.borderColor = "orange";
 	}
 	else{
@@ -55,8 +55,6 @@ torpedo.processDOM = function ()
         var appcontent = document.getElementById("appcontent"); // browser app content
 		var panel = document.getElementById("tooltippanel");
 
-		torpedo.db.initDB();
-		
 		$(panel).bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
 		$(panel).bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
 		$(document.getElementById("info-pic")).bind("click",torpedo.handler.mouseClickInfoButton);
@@ -80,13 +78,7 @@ torpedo.processDOM = function ()
 		if(navigator.onLine)
 		{
 			if(gFolderDisplay.selectedCount>0)
-			{	
-				if(torpedo.prefs.getBoolPref("firstrun"))
-				{
-					torpedo.prefs.setBoolPref("firstrun",false);
-					torpedo.dialogmanager.createInstruction(torpedo.instructionSize.width,torpedo.instructionSize.height);
-				}
-				
+			{					
 				var doc = event.originalTarget;  // doc is document that triggered "onload" event
 				var linkElement = doc.getElementsByTagName("a");
 				var linkNumber = linkElement.length;
@@ -103,7 +95,7 @@ torpedo.processDOM = function ()
 						if(torpedo.functions.isURL(hrefValue))
 						{	
 							//$(aElement).bind("click",torpedo.handler.mouseClickHref);
-							$(aElement).bind("mouseover",torpedo.handler.mouseOverHref);
+							$(aElement).bind("mouseenter",torpedo.handler.mouseOverHref);
 							$(aElement).bind("mouseleave",torpedo.handler.mouseDownHref);
 							
 							if(titleValue != null || titleValue != "")
@@ -124,8 +116,14 @@ torpedo.processDOM = function ()
 window.addEventListener("load", function load(event) 
 {
         window.removeEventListener("load", load, false);
-		torpedo.stringsBundle = document.getElementById("string-bundle");
-		
+		torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
+
 		torpedo.prefs.addonUninstallingListener();
         torpedo.processDOM();
+
+        if(torpedo.prefs.getBoolPref("firstrun")){
+			torpedo.prefs.setBoolPref("firstrun",false);
+			torpedo.dialogmanager.createWelcome(torpedo.instructionSize.width,torpedo.instructionSize.height);
+			torpedo.dialogmanager.createInstruction(torpedo.instructionSize.width,torpedo.instructionSize.height);
+		}
 }, false);
