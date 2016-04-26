@@ -23,7 +23,7 @@ torpedo.db.pushUrl = function (website)
 };
 
 torpedo.db.inList = function (website, list){
-	if(list == "URLDefaultList" && (!torpedo.handler.isChecked("greenActivated"))){
+	if(list == "URLDefaultList" && (!torpedo.handler.isChecked("green"))){
 		return false;
 	}
 
@@ -82,8 +82,6 @@ torpedo.db.deleteSomeSecond = function () {
 		str.data = secondSites.replace(cutOut, "");
 
 		torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
-
-		Application.console.log("really: " + torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data);
 
 		var theList = document.getElementById('theList');
 		theList.removeChild(theList.getItemAtIndex(selected));

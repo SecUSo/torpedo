@@ -13,7 +13,7 @@
 	
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js"></script>
 	
-	<vbox style="padding: 2px; width: 880px; height: 495px;">
-		<image id="instructionPic" flex="0" align="start" width="880" height="495"/>
+	<vbox style="padding: 2px;">
+		<image id="instructionPic" flex="0" width="1080px" height="607.5px"/>
 	</vbox>
 </dialog>

@@ -4,13 +4,14 @@ torpedo.dialogmanager = torpedo.dialogmanager || {};
 
 torpedo.dialogmanager.createInstruction = function (windowWidth,windowHeight) 
 {
-	var dimension = torpedo.functions.calcWindowPosition(windowWidth,windowHeight);
-	window.openDialog("chrome://torpedo/content/dialog/instruction.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen, top='+dimension.top+',left='+dimension.left+', width='+windowWidth+',height='+windowHeight+'");
+    var left = (screen.width/2)-(windowWidth/2);
+    var top = (screen.height/2)-(windowHeight/2);
+	window.openDialog("chrome://torpedo/content/dialog/instruction.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal,top='+top+',left='+left+', width='+width+',height='+height+'");
 };
 
-torpedo.dialogmanager.createDelete = function (windowWidth,windowHeight, dimension)  
+torpedo.dialogmanager.createDelete = function (windowWidth,windowHeight)  
 {
-	window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome, dialog,resizable=yes, modal,top="+dimension.top+",left="+dimension.left+",width="+windowWidth+",height="+windowHeight+"");
+	window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome, dialog,resizable=yes,centerscreen, modal,width='+windowWidth+',height='+windowHeight+'");
 };
 
 torpedo.dialogmanager.createEdit = function () {
@@ -23,7 +24,7 @@ torpedo.dialogmanager.showDefaults = function(){
 
 torpedo.dialogmanager.createWelcome = function(windowWidth, windowHeight)
 {
-	var dimension = torpedo.functions.calcWindowPosition(windowWidth,windowHeight);
-	window.openDialog("chrome://torpedo/content/dialog/welcome.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen, top='+dimension.top+',left='+dimension.left+', width='+windowWidth+',height='+windowHeight+'");
-
+    var left = (screen.width/2)-(windowWidth/2);
+    var top = (screen.height/2)-(windowHeight/2);
+	window.openDialog("chrome://torpedo/content/dialog/welcome.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'");
 };

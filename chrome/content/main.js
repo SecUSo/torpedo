@@ -11,6 +11,7 @@ torpedo.updateTooltip = function (url,element)
 		url = element.getAttribute('redirection_url');
 		document.getElementById("tooltippanel").style.borderColor = "none";
 	}
+	torpedo.functions.traceUrl(url);
 	
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var urlsplit = url.split(""+baseDomain);
@@ -91,7 +92,7 @@ torpedo.processDOM = function ()
 						var aElement = linkElement[i];
 						var hrefValue = aElement.getAttribute("href");
 						var titleValue = aElement.getAttribute("title");
-						
+
 						if(torpedo.functions.isURL(hrefValue))
 						{	
 							//$(aElement).bind("click",torpedo.handler.mouseClickHref);
@@ -121,7 +122,7 @@ window.addEventListener("load", function load(event)
 		torpedo.prefs.addonUninstallingListener();
         torpedo.processDOM();
 
-        if(torpedo.prefs.getBoolPref("firstrun")){
+       if(torpedo.prefs.getBoolPref("firstrun")){
 			torpedo.prefs.setBoolPref("firstrun",false);
 			torpedo.dialogmanager.createWelcome(torpedo.instructionSize.width,torpedo.instructionSize.height);
 			torpedo.dialogmanager.createInstruction(torpedo.instructionSize.width,torpedo.instructionSize.height);

@@ -24,9 +24,30 @@ torpedo.functions.calcWindowPosition = function (windowWidth,windowHeight)
 
 	return{
 		top: top,
-		left: left
+		left: left,
+		width: width,
+		height: height
 	};	
 }
+
+torpedo.functions.traceUrl = function (url)
+{
+    var api = 'http://untiny.me/api/1.0/extract?url=' 
+    + encodeURIComponent(url) + '&format=json';
+
+    Application.console.log(api);
+
+  	$.ajax({
+		api, jsonp: "callback", dataType: "jsonp",
+		success: function(response) {
+		    $('.result h3').text(response['long-url']);
+  			Application.console.log(response.responseText);
+		},
+		error: function(xhr, ajaxOptions, thrownError){
+			Application.console.log(xhr.responseText);
+		}
+  	})
+};
 
 torpedo.functions.findParentTagTarget = function (event,tagName)
 {

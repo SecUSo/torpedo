@@ -142,13 +142,11 @@ torpedo.handler.mouseClickHref = function (event)
 
 torpedo.handler.mouseClickInfoButton = function (event) 
 {
-	torpedo.dialogmanager.createInstruction(800,450);
+	torpedo.dialogmanager.createInstruction(1080,607.5);
 };
 
 torpedo.handler.mouseClickDeleteButton = function(event){
-	Application.console.log("delete clicked");
-	var dimension = torpedo.functions.calcWindowPosition(300,80);
-	torpedo.dialogmanager.createDelete(300,80, dimension);
+	torpedo.dialogmanager.createDelete(440,117);
 };
 
 torpedo.handler.mouseClickEditButton = function(event){
