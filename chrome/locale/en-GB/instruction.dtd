@@ -7,19 +7,19 @@
 <!ENTITY sure "Do you really want to delete all entries?">
 <!ENTITY seconds "second(s)">
 <!ENTITY lists "Lists">
-<!ENTITY activated "Default list activated">
+<!ENTITY activated "List of trustworthy links activated">
 <!ENTITY userlinks "List of user links">
 <!ENTITY editentries "Edit entries">
 <!ENTITY clearentries "Clear all entries">
-<!ENTITY showdefaults "Show all default links">
+<!ENTITY showdefaults "Show all trustworthy links">
 <!ENTITY deleteEntries "Delete entries">
 <!ENTITY pickEdit "Which of the entries do you want to delete?">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY listofdefaults "List of default links">
+<!ENTITY listofdefaults "List of trustworthy links">
 <!ENTITY delete "Delete">
-<!ENTITY defaultLists "Default lists">
-<!ENTITY settings "Einstellungen">
-<!ENTITY activatedgreen "Timer activated on default links">
+<!ENTITY defaultLists "Trustworthy links">
+<!ENTITY settings "Settings">
+<!ENTITY activatedgreen "Timer activated on trustworthy links">
 <!ENTITY activatedorange "Timer activated on user links">
 <!ENTITY next "Next">

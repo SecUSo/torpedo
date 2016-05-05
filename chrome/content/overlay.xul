@@ -10,20 +10,21 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/main.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/urls.js"/>
-	
+
 	<popupset>
         <panel id="tooltippanel">
 			<hbox class="mainBox">
 				<vbox>
+					<label id="redirect" />
 					<span id="url-box">
 						<label id="url1" />
 						<label id="baseDomain" />
 						<label id="url2"  />
 					</span>
-					<label id="description"/>		
+					<label id="description"/>
 					<hbox id="seconds-box">
 							<label id="countdown"/>
-							<label id="secs" />	
+							<label id="secs" />
 					</hbox>
 				</vbox>
 				<vbox id="info-box">
@@ -32,10 +33,10 @@
 						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 					</hbox>
 				</vbox>
-			</hbox>		
+			</hbox>
         </panel>
     </popupset>
-	
+
 	<stringbundleset>
         <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>

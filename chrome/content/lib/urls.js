@@ -23,7 +23,7 @@ torpedo.db.pushUrl = function (website)
 };
 
 torpedo.db.inList = function (website, list){
-	if(list == "URLDefaultList" && (!torpedo.handler.isChecked("green"))){
+	if(list == "URLDefaultList" && (!torpedo.functions.isChecked("green"))){
 		return false;
 	}
 

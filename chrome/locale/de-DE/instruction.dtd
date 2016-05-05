@@ -7,7 +7,7 @@
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
 <!ENTITY seconds "Sekunde(n)">
 <!ENTITY lists "Listen">
-<!ENTITY activated "Standardliste aktiviert">
+<!ENTITY activated "Liste der vertrauenswürdigen Domains aktiviert">
 <!ENTITY userlinks "Liste der User-Links">
 <!ENTITY editentries "Einträge bearbeiten">
 <!ENTITY clearentries "Alle Einträge löschen">
@@ -16,10 +16,10 @@
 <!ENTITY pickEdit "Welchen der Einträge möchten Sie löschen?">
 <!ENTITY option "Optionen">
 <!ENTITY close "Schließen">
-<!ENTITY listofdefaults "Liste der Standardlinks">
+<!ENTITY listofdefaults "Liste der als vertrauenswürdig eingestuften Domains">
 <!ENTITY delete "Löschen">
-<!ENTITY defaultLists "Standardlinks">
+<!ENTITY defaultLists "Vertrauenswürdige Links">
 <!ENTITY settings "Einstellungen">
-<!ENTITY activatedgreen "Timer bei Standardliste aktiviert">
+<!ENTITY activatedgreen "Timer bei vertrauenswürdigen Domains aktiviert">
 <!ENTITY activatedorange "Timer bei User-Liste aktiviert">
 <!ENTITY next "Weiter">
