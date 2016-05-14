@@ -7,10 +7,8 @@ torpedo.instructionSize = {width: 800,height: 460};
 torpedo.updateTooltip = function (url, isRedirect)
 {
 	torpedo.handler.setCountDownTimer(url);
-
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var urlsplit = url.split(""+baseDomain);
-
 	document.getElementById("url1").textContent = urlsplit[0];
 	document.getElementById("baseDomain").textContent = baseDomain;
 	document.getElementById("secs").textContent = torpedo.stringsBundle.getString('second_show');
@@ -91,21 +89,20 @@ torpedo.processDOM = function ()
 						var aElement = linkElement[i];
 						var hrefValue = aElement.getAttribute("href");
 						var titleValue = aElement.getAttribute("title");
-						if(hrefValue == null) Application.console.log("nullvalue in linkelement " + i);
-						Application.console.log(hrefValue);
-						if(torpedo.functions.isURL(hrefValue))
-						{
-							$(aElement).bind("mouseenter", function(event){
-								torpedo.handler.mouseOverHref(event, aElement);
-							})
-							$(aElement).bind("mouseleave", function(event){
-								torpedo.handler.mouseDownHref(event, aElement);
-							})
-							$(aElement).bind("click", function(){
-								return false;
-							})
 
-						}
+						if(torpedo.functions.isURL(hrefValue))
+							{
+								$(aElement).bind("mouseenter", function(event){
+									torpedo.handler.mouseOverHref(event, aElement);
+								})
+								$(aElement).bind("mouseleave", function(event){
+									torpedo.handler.mouseDownHref(event, aElement);
+								})
+								$(aElement).bind("click", function(){
+									return false;
+								})
+
+							}
 					}
 				}
 
@@ -124,7 +121,8 @@ window.addEventListener("load", function load(event)
 		torpedo.prefs.addonUninstallingListener();
         torpedo.processDOM();
 
-       if(torpedo.prefs.getBoolPref("firstrun")){
+       if(torpedo.prefs.getBoolPref("firstrun"))
+       {
 			torpedo.prefs.setBoolPref("firstrun",false);
 			torpedo.dialogmanager.createWelcome(torpedo.instructionSize.width,torpedo.instructionSize.height);
 			torpedo.dialogmanager.createInstruction(torpedo.instructionSize.width,torpedo.instructionSize.height);

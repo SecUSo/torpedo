@@ -5,21 +5,25 @@
 <!ENTITY yes "Yes">
 <!ENTITY no "No">
 <!ENTITY sure "Do you really want to delete all entries?">
-<!ENTITY seconds "second(s)">
+<!ENTITY seconds "second(s) until you can click on a link">
 <!ENTITY lists "Lists">
-<!ENTITY activated "List of trustworthy links activated">
-<!ENTITY userlinks "List of user links">
-<!ENTITY editentries "Edit entries">
-<!ENTITY clearentries "Clear all entries">
-<!ENTITY showdefaults "Show all trustworthy links">
+<!ENTITY activated "List of trustworthy domains activated">
+<!ENTITY userlinks "List of user domains">
+<!ENTITY editentries "Delete individual entries">
+<!ENTITY clearentries "Delete all entries">
+<!ENTITY showdefaults "Show all trustworthy domains">
 <!ENTITY deleteEntries "Delete entries">
 <!ENTITY pickEdit "Which of the entries do you want to delete?">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY listofdefaults "List of trustworthy links">
+<!ENTITY listofdefaults "List of trustworthy domains">
 <!ENTITY delete "Delete">
-<!ENTITY defaultLists "Trustworthy links">
+<!ENTITY defaultLists "Trustworthy domains">
 <!ENTITY settings "Settings">
-<!ENTITY activatedgreen "Timer activated on trustworthy links">
-<!ENTITY activatedorange "Timer activated on user links">
+<!ENTITY activatedgreen "Timer activated on trustworthy domains">
+<!ENTITY activatedorange "Timer activated on user domains">
 <!ENTITY next "Next">
+<!ENTITY redirection "Redirections">
+<!ENTITY noredirect "Do not check domains for forwarding">
+<!ENTITY manualredirect "Check domains manually for forwarding">
+<!ENTITY autoredirect "Check domains automatically for forwarding">

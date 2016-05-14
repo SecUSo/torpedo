@@ -3,6 +3,7 @@ pref("extensions.torpedo.blockingTimer", 3);
 pref("extensions.torpedo.checkedGreenList", true);
 pref("extensions.torpedo.activatedGreenList", false);
 pref("extensions.torpedo.activatedOrangeList", false);
+pref("extensions.torpedo.redirection", 2);
 pref("extensions.torpedo.URLDefaultList", "google.de,youtube.com,facebook.com,amazon.de,google.com,ebay.de,wikipedia.org,web.de,gmx.net,t-online.de,bing.com,ebay-kleinanzeigen.de,yahoo.com,bild.de,msn.com,spiegel.de,live.com,chip.de,mobile.de,paypal.com,otto.de,gutefrage.net,focus.de,immobilienscout24.de,outbrain.com,twitter.com,telekom.com,postbank.de,instagram.com,bahn.de,chefkoch.de,autoscout24.de,1und1.de,microsoft.com,kicker.de,blogspot.de,welt.de,netflix.com,booking.com,idealo.de,xing.com,fiducia.de,twitch.tv,pinterest.com,tumblr.com,zalando.de,wetter.com,heise.de,dict.cc,arbeitsagentur.de,wordpress.com,computerbild.de,ikea.com,sueddeutsche.de,vice.com,sky.de,leo.org,zeit.de,sport1.de,ask.com,deutsche-bank.de,linkedin.com,commerzbank.de,zdf.de,freenet.de,faz.net,adobe.com,n-tv.de,mediamarkt.de,siteadvisor.com,amazon.com,aol.com,tchibo.de,hm.com,immowelt.de,vodafone.de,ing-diba.de,dhl.de,giga.de,telekom.de,meinestadt.de,wetteronline.de,tagesschau.de,bonprix.de,apple.com,duden.de,whatsapp.com,lidl.de,check24.de,reddit.com,stern.de,wikia.com,9gag.com,arcor.de,ebay.com,dasoertliche.de,dropbox.com,holidaycheck.de,dkb.de,dawanda.com,tripadvisor.de,ardmediathek.de,");
 pref("extensions.torpedo.URLSecondList", "");
 pref("extensions.torpedo.URLFirstList", "");

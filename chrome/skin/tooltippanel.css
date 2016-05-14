@@ -3,6 +3,7 @@ span #baseDomain
 	font-weight:bold;
 	margin: 0px;
 	text-decoration: underline;
+    cursor: pointer;
 }
 
 span
@@ -25,6 +26,7 @@ span #url1,span #url2
 {
 	margin: 0px;
 	text-decoration: underline;
+    cursor: pointer;
 }
 
 #showDefaults
@@ -63,6 +65,7 @@ span #url1,span #url2
 {
     width: 32px;
     height: 32px;
+    cursor: pointer;
 }
 
 #info-box

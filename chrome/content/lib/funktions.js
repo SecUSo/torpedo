@@ -74,9 +74,9 @@ torpedo.functions.isURL = function (url) {
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
     var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
-    var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI("" + url, null, null);
-    try {
-        //hardcoded because this is the only url where this doesn't work
+    try { 
+        var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI("" + url, null, null);
+           //hardcoded because this is the only url where this doesn't work
         if (eTLDService.getBaseDomain(tempURI) == "www.blogspot.de") return "blogspot.de";
         return eTLDService.getBaseDomain(tempURI);
     }
@@ -156,6 +156,7 @@ var a = torpedo.prefs.getBoolPref("checkedGreenList");
 var b = torpedo.prefs.getBoolPref("activatedGreenList");
 var c = torpedo.prefs.getBoolPref("activatedOrangeList");
 
+
 torpedo.functions.isChecked = function (color){
     if(color == "green") return torpedo.prefs.getBoolPref("checkedGreenList");
     if(color == "greenActivated") return torpedo.prefs.getBoolPref("activatedGreenList");
@@ -175,4 +176,12 @@ torpedo.functions.changeActivatedGreen = function (){
 torpedo.functions.changeActivatedOrange = function (){
     c = !c;
     torpedo.prefs.setBoolPref("activatedOrangelist", c);
+};
+
+torpedo.functions.redirect = function (id){
+    Application.console.log("id is " + id);
+    torpedo.prefs.setIntPref("redirection", id);
+
+    Application.console.log("redirection set to " + torpedo.prefs.getIntPref("redirection"));
+    Application.console.log("element focused is " + document.getElementById("radiogroup").selectedIndex);
 };

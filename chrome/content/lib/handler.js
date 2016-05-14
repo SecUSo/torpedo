@@ -31,30 +31,32 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 10);
+	}, 300);
 };
 
 var alreadyClicked = "";
 
 torpedo.handler.mouseOverHref = function (event)
 {
-	clearTimeout(torpedo.handler.MouseLeavetimer);
-	var panel = document.getElementById("tooltippanel");
 	tempTarget = torpedo.functions.findParentTagTarget(event,'A');
-	var tempTargetc = event.target || event.srcElement;
 	var url = tempTarget.href;
-	torpedo.updateTooltip(url);
-	alreadyClicked = "";
-	var redirect = false;
-	for(var i = 0; i < redirects.length; i++){
-		if(url.contains(redirects[i])) {
-			redirect = true;
-			break;
+	if(url != ""){
+		clearTimeout(torpedo.handler.MouseLeavetimer);
+		var panel = document.getElementById("tooltippanel");
+		torpedo.updateTooltip(url);
+		alreadyClicked = "";
+		var redirect = false;
+		for(var i = 0; i < redirects.length; i++){
+			if(url.contains(redirects[i])) {
+				redirect = true;
+				break;
+			}
 		}
-	}
-	if(redirect) torpedo.functions.traceUrl(url);
+		if(redirect) torpedo.functions.traceUrl(url);
 
-	panel.openPopup(tempTarget, "after_start", 0, 0, true, false);
+		panel.openPopup(tempTarget, "after_start", 0, 0, true, false);
+	}
+	else Application.console.log("undefined");
 };
 
 torpedo.handler.setCountDownTimer = function (url) {
@@ -101,7 +103,7 @@ torpedo.handler.mouseDownHref = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 10);
+	}, 300);
 };
 
 torpedo.handler.mouseClickHref = function (event)
