@@ -48,8 +48,7 @@ torpedo.handler.mouseOverHref = function (event)
 			}
 			else if(torpedo.prefs.getBoolPref("redirection1")){
 				Url = url;
-            	document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('attention');
-				document.getElementById("redirectButton").hidden = false;
+            	document.getElementById("redirectButton").hidden = false;
 			}
 		}
 		torpedo.functions.traceUrl(url, redirect);
@@ -114,7 +113,7 @@ torpedo.handler.mouseClickHref = function (event)
 
 		var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 
-	 	torpedo.db.pushUrl(baseDomain);
+	 	if(!torpedo.functions.isRedirect(url)) torpedo.db.pushUrl(baseDomain);
 
 		var ioservice = Components.classes["@mozilla.org/network/io-service;1"]
 	                          .getService(Components.interfaces.nsIIOService);

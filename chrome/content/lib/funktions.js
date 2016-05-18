@@ -62,45 +62,42 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
 }
 
 // url expanding services 
-
+var OldUrl = "";
 torpedo.functions.traceUrl = function (url, redirect) {
     torpedo.updateTooltip(url, false);
+    OldUrl = url;
     if(redirect){ 
         $.getJSON('http://untiny.me/api/1.0/extract', {format: 'json', 'url': url})
             .done(function (json) {
        	      torpedo.functions.containsUrl(json.org_url);
             })
            .fail(function (jqxhr, textStatus, error) {
-                Application.console.log("redirection error");
                 if(torpedo.prefs.getBoolPref("redirection2") || torpedo.prefs.getBoolPref("redirection1")){
                     document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('offline');
                 }
             });
     }
-};
+}; 
 
 torpedo.functions.containsUrl = function (url){
     document.getElementById("redirectButton").hidden = true;
-    if(url != undefined){
-        document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
-        
-        setTimeout(function(e){
-            if(url.contains("redirect")){
-              var index = url.lastIndexOf("http");
-              var subs = url.slice(indexgetString, url.length);
-              index = subs.indexOf("&");
-              url = subs.slice(0, index);
-            }
-            if(torpedo.functions.isRedirect(url)){
-                torpedo.functions.traceUrl(url, true);
-            }            
-            else {
-                document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
-            }
-            torpedo.updateTooltip(url, true);   
-        }, 2500);
-
-    }
+    Application.console.log("url is" + url);
+    if(url == undefined){
+        url = OldUrl;
+        Application.console.log("url is now" + url);
+    } 
+    document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
+      
+    setTimeout(function(e){
+        url = torpedo.functions.containsRedirect(url); 
+        if(torpedo.functions.isRedirect(url)){
+            torpedo.functions.traceUrl(url, true);
+        }            
+        else {
+            document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
+        }
+        torpedo.updateTooltip(url, true);   
+    }, 2500);
 };
 
 // Countdown functions
@@ -227,3 +224,14 @@ torpedo.functions.isRedirect = function(url){
     }
     return redirect;
 };
+
+torpedo.functions.containsRedirect = function(url){
+    if(url.contains("redirect")){
+        Application.console.log("contains redirect!");
+        var index = url.lastIndexOf("http");
+        var subs = url.slice(index, url.length);
+        index = subs.indexOf("&");
+        url = subs.slice(0, index);
+    }
+    return url;
+}

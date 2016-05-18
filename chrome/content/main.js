@@ -14,6 +14,9 @@ torpedo.updateTooltip = function (url, isRedirect)
 		document.getElementById("url2").textContent = urlsplit[1];
 	}
 	if(!isRedirect) document.getElementById("redirect").textContent = "";
+	if(torpedo.prefs.getBoolPref("redirection1") && torpedo.functions.isRedirect(url)){
+            document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('attention');
+    }
 	document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
 	document.getElementById("secs").textContent = torpedo.stringsBundle.getString('second_show');
 
