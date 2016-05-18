@@ -65,9 +65,6 @@ torpedo.db.deleteAllSecond = function () {
     str.data = "";
 	torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
 	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
-
-	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
-	alert(torpedo.stringsBundle.getString('entries_gone'));
 };
 
 torpedo.db.deleteSomeSecond = function () {

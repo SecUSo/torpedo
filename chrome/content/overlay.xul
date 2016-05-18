@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://torpedo/skin/tooltippanel.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <overlay
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -14,17 +15,18 @@
 	<popupset>
         <panel id="tooltippanel">
 			<hbox class="mainBox">
-				<vbox>
+				<vbox class="vBox">
 					<label id="redirect" />
 					<span id="url-box">
 						<label id="url1" />
 						<label id="baseDomain" />
 						<label id="url2"  />
 					</span>
+					<button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
 					<label id="description"/>
 					<hbox id="seconds-box">
 							<label id="countdown"/>
-							<label id="secs" />
+							<label id="secs" value="&secs;"/>
 					</hbox>
 				</vbox>
 				<vbox id="info-box">

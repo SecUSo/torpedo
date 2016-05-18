@@ -1,4 +1,5 @@
 var torpedo = torpedo || {};
+var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.dialogmanager = torpedo.dialogmanager || {};
 
@@ -16,6 +17,10 @@ torpedo.dialogmanager.createDelete = function (windowWidth,windowHeight)
 
 torpedo.dialogmanager.createEdit = function () {
 	window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
+};
+
+torpedo.dialogmanager.createInfo = function () {
+	window.openDialog("chrome://torpedo/content/dialog/info.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
 };
 
 torpedo.dialogmanager.showDefaults = function(){

@@ -1,9 +1,12 @@
 var torpedo = torpedo || {};
 var Url = "";
+var redirects = [".tk","1u.ro","1url.com","2pl.us","2tu.us","3.ly","a.gd","a.gg","a.nf","a2a.me","abe5.com","adjix.com","alturl.com","atu.ca","awe.sm","b23.ru","bacn.me","bit.ly","bkite.com","blippr.com","blippr.com","bloat.me","bt.io","budurl.com","buk.me","burnurl.com","c.shamekh.ws","cd4.me","chilp.it","chs.mx","clck.ru","cli.gs","clickthru.ca","cort.as","cuthut.com","cutt.us","cuturl.com","decenturl.com","df9.net","digs.by","doiop.com","dwarfurl.com","easyurl.net","eepurl.com","eezurl.com","ewerl.com","fa.by","fav.me","fb.me","ff.im","fff.to","fhurl.com","flic.kr","flq.us","fly2.ws","fuseurl.com","fwd4.me","getir.net","gl.am","go.9nl.com","go2.me","golmao.com","goo.gl","goshrink.com","gri.ms","gurl.es","hellotxt.com","hex.io","href.in","htxt.it","hugeurl.com","hurl.ws","icanhaz.com","icio.us","idek.net","is.gd","it2.in","ito.mx","j.mp","jijr.com","kissa.be","kl.am","korta.nu","l9k.net","liip.to","liltext.com","lin.cr","linkbee.com","littleurl.info","liurl.cn","ln-s.net","ln-s.ru","lnkurl.com","loopt.us","lru.jp","lt.tl","lurl.no","memurl.com","migre.me","minilien.com","miniurl.com","miniurls.org","minurl.fr","moourl.com","myurl.in","ncane.com","netnet.me","nn.nf","o-x.fr","ofl.me","omf.gd","ow.ly","oxyz.info","p8g.tw","parv.us","pic.gd","ping.fm","piurl.com","plurl.me","pnt.me","poll.fm","pop.ly","poprl.com","post.ly","posted.at","ptiturl.com","qurlyq.com","rb6.me","readthis.ca","redirects.ca","redirx.com","relyt.us","retwt.me","ri.ms","rickroll.it","rly.cc","rsmonkey.com","rubyurl.com","rurl.org","s3nt.com","s7y.us","saudim.ac","short.ie","short.to","shortna.me","shoturl.us","shrinkster.com","shrinkurl.us","shrtl.com","shw.me","simurl.net","simurl.org","simurl.us","sn.im","sn.vc","snipr.com","snipurl.com","snurl.com","soo.gd","sp2.ro","spedr.com","starturl.com","stickurl.com","sturly.com","su.pr","t.co","takemyfile.com","tcrn.ch","teq.mx","thrdl.es","tighturl.com","tiny.cc","tiny.pl","tinyarro.ws","tinytw.it","tinyurl.com","tl.gd","tnw.to","to.ly","togoto.us","tr.im","tr.my","trcb.me","tumblr.com","tw0.us","tw1.us","tw2.us","tw5.us","tw6.us","tw8.us","tw9.us","twa.lk","twd.ly","twi.gy","twit.ac","twitthis.com","twiturl.de","twitzap.com","twtr.us","twurl.nl","u.mavrev.com","u.nu","ub0.cc","updating.me","ur1.ca","url.co.uk","url.ie","url.inc-x.eu","url4.eu","urlborg.com","urlbrief.com","urlcut.com","urlhawk.com","urlkiss.com","urlpire.com","urlvi.be","urlx.ie","uservoice.com","ustre.am","virl.com","vl.am","wa9.la","wapurl.co.uk","wipi.es","wkrg.com","wp.me","x.co","x.hypem.com","x.se","xav.cc","xeeurl.com","xr.com","xrl.in","xrl.us","xurl.jp","xzb.cc","yatuc.com","ye-s.com","yep.it","yfrog.com","zi.pe","zz.gd"];
 
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.functions = torpedo.functions || {};
+
+torpedo.functions.manualRedirect = false;
 
 torpedo.functions.calcWindowPosition = function (windowWidth, windowHeight) {
     var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
@@ -27,33 +30,6 @@ torpedo.functions.calcWindowPosition = function (windowWidth, windowHeight) {
         height: height
     };
 }
-var oldUrl = "";
-
-torpedo.functions.traceUrl = function (url) {
-    oldUrl = url;
-    $.getJSON('http://untiny.me/api/1.0/extract', {format: 'json', 'url': url})
-        .done(function (json) {
-   	      torpedo.functions.containsUrl(json.org_url);
-        })
-       .fail(function (jqxhr, textStatus, error) {
-         Application.console.log("redirection error");
-        });
-};
-
-torpedo.functions.containsUrl = function (url, err){
-    if(url == undefined){
-       torpedo.updateTooltip(oldUrl, false);
-     }
-     else{
-        if(url.contains("redirect")){
-          var index = url.lastIndexOf("http");
-          var subs = url.slice(index, url.length);
-          index = subs.indexOf("&");
-          url = subs.slice(0, index);
-        }
-        torpedo.updateTooltip(url, true);
-    }
-};
 
 torpedo.functions.findParentTagTarget = function (event, tagName) {
     var tempTarget = event.target || event.srcElement;
@@ -84,6 +60,50 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
         return "";
     }
 }
+
+// url expanding services 
+
+torpedo.functions.traceUrl = function (url, redirect) {
+    torpedo.updateTooltip(url, false);
+    if(redirect){ 
+        $.getJSON('http://untiny.me/api/1.0/extract', {format: 'json', 'url': url})
+            .done(function (json) {
+       	      torpedo.functions.containsUrl(json.org_url);
+            })
+           .fail(function (jqxhr, textStatus, error) {
+                Application.console.log("redirection error");
+                if(torpedo.prefs.getBoolPref("redirection2") || torpedo.prefs.getBoolPref("redirection1")){
+                    document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('offline');
+                }
+            });
+    }
+};
+
+torpedo.functions.containsUrl = function (url){
+    document.getElementById("redirectButton").hidden = true;
+    if(url != undefined){
+        document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
+        
+        setTimeout(function(e){
+            if(url.contains("redirect")){
+              var index = url.lastIndexOf("http");
+              var subs = url.slice(indexgetString, url.length);
+              index = subs.indexOf("&");
+              url = subs.slice(0, index);
+            }
+            if(torpedo.functions.isRedirect(url)){
+                torpedo.functions.traceUrl(url, true);
+            }            
+            else {
+                document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
+            }
+            torpedo.updateTooltip(url, true);   
+        }, 2500);
+
+    }
+};
+
+// Countdown functions
 
 torpedo.functions.countdown = function (timee, id, url) {
     var startTime = timee;
@@ -135,7 +155,7 @@ torpedo.functions.countdown = function (timee, id, url) {
         if (startTime == 0) {
             clearInterval(timerInterval);
         }
-        else {
+        else{
             --startTime;
         }
 
@@ -151,6 +171,9 @@ torpedo.functions.setHref = function (url) {
 torpedo.functions.getHref = function () {
     return Url;
 }
+
+
+// list settings
 
 var a = torpedo.prefs.getBoolPref("checkedGreenList");
 var b = torpedo.prefs.getBoolPref("activatedGreenList");
@@ -178,10 +201,29 @@ torpedo.functions.changeActivatedOrange = function (){
     torpedo.prefs.setBoolPref("activatedOrangelist", c);
 };
 
-torpedo.functions.redirect = function (id){
-    Application.console.log("id is " + id);
-    torpedo.prefs.setIntPref("redirection", id);
+// redirection settings
 
-    Application.console.log("redirection set to " + torpedo.prefs.getIntPref("redirection"));
-    Application.console.log("element focused is " + document.getElementById("radiogroup").selectedIndex);
+torpedo.functions.redirect = function (id){
+    torpedo.prefs.setBoolPref("redirection"+id, true);
+    var id1 = (id+1)%3;
+    var id2 = (id+2)%3;
+    torpedo.prefs.setBoolPref("redirection"+id1, false);
+    torpedo.prefs.setBoolPref("redirection"+id2, false);
+
+    // prevent user from selecting no option at all in settings
+    if(document.getElementById("redirect"+id).checked == false){
+        document.getElementById("redirect"+id).checked = true;
+    }
+};
+
+torpedo.functions.isRedirect = function(url){
+    var redirect = false; 
+    if(url.contains("redirect")) return true;
+    for(var i = 0; i < redirects.length; i++){
+        if(url.contains(redirects[i])) {
+            redirect = true;
+            break;
+        }
+    }
+    return redirect;
 };

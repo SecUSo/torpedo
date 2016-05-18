@@ -21,7 +21,9 @@
             <preference id="firefox-checked-greenlist" name="extensions.torpedo.checkedGreenList" type="bool"/>
             <preference id="firefox-checked-greenlistactivated" name="extensions.torpedo.activatedGreenList" type="bool"/>
             <preference id="firefox-checked-orangelistactivated" name="extensions.torpedo.activatedOrangeList" type="bool"/>
-            <preference id="firefox-redirection" name="extensions.torpedo.redirection" type="int"/>
+            <preference id="firefox-redirection0" name="extensions.torpedo.redirection0" type="bool"/>
+            <preference id="firefox-redirection1" name="extensions.torpedo.redirection1" type="bool"/>
+            <preference id="firefox-redirection2" name="extensions.torpedo.redirection2" type="bool"/>
 	   </preferences>
 
         <tabbox>
@@ -55,7 +57,7 @@
                                 <button id="showDefaults" label="&showdefaults;" style="margin-left:20px;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
                             </row>
                             <row>
-                                <label id="userlinks" value="&userlinks;" style="font-weight:bold; color:orange; margin-left:20px; margin-top:30px; margin-bottom:10px;"/>
+                                <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; color:orange; margin-left:20px; margin-top:30px; margin-bottom:10px;"/>
                             </row>
                             <row>
                                 <checkbox id="orangelistactivated" label="&activatedorange;" preference="firefox-checked-orangelistactivated" style="margin-left:20px;" oncommand="torpedo.functions.changeActivatedOrange();" />
@@ -70,19 +72,19 @@
                     </grid>    			
 				</tabpanel>
                 <tabpanel id="redirecttab" orient="horizontal">
-                      <groupbox>
                         <grid>
-                            <rows>
-                                <row>
-                                <radiogroup id="radiogroup" preference="firefox-redirection" >
-                                    <radio id="redirectno" label="&noredirect;" onclick="torpedo.functions.redirect(0);" />
-                                    <radio id="redirectmanual" label="&manualredirect;" onclick="torpedo.functions.redirect(1);" />
-                                    <radio id="redirectauto" label="&autoredirect;" onclick="torpedo.functions.redirect(2);" />
-                                </radiogroup>
-                                </row>
-                            </rows>
+                        <rows>
+                            <row>
+                                <checkbox id="redirect0" label="&noredirect;" preference="firefox-redirection0" style="margin-top:10px;" oncommand="torpedo.functions.redirect(0);" />
+                            </row>
+                            <row>
+                                <checkbox id="redirect1" label="&manualredirect;" preference="firefox-redirection1" oncommand="torpedo.functions.redirect(1);" />
+                            </row>
+                            <row>
+                                <checkbox id="redirect2" label="&autoredirect;" preference="firefox-redirection2" oncommand="torpedo.functions.redirect(2);" />
+                            </row>
+                        </rows>
                         </grid>
-                      </groupbox>
                 </tabpanel>
 			</tabpanels>
 		</tabbox>

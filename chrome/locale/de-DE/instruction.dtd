@@ -9,6 +9,7 @@
 <!ENTITY lists "Listen">
 <!ENTITY activated "Liste der vertrauenswürdigen Domains aktiviert">
 <!ENTITY userlinks "Liste der User-Domains">
+<!ENTITY userdomains "Domains, die mind. 2x aufgerufen wurden">
 <!ENTITY editentries "Einzelne Einträge löschen">
 <!ENTITY clearentries "Alle Einträge löschen">
 <!ENTITY showdefaults "Zeige Liste der vertrauenswürdigen Domains">
@@ -24,6 +25,9 @@
 <!ENTITY activatedorange "Timer bei User-Domains aktiviert">
 <!ENTITY next "Weiter">
 <!ENTITY redirection "Weiterleitungen">
+<!ENTITY redirect "URL auflösen">
 <!ENTITY noredirect "Domains nicht auf Weiterleitungen prüfen">
 <!ENTITY manualredirect "Domains manuell auf Weiterleitungen prüfen">
 <!ENTITY autoredirect "Domains automatisch auf Weiterleitungen prüfen">
+<!ENTITY secs "Sekunde(n)">
+<!ENTITY entries_gone "Alle von Ihnen gespeicherten Links wurden gelöscht.">

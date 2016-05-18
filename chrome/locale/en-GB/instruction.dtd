@@ -9,6 +9,7 @@
 <!ENTITY lists "Lists">
 <!ENTITY activated "List of trustworthy domains activated">
 <!ENTITY userlinks "List of user domains">
+<!ENTITY userdomains "Domains which were called at least 2 times">
 <!ENTITY editentries "Delete individual entries">
 <!ENTITY clearentries "Delete all entries">
 <!ENTITY showdefaults "Show all trustworthy domains">
@@ -24,6 +25,9 @@
 <!ENTITY activatedorange "Timer activated on user domains">
 <!ENTITY next "Next">
 <!ENTITY redirection "Redirections">
+<!ENTITY redirect "Expand Url">
 <!ENTITY noredirect "Do not check domains for forwarding">
 <!ENTITY manualredirect "Check domains manually for forwarding">
 <!ENTITY autoredirect "Check domains automatically for forwarding">
+<!ENTITY secs "second(s)">
+<!ENTITY entries_gone "All of your saved links are deleted now.">

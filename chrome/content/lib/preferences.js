@@ -52,7 +52,9 @@ torpedo.prefs = function () {
 			prefManager.clearUserPref("checkedGreenList");
 			prefManager.clearUserPref("activatedGreenList");
 			prefManager.clearUserPref("activatedOrangeList");
-			prefManager.clearUserPref("redirection");
+			prefManager.clearUserPref("redirection0");
+			prefManager.clearUserPref("redirection1");
+			prefManager.clearUserPref("redirection2");
 			prefManager.clearUserPref("URLDefaultList");
 			prefManager.clearUserPref("URLSecondList");
 			prefManager.clearUserPref("URLFirstList");

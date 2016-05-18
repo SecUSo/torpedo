@@ -6,24 +6,29 @@ torpedo.instructionSize = {width: 800,height: 460};
 
 torpedo.updateTooltip = function (url, isRedirect)
 {
-	torpedo.handler.setCountDownTimer(url);
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var urlsplit = url.split(""+baseDomain);
 	document.getElementById("url1").textContent = urlsplit[0];
 	document.getElementById("baseDomain").textContent = baseDomain;
+	if(urlsplit.length>1){
+		document.getElementById("url2").textContent = urlsplit[1];
+	}
+	if(!isRedirect) document.getElementById("redirect").textContent = "";
+	document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
 	document.getElementById("secs").textContent = torpedo.stringsBundle.getString('second_show');
 
-	document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
-	
+	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(baseDomain, "URLDefaultList")){
 		document.getElementById("tooltippanel").style.borderColor = "green";
+		// if timer is on in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
-
 			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
 		}
 	}
+	// domain is in <2 times clicked links
 	else if(torpedo.db.inList(baseDomain, "URLSecondList")){
 		document.getElementById("tooltippanel").style.borderColor = "orange";
+		// timer is on in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
 			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
 		}
@@ -31,19 +36,7 @@ torpedo.updateTooltip = function (url, isRedirect)
 	else{
 		document.getElementById("tooltippanel").style.borderColor = "red";
 	}
-	if(isRedirect){
-		document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
-	}
-	else {
-		document.getElementById("redirect").textContent = "";
-	}
-
 	torpedo.functions.setHref(url);
-
-	if(urlsplit.length>1)
-	{
-		document.getElementById("url2").textContent = urlsplit[1];
-	}
 };
 
 torpedo.processDOM = function ()

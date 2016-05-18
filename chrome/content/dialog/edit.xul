@@ -22,9 +22,6 @@
 		<vbox>
 			<label value="&pickEdit;" />
 			<listbox id="theList" width="400" onselect="torpedo.db.select(this.selectedIndex);">
-			  <listhead>
-			    <listheader label="URLs" width="400"/>
-			  </listhead>
 			</listbox>
 		</vbox>
 </dialog>

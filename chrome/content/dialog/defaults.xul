@@ -18,9 +18,6 @@
 
 		<vbox>
 			<listbox id="defaultList" width="400">
-			  <listhead>
-			    <listheader label="URLs" width="400"/>
-			  </listhead>
 			  <listcols>
 			    <listcol flex="1"/>
 			  </listcols>
