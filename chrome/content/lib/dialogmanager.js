@@ -1,6 +1,4 @@
 var torpedo = torpedo || {};
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
-
 torpedo.dialogmanager = torpedo.dialogmanager || {};
 
 torpedo.dialogmanager.createInstruction = function (windowWidth,windowHeight) 

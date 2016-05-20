@@ -3,8 +3,6 @@ var clickTimer = null, countDownTimer = null;
 var tempTarget;
 var Url;
 var alreadyClicked = "";
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
-
 torpedo.handler = torpedo.handler || {};
 
 torpedo.handler.MouseLeavetimer;
@@ -36,6 +34,8 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 torpedo.handler.mouseOverHref = function (event)
 {
 	tempTarget = torpedo.functions.findParentTagTarget(event,'A');
+	torpedo.functions.loop = 0;
+	torpedo.functions.loopTimer = 2500;
 	var url = tempTarget.href;
 	var redirect = false;
 	if(url != ""){

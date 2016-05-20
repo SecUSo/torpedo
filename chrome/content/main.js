@@ -1,7 +1,5 @@
 var torpedo = torpedo || {};
 var lastBrowserStatus;
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
-
 torpedo.instructionSize = {width: 800,height: 460};
 
 torpedo.updateTooltip = function (url, isRedirect)
@@ -13,15 +11,24 @@ torpedo.updateTooltip = function (url, isRedirect)
 	if(urlsplit.length>1){
 		document.getElementById("url2").textContent = urlsplit[1];
 	}
-	if(!isRedirect) document.getElementById("redirect").textContent = "";
+	var redirect = torpedo.functions.isRedirect(url);
+	if(!isRedirect){
+		document.getElementById("redirect").textContent = "";
+	} 
 	if(torpedo.prefs.getBoolPref("redirection1") && torpedo.functions.isRedirect(url)){
             document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('attention');
     }
-	document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
-	document.getElementById("secs").textContent = torpedo.stringsBundle.getString('second_show');
-
+	if(!redirect) {
+		document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
+		document.getElementById("description").hidden = false;
+		document.getElementById("seconds-box").hidden = false;
+	}
+	else{
+		document.getElementById("description").hidden = true;
+		document.getElementById("seconds-box").hidden = true;
+	}
 	// trustworthy domains activated and url is in it
-	if(torpedo.functions.isChecked("green") && torpedo.db.inList(baseDomain, "URLDefaultList")){
+	if(torpedo.functions.isChecked("green") && torpedo.db.inList(baseDomain, "URLDefaultList") && !redirect){
 		document.getElementById("tooltippanel").style.borderColor = "green";
 		// if timer is on in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
@@ -29,7 +36,7 @@ torpedo.updateTooltip = function (url, isRedirect)
 		}
 	}
 	// domain is in <2 times clicked links
-	else if(torpedo.db.inList(baseDomain, "URLSecondList")){
+	else if(torpedo.db.inList(baseDomain, "URLSecondList") && !redirect){
 		document.getElementById("tooltippanel").style.borderColor = "orange";
 		// timer is on in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
@@ -39,7 +46,7 @@ torpedo.updateTooltip = function (url, isRedirect)
 	else{
 		document.getElementById("tooltippanel").style.borderColor = "red";
 	}
-	torpedo.functions.setHref(url);
+	if(!redirect) torpedo.functions.setHref(url);
 };
 
 torpedo.processDOM = function ()
@@ -57,7 +64,7 @@ torpedo.processDOM = function ()
 
         if (appcontent)
 		{
-			appcontent.addEventListener("OMContentLoaded", onPageLoad, true);
+			appcontent.addEventListener("DOMContentLoaded", onPageLoad, true);
         }
 
         var messagepane = document.getElementById("messagepane"); // tunderbird message pane

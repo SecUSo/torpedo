@@ -1,6 +1,3 @@
-
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
-
 // Called once if and only if the user clicks OK
 function onLoad(picture) {
 	if(picture=="instruction") {
