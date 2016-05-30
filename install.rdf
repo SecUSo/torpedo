@@ -8,20 +8,22 @@
     <em:version>1.0</em:version>
     <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
     <em:description>TOrPeDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TOrPeDO displays the correct web address in a tooltip and helps you to analyze it.
-    Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
+
+Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
     <em:creator>TU Darmstadt SECUSO</em:creator>
     <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
     <em:icon64URL>chrome://torpedo/skin/icon64.png</em:icon64URL>
-	<em:optionsURL>chrome://torpedo/content/options.xul</em:optionsURL>
+  <em:optionsURL>chrome://torpedo/content/options.xul</em:optionsURL>
     <em:type>2</em:type>
 
-	<em:localized>
+  <em:localized>
       <Description>
         <em:locale>de</em:locale>
         <em:creator>TU Darmstadt - SECUSO</em:creator>
         <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
         <em:description>TOrPeDO ist ein Tool zum Erkennen von betrügerischen Links (Phishing). Bewegen Sie die Maus über einen Link in einer Email. TOrPeDO zeigt Ihnen die tatsächliche Webadresse in einem Tooltip an und hilft Ihnen, diese zu untersuchen.
-        Als vertrauenswürdig eingestufte Webadressen haben eine grüne Umrandung im Popup. Webadressen, die Sie zweimal geöffnet haben, sind orange umrandet.</em:description>
+
+Als vertrauenswürdig eingestufte Webadressen haben eine grüne Umrandung im Popup. Webadressen, die Sie zweimal geöffnet haben, sind orange umrandet.</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
         <em:icon64URL>chrome://torpedo/skin/icon64.png</em:icon64URL>
         <em:optionsURL>chrome://torpedo/content/options.xul</em:optionsURL>
@@ -34,7 +36,8 @@
         <em:creator>TU Darmstadt - SECUSO</em:creator>
         <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
         <em:description>TOrPeDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TOrPeDO displays the correct web address in a tooltip and helps you to analyze it.
-        Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
+
+Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso-home/</em:homepageURL>
       </Description>
     </em:localized>
@@ -47,6 +50,6 @@
         <em:maxVersion>45.1</em:maxVersion>
       </Description>
     </em:targetApplication>
-	<em:targetApplication>
+  <em:targetApplication>
   </Description>
 </RDF>
