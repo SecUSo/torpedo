@@ -1,15 +1,18 @@
 var torpedo = torpedo || {};
 torpedo.db = torpedo.db || {};
 
+var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
+
 torpedo.db.pushUrl = function (website) 
 {
-	if (torpedo.db.inList(website, "URLDefaultList")){
+	var isRedirect = torpedo.functions.isRedirect(website);
+	if (torpedo.db.inList(website, "URLDefaultList") && !isRedirect){
 		return 1;
 	}
-	else if (torpedo.db.inList(website, "URLSecondList")){
+	else if (torpedo.db.inList(website, "URLSecondList") && !isRedirect){
 		return 2;
 	}
-	else if (torpedo.db.inList(website, "URLFirstList")){
+	else if (torpedo.db.inList(website, "URLFirstList") && !isRedirect){
 		torpedo.db.putInsideSecond(website);
 
 		return 3;
@@ -34,10 +37,13 @@ torpedo.db.putInsideSecond = function(website){
 	var str = Components.classes["@mozilla.org/supports-string;1"]
 		      .createInstance(Components.interfaces.nsISupportsString);
 
+	// put website into user list
 	var firstSites = torpedo.prefs.getComplexValue("URLFirstList", Components.interfaces.nsISupportsString).data;
-	str.data = website + ",";
+	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
+	str.data = secondSites + website + ",";
 	torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
 
+	// delete website out of first clicked links
 	var myString = firstSites.substring(firstSites.indexOf(website), firstSites.indexOf(website)+website.length+1);
 	if(myString.indexOf(",") >= 0) website = website + ",";
 	str.data = firstSites.replace(website, "");		
@@ -49,8 +55,7 @@ torpedo.db.putInsideFirst = function(website){
 		      .createInstance(Components.interfaces.nsISupportsString);
 
 	var firstSites = torpedo.prefs.getComplexValue("URLFirstList", Components.interfaces.nsISupportsString).data;
-	if(firstSites.length == 0) str.data = website;
-	else str.data = "," +  website;
+	str.data = firstSites + "," +  website;
 	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
 };
 
@@ -121,4 +126,13 @@ torpedo.db.getDefaults = function (){
 	    row.setAttribute('label', cutOut[i]);
 	    defaultList.appendChild(row);
 	}
+}
+
+torpedo.db.restoreSettings = function(){
+	var del = document.getElementById("defaultdelete").checked;
+	if(del) {
+		torpedo.db.deleteAllSecond();
+	}
+	torpedo.prefs.resetPrefs(false);
+	return true;
 }

@@ -12,7 +12,7 @@
 	
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
-    <script type="application/javascript" src="chrome://torpedo/content/lib/urls.js"/>
+    <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 
 	<stringbundleset>
@@ -20,6 +20,6 @@
     </stringbundleset>
 
 	<vbox>
-		<label id="sure" value="&sure;"/>
+		<label value="&sure;"/>
 	</vbox>
 </dialog>

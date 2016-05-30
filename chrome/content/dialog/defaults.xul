@@ -3,13 +3,13 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		title="&defaultLists;"
+		title="&listofdefaults;"
 		buttons="cancel"
 		buttonlabelcancel="&close;"
 		ondialogcancel="return true;"
 		onload="torpedo.db.getDefaults();">
 
-    <script type="application/javascript"  src="chrome://torpedo/content/lib/urls.js" />
+    <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	
 	<stringbundleset>

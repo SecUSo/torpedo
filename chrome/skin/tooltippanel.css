@@ -2,7 +2,6 @@ span #baseDomain
 {
 	font-weight:bold;
 	margin: 0px;
-	text-decoration: underline;
     cursor: pointer;
 }
 
@@ -18,20 +17,30 @@ span
 	white-space: normal
 }
 
-#greenlist {
+#greenlist 
+{
 	margin-bottom: 5px;
 }
 
-#seconds-box {
+#seconds-box 
+{
 	margin-top: 5px;
 }
 span #url1,span #url2
 {
 	margin: 0px;
-	text-decoration: underline;
     cursor: pointer;
 }
 
+#url1, #url2
+{
+	color: #404040;
+}
+
+#url2
+{
+	margin-left: 15px;
+}
 #showDefaults
 {
 	margin-top: 10px;
@@ -53,7 +62,7 @@ span #url1,span #url2
 #tooltippanel
 {
 	-moz-appearance: none !important;
-	background-color: #FFFFFF !important;
+	background-color: #FFFFFF;
 	border: solid 2px red;
 }
 
@@ -70,10 +79,20 @@ span #url1,span #url2
 	margin-right: 15px;
 }
 
+#warning-pic
+{
+    width: 32px;
+    height: 32px;
+    margin-left: 5px;
+    margin-top: 10px;
+   	margin-right: 10px;
+}
+
 #info-pic
 {
     width: 32px;
     height: 32px;
+	margin-left: 10px;
     cursor: pointer;
 }
 

@@ -1,9 +1,10 @@
-<!ENTITY observationtext "Betrachte NUR den Teil der URL, der im Tooltip in fett hervorgehoben ist.">
-<!ENTITY appendixtext "PS: Lange ULRs können auch echt sein. Wichtig ist nur, dass der in <html:b>fett</html:b> hervorgehobene Bereich stimmt">
-<!ENTITY maindescriptiontext "IGNORIERE alles andere: ignoriere Betreff, Logos, Absender, https und Design. Dies kann alles ganz einfach gefälscht werden. <html:b>Daher ignorieren Sie die Angabe von wem Sie die E-Mail erhalten haben</html:b>. Auch die anderen Teile der URL können einfach gefälscht werden.">
 <!ENTITY windowheader "TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn">
 <!ENTITY yes "Ja">
 <!ENTITY no "Nein">
+<!ENTITY save "Speichern">
+<!ENTITY default_settings "Standard-Einstellungen">
+<!ENTITY sure_defaultsettings "Standard-Einstellungen wiederherstellen?">
+<!ENTITY attention_defaultsettings "Einträge in User-Domains löschen">
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
 <!ENTITY seconds "Sekunde(n), bis auf den Link geklickt werden kann">
 <!ENTITY lists "Listen">
@@ -19,15 +20,22 @@
 <!ENTITY close "Schließen">
 <!ENTITY listofdefaults "Liste der als vertrauenswürdig eingestuften Domains">
 <!ENTITY delete "Löschen">
-<!ENTITY defaultLists "Vertrauenswürdige Domains">
 <!ENTITY settings "Einstellungen">
 <!ENTITY activatedgreen "Timer bei vertrauenswürdigen Domains aktiviert">
 <!ENTITY activatedorange "Timer bei User-Domains aktiviert">
 <!ENTITY next "Weiter">
 <!ENTITY redirection "Weiterleitungen">
-<!ENTITY redirect "URL auflösen">
+<!ENTITY redirect "Zeige tatsächliche URL">
 <!ENTITY noredirect "Domains nicht auf Weiterleitungen prüfen">
 <!ENTITY manualredirect "Domains manuell auf Weiterleitungen prüfen">
 <!ENTITY autoredirect "Domains automatisch auf Weiterleitungen prüfen">
 <!ENTITY secs "Sekunde(n)">
-<!ENTITY entries_gone "Alle von Ihnen gespeicherten Links wurden gelöscht.">
+<!ENTITY entries_gone "Erfolgreich gelöscht">
+<!ENTITY redirect_description0 "Bei einigen Webadressen wissen wir, dass die entsprechenden Server Sie auf eine andere">
+<!ENTITY redirect_description1 "Webseite umleiten werden (beispielsweise TinyURL). In dem Fall nutzt Ihnen die angezeigte">
+<!ENTITY redirect_description2 "Webadresse wenig. TOrPeDO überlässt Ihnen die Entscheidung, ob automatisch im Hintergrund">
+<!ENTITY redirect_description3 "die tatsächliche Web-Adresse ermittelt und angezeigt werden soll, ob Sie diese Funktion">
+<!ENTITY redirect_description4 "jeweils manuell starten möchten oder die Funktion gar nicht nutzen möchten.">
+<!ENTITY showredirects "Zeige Liste der Weiterleitungs-Domains">
+<!ENTITY redirectList "Liste der Weiterleitungs-Domains">
+<!ENTITY warning "Achtung! Die angezeigte Domain stimmt nicht mit der tatsächlichen Domain überein. Dies könnte ein Phishing-Angriff sein.">

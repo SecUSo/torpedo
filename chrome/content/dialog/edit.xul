@@ -12,7 +12,7 @@
 		onload="torpedo.db.getSecond();">
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
-    <script type="application/javascript"  src="chrome://torpedo/content/lib/urls.js" />
+    <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	
 	<stringbundleset>

@@ -4,6 +4,5 @@ skin torpedo classic/1.0 chrome/skin/
 overlay	chrome://messenger/content/messenger.xul	chrome://torpedo/content/overlay.xul
 
 locale torpedo en-US chrome/locale/en-US/
-locale torpedo en-GB chrome/locale/en-GB/
 locale torpedo de-DE chrome/locale/de-DE/
 

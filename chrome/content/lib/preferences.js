@@ -28,7 +28,7 @@ torpedo.prefs = function () {
 					if (addon.id == "torpedo@tu-darmstadt.de") 
 					{				
 						// It will be automatically removed if the default value is set
-						torpedo.prefs.resetPrefs();
+						torpedo.prefs.resetPrefs(true);
 					}
 				}
 			};
@@ -40,14 +40,14 @@ torpedo.prefs = function () {
 			}
 			catch (ex) 
 			{
-				//alert(ex);
+				
 			}
         },
 		
-		resetPrefs: function () 
+		resetPrefs: function (all) 
 		{
             // reset all prefs manually
-			prefManager.clearUserPref("firstrun");
+			if(all)prefManager.clearUserPref("firstrun");
 			prefManager.clearUserPref("blockingTimer");
 			prefManager.clearUserPref("checkedGreenList");
 			prefManager.clearUserPref("activatedGreenList");
@@ -56,8 +56,8 @@ torpedo.prefs = function () {
 			prefManager.clearUserPref("redirection1");
 			prefManager.clearUserPref("redirection2");
 			prefManager.clearUserPref("URLDefaultList");
-			prefManager.clearUserPref("URLSecondList");
-			prefManager.clearUserPref("URLFirstList");
+			if(all)prefManager.clearUserPref("URLSecondList");
+			if(all)prefManager.clearUserPref("URLFirstList");
 		}		
     };
 }();

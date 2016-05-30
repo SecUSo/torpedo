@@ -60,53 +60,74 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
     }
 }
 
+
+torpedo.functions.loopTimer = 2500;
+makeBlue = true;
+
 // url expanding services (for redirection)
 torpedo.functions.loop = 0;
 var OldUrl = "";
 torpedo.functions.traceUrl = function (url, redirect) {
-    torpedo.updateTooltip(url, false);
+    torpedo.updateTooltip(url);
     OldUrl = url;
     if(redirect){ 
-        $.getJSON('http://untiny.me/api/1.0/extract', {format: 'json', 'url': url})
-            .done(function (json) {
-       	      torpedo.functions.containsUrl(json.org_url);
-            })
-           .fail(function (jqxhr, textStatus, error) {
-                if(torpedo.prefs.getBoolPref("redirection2") || torpedo.prefs.getBoolPref("redirection1")){
-                    document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('offline');
-                }
-            });
+        makeBlue = false;
+        document.getElementById("baseDomain").style.color = "#404040";  
+        torpedo.functions.trace(url);
     }
 }; 
 
-torpedo.functions.loopTimer = 2500;
+torpedo.functions.trace = function (url){
+    $.getJSON("http://untiny.me/api/1.0/extract", {format: "json", "url": url})
+            .done(function (json) {
+              torpedo.functions.containsUrl(json.org_url);
+            })
+           .fail(function (jqxhr, textStatus, error) {
+                if(!navigator.onLine){
+                    document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('offline');
+                }
+                torpedo.functions.containsUrl(OldUrl);
+            });
+};
 
 torpedo.functions.containsUrl = function (url){
-    document.getElementById("redirectButton").hidden = true;
-    Application.console.log("url is " + url);
+    torpedo.handler.title = "";
+    torpedo.handler.clickEnabled = false;
     if(url == undefined){
-        url = OldUrl;
-        Application.console.log("url is now " + url);
+        url = decodeURIComponent(OldUrl);
     } 
     document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
-      
+    document.getElementById("seconds-box").hidden = true;
+    document.getElementById("description").hidden = true;
+    if(torpedo.prefs.getBoolPref("redirection1")){
+        document.getElementById("redirectButton").hidden = false;
+        document.getElementById("redirectButton").disabled = true;
+    }
+
     setTimeout(function(e){
         url = torpedo.functions.containsRedirect(url); 
-        if(torpedo.functions.loop < 5 && torpedo.functions.isRedirect(url)){
-            document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
-            torpedo.functions.loop++;
-            torpedo.functions.traceUrl(url, true);
-            if(torpedo.functions.loop > 0){
-                torpedo.functions.loopTimer = 0;
-            }
-        }
         if (torpedo.functions.loop == 5){
             document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('error');
-        }            
-        if(torpedo.functions.loop < 5 && !torpedo.functions.isRedirect(url)){
-            document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
+            makeBlue = true;
+            document.getElementById("baseDomain").style.color = "#0044CC";            
+            $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
+        }       
+        else{
+            torpedo.functions.loop++; 
+            if(torpedo.functions.loop > 0){
+                torpedo.functions.loopTimer = 0;
+            }               
+            $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);            
+            if(torpedo.functions.isRedirect(url)){    
+                torpedo.functions.trace(url);
+                document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
+            }
+            else{
+                makeBlue = true;
+                document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
+                torpedo.updateTooltip(url);
+            }                      
         }
-        if(torpedo.functions.loop < 5) torpedo.updateTooltip(url, true);   
     }, torpedo.functions.loopTimer);
 };
 
@@ -116,10 +137,6 @@ torpedo.functions.countdown = function (timee, id, url) {
     var startTime = timee;
 
     var setBaseDomain = document.getElementById("baseDomain");
-    var setUrl1 = document.getElementById("url1");
-    var setUrl2 = document.getElementById("url2");
-
-    setUrl2.style.color = "#808080";
     var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
     var noTimer = ((!torpedo.functions.isChecked("greenActivated") && torpedo.db.inList(baseDomain, "URLDefaultList")) || 
             (!torpedo.functions.isChecked("orangeActivated") && torpedo.db.inList(baseDomain, "URLSecondList")));
@@ -127,8 +144,6 @@ torpedo.functions.countdown = function (timee, id, url) {
     if (noTimer) {
         startTime = 0;
         document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
-        setUrl1.style.color = "#0066cc";
-        setBaseDomain.style.color = "#0066cc";
     }
 
     function showTime() {
@@ -139,16 +154,16 @@ torpedo.functions.countdown = function (timee, id, url) {
         if (second == 0) {
             //change text from tooltip to "you can click link now"
             document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
-
+            document.getElementById("seconds-box").hidden = true;
+            if(makeBlue){
+                setBaseDomain.style.color = "#0044CC";
+            }
             // make URL in tooltip clickable
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
-            setUrl1.style.color = "#0066cc";
-            setBaseDomain.style.color = "#0066cc";
         }
         else {
             $(document.getElementById("url-box")).unbind("click");
-            setUrl1.style.color = "#404040";
-            setBaseDomain.style.color = "#404040";
+            setBaseDomain.style.color = "#404040";      
         }
     }
 
@@ -225,9 +240,11 @@ torpedo.functions.redirect = function (id){
 
 torpedo.functions.isRedirect = function(url){
     var redirect = false; 
-    if(url.contains("redirect")) return true;
+    if(url.contains("redirect")) return true;  
+    var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
+
     for(var i = 0; i < redirects.length; i++){
-        if(url.contains(redirects[i])) {
+        if(baseDomain == redirects[i]) {
             redirect = true;
             break;
         }

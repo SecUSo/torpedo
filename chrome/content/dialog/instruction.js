@@ -29,3 +29,8 @@ function onLoad(picture) {
 		}
 	}
 }
+
+window.addEventListener("load", function load(event)
+{
+    window.moveTo(window.arguments[1],window.arguments[0]);  
+}, false);
