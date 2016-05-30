@@ -5,7 +5,6 @@
 ###### Deutsch / German
 
 **SCHRITT 1**
-
 WINDOWS:
 Markieren Sie alle Dateien im Torpedo-Ordner mit STRG-A und führen Sie einen Rechtsklick aus. Nun wählen Sie "Senden an ... ZIP-komprimierten Ordner". Der komprimierte Ordner muss jetzt in "torpedo.xpi" umbenannt werden.
 
@@ -17,7 +16,6 @@ Navigieren Sie in den Torpedo-Ordner mit "cd /your-git-repository/torpedo/". Nun
 
 
 **SCHRITT 2**
-
 Öffnen Sie Thunderbird und klicken Sie auf Einstellungen -> "Add-Ons". Dort wählen Sie das Einstellungen-Symbol oben in der Mitte. Daraufhin öffnen sich mehrere Optionen. Wählen Sie "Add On aus Datei installieren". Suchen Sie die torpedo.xpi-Datei, und installieren Sie diese. Jetzt sollte Thunderbird neu gestartet werden, damit die Änderungen wirksam werden.
 
 
@@ -25,7 +23,6 @@ Navigieren Sie in den Torpedo-Ordner mit "cd /your-git-repository/torpedo/". Nun
 ###### Englisch / English
 
 **STEP 1**
-
 WINDOWS:
 Select every file inside the torpedo folder with STRG-A and use the right mouse key. Now you choose "Send to ... ZIP-compressed folder". The compressed folder has to be renamed in "torpedo.xpi".
 
@@ -37,7 +34,6 @@ Navigate into the torpedo folder with "cd /your-git-repository/torpedo/". Now en
 
 
 **STEP 2**
-
 Open Thunderbird and choose Tools -> "Add Ons". In the Add Ons screen, click on the settings symbol at the top center. Here you will find multiple options. Choose "Install Add On from file" and search for "torpedo.xpi". After the installation, Thunderbird should be restarted for the changes to take effect.
 
 ## Lizenz
