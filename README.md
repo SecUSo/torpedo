@@ -36,6 +36,9 @@ Navigate into the torpedo folder with "cd /your-git-repository/torpedo/". Now en
 **STEP 2**
 Open Thunderbird and choose Tools -> "Add Ons". In the Add Ons screen, click on the settings symbol at the top center. Here you will find multiple options. Choose "Install Add On from file" and search for "torpedo.xpi". After the installation, Thunderbird should be restarted for the changes to take effect.
 
+## Download
+Das Add-on kann von der offiziellen [Add-on Webseite](https://addons.mozilla.org/de/thunderbird/addon/torpedo-phishing-detection/) von Mozilla heruntergeladen werden.
+
 ## Lizenz
 
 TOrPeDO ist mit der GPLv3 lizenziert.
