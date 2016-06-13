@@ -38,4 +38,4 @@
 <!ENTITY redirect_description4 "or to not use the functionality at all.">
 <!ENTITY showredirects "Show all redirection domains">
 <!ENTITY redirectList "List of redirection domains">
-<!ENTITY warning "Warning! The displayed domain is not the same as the actual domain. This could be a phishing attack.">
+<!ENTITY warning "Warning! This could be a phishing attack, because the displayed domain differs from the actual domain.">

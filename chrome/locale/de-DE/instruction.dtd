@@ -38,4 +38,4 @@
 <!ENTITY redirect_description4 "jeweils manuell starten möchten oder die Funktion gar nicht nutzen möchten.">
 <!ENTITY showredirects "Zeige Liste der Weiterleitungs-Domains">
 <!ENTITY redirectList "Liste der Weiterleitungs-Domains">
-<!ENTITY warning "Achtung! Die angezeigte Domain stimmt nicht mit der tatsächlichen Domain überein. Dies könnte ein Phishing-Angriff sein.">
+<!ENTITY warning "Achtung! Dies könnte ein Phishing-Angriff sein, da die angezeigte Domain nicht mit der tatsächlichen übereinstimmt.">

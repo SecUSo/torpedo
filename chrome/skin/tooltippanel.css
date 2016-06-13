@@ -1,3 +1,11 @@
+#tooltippanel
+{
+	-moz-appearance: none !important;
+	background-color: #FFFFFF;
+	border: solid 2px red;
+	font-size:90%;
+}
+
 span #baseDomain
 {
 	font-weight:bold;
@@ -8,38 +16,32 @@ span #baseDomain
 span
 {
 	margin-top: 10px;
-	max-width: 220px;
+	max-width: 600px;
     display: block;
 	float:left;
 	font-weight: normal;
-	/*-ms-word-break: break-all;*/
-	word-break: break-all;
-	white-space: normal
+	white-space: normal;
+	font-size: 110%;
 }
 
 #greenlist 
 {
 	margin-bottom: 5px;
 }
-
-#seconds-box 
-{
-	margin-top: 5px;
-}
 span #url1,span #url2
 {
 	margin: 0px;
     cursor: pointer;
-}
-
-#url1, #url2
-{
 	color: #404040;
 }
-
 #url2
 {
 	margin-left: 15px;
+	margin-right: 0px;
+}
+#seconds-box{
+	margin-left: 0px;
+	margin-right: 0px;
 }
 #showDefaults
 {
@@ -59,13 +61,6 @@ span #url1,span #url2
 	margin-top: 5px;
 }
 
-#tooltippanel
-{
-	-moz-appearance: none !important;
-	background-color: #FFFFFF;
-	border: solid 2px red;
-}
-
 .mainBox
 {
 	margin-top: 5px;
@@ -81,8 +76,8 @@ span #url1,span #url2
 
 #warning-pic
 {
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 36px;
     margin-left: 5px;
     margin-top: 10px;
    	margin-right: 10px;
@@ -90,9 +85,10 @@ span #url1,span #url2
 
 #info-pic
 {
-    width: 32px;
-    height: 32px;
+    width: 25px;
+    height: 25px;
 	margin-left: 10px;
+	margin-bottom: 1px;
     cursor: pointer;
 }
 

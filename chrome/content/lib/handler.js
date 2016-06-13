@@ -1,12 +1,12 @@
 var torpedo = torpedo || {};
 var clickTimer = null, countDownTimer = null;
-var tempTarget;
 var Url;
 var alreadyClicked = "";
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.handler = torpedo.handler || {};
 
+torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
 
 torpedo.handler.mouseOverTooltipPane = function (event)
@@ -37,19 +37,22 @@ torpedo.handler.title = "";
 
 torpedo.handler.mouseOverHref = function (event)
 {
-	tempTarget = torpedo.functions.findParentTagTarget(event,'A');
-	torpedo.handler.title = tempTarget.innerHTML;
+	torpedo.handler.TempTarget = torpedo.functions.findParentTagTarget(event,'A');
+	torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
     torpedo.handler.clickEnabled = true;
     document.getElementById("redirectButton").disabled = false;
 	torpedo.functions.loop = 0;
 	torpedo.functions.loopTimer = 2500;
-	var url = tempTarget.href;
+	var url = torpedo.handler.TempTarget.href;
 	var redirect = false;
+
+	$(torpedo.handler.TempTarget).unbind("click");
+	$(torpedo.handler.TempTarget).bind("click", function(){
+		return false;
+	});
+
 	if(url != "" && url != undefined){
 		clearTimeout(torpedo.handler.MouseLeavetimer);
-		$(tempTarget).bind("click", function(){
-							return false;
-						})
 		alreadyClicked = "";
 		document.getElementById("redirectButton").hidden = true;
 		if(torpedo.functions.isRedirect(url)){
@@ -62,7 +65,7 @@ torpedo.handler.mouseOverHref = function (event)
 		}
 		torpedo.functions.traceUrl(url, redirect);
     	var panel = document.getElementById("tooltippanel");
-   	 	panel.openPopup(tempTarget, "after_start", 0, 0, true, false);
+   	 	panel.openPopup(torpedo.handler.TempTarget, "after_start", 0, 0, true, false);
 	}
 };
 

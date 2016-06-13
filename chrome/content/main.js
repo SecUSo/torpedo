@@ -15,20 +15,21 @@ torpedo.updateTooltip = function (url)
 		}
 		document.getElementById("url2").textContent = urlsplit[1];
 	}
+	document.getElementById("redirect").textContent = "";
 	var title = torpedo.handler.title;
 	if(title != "" && torpedo.functions.isURL(title)){
 		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 		if(titleDomain != baseDomain){
-			document.getElementById("tooltippanel").style.backgroundColor = "#FF8080";
+			document.getElementById("tooltippanel").style.borderWidth = "5px";
+			document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('warn');
 			document.getElementById("warning-pic").hidden = false;
 		} 
 		else {
-			document.getElementById("tooltippanel").style.backgroundColor = "#FFFFFF";
+			document.getElementById("tooltippanel").style.borderWidth = "2px";
 			document.getElementById("warning-pic").hidden = true;
 		}
 	}
 	document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
-	document.getElementById("redirect").textContent = "";
 	document.getElementById("description").hidden = false;
 	document.getElementById("seconds-box").hidden = false;
 	var redirect = torpedo.functions.isRedirect(url);

@@ -143,7 +143,6 @@ torpedo.functions.countdown = function (timee, id, url) {
 
     if (noTimer) {
         startTime = 0;
-        document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
     }
 
     function showTime() {
@@ -160,6 +159,7 @@ torpedo.functions.countdown = function (timee, id, url) {
             }
             // make URL in tooltip clickable
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
+            $(torpedo.handler.TempTarget).unbind("click");
         }
         else {
             $(document.getElementById("url-box")).unbind("click");
