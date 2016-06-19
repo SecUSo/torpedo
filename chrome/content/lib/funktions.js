@@ -30,11 +30,30 @@ torpedo.functions.calcWindowPosition = function (windowWidth, windowHeight) {
     };
 }
 
-torpedo.functions.findParentTagTarget = function (event, tagName) {
+torpedo.functions.findParentTagTarget = function (event, aTag) {
     var tempTarget = event.target || event.srcElement;
 
-    if (tempTarget.nodeName == tagName) {
+    Application.console.log("nodeName: " + tempTarget.nodeName);
+    var attr = tempTarget.attributes;
+    for( var i = 0; i < attr.length; i++){
+        Application.console.log("attributname " + i + " von Node: " + attr[i].name);
+    }
+
+    if (tempTarget.nodeName == aTag) {
         return tempTarget;
+    }
+    var children = event.target.childNodes;
+    for( var i = 0; i < children.length; i++){
+        Application.console.log("childrenname " + i + ": " + children[i].name);
+        if(children[i].nodeName == aTag){
+            return children[i];
+        }
+    }
+    var parent = event.target.parentNode;
+    attr = parent.attributes;
+    Application.console.log(parent.nodeName);
+    for( var i = 0; i < attr.length; i++){
+        Application.console.log("attributname " + i + " von parent: " + attr[i].name);
     }
 
     return event.target.parentNode;

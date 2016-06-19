@@ -18,7 +18,7 @@
 				<vbox id="warningBox">
 					<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
 				</vbox>
-				<vbox class="vBox">
+				<vbox class="vBox" wrap="true">
 					<label id="redirect" />
 					<span id="url-box">
 						<label id="url1" />

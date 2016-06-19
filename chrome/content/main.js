@@ -16,6 +16,8 @@ torpedo.updateTooltip = function (url)
 		document.getElementById("url2").textContent = urlsplit[1];
 	}
 	document.getElementById("redirect").textContent = "";
+	document.getElementById("tooltippanel").style.borderWidth = "2px";
+	document.getElementById("warning-pic").hidden = true;
 	var title = torpedo.handler.title;
 	if(title != "" && torpedo.functions.isURL(title)){
 		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
@@ -24,10 +26,6 @@ torpedo.updateTooltip = function (url)
 			document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('warn');
 			document.getElementById("warning-pic").hidden = false;
 		} 
-		else {
-			document.getElementById("tooltippanel").style.borderWidth = "2px";
-			document.getElementById("warning-pic").hidden = true;
-		}
 	}
 	document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
 	document.getElementById("description").hidden = false;
@@ -55,7 +53,7 @@ torpedo.updateTooltip = function (url)
 			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
 		}
 	}
-	// domain is in <2 times clicked links
+	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(baseDomain, "URLSecondList") && !redirect){
 		document.getElementById("tooltippanel").style.borderColor = "orange";
 		// timer is on in clicked links
@@ -104,10 +102,10 @@ torpedo.processDOM = function ()
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
 						$(aElement).bind("mouseenter", function(event){
-							torpedo.handler.mouseOverHref(event, aElement);
+							torpedo.handler.mouseOverHref(event);
 						})
 						$(aElement).bind("mouseleave", function(event){
-							torpedo.handler.mouseDownHref(event, aElement);
+							torpedo.handler.mouseDownHref(event);
 						})
 					}
 				}

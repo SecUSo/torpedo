@@ -30,20 +30,24 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 3500);
+	}, 100);
 };
 
 torpedo.handler.title = "";
 
-torpedo.handler.mouseOverHref = function (event)
+torpedo.handler.mouseOverHref = function (event, aElement)
 {
-	torpedo.handler.TempTarget = torpedo.functions.findParentTagTarget(event,'A');
+	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
+	if(tempTarget != torpedo.handler.TempTarget){
+		document.getElementById("tooltippanel").hidePopup();
+	}
+	torpedo.handler.TempTarget = tempTarget;
 	torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
     torpedo.handler.clickEnabled = true;
     document.getElementById("redirectButton").disabled = false;
 	torpedo.functions.loop = 0;
 	torpedo.functions.loopTimer = 2500;
-	var url = torpedo.handler.TempTarget.href;
+	var url = torpedo.handler.TempTarget.getAttribute("href");
 	var redirect = false;
 
 	$(torpedo.handler.TempTarget).unbind("click");
@@ -65,7 +69,9 @@ torpedo.handler.mouseOverHref = function (event)
 		}
 		torpedo.functions.traceUrl(url, redirect);
     	var panel = document.getElementById("tooltippanel");
-   	 	panel.openPopup(torpedo.handler.TempTarget, "after_start", 0, 0, true, false);
+    	var position = "after_pointer";
+    	if(tempTarget.nodeName == "IMG") position = "bottomleft";
+   	 	panel.openPopup(torpedo.handler.TempTarget, position, 0, -5, true, false);
 	}
 };
 
@@ -113,7 +119,7 @@ torpedo.handler.mouseDownHref = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 300);
+	}, 100);
 };
 
 torpedo.handler.mouseClickHref = function (event)
