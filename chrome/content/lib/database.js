@@ -27,7 +27,6 @@ torpedo.db.inList = function (website, list){
 	if(torpedo.functions.isRedirect(website) || (list == "URLDefaultList" && (!torpedo.functions.isChecked("green")))){
 		return false;
 	}
-
 	var sites = torpedo.prefs.getComplexValue(list, Components.interfaces.nsISupportsString).data;
 	website = website.toLowerCase();
 	return (sites.indexOf(website) > -1);

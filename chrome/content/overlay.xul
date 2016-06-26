@@ -20,12 +20,12 @@
 				</vbox>
 				<vbox class="vBox" wrap="true">
 					<label id="redirect" />
+					<button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
 					<span id="url-box">
 						<label id="url1" />
 						<label id="baseDomain" />
 						<label id="url2"  />
 					</span>
-					<button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
 					<hbox id="seconds-box">
 						<label id="description"/>
 						<label id="countdown"/>

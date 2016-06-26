@@ -25,7 +25,7 @@
 <!ENTITY activatedorange "Timer activated on user domains">
 <!ENTITY next "Next">
 <!ENTITY redirection "Redirections">
-<!ENTITY redirect "Show actual url">
+<!ENTITY redirect "Click to show actual url">
 <!ENTITY noredirect "Do not check domains for forwarding">
 <!ENTITY manualredirect "Check domains manually for forwarding">
 <!ENTITY autoredirect "Check domains automatically for forwarding">

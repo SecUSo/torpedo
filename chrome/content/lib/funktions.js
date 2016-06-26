@@ -1,6 +1,6 @@
 var torpedo = torpedo || {};
 var Url = "";
-var redirects = [".tk","1u.ro","1url.com","2pl.us","2tu.us","3.ly","a.gd","a.gg","a.nf","a2a.me","abe5.com","adjix.com","alturl.com","atu.ca","awe.sm","b23.ru","bacn.me","bit.ly","bkite.com","blippr.com","blippr.com","bloat.me","bt.io","budurl.com","buk.me","burnurl.com","c.shamekh.ws","cd4.me","chilp.it","chs.mx","clck.ru","cli.gs","clickthru.ca","cort.as","cuthut.com","cutt.us","cuturl.com","decenturl.com","df9.net","digs.by","doiop.com","dwarfurl.com","easyurl.net","eepurl.com","eezurl.com","ewerl.com","fa.by","fav.me","fb.me","ff.im","fff.to","fhurl.com","flic.kr","flq.us","fly2.ws","fuseurl.com","fwd4.me","getir.net","gl.am","go.9nl.com","go2.me","golmao.com","goo.gl","goshrink.com","gri.ms","gurl.es","hellotxt.com","hex.io","href.in","htxt.it","hugeurl.com","hurl.ws","icanhaz.com","icio.us","idek.net","is.gd","it2.in","ito.mx","j.mp","jijr.com","kissa.be","kl.am","korta.nu","l9k.net","liip.to","liltext.com","lin.cr","linkbee.com","littleurl.info","liurl.cn","ln-s.net","ln-s.ru","lnkurl.com","loopt.us","lru.jp","lt.tl","lurl.no","memurl.com","migre.me","minilien.com","miniurl.com","miniurls.org","minurl.fr","moourl.com","myurl.in","ncane.com","netnet.me","nn.nf","o-x.fr","ofl.me","omf.gd","ow.ly","oxyz.info","p8g.tw","parv.us","pic.gd","ping.fm","piurl.com","plurl.me","pnt.me","poll.fm","pop.ly","poprl.com","post.ly","posted.at","ptiturl.com","qurlyq.com","rb6.me","readthis.ca","redirects.ca","redirx.com","relyt.us","retwt.me","ri.ms","rickroll.it","rly.cc","rsmonkey.com","rubyurl.com","rurl.org","s3nt.com","s7y.us","saudim.ac","short.ie","short.to","shortna.me","shoturl.us","shrinkster.com","shrinkurl.us","shrtl.com","shw.me","simurl.net","simurl.org","simurl.us","sn.im","sn.vc","snipr.com","snipurl.com","snurl.com","soo.gd","sp2.ro","spedr.com","starturl.com","stickurl.com","sturly.com","su.pr","t.co","takemyfile.com","tcrn.ch","teq.mx","thrdl.es","tighturl.com","tiny.cc","tiny.pl","tinyarro.ws","tinytw.it","tinyurl.com","tl.gd","tnw.to","to.ly","togoto.us","tr.im","tr.my","trcb.me","tumblr.com","tw0.us","tw1.us","tw2.us","tw5.us","tw6.us","tw8.us","tw9.us","twa.lk","twd.ly","twi.gy","twit.ac","twitthis.com","twiturl.de","twitzap.com","twtr.us","twurl.nl","u.mavrev.com","u.nu","ub0.cc","updating.me","ur1.ca","url.co.uk","url.ie","url.inc-x.eu","url4.eu","urlborg.com","urlbrief.com","urlcut.com","urlhawk.com","urlkiss.com","urlpire.com","urlvi.be","urlx.ie","uservoice.com","ustre.am","virl.com","vl.am","wa9.la","wapurl.co.uk","wipi.es","wkrg.com","wp.me","x.co","x.hypem.com","x.se","xav.cc","xeeurl.com","xr.com","xrl.in","xrl.us","xurl.jp","xzb.cc","yatuc.com","ye-s.com","yep.it","yfrog.com","zi.pe","zz.gd"];
+var redirects = [".tk","1u.ro","1url.com","2pl.us","2tu.us","3.ly","a.gd","a.gg","a.nf","a2a.me","abe5.com","adjix.com","alturl.com","atu.ca","awe.sm","b23.ru","bacn.me","bit.ly","bkite.com","blippr.com","blippr.com","bloat.me","bt.io","budurl.com","buk.me","burnurl.com","c.shamekh.ws","cd4.me","chilp.it","chs.mx","clck.ru","cli.gs","clickthru.ca","cort.as","cuthut.com","cutt.us","cuturl.com","decenturl.com","df9.net","digs.by","doiop.com","dwarfurl.com","easyurl.net","eepurl.com","eezurl.com","ewerl.com","fa.by","fav.me","fb.me","ff.im","fff.to","fhurl.com","flic.kr","flq.us","fly2.ws","fuseurl.com","fwd4.me","getir.net","gl.am","go.9nl.com","go2.me","golmao.com","goo.gl","goshrink.com","gri.ms","gurl.es","hellotxt.com","hex.io","href.in","htxt.it","hugeurl.com","hurl.ws","icanhaz.com","icio.us","idek.net","is.gd","it2.in","ito.mx","j.mp","jijr.com","kissa.be","kl.am","korta.nu","l9k.net","liip.to","liltext.com","lin.cr","linkbee.com","littleurl.info","liurl.cn","ln-s.net","ln-s.ru","lnkurl.com","loopt.us","lru.jp","lt.tl","lurl.no","memurl.com","migre.me","minilien.com","miniurl.com","miniurls.org","minurl.fr","moourl.com","myurl.in","ncane.com","netnet.me","nn.nf","o-x.fr","ofl.me","omf.gd","ow.ly","oxyz.info","p8g.tw","parv.us","pic.gd","ping.fm","piurl.com","plurl.me","pnt.me","poll.fm","pop.ly","poprl.com","post.ly","posted.at","ptiturl.com","qurlyq.com","rb6.me","readthis.ca","redirects.ca","redirx.com","relyt.us","retwt.me","ri.ms","rickroll.it","rly.cc","rsmonkey.com","rubyurl.com","rurl.org","s3nt.com","s7y.us","saudim.ac","short.ie","short.to","shortna.me","shoturl.us","shrinkster.com","shrinkurl.us","shrtl.com","shw.me","simurl.net","simurl.org","simurl.us","sn.im","sn.vc","snipr.com","snipurl.com","snurl.com","soo.gd","sp2.ro","spedr.com","starturl.com","stickurl.com","sturly.com","su.pr","t.co","takemyfile.com","tcrn.ch","teq.mx","thrdl.es","tighturl.com","tiny.cc","tiny.pl","tinyarro.ws","tinytw.it","tinyurl.com","tl.gd","tnw.to","to.ly","togoto.us","tr.im","tr.my","trcb.me","tw0.us","tw1.us","tw2.us","tw5.us","tw6.us","tw8.us","tw9.us","twa.lk","twd.ly","twi.gy","twit.ac","twitthis.com","twiturl.de","twitzap.com","twtr.us","twurl.nl","u.mavrev.com","u.nu","ub0.cc","updating.me","ur1.ca","url.co.uk","url.ie","url.inc-x.eu","url4.eu","urlborg.com","urlbrief.com","urlcut.com","urlhawk.com","urlkiss.com","urlpire.com","urlvi.be","urlx.ie","uservoice.com","ustre.am","virl.com","vl.am","wa9.la","wapurl.co.uk","wipi.es","wkrg.com","wp.me","x.co","x.hypem.com","x.se","xav.cc","xeeurl.com","xr.com","xrl.in","xrl.us","xurl.jp","xzb.cc","yatuc.com","ye-s.com","yep.it","yfrog.com","zi.pe","zz.gd"];
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.functions = torpedo.functions || {};
@@ -33,29 +33,29 @@ torpedo.functions.calcWindowPosition = function (windowWidth, windowHeight) {
 torpedo.functions.findParentTagTarget = function (event, aTag) {
     var tempTarget = event.target || event.srcElement;
 
-    Application.console.log("nodeName: " + tempTarget.nodeName);
+/*    Application.console.log("nodeName: " + tempTarget.nodeName);
     var attr = tempTarget.attributes;
     for( var i = 0; i < attr.length; i++){
         Application.console.log("attributname " + i + " von Node: " + attr[i].name);
     }
-
+*/
     if (tempTarget.nodeName == aTag) {
         return tempTarget;
     }
     var children = event.target.childNodes;
     for( var i = 0; i < children.length; i++){
-        Application.console.log("childrenname " + i + ": " + children[i].name);
+        //Application.console.log("childrenname " + i + ": " + children[i].name);
         if(children[i].nodeName == aTag){
             return children[i];
         }
     }
     var parent = event.target.parentNode;
-    attr = parent.attributes;
+    /*attr = parent.attributes;
     Application.console.log(parent.nodeName);
     for( var i = 0; i < attr.length; i++){
         Application.console.log("attributname " + i + " von parent: " + attr[i].name);
     }
-
+*/
     return event.target.parentNode;
 }
 
@@ -67,86 +67,83 @@ torpedo.functions.isURL = function (url) {
 };
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
-    var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
-    try { 
-        var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI("" + url, null, null);
-           //hardcoded because this is the only url where this doesn't work
-        if (eTLDService.getBaseDomain(tempURI) == "www.blogspot.de") return "blogspot.de";
-        return eTLDService.getBaseDomain(tempURI);
+    if (url.indexOf("://") > -1) {
+        url = url.split('/')[2];
     }
-    catch (err) {
-        return "";
+    else {
+        url = url.split('/')[0];
     }
+    var regex_var = new RegExp(/[^.]*\.[^.]{2,3}(?:\.[^.]{2,3})?$/);
+    var array = regex_var.exec(url);
+    url = array[0];
+    array = url.split(".");
+    if(array[0] == "www" || array[0].indexOf("http") > -1){
+        url = "";
+        for(var i = 1; i < array.length-1; i++){
+            url += array[i] + ".";
+        }
+        url += array[array.length-1];
+    }
+    return url;
 }
 
+OldUrl = "";
 
-torpedo.functions.loopTimer = 2500;
-makeBlue = true;
-
-// url expanding services (for redirection)
-torpedo.functions.loop = 0;
-var OldUrl = "";
 torpedo.functions.traceUrl = function (url, redirect) {
     torpedo.updateTooltip(url);
     OldUrl = url;
     if(redirect){ 
-        makeBlue = false;
-        document.getElementById("baseDomain").style.color = "#404040";  
-        torpedo.functions.trace(url);
+        torpedo.functions.containsUrl(url);
     }
 }; 
 
 torpedo.functions.trace = function (url){
-    $.getJSON("http://untiny.me/api/1.0/extract", {format: "json", "url": url})
-            .done(function (json) {
-              torpedo.functions.containsUrl(json.org_url);
-            })
-           .fail(function (jqxhr, textStatus, error) {
-                if(!navigator.onLine){
-                    document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('offline');
-                }
-                torpedo.functions.containsUrl(OldUrl);
-            });
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onload = function () {
+        torpedo.functions.containsUrl(xhr.responseURL); 
+    };
+    xhr.send(null);
 };
 
-torpedo.functions.containsUrl = function (url){
+torpedo.functions.loop = 0;
+torpedo.functions.loopTimer = 2000;
+
+torpedo.functions.containsUrl = function(url){
     torpedo.handler.title = "";
-    torpedo.handler.clickEnabled = false;
-    if(url == undefined){
-        url = decodeURIComponent(OldUrl);
-    } 
+    torpedo.handler.clickEnabled = false;  
+    torpedo.hideButton = true;  
     document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
     document.getElementById("seconds-box").hidden = true;
     document.getElementById("description").hidden = true;
-    if(torpedo.prefs.getBoolPref("redirection1")){
-        document.getElementById("redirectButton").hidden = false;
-        document.getElementById("redirectButton").disabled = true;
-    }
-
-    setTimeout(function(e){
-        url = torpedo.functions.containsRedirect(url); 
-        if (torpedo.functions.loop == 5){
+    document.getElementById("redirectButton").hidden = true;
+    
+    setTimeout(function(e){    
+        if(torpedo.functions.loop == 5){
             document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('error');
-            makeBlue = true;
-            document.getElementById("baseDomain").style.color = "#0044CC";            
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
-        }       
-        else{
-            torpedo.functions.loop++; 
+        }
+        else{   
             if(torpedo.functions.loop > 0){
                 torpedo.functions.loopTimer = 0;
-            }               
-            $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);            
-            if(torpedo.functions.isRedirect(url)){    
-                torpedo.functions.trace(url);
+            }  
+            torpedo.functions.loop++;
+            $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);   
+            if(torpedo.functions.isRedirect(url)){
+                var containsRe = url.indexOf("redirect") > -1;
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
+                if(containsRe) {
+                    url = torpedo.functions.containsRedirect(decodeURIComponent(url));
+                    torpedo.functions.containsUrl(url);
+                }
+                else torpedo.functions.trace(url);
             }
             else{
-                makeBlue = true;
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
+                torpedo.functions.loop = 0;
                 torpedo.updateTooltip(url);
-            }                      
-        }
+            }
+        }               
     }, torpedo.functions.loopTimer);
 };
 
@@ -173,16 +170,13 @@ torpedo.functions.countdown = function (timee, id, url) {
             //change text from tooltip to "you can click link now"
             document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
             document.getElementById("seconds-box").hidden = true;
-            if(makeBlue){
-                setBaseDomain.style.color = "#0044CC";
-            }
+
             // make URL in tooltip clickable
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
         }
         else {
             $(document.getElementById("url-box")).unbind("click");
-            setBaseDomain.style.color = "#404040";      
         }
     }
 
@@ -259,7 +253,7 @@ torpedo.functions.redirect = function (id){
 
 torpedo.functions.isRedirect = function(url){
     var redirect = false; 
-    if(url.contains("redirect")) return true;  
+    if(url.indexOf("redirect") > -1) return true;  
     var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 
     for(var i = 0; i < redirects.length; i++){
@@ -282,6 +276,9 @@ torpedo.functions.containsRedirect = function(url){
         var index = re+9;
     }
     var temp = url.slice(index, url.length);
-    if(torpedo.functions.isURL(temp)) url = temp;
+    if(torpedo.functions.isURL(temp)){
+        url = temp;
+    } 
+
     return url;
 }

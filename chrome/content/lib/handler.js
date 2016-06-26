@@ -1,10 +1,10 @@
 var torpedo = torpedo || {};
 var clickTimer = null, countDownTimer = null;
-var Url;
 var alreadyClicked = "";
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.handler = torpedo.handler || {};
+torpedo.handler.Url;
 
 torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
@@ -30,7 +30,7 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 100);
+	}, 1000);
 };
 
 torpedo.handler.title = "";
@@ -44,12 +44,13 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 	torpedo.handler.TempTarget = tempTarget;
 	torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
     torpedo.handler.clickEnabled = true;
-    document.getElementById("redirectButton").disabled = false;
-	torpedo.functions.loop = 0;
+
+    torpedo.functions.loop = 0;
 	torpedo.functions.loopTimer = 2500;
 	var url = torpedo.handler.TempTarget.getAttribute("href");
+	torpedo.handler.Url = url;
 	var redirect = false;
-
+    torpedo.hideButton = false;  
 	$(torpedo.handler.TempTarget).unbind("click");
 	$(torpedo.handler.TempTarget).bind("click", function(){
 		return false;
@@ -58,25 +59,19 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 	if(url != "" && url != undefined){
 		clearTimeout(torpedo.handler.MouseLeavetimer);
 		alreadyClicked = "";
-		document.getElementById("redirectButton").hidden = true;
+
 		if(torpedo.functions.isRedirect(url)){
 			if(torpedo.prefs.getBoolPref("redirection2")){
 				redirect = true;
 			}
-			else if(torpedo.prefs.getBoolPref("redirection1")){
-				Url = url;
-			}
 		}
-		torpedo.functions.traceUrl(url, redirect);
-    	var panel = document.getElementById("tooltippanel");
-    	var position = "after_pointer";
-    	if(tempTarget.nodeName == "IMG") position = "bottomleft";
-   	 	panel.openPopup(torpedo.handler.TempTarget, position, 0, -5, true, false);
-	}
+		var panel = document.getElementById("tooltippanel");
+		panel.openPopup(tempTarget, "after_start",0,0, false, false);
+    	torpedo.functions.traceUrl(url, redirect);
+    }
 };
 
 torpedo.handler.setCountDownTimer = function (url) {
-	Url = url;
 	if(countDownTimer == null){
 		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown', url);
 		clickTimer = setTimeout(function()
@@ -165,7 +160,7 @@ torpedo.handler.mouseClickDefaultsButton = function (event) {
 
 torpedo.handler.clickEnabled = true;
 torpedo.handler.mouseClickRedirectButton = function (event){
-	if(torpedo.handler.clickEnabled) torpedo.functions.traceUrl(Url, true);
+	if(torpedo.handler.clickEnabled) torpedo.functions.traceUrl(torpedo.handler.Url, true);
 };
 
 torpedo.handler.mouseClickRedirectShow = function (event) {

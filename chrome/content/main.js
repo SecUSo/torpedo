@@ -3,75 +3,93 @@ var lastBrowserStatus;
 torpedo.instructionSize = {width: 800,height: 460};
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
+torpedo.hideButton = true;  
 torpedo.updateTooltip = function (url)
 {
+	if(url.indexOf("www") <= -1){
+		if (url.indexOf("://") > -1) {
+        	var array = url.split("://");
+        	url = array[0] + "://www." + array[1];
+    	}
+    	else {
+    		url = "www." + url;
+    	}
+	}
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var urlsplit = url.split(""+baseDomain);
 	document.getElementById("url1").textContent = urlsplit[0];
 	document.getElementById("baseDomain").textContent = baseDomain;
 	if(urlsplit.length>1){
-		if(urlsplit[1].length > 500){
-			urlsplit[1] = urlsplit[1].substr(0,500) + "...";
+		if(urlsplit[1].length > 380){
+			urlsplit[1] = urlsplit[1].substr(0,380) + "...";
 		}
 		document.getElementById("url2").textContent = urlsplit[1];
 	}
-	document.getElementById("redirect").textContent = "";
-	document.getElementById("tooltippanel").style.borderWidth = "2px";
-	document.getElementById("warning-pic").hidden = true;
+
+	var redirect = document.getElementById("redirect");
+	var description = document.getElementById("description");
+	var panel = document.getElementById("tooltippanel");
+	var secondsbox = document.getElementById("seconds-box");
+	var warningpic = document.getElementById("warning-pic");
+	var redirectButton = document.getElementById("redirectButton");
+
+	//document.getElementById("tooltippanel").style.borderWidth = "2px";
+	description.textContent = torpedo.stringsBundle.getString('check_message');
+	description.hidden = false;
+	secondsbox.hidden = false;
+	warningpic.hidden = true;
+    redirectButton.hidden = true;
 	var title = torpedo.handler.title;
 	if(title != "" && torpedo.functions.isURL(title)){
 		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 		if(titleDomain != baseDomain){
-			document.getElementById("tooltippanel").style.borderWidth = "5px";
-			document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('warn');
-			document.getElementById("warning-pic").hidden = false;
+			//document.getElementById("tooltippanel").style.borderWidth = "5px";
+			redirect.textContent = torpedo.stringsBundle.getString('warn');
+			warningpic.hidden = false;
 		} 
 	}
-	document.getElementById("description").textContent = torpedo.stringsBundle.getString('check_message');
-	document.getElementById("description").hidden = false;
-	document.getElementById("seconds-box").hidden = false;
-	var redirect = torpedo.functions.isRedirect(url);
+	if(redirect.textContent != torpedo.stringsBundle.getString('alert_redirect')) redirect.textContent = "";
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
 
-	if(redirect){
-        document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('attention');
+	if(torpedo.functions.isRedirect(url)){
+        redirect.textContent = torpedo.stringsBundle.getString('attention');
     	if(autore){
-			document.getElementById("description").hidden = true;
-			document.getElementById("seconds-box").hidden = true;
+			description.hidden = true;
+			secondsbox.hidden = true;
 		}
-		else if(manure){
-            document.getElementById("redirectButton").hidden = false;
+		else if(manure && !torpedo.hideButton){
+            redirectButton.hidden = false;
     	}
 	}
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(baseDomain, "URLDefaultList") && !redirect){
-		document.getElementById("tooltippanel").style.borderColor = "green";
+		panel.style.borderColor = "green";
 		// if timer is on in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
-			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
+			description.textContent = torpedo.stringsBundle.getString('click_link');
 		}
 	}
 	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(baseDomain, "URLSecondList") && !redirect){
-		document.getElementById("tooltippanel").style.borderColor = "orange";
+		panel.style.borderColor = "orange";
 		// timer is on in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
-			document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
+			description.textContent = torpedo.stringsBundle.getString('click_link');
 		}
 	}
 	else{
-		document.getElementById("tooltippanel").style.borderColor = "red";
+		panel.style.borderColor = "red";
 	}
 	torpedo.functions.setHref(url);
+
 };
 
 torpedo.processDOM = function ()
 {
 	function init()
 	{
-        var appcontent = document.getElementById("appcontent"); // browser app content
 		var panel = document.getElementById("tooltippanel");
 
 		$(panel).bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
@@ -101,6 +119,7 @@ torpedo.processDOM = function ()
 				
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
+						
 						$(aElement).bind("mouseenter", function(event){
 							torpedo.handler.mouseOverHref(event);
 						})
