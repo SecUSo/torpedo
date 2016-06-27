@@ -3,7 +3,7 @@
 ## Download
 Das Add-on kann von der offiziellen [Add-on Webseite](https://addons.mozilla.org/de/thunderbird/addon/torpedo-phishing-detection/) von Mozilla heruntergeladen werden.
 
-## INSTALLATION (nicht notwendig, wenn Sie das Add On von der Website oder im Thunderbird Store herunterladen)
+## INSTALLATION (nicht notwendig, wenn Sie das Add On im Thunderbird Store herunterladen)
 
 ###### Deutsch / German
 
