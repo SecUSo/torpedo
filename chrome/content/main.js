@@ -52,8 +52,9 @@ torpedo.updateTooltip = function (url)
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
+	var isRedirect = torpedo.functions.isRedirect(url);
 
-	if(torpedo.functions.isRedirect(url)){
+	if(isRedirect){
         redirect.textContent = torpedo.stringsBundle.getString('attention');
     	if(autore){
 			description.hidden = true;
@@ -64,7 +65,7 @@ torpedo.updateTooltip = function (url)
     	}
 	}
 	// trustworthy domains activated and url is in it
-	if(torpedo.functions.isChecked("green") && torpedo.db.inList(baseDomain, "URLDefaultList") && !redirect){
+	if(torpedo.functions.isChecked("green") && torpedo.db.inList(baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
 		// if timer is on in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
@@ -72,7 +73,7 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	// domain is in < 2 times clicked links
-	else if(torpedo.db.inList(baseDomain, "URLSecondList") && !redirect){
+	else if(torpedo.db.inList(baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "orange";
 		// timer is on in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
@@ -83,7 +84,7 @@ torpedo.updateTooltip = function (url)
 		panel.style.borderColor = "red";
 	}
 	torpedo.functions.setHref(url);
-
+	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
 
 torpedo.processDOM = function ()
@@ -122,10 +123,10 @@ torpedo.processDOM = function ()
 						
 						$(aElement).bind("mouseenter", function(event){
 							torpedo.handler.mouseOverHref(event);
-						})
+						});
 						$(aElement).bind("mouseleave", function(event){
 							torpedo.handler.mouseDownHref(event);
-						})
+						});
 					}
 				}
 			}

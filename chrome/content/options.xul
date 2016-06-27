@@ -6,7 +6,8 @@
         buttonlabelextra1="&default_settings;"
         buttonlabelcancel="&close;"
         buttonlabelaccept="&save;"
-        ondialogextra1="torpedo.dialogmanager.createDefaultDelete();">
+        ondialogextra1="torpedo.dialogmanager.createDefaultDelete();"
+        onload="document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('activatedTimer');">
 
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
@@ -20,6 +21,7 @@
     <prefpane>
 	
 		<preferences>
+            <preference id="firefox-checked-timer" name="extensions.torpedo.checkedTimer" type="bool"/>
 			<preference id="firefox-blocking-timer" name="extensions.torpedo.blockingTimer" type="int"/>
             <preference id="firefox-checked-greenlist" name="extensions.torpedo.checkedGreenList" type="bool"/>
             <preference id="firefox-checked-greenlistactivated" name="extensions.torpedo.activatedGreenList" type="bool"/>
@@ -38,7 +40,10 @@
 			<tabpanels>
 				<tabpanel id="timertab" orient="horizontal">
                     <rows>
-                        <row >
+                        <row>
+                            <checkbox id="activatedtimer" label="&activatedtimer;" preference="firefox-checked-timer" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('activatedTimer'));" oncommand="torpedo.functions.changeActivatedTimer();"/>
+                        </row>
+                        <row>
                             <textbox type="number" id="countdown" preference="firefox-blocking-timer" style="margin-top:10px; max-width:70px; max-height:30px"/>
                             <grid>
                                <label value="&seconds;" style="margin-top:15px" />

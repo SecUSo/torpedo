@@ -8,6 +8,8 @@ torpedo.handler.Url;
 
 torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
+torpedo.handler.timeOut;
+torpedo.handler.release = false;
 
 torpedo.handler.mouseOverTooltipPane = function (event)
 {
@@ -16,10 +18,17 @@ torpedo.handler.mouseOverTooltipPane = function (event)
 
 torpedo.handler.mouseDownTooltipPane = function (event)
 {
+	torpedo.handler.timeOut = 100;
+	if(torpedo.functions.loop >= 0){
+		torpedo.handler.timeOut = 3000;
+		while(!releaseTooltip){
+			
+		}
+		releaseTooltip = false;
+	}
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e)
 	{
 		document.getElementById("tooltippanel").hidePopup();
-
 		if(countDownTimer != null)
 		{
 			clearInterval(countDownTimer);
@@ -30,7 +39,12 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 		{
 			clearTimeout(clickTimer);
 		}
-	}, 1000);
+		
+	}, torpedo.handler.timeOut);
+};
+
+torpedo.handler.releaseTooltip = function (){
+	torpedo.handler.release = true;
 };
 
 torpedo.handler.title = "";
@@ -38,37 +52,35 @@ torpedo.handler.title = "";
 torpedo.handler.mouseOverHref = function (event, aElement)
 {
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
+	var panel = document.getElementById("tooltippanel");
 	if(tempTarget != torpedo.handler.TempTarget){
-		document.getElementById("tooltippanel").hidePopup();
+		panel.hidePopup();
 	}
 	torpedo.handler.TempTarget = tempTarget;
 	torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
     torpedo.handler.clickEnabled = true;
+    if(!(panel.state == "showing" && torpedo.handler.Url == url)){
+	    torpedo.functions.loop = -1;
+		torpedo.functions.loopTimer = 2500;
+		var url = torpedo.handler.TempTarget.getAttribute("href");
+		if(url != "" && url != undefined ){
+			torpedo.handler.Url = url;
+			var redirect = false;
+		    torpedo.hideButton = false;  
+			$(torpedo.handler.TempTarget).unbind("click");
+			$(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
 
-    torpedo.functions.loop = 0;
-	torpedo.functions.loopTimer = 2500;
-	var url = torpedo.handler.TempTarget.getAttribute("href");
-	torpedo.handler.Url = url;
-	var redirect = false;
-    torpedo.hideButton = false;  
-	$(torpedo.handler.TempTarget).unbind("click");
-	$(torpedo.handler.TempTarget).bind("click", function(){
-		return false;
-	});
+			clearTimeout(torpedo.handler.MouseLeavetimer);
+			alreadyClicked = "";
 
-	if(url != "" && url != undefined){
-		clearTimeout(torpedo.handler.MouseLeavetimer);
-		alreadyClicked = "";
-
-		if(torpedo.functions.isRedirect(url)){
-			if(torpedo.prefs.getBoolPref("redirection2")){
-				redirect = true;
+			if(torpedo.functions.isRedirect(url)){
+				if(torpedo.prefs.getBoolPref("redirection2")){
+					redirect = true;
+				}
 			}
-		}
-		var panel = document.getElementById("tooltippanel");
-		panel.openPopup(tempTarget, "after_start",0,0, false, false);
-    	torpedo.functions.traceUrl(url, redirect);
-    }
+	    	torpedo.functions.traceUrl(url, redirect);
+	    }
+	}
 };
 
 torpedo.handler.setCountDownTimer = function (url) {
@@ -139,6 +151,16 @@ torpedo.handler.mouseClickHref = function (event)
 		// now, open it!
 		extps.loadURI(uriToOpen, null);
 	}
+};
+
+torpedo.handler.mouseClickHrefError = function(event){
+	var panel = document.getElementById("errorpanel");
+	panel.openPopup(torpedo.handler.TempTarget, "before_start",0,0, false, false);
+	setTimeout(function (e)
+	{
+		panel.hidePopup();
+	}, 2500);
+	return false;
 };
 
 torpedo.handler.mouseClickInfoButton = function (event)

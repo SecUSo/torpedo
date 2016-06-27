@@ -13,7 +13,7 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
 
 	<popupset>
-        <panel id="tooltippanel">
+        <panel id="tooltippanel" flip="both">
 			<hbox class="mainBox">
 				<vbox id="warningBox">
 					<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
@@ -40,6 +40,14 @@
 				</vbox>
 			</hbox>
         </panel>
+    </popupset>
+
+    <popupset>
+    	<panel type="arrow" id="errorpanel" fade="slow">
+    		<hbox class="mainBox">
+    			<label id="errormessage" value="&tooearly;"/>
+   			</hbox>
+    	</panel>
     </popupset>
 
 	<stringbundleset>

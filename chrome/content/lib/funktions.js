@@ -88,6 +88,8 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
 }
 
 OldUrl = "";
+torpedo.functions.loop = -1;
+torpedo.functions.loopTimer = 2000;
 
 torpedo.functions.traceUrl = function (url, redirect) {
     torpedo.updateTooltip(url);
@@ -106,10 +108,9 @@ torpedo.functions.trace = function (url){
     xhr.send(null);
 };
 
-torpedo.functions.loop = 0;
-torpedo.functions.loopTimer = 2000;
-
 torpedo.functions.containsUrl = function(url){
+    torpedo.functions.loop++;
+    Application.console.log(torpedo.functions.loop + " before timeout");
     torpedo.handler.title = "";
     torpedo.handler.clickEnabled = false;  
     torpedo.hideButton = true;  
@@ -141,9 +142,12 @@ torpedo.functions.containsUrl = function(url){
             else{
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
                 torpedo.functions.loop = 0;
+                torpedo.handler.releaseTooltip();
                 torpedo.updateTooltip(url);
             }
-        }               
+        }
+
+        Application.console.log(torpedo.functions.loop + " in looptimer");               
     }, torpedo.functions.loopTimer);
 };
 
@@ -174,6 +178,7 @@ torpedo.functions.countdown = function (timee, id, url) {
             // make URL in tooltip clickable
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
+            $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
         }
         else {
             $(document.getElementById("url-box")).unbind("click");
@@ -213,6 +218,7 @@ torpedo.functions.getHref = function () {
 var a = torpedo.prefs.getBoolPref("checkedGreenList");
 var b = torpedo.prefs.getBoolPref("activatedGreenList");
 var c = torpedo.prefs.getBoolPref("activatedOrangeList");
+var d = torpedo.prefs.getBoolPref("checkedTimer");
 
 
 torpedo.functions.isChecked = function (color){
@@ -235,6 +241,21 @@ torpedo.functions.changeActivatedOrange = function (){
     c = !c;
     torpedo.prefs.setBoolPref("activatedOrangelist", c);
 };
+
+// timer settings
+
+torpedo.functions.changeActivatedTimer = function (){
+    d = !d;
+    torpedo.prefs.setBoolPref("activatedTimer", d);
+    if(!d){
+        torpedo.prefs.setIntPref("blockingTimer", 0);
+        document.getElementById("countdown").disabled = true;
+    }
+    else{
+        torpedo.prefs.setIntPref("blockingTimer", 3);        
+        document.getElementById("countdown").disabled = false;
+    }
+}
 
 // redirection settings
 

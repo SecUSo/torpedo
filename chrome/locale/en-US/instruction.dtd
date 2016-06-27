@@ -8,7 +8,7 @@
 <!ENTITY sure "Do you really want to delete all entries?">
 <!ENTITY seconds "second(s) until you can click on a link">
 <!ENTITY lists "Lists">
-<!ENTITY activated "List of trustworthy domains activated">
+<!ENTITY activated "Trustworthy domains activated">
 <!ENTITY userlinks "List of user domains">
 <!ENTITY editentries "Delete individual entries">
 <!ENTITY userdomains "Domains which were called at least 2 times">
@@ -21,8 +21,9 @@
 <!ENTITY listofdefaults "List of trustworthy domains">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
-<!ENTITY activatedgreen "Timer activated on trustworthy domains">
-<!ENTITY activatedorange "Timer activated on user domains">
+<!ENTITY activatedtimer "Timer activated">
+<!ENTITY activatedgreen "Timer on trustworthy domains">
+<!ENTITY activatedorange "Timer on user domains">
 <!ENTITY next "Next">
 <!ENTITY redirection "Redirections">
 <!ENTITY redirect "Click to show actual url">
@@ -39,3 +40,4 @@
 <!ENTITY showredirects "Show all redirection domains">
 <!ENTITY redirectList "List of redirection domains">
 <!ENTITY warning "Warning! This could be a phishing attack, because the displayed domain differs from the actual domain.">
+<!ENTITY tooearly "Please wait until the countdown has finished! You can deactivate this feature in the settings.">

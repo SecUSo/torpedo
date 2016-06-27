@@ -8,10 +8,10 @@
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
 <!ENTITY seconds "Sekunde(n), bis auf den Link geklickt werden kann">
 <!ENTITY lists "Listen">
-<!ENTITY activated "Liste der vertrauenswürdigen Domains aktiviert">
+<!ENTITY activated "Vertrauenswürdige Domains aktiviert">
 <!ENTITY userlinks "Liste der User-Domains">
 <!ENTITY userdomains "Domains, die mind. 2x aufgerufen wurden">
-<!ENTITY editentries "Einzelne Einträge löschen">
+<!ENTITY editentries "Anzeigen & einzelne Einträge löschen">
 <!ENTITY clearentries "Alle Einträge löschen">
 <!ENTITY showdefaults "Zeige Liste der vertrauenswürdigen Domains">
 <!ENTITY deleteEntries "Einträge löschen">
@@ -21,8 +21,9 @@
 <!ENTITY listofdefaults "Liste der als vertrauenswürdig eingestuften Domains">
 <!ENTITY delete "Löschen">
 <!ENTITY settings "Einstellungen">
-<!ENTITY activatedgreen "Timer bei vertrauenswürdigen Domains aktiviert">
-<!ENTITY activatedorange "Timer bei User-Domains aktiviert">
+<!ENTITY activatedtimer "Timer aktiviert">
+<!ENTITY activatedgreen "Timer bei vertrauenswürdigen Domains">
+<!ENTITY activatedorange "Timer bei User-Domains">
 <!ENTITY next "Weiter">
 <!ENTITY redirection "Weiterleitungen">
 <!ENTITY redirect "Zeige tatsächliche URL">
@@ -39,3 +40,4 @@
 <!ENTITY showredirects "Zeige Liste der Weiterleitungs-Domains">
 <!ENTITY redirectList "Liste der Weiterleitungs-Domains">
 <!ENTITY warning "Achtung! Dies könnte ein Phishing-Angriff sein, da die angezeigte Domain nicht mit der tatsächlichen übereinstimmt.">
+<!ENTITY tooearly "Bitte warten Sie, bis der Timer abgelaufen ist! Diese Funktion können Sie in den Einstellungen ändern.">

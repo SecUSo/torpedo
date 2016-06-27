@@ -98,6 +98,7 @@ torpedo.db.getSecond = function () {
 		secondSites = secondSites.substring(split+1, secondSites.length);
 		i++;
 	}
+	cutOut.sort();
 	for (i = 0; i < cutOut.length; i++) {
 		var row = document.createElement('listitem');
 	    row.setAttribute('label', cutOut[i]);

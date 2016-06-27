@@ -60,8 +60,9 @@ span #url1,span #url2
 	background-color: #FFFFFF;
 	border: solid 2px red;
     border-radius: 5px;
-    color: #666666;
+    color: #000000;
 }
+
 
 .mainBox
 {
