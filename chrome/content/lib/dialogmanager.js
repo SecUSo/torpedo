@@ -11,23 +11,23 @@ torpedo.dialogmanager.createInstruction = function ()
 
 torpedo.dialogmanager.createDelete = function (windowWidth,windowHeight)  
 {
-	window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome, dialog,resizable=yes,centerscreen, modal,width='+windowWidth+',height='+windowHeight+'");
+	window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome, dialog,resizable=no,centerscreen, modal,width='+windowWidth+',height='+windowHeight+'");
 };
 
 torpedo.dialogmanager.createEdit = function () {
-	window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen, width='300px'");
+	window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen, width='300px'");
 };
 
 torpedo.dialogmanager.createInfo = function () {
-	window.openDialog("chrome://torpedo/content/dialog/info.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
+	window.openDialog("chrome://torpedo/content/dialog/info.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
 
 torpedo.dialogmanager.showDefaults = function(){
-	window.openDialog("chrome://torpedo/content/dialog/defaults.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
+	window.openDialog("chrome://torpedo/content/dialog/defaults.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
 
 torpedo.dialogmanager.showRedirects = function(){
-	window.openDialog("chrome://torpedo/content/dialog/redirects.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen");
+	window.openDialog("chrome://torpedo/content/dialog/redirects.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
 
 torpedo.dialogmanager.createWelcome = function()
@@ -40,5 +40,5 @@ torpedo.dialogmanager.createWelcome = function()
 };
 
 torpedo.dialogmanager.createDefaultDelete = function () {
-	window.openDialog("chrome://torpedo/content/dialog/defaultdelete.xul", "bmarks", "chrome=yes, dialog,resizable=yes, modal, centerscreen, width='300px'");
+	window.openDialog("chrome://torpedo/content/dialog/defaultdelete.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen, width='300px'");
 };

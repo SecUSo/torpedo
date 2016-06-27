@@ -59,6 +59,8 @@ torpedo.db.putInsideFirst = function(website){
 };
 
 var selected;
+var secondList = [];
+var firstList = [];
 
 torpedo.db.deleteAllSecond = function () {
 	var str = Components.classes["@mozilla.org/supports-string;1"]
@@ -75,7 +77,8 @@ torpedo.db.deleteSomeSecond = function () {
 
 	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
 	if(secondSites.length > 0){
-		var cutOut = secondSites.substring(secondSites.indexOf(selected), secondSites.length);
+		var listElement = secondList[selected];
+		var cutOut = secondSites.substring(secondSites.indexOf(listElement), secondSites.length);
 		var comma = secondSites.indexOf(",");
 		cutOut = cutOut.substring(0, comma+1);
 		str.data = secondSites.replace(cutOut, "");
@@ -90,18 +93,18 @@ torpedo.db.deleteSomeSecond = function () {
 torpedo.db.getSecond = function () {
 	var theList = document.getElementById('theList');
 	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
-	var cutOut = [];
 	var i = 0;
+	secondList = [];
 	while(secondSites.indexOf(",") >= 0){
 		var split = secondSites.indexOf(",");
-		cutOut[i] = secondSites.substring(0,split);
+		secondList[i] = secondSites.substring(0,split);
 		secondSites = secondSites.substring(split+1, secondSites.length);
 		i++;
 	}
-	cutOut.sort();
-	for (i = 0; i < cutOut.length; i++) {
+	secondList.sort();
+	for (i = 0; i < secondList.length; i++) {
 		var row = document.createElement('listitem');
-	    row.setAttribute('label', cutOut[i]);
+	    row.setAttribute('label', secondList[i]);
 	    theList.appendChild(row);
 	}
 };
@@ -113,17 +116,18 @@ torpedo.db.select = function(index){
 torpedo.db.getDefaults = function (){
 	var defaultList = document.getElementById('defaultList');
 	var defaultSites = torpedo.prefs.getComplexValue("URLDefaultList", Components.interfaces.nsISupportsString).data;
-	var cutOut = [];
 	var i = 0;
+	firstList = [];
 	while(defaultSites.indexOf(",") >= 0){
 		var split = defaultSites.indexOf(",");
-		cutOut[i] = defaultSites.substring(0,split); 
+		firstList[i] = defaultSites.substring(0,split); 
 		defaultSites = defaultSites.substring(split+1, defaultSites.length);
 		i++;
 	}
-	for (i = 0; i < cutOut.length; i++) {
+	firstList.sort();
+	for (i = 0; i < firstList.length; i++) {
 		var row = document.createElement('listitem');
-	    row.setAttribute('label', cutOut[i]);
+	    row.setAttribute('label', firstList[i]);
 	    defaultList.appendChild(row);
 	}
 }
