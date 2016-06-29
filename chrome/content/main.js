@@ -54,6 +54,7 @@ torpedo.updateTooltip = function (url)
 	var autore = torpedo.prefs.getBoolPref("redirection2");
 	var isRedirect = torpedo.functions.isRedirect(url);
 
+
 	if(isRedirect){
         redirect.textContent = torpedo.stringsBundle.getString('attention');
     	if(autore){
@@ -104,6 +105,7 @@ torpedo.processDOM = function ()
 		{
 			messagepane.addEventListener("load", function(event) { onPageLoad(event); }, true);
         }
+        
 	}
 
 	function onPageLoad(event){

@@ -9,7 +9,6 @@ torpedo.handler.Url;
 torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
 torpedo.handler.timeOut;
-torpedo.handler.release = false;
 
 torpedo.handler.mouseOverTooltipPane = function (event)
 {
@@ -21,10 +20,6 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 	torpedo.handler.timeOut = 100;
 	if(torpedo.functions.loop >= 0){
 		torpedo.handler.timeOut = 3000;
-		while(!releaseTooltip){
-			
-		}
-		releaseTooltip = false;
 	}
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e)
 	{
@@ -41,10 +36,6 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 		}
 		
 	}, torpedo.handler.timeOut);
-};
-
-torpedo.handler.releaseTooltip = function (){
-	torpedo.handler.release = true;
 };
 
 torpedo.handler.title = "";
@@ -190,3 +181,9 @@ torpedo.handler.mouseClickRedirectButton = function (event){
 torpedo.handler.mouseClickRedirectShow = function (event) {
 	torpedo.dialogmanager.showRedirects();
 };
+
+torpedo.handler.loadOptions = function (){
+	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
+	document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('activatedTimer');
+    document.getElementById('redirectdescription').textContent = torpedo.stringsBundle.getString('description');
+}

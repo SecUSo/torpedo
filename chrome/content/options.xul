@@ -7,7 +7,7 @@
         buttonlabelcancel="&close;"
         buttonlabelaccept="&save;"
         ondialogextra1="torpedo.dialogmanager.createDefaultDelete();"
-        onload="document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('activatedTimer');">
+        onload="torpedo.handler.loadOptions();">
 
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
@@ -39,80 +39,34 @@
             </tabs>
 			<tabpanels>
 				<tabpanel id="timertab" orient="horizontal">
-                    <rows>
-                        <row>
-                            <checkbox id="activatedtimer" label="&activatedtimer;" preference="firefox-checked-timer" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('activatedTimer'));" oncommand="torpedo.functions.changeActivatedTimer();"/>
-                        </row>
-                        <row>
+                    <vbox>
+                        <checkbox id="activatedtimer" label="&activatedtimer;" preference="firefox-checked-timer" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('activatedTimer'));" oncommand="torpedo.functions.changeActivatedTimer();"/>
+                        <hbox>
                             <textbox type="number" id="countdown" preference="firefox-blocking-timer" style="margin-top:10px; max-width:70px; max-height:30px"/>
-                            <grid>
-                               <label value="&seconds;" style="margin-top:15px" />
-                            </grid>     
-                        </row>	
-                        <row>
-                            <checkbox id="greenlistactivated" label="&activatedgreen;" preference="firefox-checked-greenlistactivated" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen();" />
-                        </row>
-                        <row>
-                            <checkbox id="orangelistactivated" label="&activatedorange;" tooltiptext="&userdomains;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange();" />
-                        </row>
-                    </rows>
+                            <label value="&seconds;" style="margin-top:15px" />
+                        </hbox>  
+                        <checkbox id="greenlistactivated" label="&activatedgreen;" preference="firefox-checked-greenlistactivated" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen();" />
+                        <checkbox id="orangelistactivated" label="&activatedorange;" tooltiptext="&userdomains;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange();" />
+                    </vbox>
                 </tabpanel>
                 <tabpanel id="listtab" orient="horizontal">
-                     <grid>
-                        <rows>
-                            <row>
-                                <label value="&listofdefaults;" style="font-weight:bold; color:green;margin-top:10px; margin-bottom:10px"/>
-                            </row>
-                            <row>
-                                <checkbox id="greenlist" label="&activated;" preference="firefox-checked-greenlist" oncommand="torpedo.functions.changeChecked();" />
-                            </row>
-                            <row>
-                                <button id="showDefaults" label="&showdefaults;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
-                            </row>
-                            <row>
-                                <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; color:orange;margin-top:30px; margin-bottom:10px;"/>
-                            </row>
-                            <row>
-                                <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
-                            </row>
-                            <row>
-                                <button id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();" />
-                            </row>
-                        </rows>
-                    </grid>    			
+                     <vbox>
+                            <label value="&listofdefaults;" style="font-weight:bold; color:green;margin-top:10px; margin-bottom:10px"/>
+                            <checkbox id="greenlist" label="&activated;" preference="firefox-checked-greenlist" oncommand="torpedo.functions.changeChecked();" />
+                            <button id="showDefaults" label="&showdefaults;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
+                            <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; color:orange;margin-top:30px; margin-bottom:10px;"/>
+                            <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
+                            <button id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();" />
+                    </vbox>    			
 				</tabpanel>
                 <tabpanel id="redirecttab" orient="horizontal">
-                    <grid>
-                        <rows>
-                            <row>
-                            <label value="&redirect_description0;" style="margin-top:10px; font-size:75%"/>
-                            </row>
-                            <row>
-                            <label value="&redirect_description1;" style="font-size:75%"/>
-                            </row>
-                            <row>
-                            <label value="&redirect_description2;" style="font-size:75%"/>
-                            </row>
-                            <row>
-                            <label value="&redirect_description3;" style="font-size:75%"/>
-                            </row>
-                            <row>
-                            <label value="&redirect_description4;" style="font-size:75%"/>
-                            </row>
-                            <row>
-                                <checkbox id="redirect0" label="&noredirect;" preference="firefox-redirection0" style="margin-top:10px;" oncommand="torpedo.functions.redirect(0);" />
-                            </row>
-                            <row>
-                                <checkbox id="redirect1" label="&manualredirect;" preference="firefox-redirection1" oncommand="torpedo.functions.redirect(1);" />
-                            </row>
-                            <row>
-                                <checkbox id="redirect2" label="&autoredirect;" preference="firefox-redirection2" oncommand="torpedo.functions.redirect(2);" />
-                            </row> 
-                            <row>
-                                <button id="showRedirects" label="&showredirects;" style="margin-left:20px;" onclick="torpedo.handler.mouseClickRedirectShow();" />
-                            </row>
-                        </rows>
-                    </grid>
+                    <vbox align="left" wrap="true">
+                        <description id="redirectdescription" style="margin-top:10px; width: 400px; font-size:75%;"/>
+                        <checkbox id="redirect0" label="&noredirect;" preference="firefox-redirection0" style="margin-top:10px;" oncommand="torpedo.functions.redirect(0);" />
+                        <checkbox id="redirect1" label="&manualredirect;" preference="firefox-redirection1" oncommand="torpedo.functions.redirect(1);" />
+                        <checkbox id="redirect2" label="&autoredirect;" preference="firefox-redirection2" oncommand="torpedo.functions.redirect(2);" />
+                        <button id="showRedirects" label="&showredirects;" onclick="torpedo.handler.mouseClickRedirectShow();" />
+                    </vbox>
                 </tabpanel>
 			</tabpanels>
 		</tabbox>

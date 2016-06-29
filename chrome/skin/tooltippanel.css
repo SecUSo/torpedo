@@ -8,13 +8,12 @@ span #baseDomain
 span
 {
 	margin-top: 10px;
-	max-width: 800px;
+	max-width: 600px;
     display: block;
 	float:left;
 	font-weight: normal;
 	word-break: break-all;
-	overflow: break-word;
-	white-space: normal;
+	white-space: pre-wrap;
     color: #333333;
 }
 #greenlist 

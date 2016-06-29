@@ -142,7 +142,6 @@ torpedo.functions.containsUrl = function(url){
             else{
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
                 torpedo.functions.loop = 0;
-                torpedo.handler.releaseTooltip();
                 torpedo.updateTooltip(url);
             }
         }

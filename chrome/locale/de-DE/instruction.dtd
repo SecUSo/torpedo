@@ -32,11 +32,7 @@
 <!ENTITY autoredirect "Domains automatisch auf Weiterleitungen prüfen">
 <!ENTITY secs "Sekunde(n)">
 <!ENTITY entries_gone "Erfolgreich gelöscht">
-<!ENTITY redirect_description0 "Bei einigen Webadressen wissen wir, dass die entsprechenden Server Sie auf eine andere">
-<!ENTITY redirect_description1 "Webseite umleiten werden (beispielsweise TinyURL). In dem Fall nutzt Ihnen die angezeigte">
-<!ENTITY redirect_description2 "Webadresse wenig. TOrPeDO überlässt Ihnen die Entscheidung, ob automatisch im Hintergrund">
-<!ENTITY redirect_description3 "die tatsächliche Web-Adresse ermittelt und angezeigt werden soll, ob Sie diese Funktion">
-<!ENTITY redirect_description4 "jeweils manuell starten möchten oder die Funktion gar nicht nutzen möchten.">
+<!ENTITY redirect_description "Bei einigen Webadressen wissen wir, dass die entsprechenden Server Sie auf eine andere Webseite umleiten werden (beispielsweise TinyURL). In dem Fall nutzt Ihnen die angezeigte Webadresse wenig. TOrPeDO überlässt Ihnen die Entscheidung, ob automatisch im Hintergrund die tatsächliche Web-Adresse ermittelt und angezeigt werden soll, ob Sie diese Funktion jeweils manuell starten möchten oder die Funktion gar nicht nutzen möchten.">
 <!ENTITY showredirects "Zeige Liste der Weiterleitungs-Domains">
 <!ENTITY redirectList "Liste der Weiterleitungs-Domains">
 <!ENTITY warning "Achtung! Dies könnte ein Phishing-Angriff sein, da die angezeigte Domain nicht mit der tatsächlichen übereinstimmt.">
