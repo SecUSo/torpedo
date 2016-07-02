@@ -123,9 +123,7 @@ torpedo.handler.mouseDownHref = function (event)
 torpedo.handler.mouseClickHref = function (event)
 {
 	var url = torpedo.functions.getHref();
-	Application.console.log("href clicked");
 	if(alreadyClicked == ""){
-		Application.console.log(alreadyClicked + " is alreadyClicked");
 		alreadyClicked = url;
 
 		var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
