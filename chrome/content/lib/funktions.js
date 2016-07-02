@@ -110,7 +110,6 @@ torpedo.functions.trace = function (url){
 
 torpedo.functions.containsUrl = function(url){
     torpedo.functions.loop++;
-    Application.console.log(torpedo.functions.loop + " before timeout");
     torpedo.handler.title = "";
     torpedo.handler.clickEnabled = false;  
     torpedo.hideButton = true;  
@@ -145,8 +144,6 @@ torpedo.functions.containsUrl = function(url){
                 torpedo.updateTooltip(url);
             }
         }
-
-        Application.console.log(torpedo.functions.loop + " in looptimer");               
     }, torpedo.functions.loopTimer);
 };
 
