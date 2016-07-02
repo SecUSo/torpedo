@@ -4,7 +4,11 @@
 
 <overlay
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-3.0.0.min.js"/>
+=======
+	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-1.12.4.min.js"/>
+>>>>>>> 88acc0157984f1364d54518fb567b1eef799820c
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
