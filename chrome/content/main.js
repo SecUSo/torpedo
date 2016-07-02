@@ -6,15 +6,6 @@ var Application = Components.classes["@mozilla.org/steel/application;1"].getServ
 torpedo.hideButton = true;  
 torpedo.updateTooltip = function (url)
 {
-	if(url.indexOf("www") <= -1){
-		if (url.indexOf("://") > -1) {
-        	var array = url.split("://");
-        	url = array[0] + "://www." + array[1];
-    	}
-    	else {
-    		url = "www." + url;
-    	}
-	}
 	var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var urlsplit = url.split(""+baseDomain);
 	document.getElementById("url1").textContent = urlsplit[0];
