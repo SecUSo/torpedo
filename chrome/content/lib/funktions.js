@@ -67,14 +67,16 @@ torpedo.functions.isURL = function (url) {
 };
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
-  if (!(url.startsWith("www.") || url.startsWith("http://") || url.startsWith("https://"))) {
-    return url;
-  }
   var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
   var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
 
   try {
-    return eTLDService.getBaseDomain(tempURI);
+    var baseDomain = eTLDService.getBaseDomain(tempURI);
+    if(baseDomain.indexOf("www.")==0) {
+        var arr = baseDomain.split("www.");
+        baseDomain = arr[1];
+    }
+    return baseDomain;
   }
   catch(err) {
     return null;
@@ -146,9 +148,8 @@ torpedo.functions.countdown = function (timee, id, url) {
     var startTime = timee;
 
     var setBaseDomain = document.getElementById("baseDomain");
-    var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-    var noTimer = ((!torpedo.functions.isChecked("greenActivated") && torpedo.db.inList(baseDomain, "URLDefaultList")) ||
-            (!torpedo.functions.isChecked("orangeActivated") && torpedo.db.inList(baseDomain, "URLSecondList")));
+    var noTimer = ((!torpedo.functions.isChecked("greenActivated") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) ||
+            (!torpedo.functions.isChecked("orangeActivated") && torpedo.db.inList(torpedo.baseDomain, "URLSecondList")));
 
     if (noTimer) {
         startTime = 0;
@@ -261,13 +262,16 @@ torpedo.functions.redirect = function (id){
     }
 };
 
+/*
+* check if url
+* contains "redirect" or contains domain from list of redirections
+*/
 torpedo.functions.isRedirect = function(url){
     var redirect = false;
     if(url.indexOf("redirect") > -1) return true;
-    var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 
     for(var i = 0; i < redirects.length; i++){
-        if(baseDomain == redirects[i]) {
+        if(torpedo.baseDomain == redirects[i]) {
             redirect = true;
             break;
         }

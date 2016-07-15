@@ -44,6 +44,8 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 {
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 	var panel = document.getElementById("tooltippanel");
+	var url = tempTarget.getAttribute("href");
+	Application.console.log("mouse over " + url);
 	if(tempTarget != torpedo.handler.TempTarget){
 		panel.hidePopup();
 	}
@@ -53,7 +55,6 @@ torpedo.handler.mouseOverHref = function (event, aElement)
     if(!(panel.state == "showing" && torpedo.handler.Url == url)){
 	    torpedo.functions.loop = -1;
 		torpedo.functions.loopTimer = 2500;
-		var url = torpedo.handler.TempTarget.getAttribute("href");
 		if(url != "" && url != undefined ){
 			torpedo.handler.Url = url;
 			var redirect = false;
@@ -125,10 +126,7 @@ torpedo.handler.mouseClickHref = function (event)
 	var url = torpedo.functions.getHref();
 	if(alreadyClicked == ""){
 		alreadyClicked = url;
-
-		var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-
-	 	if(!torpedo.functions.isRedirect(url)) torpedo.db.pushUrl(baseDomain);
+	 	if(!torpedo.functions.isRedirect(url)) torpedo.db.pushUrl(torpedo.baseDomain);
 
 		var ioservice = Components.classes["@mozilla.org/network/io-service;1"]
 	                          .getService(Components.interfaces.nsIIOService);
