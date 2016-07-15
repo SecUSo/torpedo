@@ -67,25 +67,19 @@ torpedo.functions.isURL = function (url) {
 };
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
-    if (url.indexOf("://") > -1) {
-        url = url.split('/')[2];
-    }
-    else {
-        url = url.split('/')[0];
-    }
-    var regex_var = new RegExp(/[^.]*\.[^.]{2,3}(?:\.[^.]{2,3})?$/);
-    var array = regex_var.exec(url);
-    url = array[0];
-    array = url.split(".");
-    if(array[0] == "www" || array[0].indexOf("http") > -1){
-        url = "";
-        for(var i = 1; i < array.length-1; i++){
-            url += array[i] + ".";
-        }
-        url += array[array.length-1];
-    }
+  if (!(url.startsWith("www.") || url.startsWith("http://") || url.startsWith("https://"))) {
     return url;
-}
+  }
+  var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
+  var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
+
+  try {
+    return eTLDService.getBaseDomain(tempURI);
+  }
+  catch(err) {
+    return null;
+  }
+};
 
 OldUrl = "";
 torpedo.functions.loop = -1;
@@ -94,16 +88,16 @@ torpedo.functions.loopTimer = 2000;
 torpedo.functions.traceUrl = function (url, redirect) {
     torpedo.updateTooltip(url);
     OldUrl = url;
-    if(redirect){ 
+    if(redirect){
         torpedo.functions.containsUrl(url);
     }
-}; 
+};
 
 torpedo.functions.trace = function (url){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onload = function () {
-        torpedo.functions.containsUrl(xhr.responseURL); 
+        torpedo.functions.containsUrl(xhr.responseURL);
     };
     xhr.send(null);
 };
@@ -111,24 +105,24 @@ torpedo.functions.trace = function (url){
 torpedo.functions.containsUrl = function(url){
     torpedo.functions.loop++;
     torpedo.handler.title = "";
-    torpedo.handler.clickEnabled = false;  
-    torpedo.hideButton = true;  
+    torpedo.handler.clickEnabled = false;
+    torpedo.hideButton = true;
     document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
     document.getElementById("seconds-box").hidden = true;
     document.getElementById("description").hidden = true;
     document.getElementById("redirectButton").hidden = true;
-    
-    setTimeout(function(e){    
+
+    setTimeout(function(e){
         if(torpedo.functions.loop == 5){
             document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('error');
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
         }
-        else{   
+        else{
             if(torpedo.functions.loop > 0){
                 torpedo.functions.loopTimer = 0;
-            }  
+            }
             torpedo.functions.loop++;
-            $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);   
+            $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);
             if(torpedo.functions.isRedirect(url)){
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
                 if(url.indexOf("redirectUrl") > -1) {
@@ -153,7 +147,7 @@ torpedo.functions.countdown = function (timee, id, url) {
 
     var setBaseDomain = document.getElementById("baseDomain");
     var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-    var noTimer = ((!torpedo.functions.isChecked("greenActivated") && torpedo.db.inList(baseDomain, "URLDefaultList")) || 
+    var noTimer = ((!torpedo.functions.isChecked("greenActivated") && torpedo.db.inList(baseDomain, "URLDefaultList")) ||
             (!torpedo.functions.isChecked("orangeActivated") && torpedo.db.inList(baseDomain, "URLSecondList")));
 
     if (noTimer) {
@@ -247,7 +241,7 @@ torpedo.functions.changeActivatedTimer = function (){
         document.getElementById("countdown").disabled = true;
     }
     else{
-        torpedo.prefs.setIntPref("blockingTimer", 3);        
+        torpedo.prefs.setIntPref("blockingTimer", 3);
         document.getElementById("countdown").disabled = false;
     }
 }
@@ -268,8 +262,8 @@ torpedo.functions.redirect = function (id){
 };
 
 torpedo.functions.isRedirect = function(url){
-    var redirect = false; 
-    if(url.indexOf("redirect") > -1) return true;  
+    var redirect = false;
+    if(url.indexOf("redirect") > -1) return true;
     var baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 
     for(var i = 0; i < redirects.length; i++){
@@ -294,7 +288,7 @@ torpedo.functions.containsRedirect = function(url){
     var temp = url.slice(index, url.length);
     if(torpedo.functions.isURL(temp)){
         url = temp;
-    } 
+    }
 
     return url;
 }
