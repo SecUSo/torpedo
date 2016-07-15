@@ -79,6 +79,23 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
     return baseDomain;
   }
   catch(err) {
+    if (url.indexOf("://") > -1) {
+        url = url.split('/')[2];      
+    }
+    else {
+        url = url.split('/')[0];
+    }
+    var regex_var = new RegExp(/[^.]*\.[^.]{2,3}(?:\.[^.]{2,3})?$/);
+    var array = regex_var.exec(url);
+    url = array[0];
+    array = url.split(".");
+    if(array[0] == "www" || array[0].indexOf("http") > -1){
+        url = "";
+        for(var i = 1; i < array.length-1; i++){
+            url += array[i] + ".";
+        }
+        url += array[array.length-1];
+    }
     return url;
   }
 };
