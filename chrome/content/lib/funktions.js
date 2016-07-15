@@ -130,9 +130,8 @@ torpedo.functions.containsUrl = function(url){
             torpedo.functions.loop++;
             $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);   
             if(torpedo.functions.isRedirect(url)){
-                var containsRe = url.indexOf("redirect") > -1;
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
-                if(containsRe) {
+                if(url.indexOf("redirectUrl") > -1) {
                     url = torpedo.functions.containsRedirect(decodeURIComponent(url));
                     torpedo.functions.containsUrl(url);
                 }
