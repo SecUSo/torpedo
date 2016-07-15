@@ -10,7 +10,10 @@ torpedo.updateTooltip = function (url)
 	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var urlsplit = url.split(""+torpedo.baseDomain);
 	document.getElementById("url1").textContent = urlsplit[0];
-	document.getElementById("baseDomain").textContent = torpedo.baseDomain;
+	var baseDomain = document.getElementById("baseDomain");
+	baseDomain.textContent = torpedo.baseDomain;
+	if(torpedo.baseDomain == url) baseDomain.style.fontWeight = "normal";
+	else baseDomain.style.fontWeight = "bold";
 
 	if(urlsplit.length>1){
 		if(urlsplit[1].length > 380){
@@ -33,20 +36,12 @@ torpedo.updateTooltip = function (url)
     redirectButton.hidden = true;
     
 	var title = torpedo.handler.title;
-	if(title != "" && title != undefined){
-		if(torpedo.functions.isURL(title)) {
-			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
-			if(titleDomain != torpedo.baseDomain){
-				redirect.textContent = torpedo.stringsBundle.getString('warn');
-				warningpic.hidden = false;
-			} 
-		}
-		else {
-			if(title != url){
-				redirect.textContent = torpedo.stringsBundle.getString('warn');
-				warningpic.hidden = false;
-			}
-		}
+	if(title != "" && title != undefined && torpedo.baseDomain != "" && torpedo.functions.isURL(title)){
+		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
+		if(titleDomain != torpedo.baseDomain){
+			redirect.textContent = torpedo.stringsBundle.getString('warn');
+			warningpic.hidden = false;
+		} 
 	}
 
 	if(redirect.textContent != torpedo.stringsBundle.getString('alert_redirect')) redirect.textContent = "";
@@ -66,7 +61,7 @@ torpedo.updateTooltip = function (url)
     	}
 	}
 	// trustworthy domains activated and url is in it
-	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
+	if(torpedo.baseDomain != "" && torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
 		// if timer is on in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
@@ -74,7 +69,7 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	// domain is in < 2 times clicked links
-	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
+	else if(torpedo.baseDomain != "" && torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "orange";
 		// timer is on in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
@@ -122,7 +117,7 @@ torpedo.processDOM = function ()
 				
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
-						Application.console.log(hrefValue + " erkannt");
+						
 						$(aElement).bind("mouseenter", function(event){
 							torpedo.handler.mouseOverHref(event);
 						});

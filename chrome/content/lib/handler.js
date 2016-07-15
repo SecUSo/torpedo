@@ -45,13 +45,13 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 	var panel = document.getElementById("tooltippanel");
 	var url = tempTarget.getAttribute("href");
-	Application.console.log("mouse over " + url);
 	if(tempTarget != torpedo.handler.TempTarget){
 		panel.hidePopup();
 	}
 	torpedo.handler.TempTarget = tempTarget;
 	torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
     torpedo.handler.clickEnabled = true;
+    
     if(!(panel.state == "showing" && torpedo.handler.Url == url)){
 	    torpedo.functions.loop = -1;
 		torpedo.functions.loopTimer = 2500;

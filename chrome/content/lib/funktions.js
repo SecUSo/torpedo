@@ -69,7 +69,7 @@ torpedo.functions.isURL = function (url) {
 torpedo.functions.getDomainWithFFSuffix = function (url) {
   var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
   var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
-
+  
   try {
     var baseDomain = eTLDService.getBaseDomain(tempURI);
     if(baseDomain.indexOf("www.")==0) {
@@ -79,7 +79,7 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
     return baseDomain;
   }
   catch(err) {
-    return null;
+    return url;
   }
 };
 
