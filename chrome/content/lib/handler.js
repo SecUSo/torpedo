@@ -53,7 +53,7 @@ torpedo.handler.mouseOverHref = function (event, aElement)
     torpedo.handler.clickEnabled = true;
     if(!(panel.state == "showing" && torpedo.handler.Url == url)){
 	    torpedo.functions.loop = -1;
-		torpedo.functions.loopTimer = 2500;
+		torpedo.functions.loopTimer = 2000;
 		if(url != "" && url != undefined ){
 			torpedo.handler.Url = url;
 			var redirect = false;

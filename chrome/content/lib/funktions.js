@@ -137,26 +137,28 @@ torpedo.functions.containsUrl = function(url){
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
         }
         else{
-            if(torpedo.functions.loop > 0){
+            if(torpedo.functions.loop >= 0){
                 torpedo.functions.loopTimer = 0;
             }
-            torpedo.functions.loop++;
             $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);
+
             if(torpedo.functions.isRedirect(url)){
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
                 if(url.indexOf("redirectUrl") > -1) {
                     url = torpedo.functions.containsRedirect(decodeURIComponent(url));
                     torpedo.functions.containsUrl(url);
                 }
-                else torpedo.functions.trace(url);
+                else {
+                    torpedo.functions.trace(url);
+                }
             }
             else{
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
-                torpedo.functions.loop = 0;
                 torpedo.updateTooltip(url);
             }
         }
     }, torpedo.functions.loopTimer);
+    torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 };
 
 // Countdown functions

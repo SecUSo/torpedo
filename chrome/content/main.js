@@ -11,7 +11,7 @@ torpedo.updateTooltip = function (url)
 	var urlsplit = url.split(""+torpedo.baseDomain);
 	document.getElementById("url1").textContent = urlsplit[0];
 	document.getElementById("baseDomain").textContent = torpedo.baseDomain;
-
+	
 	if(urlsplit.length>1){
 		if(urlsplit[1].length > 380){
 			urlsplit[1] = urlsplit[1].substr(0,380) + "...";
