@@ -110,10 +110,8 @@ torpedo.processDOM = function ()
 			{
 				var aElement = linkElement[i];
 				var hrefValue = aElement.getAttribute("href");
-				
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
-						
 						$(aElement).bind("mouseenter", function(event){
 							torpedo.handler.mouseOverHref(event);
 						});

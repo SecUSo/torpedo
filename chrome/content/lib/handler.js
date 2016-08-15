@@ -181,4 +181,5 @@ torpedo.handler.loadOptions = function (){
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 	document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('activatedTimer');
     document.getElementById('redirectdescription').textContent = torpedo.stringsBundle.getString('description');
+    document.getElementById('redirectwarning').textContent = torpedo.stringsBundle.getString('warning');
 }

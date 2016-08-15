@@ -60,12 +60,13 @@
                     </vbox>    			
 				</tabpanel>
                 <tabpanel id="redirecttab" orient="horizontal">
-                    <vbox align="left" wrap="true">
+                    <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:300px; ">
                         <description id="redirectdescription" style="margin-top:10px; width: 400px; font-size:75%;"/>
                         <checkbox id="redirect0" label="&noredirect;" preference="firefox-redirection0" style="margin-top:10px;" oncommand="torpedo.functions.redirect(0);" />
                         <checkbox id="redirect1" label="&manualredirect;" preference="firefox-redirection1" oncommand="torpedo.functions.redirect(1);" />
                         <checkbox id="redirect2" label="&autoredirect;" preference="firefox-redirection2" oncommand="torpedo.functions.redirect(2);" />
                         <button id="showRedirects" label="&showredirects;" onclick="torpedo.handler.mouseClickRedirectShow();" />
+                        <description id="redirectwarning" style="margin-top:10px; width: 400px; font-size:75%;"/>
                     </vbox>
                 </tabpanel>
 			</tabpanels>

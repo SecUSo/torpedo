@@ -29,6 +29,9 @@ torpedo.db.inList = function (website, list){
 	}
 	var sites = torpedo.prefs.getComplexValue(list, Components.interfaces.nsISupportsString).data;
 	website = website.toLowerCase();
+	if(sites.indexOf(website) != 0 && sites.charAt(sites.indexOf(website)-1) != ','){
+		return false;
+	}
 	return (sites.indexOf(website) > -1);
 };
 

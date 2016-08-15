@@ -141,7 +141,7 @@ torpedo.functions.containsUrl = function(url){
                 torpedo.functions.loopTimer = 0;
             }
             $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);
-
+            torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
                 document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
                 if(url.indexOf("redirectUrl") > -1) {

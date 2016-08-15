@@ -32,9 +32,6 @@
 <!ENTITY autoredirect "Check domains automatically for forwarding">
 <!ENTITY secs "second(s)">
 <!ENTITY entries_gone "Success">
-<!ENTITY redirect_description "We can detect if the domain you are about to access redirects you to another link. 
-In most cases, you can't see where the shortened link points to (for example tiny.url, bit.ly). TOrPeDO offers you to evaluate the actual domain automatically, to ask you if you want to use this functionality each time it detects a redirection,
-or to not use the functionality at all.">
 <!ENTITY showredirects "Show all redirection domains">
 <!ENTITY redirectList "List of redirection domains">
 <!ENTITY warning "Warning! This could be a phishing attack, because the displayed domain differs from the actual domain.">

@@ -2,7 +2,9 @@ span #baseDomain
 {
 	font-weight:bold;
 	margin: 0px;
+	margin-left: 2px;
     cursor: pointer;
+    letter-spacing: 2px;
 }
 
 span
