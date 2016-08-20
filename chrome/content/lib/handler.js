@@ -17,7 +17,7 @@ torpedo.handler.mouseOverTooltipPane = function (event)
 
 torpedo.handler.mouseDownTooltipPane = function (event)
 {
-	torpedo.handler.timeOut = 100;
+	torpedo.handler.timeOut = 1000;
 	if(torpedo.functions.loop >= 0){
 		torpedo.handler.timeOut = 3000;
 	}
@@ -39,15 +39,16 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 };
 
 torpedo.handler.title = "";
-
 torpedo.handler.mouseOverHref = function (event, aElement)
 {
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 	var panel = document.getElementById("tooltippanel");
 	var url = tempTarget.getAttribute("href");
+	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
 		panel.hidePopup();
 	}
+	redirect = false;
 	torpedo.handler.TempTarget = tempTarget;
 	torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
     torpedo.handler.clickEnabled = true;
@@ -56,7 +57,6 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 		torpedo.functions.loopTimer = 2000;
 		if(url != "" && url != undefined ){
 			torpedo.handler.Url = url;
-			var redirect = false;
 		    torpedo.hideButton = false;  
 			$(torpedo.handler.TempTarget).unbind("click");
 			$(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
@@ -64,10 +64,8 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 			clearTimeout(torpedo.handler.MouseLeavetimer);
 			alreadyClicked = "";
 
-			if(torpedo.functions.isRedirect(url)){
-				if(torpedo.prefs.getBoolPref("redirection2")){
-					redirect = true;
-				}
+			if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
+				redirect = true;
 			}
 	    	torpedo.functions.traceUrl(url, redirect);
 	    }

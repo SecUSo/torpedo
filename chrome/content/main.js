@@ -24,27 +24,37 @@ torpedo.updateTooltip = function (url)
 	var secondsbox = document.getElementById("seconds-box");
 	var warningpic = document.getElementById("warning-pic");
 	var redirectButton = document.getElementById("redirectButton");
+	redirectButton.disabled = true;
 
 	description.textContent = torpedo.stringsBundle.getString('check_message');
 	description.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
-    redirectButton.hidden = true;
     
 	var title = torpedo.handler.title;
 
+	var isphish = false;
 	if(title != "" && title != undefined && torpedo.functions.isURL(title)){
 		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 		if(titleDomain != torpedo.baseDomain){
 			redirect.textContent = torpedo.stringsBundle.getString('warn');
+			isphish = true;
 			warningpic.hidden = false;
 		} 
 	}
-	if(redirect.textContent != torpedo.stringsBundle.getString('alert_redirect')) redirect.textContent = "";
+	if(!isphish){
+		if(!isRedirect) redirect.textContent = "";
+	} 
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
 	var isRedirect = torpedo.functions.isRedirect(url);
+
+    if(!(isRedirect && manure)) redirectButton.hidden = true;
+    else if(!torpedo.hideButton){
+            redirectButton.hidden = false;
+            redirectButton.disabled = false;
+    }
 
 	if(isRedirect){
         redirect.textContent = torpedo.stringsBundle.getString('attention');
@@ -52,9 +62,6 @@ torpedo.updateTooltip = function (url)
 			description.hidden = true;
 			secondsbox.hidden = true;
 		}
-		else if(manure && !torpedo.hideButton){
-            redirectButton.hidden = false;
-    	}
 	}
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
@@ -74,7 +81,9 @@ torpedo.updateTooltip = function (url)
 	}
 	else{
 		panel.style.borderColor = "red";
-		redirect.textContent = torpedo.stringsBundle.getString('check');
+		if(!isphish) {
+			if(!isRedirect) redirect.textContent = torpedo.stringsBundle.getString('check');
+		}
 	}
 	torpedo.functions.setHref(url);
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);

@@ -125,15 +125,15 @@ torpedo.functions.containsUrl = function(url){
     torpedo.functions.loop++;
     torpedo.handler.title = "";
     torpedo.handler.clickEnabled = false;
-    torpedo.hideButton = true;
-    document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
+    var redirect = document.getElementById("redirect");
+    redirect.textContent = torpedo.stringsBundle.getString('wait');
     document.getElementById("seconds-box").hidden = true;
     document.getElementById("description").hidden = true;
-    document.getElementById("redirectButton").hidden = true;
+    document.getElementById("redirectButton").disabled = true;
 
     setTimeout(function(e){
         if(torpedo.functions.loop == 5){
-            document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('error');
+            redirect.textContent = torpedo.stringsBundle.getString('error');
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
         }
         else{
@@ -143,7 +143,7 @@ torpedo.functions.containsUrl = function(url){
             $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);
             torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
-                document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('wait');
+                redirect.textContent = torpedo.stringsBundle.getString('wait');
                 if(url.indexOf("redirectUrl") > -1) {
                     url = torpedo.functions.containsRedirect(decodeURIComponent(url));
                     torpedo.functions.containsUrl(url);
@@ -153,7 +153,7 @@ torpedo.functions.containsUrl = function(url){
                 }
             }
             else{
-                document.getElementById("redirect").textContent = torpedo.stringsBundle.getString('alert_redirect');
+                redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
                 torpedo.updateTooltip(url);
             }
         }
@@ -286,16 +286,15 @@ torpedo.functions.redirect = function (id){
 * contains "redirect" or contains domain from list of redirections
 */
 torpedo.functions.isRedirect = function(url){
-    var redirect = false;
     if(url.indexOf("redirect") > -1) return true;
 
     for(var i = 0; i < redirects.length; i++){
         if(torpedo.baseDomain == redirects[i]) {
-            redirect = true;
-            break;
+            return true;
         }
     }
-    return redirect;
+    Application.console.log(url + " is not a redirect, baseDomain is " + torpedo.baseDomain);
+    return false;
 };
 
 torpedo.functions.containsRedirect = function(url){
