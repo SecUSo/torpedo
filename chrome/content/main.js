@@ -66,7 +66,7 @@ torpedo.updateTooltip = function (url)
 	}
 	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
-		panel.style.borderColor = "orange";
+		panel.style.borderColor = "#1a509d";
 		// timer is on in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
 			description.textContent = torpedo.stringsBundle.getString('click_link');
@@ -74,6 +74,7 @@ torpedo.updateTooltip = function (url)
 	}
 	else{
 		panel.style.borderColor = "red";
+		redirect.textContent = torpedo.stringsBundle.getString('check');
 	}
 	torpedo.functions.setHref(url);
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
