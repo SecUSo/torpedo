@@ -33,30 +33,23 @@ torpedo.functions.calcWindowPosition = function (windowWidth, windowHeight) {
 torpedo.functions.findParentTagTarget = function (event, aTag) {
     var tempTarget = event.target || event.srcElement;
 
-/*    Application.console.log("nodeName: " + tempTarget.nodeName);
-    var attr = tempTarget.attributes;
-    for( var i = 0; i < attr.length; i++){
-        Application.console.log("attributname " + i + " von Node: " + attr[i].name);
-    }
-*/
     if (tempTarget.nodeName == aTag) {
         return tempTarget;
     }
     var children = event.target.childNodes;
     for( var i = 0; i < children.length; i++){
-        //Application.console.log("childrenname " + i + ": " + children[i].name);
         if(children[i].nodeName == aTag){
             return children[i];
         }
     }
     var parent = event.target.parentNode;
-    /*attr = parent.attributes;
-    Application.console.log(parent.nodeName);
-    for( var i = 0; i < attr.length; i++){
-        Application.console.log("attributname " + i + " von parent: " + attr[i].name);
+    for(var j = 0; j < 5; j++){
+        if(parent.nodeName == aTag){
+            return parent;
+        }
+        parent = parent.parentNode;        
     }
-*/
-    return event.target.parentNode;
+    return undefined;
 }
 
 torpedo.functions.isURL = function (url) {
@@ -68,9 +61,9 @@ torpedo.functions.isURL = function (url) {
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
   var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
-  var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
   
   try {
+    var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
     var baseDomain = eTLDService.getBaseDomain(tempURI);
     if(baseDomain.indexOf("www.")==0) {
         var arr = baseDomain.split("www.");
@@ -293,7 +286,6 @@ torpedo.functions.isRedirect = function(url){
             return true;
         }
     }
-    Application.console.log(url + " is not a redirect, baseDomain is " + torpedo.baseDomain);
     return false;
 };
 

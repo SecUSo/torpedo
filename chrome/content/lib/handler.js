@@ -42,33 +42,35 @@ torpedo.handler.title = "";
 torpedo.handler.mouseOverHref = function (event, aElement)
 {
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
-	var panel = document.getElementById("tooltippanel");
-	var url = tempTarget.getAttribute("href");
-	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-	if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
-		panel.hidePopup();
-	}
-	redirect = false;
-	torpedo.handler.TempTarget = tempTarget;
-	torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
-    torpedo.handler.clickEnabled = true;
-    if(!(panel.state == "showing" && torpedo.handler.Url == url)){
-	    torpedo.functions.loop = -1;
-		torpedo.functions.loopTimer = 2000;
-		if(url != "" && url != undefined ){
-			torpedo.handler.Url = url;
-		    torpedo.hideButton = false;  
-			$(torpedo.handler.TempTarget).unbind("click");
-			$(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
+	if(tempTarget != undefined){
+		var panel = document.getElementById("tooltippanel");
+		var url = tempTarget.getAttribute("href");
+		if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
+			panel.hidePopup();
+		}
+		redirect = false;
+		torpedo.handler.TempTarget = tempTarget;
+		torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
+	    torpedo.handler.clickEnabled = true;
+	    if(!(panel.state == "showing" && torpedo.handler.Url == url)){
+		    torpedo.functions.loop = -1;
+			torpedo.functions.loopTimer = 2000;
+			if(url != "" && url != null && url != undefined ){
+				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
+				torpedo.handler.Url = url;
+			    torpedo.hideButton = false;  
+				$(torpedo.handler.TempTarget).unbind("click");
+				$(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
 
-			clearTimeout(torpedo.handler.MouseLeavetimer);
-			alreadyClicked = "";
+				clearTimeout(torpedo.handler.MouseLeavetimer);
+				alreadyClicked = "";
 
-			if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
-				redirect = true;
-			}
-	    	torpedo.functions.traceUrl(url, redirect);
-	    }
+				if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
+					redirect = true;
+				}
+		    	torpedo.functions.traceUrl(url, redirect);
+		    }
+		}
 	}
 };
 
