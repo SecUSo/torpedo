@@ -13,8 +13,8 @@ torpedo.updateTooltip = function (url)
 	document.getElementById("baseDomain").textContent = torpedo.baseDomain;
 	
 	if(urlsplit.length>1){
-		if(urlsplit[1].length > 380){
-			urlsplit[1] = urlsplit[1].substr(0,380) + "...";
+		if(urlsplit[1].length > 200){
+			urlsplit[1] = urlsplit[1].substr(0,200) + "...";
 		}
 		document.getElementById("url2").textContent = urlsplit[1];
 	}

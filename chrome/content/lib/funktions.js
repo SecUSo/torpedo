@@ -43,12 +43,13 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
         }
     }
     var parent = event.target.parentNode;
-    for(var j = 0; j < 5; j++){
+    for( var j = 0; j < 5; j++){
         if(parent.nodeName == aTag){
             return parent;
         }
         parent = parent.parentNode;        
     }
+    Application.console.log("href not found");
     return undefined;
 }
 
