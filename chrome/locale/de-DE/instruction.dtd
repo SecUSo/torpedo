@@ -21,7 +21,7 @@
 <!ENTITY listofdefaults "Liste der als vertrauenswürdig eingestuften Domains">
 <!ENTITY delete "Löschen">
 <!ENTITY settings "Einstellungen">
-<!ENTITY activatedtimer "Timer aktiviert">
+<!ENTITY checkedtimer "Timer aktiviert">
 <!ENTITY activatedgreen "Timer bei vertrauenswürdigen Domains">
 <!ENTITY activatedorange "Timer bei User-Domains">
 <!ENTITY next "Weiter">

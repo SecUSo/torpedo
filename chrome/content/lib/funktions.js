@@ -247,9 +247,9 @@ torpedo.functions.changeActivatedOrange = function (){
 
 // timer settings
 
-torpedo.functions.changeActivatedTimer = function (){
+torpedo.functions.changeCheckedTimer = function (){
     d = !d;
-    torpedo.prefs.setBoolPref("activatedTimer", d);
+    torpedo.prefs.setBoolPref("checkedTimer", d);
     if(!d){
         torpedo.prefs.setIntPref("blockingTimer", 0);
         document.getElementById("countdown").disabled = true;
