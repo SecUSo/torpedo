@@ -1,60 +1,32 @@
-span #baseDomain
+#url-box
 {
-	font-weight:bold;
-	margin: 0px;
-	margin-left: 2px;
-    cursor: pointer;
-    letter-spacing: 2px;
-}
-
-span
-{
-	margin-top: 10px;
-	max-width: 400px;
-    display: block;
 	float:left;
 	font-weight: normal;
 	word-break: break-all;
 	white-space: pre-wrap;
     color: #333333;
+	margin: 6px 0px 6px 5px;
+	max-width: 400px;
 }
-#greenlist 
+#baseDomain
 {
-	margin-bottom: 5px;
+	font-weight:bold;
+	margin: 0px 0px 0px 2px;
+    cursor: pointer;
+    letter-spacing: 2px;
 }
-span #url1,span #url2
+#url1,#url2
 {
-	margin: 0px;
+	margin: 0px 0px 0px 1px;
     cursor: pointer;
 	color: #404040;
+	white-space: pre-wrap;
 }
-#url2
-{
-	margin-left: 15px;
-	margin-right: 0px;
-}
-#seconds-box{
-	margin-left: 0px;
-	margin-right: 0px;
-}
-#showDefaults
-{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-#url-box
-{
-	margin-top: 0px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	margin-right: 10px;
-}
-
 #redirect
 {
-	margin-top: 5px;
+	margin: 5px 0px 3px 4px;
+	width: 350px;
 }
-
 #tooltippanel
 {
 	-moz-appearance: none !important;
@@ -63,40 +35,35 @@ span #url1,span #url2
     border-radius: 5px;
     color: #000000;
 }
-
-
 .mainBox
 {
-	margin-top: 5px;
-	margin-left: 5px;
-	margin-right: 10px;
-	margin-bottom: 5px;
+	margin: 0px;
 }
-
-#vBox
+#info-box
 {
-	margin-right: 15px;
+    margin-left: 5px;
 }
-
 #warning-pic
 {
     width: 35px;
     height: 36px;
-    margin-left: 5px;
-    margin-top: 10px;
-   	margin-right: 10px;
+    margin: 10px 5px 2px 10px;
 }
-
 #info-pic
 {
     width: 25px;
     height: 25px;
-	margin-right: 3px;
-	margin-bottom: 3px;
-    cursor: pointer;
+	margin: 6px;
 }
-
-#info-box
+#seconds-box{
+	margin: 0px 0px 0px 0px;
+}
+#greenlist 
 {
-    margin-left: 0px;
+	margin-bottom: 5px;
+}
+#showDefaults
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

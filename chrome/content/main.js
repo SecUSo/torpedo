@@ -27,6 +27,7 @@ torpedo.updateTooltip = function (url)
 	redirectButton.disabled = true;
 
 	description.textContent = torpedo.stringsBundle.getString('check_message');
+	redirect.hidden = false;
 	description.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
@@ -43,7 +44,10 @@ torpedo.updateTooltip = function (url)
 		} 
 	}
 	if(!isphish){
-		if(!isRedirect) redirect.textContent = "";
+		if(!isRedirect){
+			redirect.textContent = "";
+			redirect.hidden = true;
+		} 
 	} 
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
@@ -58,6 +62,7 @@ torpedo.updateTooltip = function (url)
 
 	if(isRedirect){
         redirect.textContent = torpedo.stringsBundle.getString('attention');
+		redirect.hidden = false;
     	if(autore){
 			description.hidden = true;
 			secondsbox.hidden = true;
@@ -82,7 +87,10 @@ torpedo.updateTooltip = function (url)
 	else{
 		panel.style.borderColor = "red";
 		if(!isphish) {
-			if(!isRedirect) redirect.textContent = torpedo.stringsBundle.getString('check');
+			if(!isRedirect){
+			 redirect.textContent = torpedo.stringsBundle.getString('check');
+			 redirect.hidden = false;
+			}
 		}
 	}
 	torpedo.functions.setHref(url);
