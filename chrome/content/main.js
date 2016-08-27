@@ -42,7 +42,6 @@ torpedo.updateTooltip = function (url)
 			redirect.textContent = torpedo.stringsBundle.getString('warn');
 			isphish = true;
 			warningpic.hidden = false;
-			Application.console.log("showing");
 			
 		} 
 	}
@@ -64,7 +63,12 @@ torpedo.updateTooltip = function (url)
     }
 
 	if(isRedirect){
-        redirect.textContent = torpedo.stringsBundle.getString('attention');
+        if(torpedo.functions.loop < 0) 
+        	redirect.textContent = torpedo.stringsBundle.getString('attention');
+        else {
+        	redirectButton.hidden = true;
+            redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
+        }        
 		redirect.hidden = false;
     	if(autore){
 			description.hidden = true;

@@ -5,8 +5,8 @@
 	word-break: break-all;
 	white-space: pre-wrap;
     color: #333333;
-	margin: 6px 2px 6px 5px;
-	max-width: 400px;
+	margin: 6px 0px 6px 5px;
+	max-width: 350px;
 }
 #baseDomain
 {
@@ -38,7 +38,6 @@
 	border: solid 2px red;
     border-radius: 5px;
     color: #000000;
-    margin-left: 1px;
 }
 #warning-pic
 {

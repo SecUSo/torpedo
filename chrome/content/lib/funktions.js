@@ -124,11 +124,11 @@ torpedo.functions.containsUrl = function(url){
     document.getElementById("seconds-box").hidden = true;
     document.getElementById("description").hidden = true;
     document.getElementById("redirectButton").disabled = true;
-
     setTimeout(function(e){
-        if(torpedo.functions.loop == 5){
-            redirect.textContent = torpedo.stringsBundle.getString('error');
+        if(torpedo.functions.loop >= 5){
             $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
+            torpedo.handler.Url = url;
+            torpedo.updateTooltip(url);
         }
         else{
             if(torpedo.functions.loop >= 0){
@@ -148,11 +148,11 @@ torpedo.functions.containsUrl = function(url){
             }
             else{
                 redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
+                torpedo.handler.Url = url;
                 torpedo.updateTooltip(url);
             }
         }
     }, torpedo.functions.loopTimer);
-    torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 };
 
 // Countdown functions

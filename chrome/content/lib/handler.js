@@ -9,32 +9,37 @@ torpedo.handler.Url;
 torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
 torpedo.handler.timeOut;
-
+mouseon = false;
 torpedo.handler.mouseOverTooltipPane = function (event)
 {
+	mouseon = true;
 	clearTimeout(torpedo.handler.MouseLeavetimer);
 };
 
 torpedo.handler.mouseDownTooltipPane = function (event)
 {
+	mouseon = false;
 	torpedo.handler.timeOut = 1000;
 	if(torpedo.functions.loop >= 0){
 		torpedo.handler.timeOut = 3000;
 	}
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e)
 	{
-		document.getElementById("tooltippanel").hidePopup();
-		if(countDownTimer != null)
-		{
-			clearInterval(countDownTimer);
-			countDownTimer = null;
-		}
+		Application.console.log("mouse on? " + mouseon);
+		if(!mouseon) {
+			document.getElementById("tooltippanel").hidePopup();
+			torpedo.handler.TempTarget = null;
+			if(countDownTimer != null)
+			{
+				clearInterval(countDownTimer);
+				countDownTimer = null;
+			}
 
-		if(clickTimer != null)
-		{
-			clearTimeout(clickTimer);
+			if(clickTimer != null)
+			{
+				clearTimeout(clickTimer);
+			}
 		}
-		
 	}, torpedo.handler.timeOut);
 };
 
@@ -42,23 +47,23 @@ torpedo.handler.title = "";
 torpedo.handler.mouseOverHref = function (event, aElement)
 {
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
-	if(tempTarget != undefined){
-		var panel = document.getElementById("tooltippanel");
-		var url = tempTarget.getAttribute("href");
-		if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
-			panel.hidePopup();
-		}
-		redirect = false;
-		torpedo.handler.TempTarget = tempTarget;
-		torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
-	    torpedo.handler.clickEnabled = true;
-	    if(!(panel.state == "showing" && torpedo.handler.Url == url)){
-		    torpedo.functions.loop = -1;
+	var panel = document.getElementById("tooltippanel");
+	Application.console.log("torpedo handler null? " + (torpedo.handler.TempTarget == null));
+	if(tempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
+			if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
+				panel.hidePopup();
+			}
+			redirect = false;
+			var url = tempTarget.getAttribute("href");
+			torpedo.handler.TempTarget = tempTarget;
+			torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
+		    torpedo.handler.clickEnabled = true;
+			torpedo.functions.loop = -1;
 			torpedo.functions.loopTimer = 2000;
 			if(url != "" && url != null && url != undefined ){
 				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 				torpedo.handler.Url = url;
-			    torpedo.hideButton = false;  
+				torpedo.hideButton = false;  
 				$(torpedo.handler.TempTarget).unbind("click");
 				$(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
 
@@ -68,9 +73,8 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 				if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
 					redirect = true;
 				}
-		    	torpedo.functions.traceUrl(url, redirect);
-		    }
-		}
+			    torpedo.functions.traceUrl(url, redirect);
+			}
 	}
 };
 
@@ -105,17 +109,19 @@ torpedo.handler.mouseDownHref = function (event)
 {
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e)
 	{
-		document.getElementById("tooltippanel").hidePopup();
+		if(!mouseon){
+			document.getElementById("tooltippanel").hidePopup();
+			torpedo.handler.TempTarget = null;
+			if(countDownTimer != null)
+			{
+				clearInterval(countDownTimer);
+				countDownTimer = null;
+			}
 
-		if(countDownTimer != null)
-		{
-			clearInterval(countDownTimer);
-			countDownTimer = null;
-		}
-
-		if(clickTimer != null)
-		{
-			clearTimeout(clickTimer);
+			if(clickTimer != null)
+			{
+				clearTimeout(clickTimer);
+			}
 		}
 	}, 100);
 };
