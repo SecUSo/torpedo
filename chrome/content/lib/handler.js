@@ -25,7 +25,6 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 	}
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e)
 	{
-		Application.console.log("mouse on? " + mouseon);
 		if(!mouseon) {
 			document.getElementById("tooltippanel").hidePopup();
 			torpedo.handler.TempTarget = null;
@@ -48,7 +47,6 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 {
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 	var panel = document.getElementById("tooltippanel");
-	Application.console.log("torpedo handler null? " + (torpedo.handler.TempTarget == null));
 	if(tempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
 			if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
 				panel.hidePopup();

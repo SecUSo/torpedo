@@ -113,8 +113,6 @@ torpedo.processDOM = function ()
 
 		$(panel).bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
 		$(panel).bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
-		$(document.getElementById("warning-pic")).bind("mouseenter", function(){Application.console.log("mouseover");});
-		$(document.getElementById("warning-pic")).bind("mouseleave", function(){Application.console.log("mouseleave");});
 		$(document.getElementById("info-pic")).bind("click",torpedo.handler.mouseClickInfoButton);
 		$(document.getElementById("deleteSecond")).bind("click",torpedo.handler.mouseClickDeleteButton);
 		$(document.getElementById("editSecond")).bind("click",torpedo.handler.mouseClickEditButton);
