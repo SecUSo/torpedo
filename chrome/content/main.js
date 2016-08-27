@@ -8,16 +8,18 @@ torpedo.baseDomain;
 torpedo.updateTooltip = function (url)
 {
 	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-	var urlsplit = url.split(""+torpedo.baseDomain);
-	document.getElementById("url1").textContent = urlsplit[0];
 	document.getElementById("baseDomain").textContent = torpedo.baseDomain;
-	
-	if(urlsplit.length>1){
-		if(urlsplit[1].length > 200){
-			urlsplit[1] = urlsplit[1].substr(0,200) + "...";
-		}
-		document.getElementById("url2").textContent = urlsplit[1];
+	var split = url.indexOf(torpedo.baseDomain);
+	var before = url.substring(0, split);
+	var after = url.substring(split+torpedo.baseDomain.length, url.length);
+
+	document.getElementById("url1").textContent = before;
+
+	if(after.length > 200){
+		after = after.substr(0,200) + "...";
 	}
+	document.getElementById("url2").textContent = after;
+
 	var redirect = document.getElementById("redirect");
 	var description = document.getElementById("description");
 	var panel = document.getElementById("tooltippanel");
@@ -25,7 +27,6 @@ torpedo.updateTooltip = function (url)
 	var warningpic = document.getElementById("warning-pic");
 	var redirectButton = document.getElementById("redirectButton");
 	redirectButton.disabled = true;
-
 	description.textContent = torpedo.stringsBundle.getString('check_message');
 	redirect.hidden = false;
 	description.hidden = false;
@@ -94,7 +95,6 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	torpedo.functions.setHref(url);
-	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
 
 torpedo.processDOM = function ()

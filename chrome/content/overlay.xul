@@ -16,33 +16,31 @@
 
 	<popupset>
         <panel id="tooltippanel">
-        <hbox>
-			<vbox class="mainBox">
-				<hbox>
-					<hbox id="warningBox">
-						<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
+        	<hbox id="redirectPanel">
+				<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
+				<description id="redirect" />
+			</hbox>
+	        <hbox>
+				<vbox>
+					<button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
+					<hbox id="url-box" wrap="true">
+						<label id="url1" />
+						<label id="baseDomain" />
+						<label id="url2"  />
 					</hbox>
-					<description id="redirect" />
-				</hbox>
-				<button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
-				<hbox id="url-box" wrap="true">
-					<label id="url1" />
-					<label id="baseDomain" />
-					<label id="url2"  />
-				</hbox>
-				<hbox id="seconds-box">
-					<label id="description"/>
-					<label id="countdown"/>
-					<label id="secs" value="&secs;"/>
-				</hbox>
-			</vbox>
-			<vbox id="info-box">
-				<spacer flex="1"/>
-				<hbox>
-					<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
-				</hbox>
-			</vbox>
-		</hbox>
+					<hbox id="seconds-box">
+						<label id="description"/>
+						<label id="countdown"/>
+						<label id="secs" value="&secs;"/>
+					</hbox>
+				</vbox>
+				<vbox id="info-box">
+					<spacer flex="1"/>
+					<hbox>
+						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
+					</hbox>
+				</vbox>
+			</hbox>
         </panel>
     </popupset>
 

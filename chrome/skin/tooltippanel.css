@@ -24,7 +24,7 @@
 }
 #redirect
 {
-	margin: 5px 0px 3px 4px;
+	margin: 4px 0px 0px 4px;
 	width: 350px;
 }
 #tooltippanel
@@ -35,17 +35,13 @@
     border-radius: 5px;
     color: #000000;
 }
-.mainBox
-{
-	margin: 0px;
-}
 #info-box
 {
     margin-left: 5px;
 }
 #warning-pic
 {
-    width: 35px;
+    width: 55px;
     height: 36px;
     margin: 10px 5px 2px 10px;
 }
