@@ -5,7 +5,7 @@
 	word-break: break-all;
 	white-space: pre-wrap;
     color: #333333;
-	margin: 6px 0px 6px 5px;
+	margin: 6px 2px 6px 5px;
 	max-width: 400px;
 }
 #baseDomain
@@ -24,8 +24,12 @@
 }
 #redirect
 {
-	margin: 4px 0px 0px 4px;
-	width: 350px;
+	margin: 2px 0px 0px 6px;
+}
+#redirectButton
+{
+	margin-left: 5px;
+	margin-top: 5px;
 }
 #tooltippanel
 {
@@ -34,25 +38,22 @@
 	border: solid 2px red;
     border-radius: 5px;
     color: #000000;
-}
-#info-box
-{
-    margin-left: 5px;
+    margin-left: 1px;
 }
 #warning-pic
 {
-    width: 55px;
+    width: 35px;
     height: 36px;
-    margin: 10px 5px 2px 10px;
+    margin: 5px 2px 0px 5px;
 }
 #info-pic
 {
     width: 25px;
     height: 25px;
-	margin: 6px;
+	margin: 5px;
 }
 #seconds-box{
-	margin: 0px 0px 0px 0px;
+	margin: 0px;
 }
 #greenlist 
 {

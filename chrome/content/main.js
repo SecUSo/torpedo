@@ -32,9 +32,9 @@ torpedo.updateTooltip = function (url)
 	description.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
-    
-	var title = torpedo.handler.title;
 
+
+	var title = torpedo.handler.title;
 	var isphish = false;
 	if(title != "" && title != undefined && torpedo.functions.isURL(title)){
 		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
@@ -42,6 +42,8 @@ torpedo.updateTooltip = function (url)
 			redirect.textContent = torpedo.stringsBundle.getString('warn');
 			isphish = true;
 			warningpic.hidden = false;
+			Application.console.log("showing");
+			
 		} 
 	}
 	if(!isphish){
@@ -95,6 +97,8 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	torpedo.functions.setHref(url);
+	panel.openPopup(tempTarget, "after_start",0,0, false, false);
+
 };
 
 torpedo.processDOM = function ()
@@ -105,6 +109,8 @@ torpedo.processDOM = function ()
 
 		$(panel).bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
 		$(panel).bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
+		$(document.getElementById("warning-pic")).bind("mouseenter", function(){Application.console.log("mouseover");});
+		$(document.getElementById("warning-pic")).bind("mouseleave", function(){Application.console.log("mouseleave");});
 		$(document.getElementById("info-pic")).bind("click",torpedo.handler.mouseClickInfoButton);
 		$(document.getElementById("deleteSecond")).bind("click",torpedo.handler.mouseClickDeleteButton);
 		$(document.getElementById("editSecond")).bind("click",torpedo.handler.mouseClickEditButton);
