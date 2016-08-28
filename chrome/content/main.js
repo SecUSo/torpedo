@@ -26,13 +26,17 @@ torpedo.updateTooltip = function (url)
 	var secondsbox = document.getElementById("seconds-box");
 	var warningpic = document.getElementById("warning-pic");
 	var redirectButton = document.getElementById("redirectButton");
+	var redirectBox = document.getElementById("redirectBox");
+	var urlBox = document.getElementById("url-box");
+	var url1andbase = document.getElementById("url1andbase");
+	var url2 = document.getElementById("url2");
+
 	redirectButton.disabled = true;
 	description.textContent = torpedo.stringsBundle.getString('check_message');
 	redirect.hidden = false;
 	description.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
-
 
 	var title = torpedo.handler.title;
 	var isphish = false;
@@ -42,7 +46,6 @@ torpedo.updateTooltip = function (url)
 			redirect.textContent = torpedo.stringsBundle.getString('warn');
 			isphish = true;
 			warningpic.hidden = false;
-			
 		} 
 	}
 	if(!isphish){
@@ -102,7 +105,13 @@ torpedo.updateTooltip = function (url)
 	}
 	torpedo.functions.setHref(url);
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
-
+	var width;
+	if(($(url2).width() + $(url1andbase).width()+4) < 399){
+	 width = $(url2).width() + $(url1andbase).width()+1;
+	}
+	else width = ($(url2).width() > $(url1andbase).width())? $(url2).width()+1 : $(url1andbase).width()+1;
+	urlBox.style.width = ""+width+"px";
+	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
 
 torpedo.processDOM = function ()

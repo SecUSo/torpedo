@@ -1,17 +1,18 @@
 #url-box
 {
-	float:left;
 	font-weight: normal;
 	word-break: break-all;
-	white-space: pre-wrap;
+	white-space: normal;
     color: #333333;
 	margin: 6px 0px 6px 5px;
-	max-width: 350px;
+	display: inline-block;
+	min-width:200px; 
+	max-width:400px;
 }
 #baseDomain
 {
 	font-weight:bold;
-	margin: 0px 0px 0px 2px;
+	margin: 3px 0px 0px 2px;
     cursor: pointer;
     letter-spacing: 2px;
 }
@@ -24,7 +25,9 @@
 }
 #redirect
 {
+	display: block;
 	margin: 2px 0px 0px 6px;
+	max-width: 400px;
 }
 #redirectButton
 {
@@ -41,9 +44,9 @@
 }
 #warning-pic
 {
-    width: 35px;
+    width: 36px;
     height: 36px;
-    margin: 5px 2px 0px 5px;
+    margin: 5px;
 }
 #info-pic
 {
