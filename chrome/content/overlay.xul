@@ -24,10 +24,10 @@
 					</hbox>
 			        <button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
 					<hbox id="url-box">
-						<span id="url1andbase">
+						<hbox id="url1andbase">
 							<label id="url1" />
 							<label id="baseDomain" />
-						</span>
+						</hbox>
 						<label id="url2"  />
 					</hbox>
 					<hbox id="seconds-box">
@@ -51,6 +51,13 @@
    			</hbox>
     	</panel>
     </popupset>
+
+    <popupset>
+	  <menupopup id="menuwindow">
+	    <menuitem label="Test1"/>
+	    <menuitem label="Test2"/>
+	  </menupopup>
+	</popupset>
 
 	<stringbundleset>
         <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>

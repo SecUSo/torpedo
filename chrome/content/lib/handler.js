@@ -13,33 +13,42 @@ mouseon = false;
 torpedo.handler.mouseOverTooltipPane = function (event)
 {
 	mouseon = true;
-	clearTimeout(torpedo.handler.MouseLeavetimer);
+	clearTimeout(torpedo.handler.MouseLeavetimer); 
+	var panel = document.getElementById("tooltippanel");
+	$(panel).contextmenu(function(){
+		var menuwindow = document.getElementById("menuwindow");
+		var urlbox = document.getElementById("url-box");
+		menuwindow.openPopup(urlbox, "after_start",0,0, false, false);
+	});
 };
 
 torpedo.handler.mouseDownTooltipPane = function (event)
 {
-	mouseon = false;
-	torpedo.handler.timeOut = 1000;
-	if(torpedo.functions.loop >= 0){
-		torpedo.handler.timeOut = 3000;
-	}
-	torpedo.handler.MouseLeavetimer = setTimeout(function (e)
-	{
-		if(!mouseon) {
-			document.getElementById("tooltippanel").hidePopup();
-			torpedo.handler.TempTarget = null;
-			if(countDownTimer != null)
-			{
-				clearInterval(countDownTimer);
-				countDownTimer = null;
-			}
-
-			if(clickTimer != null)
-			{
-				clearTimeout(clickTimer);
-			}
+	var menuwindow = document.getElementById("menuwindow");
+	if(menuwindow.state != "open"){
+		mouseon = false;
+		torpedo.handler.timeOut = 1000;
+		if(torpedo.functions.loop >= 0){
+			torpedo.handler.timeOut = 3000;
 		}
-	}, torpedo.handler.timeOut);
+		torpedo.handler.MouseLeavetimer = setTimeout(function (e)
+		{
+			if(!mouseon) {
+				document.getElementById("tooltippanel").hidePopup();
+				torpedo.handler.TempTarget = null;
+				if(countDownTimer != null)
+				{
+					clearInterval(countDownTimer);
+					countDownTimer = null;
+				}
+
+				if(clickTimer != null)
+				{
+					clearTimeout(clickTimer);
+				}
+			}
+		}, torpedo.handler.timeOut);
+	}
 };
 
 torpedo.handler.title = "";
