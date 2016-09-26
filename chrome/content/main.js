@@ -107,7 +107,7 @@ torpedo.updateTooltip = function (url)
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 	var width;
 	if(($(url2).width() + $(url1andbase).width()+4) < 399){
-	 	urlBox.style.minWidth = "200px";
+	 urlBox.style.minWidth = "200px";
 	 if(torpedo.baseDomain.length + after.length <= 25){
 	 	urlBox.style.minWidth = "100px";
 	 }

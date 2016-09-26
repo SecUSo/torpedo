@@ -169,6 +169,7 @@ torpedo.functions.countdown = function (timee, id, url) {
 
     function showTime() {
         var second = startTime % 60;
+        var urlBox = document.getElementById("url-box");
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
         $("#" + id).html(strZeit);
 
@@ -178,12 +179,17 @@ torpedo.functions.countdown = function (timee, id, url) {
             document.getElementById("seconds-box").hidden = true;
 
             // make URL in tooltip clickable
-            $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
+            $(urlBox).unbind("click");
+            $(urlBox).bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
         }
         else {
-            $(document.getElementById("url-box")).unbind("click");
+            $(urlBox).unbind("click");
+            $(urlBox).bind("click", torpedo.handler.mouseClickHrefError);
+            $(torpedo.handler.TempTarget).unbind("click");
+            $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
+
         }
     }
 

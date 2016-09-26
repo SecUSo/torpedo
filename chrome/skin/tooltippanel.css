@@ -1,10 +1,3 @@
-#baseDomain
-{
-	font-weight:bold;
-	margin: 0px 0px 0px 2px;
-    cursor: pointer;
-    letter-spacing: 2px;
-}
 #url-box
 {
 	font-weight: normal;
@@ -15,6 +8,13 @@
 	display: inline-block;
 	min-width:200px; 
 	max-width:400px;
+}
+#baseDomain
+{
+	font-weight:bold;
+	margin: 0px 0px 0px 2px;
+    cursor: pointer;
+    letter-spacing: 2px;
 }
 #url1,#url2
 {

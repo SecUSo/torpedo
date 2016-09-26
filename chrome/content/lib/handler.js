@@ -71,9 +71,7 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 				torpedo.handler.Url = url;
 				torpedo.hideButton = false;  
-				$(torpedo.handler.TempTarget).unbind("click");
-				$(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
-
+				
 				clearTimeout(torpedo.handler.MouseLeavetimer);
 				alreadyClicked = "";
 
