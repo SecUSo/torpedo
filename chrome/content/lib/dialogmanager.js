@@ -18,6 +18,9 @@ torpedo.dialogmanager.createEdit = function () {
 	window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen, width='300px'");
 };
 
+torpedo.dialogmanager.createEditDefaults = function(){
+	window.openDialog("chrome://torpedo/content/dialog/editdefault.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
+};
 torpedo.dialogmanager.createInfo = function () {
 	window.openDialog("chrome://torpedo/content/dialog/info.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };

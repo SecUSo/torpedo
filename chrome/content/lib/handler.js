@@ -18,6 +18,8 @@ torpedo.handler.mouseOverTooltipPane = function (event)
 	$(panel).contextmenu(function(){
 		var menuwindow = document.getElementById("menuwindow");
 		var urlbox = document.getElementById("url-box");
+		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) document.getElementById("addtotrusted").disabled = true;
+		else  document.getElementById("addtotrusted").disabled = false;
 		menuwindow.openPopup(urlbox, "after_start",0,0, false, false);
 	});
 };
@@ -133,33 +135,34 @@ torpedo.handler.mouseDownHref = function (event)
 
 torpedo.handler.mouseClickHref = function (event)
 {
-	var url = torpedo.functions.getHref();
-	if(alreadyClicked == ""){
-		alreadyClicked = url;
-	 	if(!torpedo.functions.isRedirect(url)) torpedo.db.pushUrl(torpedo.baseDomain);
-
-		var ioservice = Components.classes["@mozilla.org/network/io-service;1"]
-	                          .getService(Components.interfaces.nsIIOService);
-
-		var uriToOpen = ioservice.newURI(url, null, null);
-
-		var extps = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"]
-		                      .getService(Components.interfaces.nsIExternalProtocolService);
-
-		// now, open it!
-		extps.loadURI(uriToOpen, null);
+	//only do sth if left mouse button is clicked 
+	if(event.button == 0){	
+		var url = torpedo.functions.getHref();
+		if(alreadyClicked == ""){
+			alreadyClicked = url;
+		 	if(!torpedo.functions.isRedirect(url)) torpedo.db.pushUrl(torpedo.baseDomain);
+		 	torpedo.handler.open(url);
+		}
+		return false;
 	}
-	return false;
 };
 
+torpedo.handler.open = function(url){
+	var ioservice = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+	var uriToOpen = ioservice.newURI(url, null, null);
+	var extps = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"].getService(Components.interfaces.nsIExternalProtocolService);
+	extps.loadURI(uriToOpen, null);
+}
 torpedo.handler.mouseClickHrefError = function(event){
-	var panel = document.getElementById("errorpanel");
-	panel.openPopup(torpedo.handler.TempTarget, "before_start",0,0, false, false);
-	setTimeout(function (e)
-	{
-		panel.hidePopup();
-	}, 2500);
-	return false;
+	if(event.button ==0){
+		var panel = document.getElementById("errorpanel");
+		panel.openPopup(torpedo.handler.TempTarget, "before_start",0,0, false, false);
+		setTimeout(function (e)
+		{
+			panel.hidePopup();
+		}, 2500);
+		return false;
+	}
 };
 
 torpedo.handler.mouseClickInfoButton = function (event)
@@ -170,11 +173,12 @@ torpedo.handler.mouseClickInfoButton = function (event)
 torpedo.handler.mouseClickDeleteButton = function(event){
 	torpedo.dialogmanager.createDelete(440,117);
 };
-
+torpedo.handler.mouseClickDefaultsEditButton = function(event){
+	torpedo.dialogmanager.createEditDefaults();
+}
 torpedo.handler.mouseClickEditButton = function(event){
 	torpedo.dialogmanager.createEdit();
 };
-
 torpedo.handler.mouseClickDefaultsButton = function (event) {
 	torpedo.dialogmanager.showDefaults();
 };

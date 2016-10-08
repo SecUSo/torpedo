@@ -13,18 +13,20 @@
 <!ENTITY editentries "Delete individual entries">
 <!ENTITY userdomains "Domains which were called at least 2 times">
 <!ENTITY clearentries "Delete all entries">
-<!ENTITY showdefaults "Show all trustworthy domains">
+<!ENTITY showdefaults "Show trustworthy domains">
 <!ENTITY deleteEntries "Delete entries">
 <!ENTITY pickEdit "Which of the entries do you want to delete?">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
 <!ENTITY listofdefaults "List of trustworthy domains">
+<!ENTITY controluserdefaults "Trustworthy domains you added yourself:">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
 <!ENTITY checkedtimer "Timer activated">
 <!ENTITY activatedgreen "Timer on trustworthy domains">
 <!ENTITY activatedorange "Timer on user domains">
 <!ENTITY next "Next">
+<!ENTITY back "Back">
 <!ENTITY redirection "Redirections">
 <!ENTITY redirect "Click to show actual URL.">
 <!ENTITY noredirect "Do not check domains for forwarding">
@@ -36,3 +38,6 @@
 <!ENTITY redirectList "List of redirection domains">
 <!ENTITY warning "Warning! This could be a phishing attack, because the displayed domain differs from the actual domain.">
 <!ENTITY tooearly "Please wait until the countdown has finished! You can deactivate this feature in the settings.">
+<!ENTITY opensettings "Open settings window">
+<!ENTITY addtotrusted "Add domain to trustworthy links">
+<!ENTITY searchfor "Check domain with google.com">

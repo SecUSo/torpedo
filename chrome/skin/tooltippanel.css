@@ -4,7 +4,7 @@
 	word-break: break-all;
 	white-space: normal;
     color: #333333;
-	margin: 4px;
+	margin: 6px 4px 2px 4px;
 	display: inline-block;
 	min-width:200px; 
 	max-width:400px;
@@ -52,14 +52,7 @@
 {
     width: 25px;
     height: 25px;
-	margin: 5px;
-}
-#seconds-box{
-	margin: 0px;
-}
-#greenlist 
-{
-	margin-bottom: 5px;
+	margin: 4px;
 }
 #showDefaults
 {

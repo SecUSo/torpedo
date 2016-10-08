@@ -9,7 +9,7 @@
 		buttons="cancel"
 		buttonlabelcancel="&close;"
 		ondialogcancel="return true;"
-		onload="onLoad('instruction');">
+		onload="onLoad();">
 	
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js"></script>
 	

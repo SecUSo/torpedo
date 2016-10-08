@@ -165,18 +165,15 @@ torpedo.processDOM = function ()
 	init();
 };
 
-window.addEventListener("load", function load(event)
-{
-        window.removeEventListener("load", load, false);
-		torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
+window.addEventListener("load", function load(event){
+	window.removeEventListener("load", load, false);
+	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 
-		torpedo.prefs.addonUninstallingListener();
-        torpedo.processDOM();
+	torpedo.prefs.addonUninstallingListener();
+    torpedo.processDOM();
 
-       if(torpedo.prefs.getBoolPref("firstrun"))
-       {
-			torpedo.prefs.setBoolPref("firstrun",false);
-			torpedo.dialogmanager.createWelcome();
-			torpedo.dialogmanager.createInstruction();
-		}
+    if(torpedo.prefs.getBoolPref("firstrun")){
+		torpedo.prefs.setBoolPref("firstrun",false);
+		torpedo.dialogmanager.createWelcome();
+	}
 }, false);

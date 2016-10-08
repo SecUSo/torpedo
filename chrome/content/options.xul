@@ -19,7 +19,6 @@
     </stringbundleset>
     
     <prefpane>
-	
 		<preferences>
             <preference id="firefox-checked-timer" name="extensions.torpedo.checkedTimer" type="bool"/>
 			<preference id="firefox-blocking-timer" name="extensions.torpedo.blockingTimer" type="int"/>
@@ -54,6 +53,8 @@
                             <label value="&listofdefaults;" style="font-weight:bold; color:green;margin-top:10px; margin-bottom:10px"/>
                             <checkbox id="greenlist" label="&activated;" preference="firefox-checked-greenlist" oncommand="torpedo.functions.changeChecked();" />
                             <button id="showDefaults" label="&showdefaults;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
+                            <label value="&controluserdefaults;" style="font-weight:bold; color:green;margin-top:10px; margin-bottom:10px"/>
+                            <button id="editDefaults" label="&editentries;" onclick="torpedo.handler.mouseClickDefaultsEditButton();" />
                             <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; color:orange;margin-top:30px; margin-bottom:10px;"/>
                             <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
                             <button id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();" />

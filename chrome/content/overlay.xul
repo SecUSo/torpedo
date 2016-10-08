@@ -54,8 +54,9 @@
 
     <popupset>
 	  <menupopup id="menuwindow">
-	    <menuitem label="Test1"/>
-	    <menuitem label="Test2"/>
+	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideDefault(torpedo.baseDomain);"/>
+	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
+	    <menuitem label="&opensettings;" onclick="window.openDialog('chrome://torpedo/content/options.xul','bmarks','chrome=yes, dialog,resizable=no, modal, centerscreen');  torpedo.handler.TempTarget = ''"/>
 	  </menupopup>
 	</popupset>
 

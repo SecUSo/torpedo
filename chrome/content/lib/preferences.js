@@ -47,7 +47,12 @@ torpedo.prefs = function () {
 		resetPrefs: function (all) 
 		{
             // reset all prefs manually
-			if(all)prefManager.clearUserPref("firstrun");
+			if(all){
+				prefManager.clearUserPref("firstrun");
+				prefManager.clearUserPref("URLSecondList");
+				prefManager.clearUserPref("URLFirstList");
+				prefManager.clearUserPref("URLDefaultUserList");
+			}
 			prefManager.clearUserPref("checkedTimer");
 			prefManager.clearUserPref("blockingTimer");
 			prefManager.clearUserPref("checkedGreenList");
@@ -57,8 +62,6 @@ torpedo.prefs = function () {
 			prefManager.clearUserPref("redirection1");
 			prefManager.clearUserPref("redirection2");
 			prefManager.clearUserPref("URLDefaultList");
-			if(all)prefManager.clearUserPref("URLSecondList");
-			if(all)prefManager.clearUserPref("URLFirstList");
 		}		
     };
 }();

@@ -5,12 +5,16 @@
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&windowheader;"
-		buttons="cancel"
-		buttonlabelcancel="&next;"
+		buttons="accept,extra1,cancel"
+		buttonlabelaccept="&back;" 
+		buttonlabelextra1="&next;"
+		buttonlabelcancel="&close;"
+		ondialogaccept="picture('welcome'); return false;"
+		ondialogextra1="picture('instruction'); return false;"
 		ondialogcancel="return true;"
-		onload="onLoad('welcome');">
+		onload="picture('welcome');">
 	
-	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js"></script>
+	<script type="application/javascript"  src="chrome://torpedo/content/dialog/welcome.js"></script>
 	
 	<vbox style="padding: 2px; width: 880px; height: 495px;">
 		<image id="welcomePic" flex="0" align="start" width="900" height="500"/>

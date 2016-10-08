@@ -35,6 +35,15 @@ torpedo.db.inList = function (website, list){
 	return (sites.indexOf(website) > -1);
 };
 
+torpedo.db.putInsideDefault = function(website){
+	var str = Components.classes["@mozilla.org/supports-string;1"]
+		      .createInstance(Components.interfaces.nsISupportsString);
+
+	var defaultSites = torpedo.prefs.getComplexValue("URLDefaultList", Components.interfaces.nsISupportsString).data;
+	str.data = defaultSites + website + ",";
+	torpedo.prefs.setComplexValue("URLDefaultList", Components.interfaces.nsISupportsString, str);
+};
+
 torpedo.db.putInsideSecond = function(website){
 	var str = Components.classes["@mozilla.org/supports-string;1"]
 		      .createInstance(Components.interfaces.nsISupportsString);
@@ -64,6 +73,7 @@ torpedo.db.putInsideFirst = function(website){
 var selected;
 var secondList = [];
 var firstList = [];
+var newList = [];
 
 torpedo.db.deleteAllSecond = function () {
 	var str = Components.classes["@mozilla.org/supports-string;1"]
@@ -118,20 +128,62 @@ torpedo.db.select = function(index){
 
 torpedo.db.getDefaults = function (){
 	var defaultList = document.getElementById('defaultList');
-	var defaultSites = torpedo.prefs.getComplexValue("URLDefaultList", Components.interfaces.nsISupportsString).data;
+	torpedo.db.fillDefault("URLDefaultList");
+	firstList.sort();
+	for (i = 0; i < firstList.length; i++) {
+		var row = document.createElement('listitem');
+	    if(firstList[i].length > 0) row.setAttribute('label', firstList[i]);
+	    defaultList.appendChild(row);
+	}
+};
+
+torpedo.db.fillDefault = function(list){
+	var defaultSites = torpedo.prefs.getComplexValue(list, Components.interfaces.nsISupportsString).data;
 	var i = 0;
 	firstList = [];
-	while(defaultSites.indexOf(",") >= 0){
+	while(defaultSites.indexOf(",") > 0){
 		var split = defaultSites.indexOf(",");
 		firstList[i] = defaultSites.substring(0,split); 
 		defaultSites = defaultSites.substring(split+1, defaultSites.length);
 		i++;
 	}
-	firstList.sort();
-	for (i = 0; i < firstList.length; i++) {
+};
+
+userDefaults = [];
+torpedo.db.fillUserDefaults = function(){
+	torpedo.db.fillDefault("URLDefaultUserList");
+	var defaultList = firstList;
+	torpedo.db.fillDefault("URLDefaultList");
+	userDefaults = [];
+	var j = 0;
+	for(var i = defaultList.length; i < firstList.length; i++){
+		userDefaults[j] = firstList[i];
+		j++;
+	}
+
+}
+torpedo.db.getUserDefaults = function(){
+	torpedo.db.fillUserDefaults();
+	userDefaults.sort();
+	for (i = 0; i < userDefaults.length; i++) {
 		var row = document.createElement('listitem');
-	    row.setAttribute('label', firstList[i]);
-	    defaultList.appendChild(row);
+	    if(userDefaults[i].length > 0) row.setAttribute('label', userDefaults[i]);
+	    document.getElementById("theDefaultList").appendChild(row);
+	}
+}
+
+torpedo.db.deleteSomeUserDefaults = function(){
+	var str = Components.classes["@mozilla.org/supports-string;1"]
+		      .createInstance(Components.interfaces.nsISupportsString);
+
+	torpedo.db.fillUserDefaults();
+	var defaultSites = torpedo.prefs.getComplexValue("URLDefaultList", Components.interfaces.nsISupportsString).data;
+	if(userDefaults.length > 0){
+		str.data = defaultSites.replace(userDefaults[selected]+",", "");
+		torpedo.prefs.setComplexValue("URLDefaultList", Components.interfaces.nsISupportsString, str);
+
+		var theDefaultList = document.getElementById('theDefaultList');
+		theDefaultList.removeChild(theDefaultList.getItemAtIndex(selected));
 	}
 }
 
