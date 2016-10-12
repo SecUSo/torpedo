@@ -43,27 +43,18 @@ torpedo.updateTooltip = function (url)
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
 	var isRedirect = torpedo.functions.isRedirect(url);
+	var shortenText = torpedo.prefs.getBoolPref("language");
 
     if(!(isRedirect && manure)) redirectButton.hidden = true;
     else if(!torpedo.hideButton){
             redirectButton.hidden = false;
             redirectButton.disabled = false;
     }
-
-	if(isRedirect){
-        if(torpedo.functions.loop < 0) 
-        	redirect.textContent = torpedo.stringsBundle.getString('attention');
-        else {
-        	redirectButton.hidden = true;
-        }        
-    	if(autore){
-			secondsbox.hidden = true;
-		}
-	}
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
-		redirect.textContent = torpedo.stringsBundle.getString('lowrisk');
+		if(shortenText) redirect.textContent = "";
+		else redirect.textContent = torpedo.stringsBundle.getString('lowrisk');
 
 		// if timer is off in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
@@ -73,7 +64,8 @@ torpedo.updateTooltip = function (url)
 	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "#1a509d";
-		redirect.textContent = torpedo.stringsBundle.getString('userrisk');
+		if(shortenText) redirect.textContent = "";
+		else redirect.textContent = torpedo.stringsBundle.getString('userrisk');
 
 		// timer is off in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
@@ -82,33 +74,45 @@ torpedo.updateTooltip = function (url)
 	}
 	else{
 		panel.style.borderColor = "black";		
-		redirect.textContent = torpedo.stringsBundle.getString('highrisk');
-		if(!isphish) {
-			if(!isRedirect){
-			 redirect.textContent = torpedo.stringsBundle.getString('check');
-			 redirect.hidden = false;
+		if(shortenText) {
+			redirect.textContent = torpedo.stringsBundle.getString('check');
+		}
+		else redirect.textContent = torpedo.stringsBundle.getString('highrisk');
+	}
+	if(isRedirect){
+		if(torpedo.functions.loop < 0) {
+			if(torpedo.functions.inRedirectList())  {
+				if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('url');
+				else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
+			}
+			else {
+				if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('redirect');
+				else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
 			}
 		}
+        else {
+        	redirectButton.hidden = true;
+        }        
+    	if(autore){
+			secondsbox.hidden = true;
+		}
+		
 	}
-	if(torpedo.functions.inRedirectList())  redirect.textContent = torpedo.stringsBundle.getString('shorturl');
-	else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
-	
 	var title = torpedo.handler.title;
-	var isphish = false;
 	if(title != "" && title != undefined && torpedo.functions.isURL(title)){
 		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 		if(titleDomain != torpedo.baseDomain){
-			redirect.textContent = torpedo.stringsBundle.getString('warn');
-			isphish = true;
+			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('warn_short');
+			else redirect.textContent = torpedo.stringsBundle.getString('warn');
 			warningpic.hidden = false;
 			panel.style.borderColor = "red";
 		} 
+		else{
+			if(!isRedirect){
+				redirect.textContent = "";
+			} 
+		}
 	}
-	if(!isphish){
-		if(!isRedirect){
-			redirect.textContent = "";
-		} 
-	} 
 	torpedo.functions.setHref(url);
 	/*panel.openPopup(tempTarget, "after_start",0,0, false, false);
 
