@@ -4,9 +4,8 @@
 	word-break: break-all;
 	white-space: normal;
     color: #333333;
-	margin: 6px 4px 2px 4px;
+	margin: 5px 4px 5px 4px;
 	display: inline-block;
-	min-width:200px; 
 	max-width:400px;
 }
 #baseDomain
@@ -45,8 +44,11 @@
 #warning-pic
 {
     width: 36px;
-    height: 36px;
-    margin: 5px;
+    max-height: 40px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom:8px;
 }
 #info-pic
 {

@@ -14,14 +14,16 @@ torpedo.updateTooltip = function (url)
 	var after = url.substring(split+torpedo.baseDomain.length, url.length);
 
 	document.getElementById("url1").textContent = before;
+	document.getElementById("url2").textContent = "";
 
 	if(after.length > 200){
 		after = after.substr(0,200) + "...";
 	}
-	document.getElementById("url2").textContent = after;
+
+	//avoid unnessecary slash
+	if (after.length > 1) document.getElementById("url2").textContent = after;
 
 	var redirect = document.getElementById("redirect");
-	var description = document.getElementById("description");
 	var panel = document.getElementById("tooltippanel");
 	var secondsbox = document.getElementById("seconds-box");
 	var warningpic = document.getElementById("warning-pic");
@@ -32,28 +34,11 @@ torpedo.updateTooltip = function (url)
 	var url2 = document.getElementById("url2");
 
 	redirectButton.disabled = true;
-	description.textContent = torpedo.stringsBundle.getString('check_message');
-	redirect.hidden = false;
-	description.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
 
-	var title = torpedo.handler.title;
-	var isphish = false;
-	if(title != "" && title != undefined && torpedo.functions.isURL(title)){
-		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
-		if(titleDomain != torpedo.baseDomain){
-			redirect.textContent = torpedo.stringsBundle.getString('warn');
-			isphish = true;
-			warningpic.hidden = false;
-		} 
-	}
-	if(!isphish){
-		if(!isRedirect){
-			redirect.textContent = "";
-			redirect.hidden = true;
-		} 
-	} 
+	document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('warn');
+	
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
@@ -70,32 +55,34 @@ torpedo.updateTooltip = function (url)
         	redirect.textContent = torpedo.stringsBundle.getString('attention');
         else {
         	redirectButton.hidden = true;
-            redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
         }        
-		redirect.hidden = false;
     	if(autore){
-			description.hidden = true;
 			secondsbox.hidden = true;
 		}
 	}
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
-		// if timer is on in trustworthy domains
+		redirect.textContent = torpedo.stringsBundle.getString('lowrisk');
+
+		// if timer is off in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
-			description.textContent = torpedo.stringsBundle.getString('click_link');
+			secondsbox.hidden = true;
 		}
 	}
 	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "#1a509d";
-		// timer is on in clicked links
+		redirect.textContent = torpedo.stringsBundle.getString('userrisk');
+
+		// timer is off in clicked links
 		if(!torpedo.functions.isChecked("orangeActivated")) {
-			description.textContent = torpedo.stringsBundle.getString('click_link');
+			secondsbox.hidden = true;
 		}
 	}
 	else{
-		panel.style.borderColor = "red";
+		panel.style.borderColor = "black";		
+		redirect.textContent = torpedo.stringsBundle.getString('highrisk');
 		if(!isphish) {
 			if(!isRedirect){
 			 redirect.textContent = torpedo.stringsBundle.getString('check');
@@ -103,8 +90,28 @@ torpedo.updateTooltip = function (url)
 			}
 		}
 	}
+	if(torpedo.functions.inRedirectList())  redirect.textContent = torpedo.stringsBundle.getString('shorturl');
+	else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
+	
+	var title = torpedo.handler.title;
+	var isphish = false;
+	if(title != "" && title != undefined && torpedo.functions.isURL(title)){
+		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
+		if(titleDomain != torpedo.baseDomain){
+			redirect.textContent = torpedo.stringsBundle.getString('warn');
+			isphish = true;
+			warningpic.hidden = false;
+			panel.style.borderColor = "red";
+		} 
+	}
+	if(!isphish){
+		if(!isRedirect){
+			redirect.textContent = "";
+		} 
+	} 
 	torpedo.functions.setHref(url);
-	panel.openPopup(tempTarget, "after_start",0,0, false, false);
+	/*panel.openPopup(tempTarget, "after_start",0,0, false, false);
+
 	var width;
 	if(($(url2).width() + $(url1andbase).width()+4) < 399){
 	 urlBox.style.minWidth = "200px";
@@ -114,7 +121,7 @@ torpedo.updateTooltip = function (url)
 	 width = $(url2).width() + $(url1andbase).width()+1;
 	}
 	else width = ($(url2).width() > $(url1andbase).width())? $(url2).width()+1 : $(url1andbase).width()+1;
-	urlBox.style.width = ""+width+"px";
+	urlBox.style.width = ""+width+"px";*/
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
 

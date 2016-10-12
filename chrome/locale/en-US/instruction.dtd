@@ -6,8 +6,11 @@
 <!ENTITY sure_defaultsettings "Restore default settings?">
 <!ENTITY attention_defaultsettings "Delete entries in user domains">
 <!ENTITY sure "Do you really want to delete all entries?">
-<!ENTITY seconds "second(s) until you can click on a link">
+<!ENTITY remainingTime "Time remaining:">
+<!ENTITY seconds "second(s)">
 <!ENTITY lists "Lists">
+<!ENTITY language "Use shortened texts for this addon">
+<!ENTITY general "General">
 <!ENTITY activated "Trustworthy domains activated">
 <!ENTITY userlinks "List of user domains">
 <!ENTITY editentries "Delete individual entries">
@@ -28,7 +31,7 @@
 <!ENTITY next "Next">
 <!ENTITY back "Back">
 <!ENTITY redirection "Redirections">
-<!ENTITY redirect "Click to show actual URL.">
+<!ENTITY redirect "Click to show destination address">
 <!ENTITY noredirect "Do not check domains for forwarding">
 <!ENTITY manualredirect "Check domains manually for forwarding">
 <!ENTITY autoredirect "Check domains automatically for forwarding">

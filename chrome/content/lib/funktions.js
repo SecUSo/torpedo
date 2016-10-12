@@ -121,7 +121,6 @@ torpedo.functions.containsUrl = function(url){
     var redirect = document.getElementById("redirect");
     redirect.textContent = torpedo.stringsBundle.getString('wait');
     document.getElementById("seconds-box").hidden = true;
-    document.getElementById("description").hidden = true;
     document.getElementById("redirectButton").disabled = true;
     setTimeout(function(e){
         if(torpedo.functions.loop >= 5){
@@ -145,8 +144,9 @@ torpedo.functions.containsUrl = function(url){
                     torpedo.functions.trace(url);
                 }
             }
-            else{
-                redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
+            else{                
+                if(torpedo.functions.inRedirectList())  redirect.textContent = torpedo.stringsBundle.getString('shorturl');
+                else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
                 torpedo.handler.Url = url;
                 torpedo.updateTooltip(url);
             }
@@ -175,8 +175,7 @@ torpedo.functions.countdown = function (timee, id, url) {
 
         if (second == 0) {
             //change text from tooltip to "you can click link now"
-            document.getElementById("description").textContent = torpedo.stringsBundle.getString('click_link');
-            document.getElementById("seconds-box").hidden = true;
+            document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('click_link');
 
             // make URL in tooltip clickable
             $(urlBox).unbind("click");
@@ -185,6 +184,7 @@ torpedo.functions.countdown = function (timee, id, url) {
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
         }
         else {
+            document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
             $(urlBox).unbind("click");
             $(urlBox).bind("click", torpedo.handler.mouseClickHrefError);
             $(torpedo.handler.TempTarget).unbind("click");
@@ -220,6 +220,12 @@ torpedo.functions.getHref = function () {
     return Url;
 }
 
+var e = torpedo.prefs.getBoolPref("language");
+
+torpedo.functions.changeLanguage = function(){
+    e = !e;
+    torpedo.prefs.setBoolPref("language", e);
+}
 
 // list settings
 
@@ -286,14 +292,18 @@ torpedo.functions.redirect = function (id){
 */
 torpedo.functions.isRedirect = function(url){
     if(url.indexOf("redirect") > -1) return true;
+    var result = torpedo.functions.inRedirectList();
+    return result;
+};
 
+torpedo.functions.inRedirectList = function(){
     for(var i = 0; i < redirects.length; i++){
         if(torpedo.baseDomain == redirects[i]) {
             return true;
         }
     }
     return false;
-};
+}
 
 torpedo.functions.containsRedirect = function(url){
     var index = 0;

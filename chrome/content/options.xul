@@ -20,6 +20,7 @@
     
     <prefpane>
 		<preferences>
+            <preference id="firefox-language" name="extensions.torpedo.language" type="bool"/>
             <preference id="firefox-checked-timer" name="extensions.torpedo.checkedTimer" type="bool"/>
 			<preference id="firefox-blocking-timer" name="extensions.torpedo.blockingTimer" type="int"/>
             <preference id="firefox-checked-greenlist" name="extensions.torpedo.checkedGreenList" type="bool"/>
@@ -32,11 +33,17 @@
 
         <tabbox style="max-width:400px">
             <tabs>
+                <tab label="&general;"/>
                 <tab label="Timer"/>
                 <tab label="&lists;" />
                 <tab label="&redirection;"/>
             </tabs>
 			<tabpanels>
+                <tabpanel id="generaltab" orient="horizontal">
+                    <vbox>
+                        <checkbox id="language" label="&language;" preference="firefox-language" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('language'));" oncommand="torpedo.functions.changeLanguage();"/>
+                    </vbox>
+                </tabpanel>
 				<tabpanel id="timertab" orient="horizontal">
                     <vbox>
                         <checkbox id="checkedtimer" label="&checkedtimer;" preference="firefox-checked-timer" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('checkedTimer'));" oncommand="torpedo.functions.changeCheckedTimer();"/>

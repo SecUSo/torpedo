@@ -6,7 +6,10 @@
 <!ENTITY sure_defaultsettings "Standard-Einstellungen wiederherstellen?">
 <!ENTITY attention_defaultsettings "Einträge in User-Domains löschen">
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
-<!ENTITY seconds "Sekunde(n), bis auf den Link geklickt werden kann">
+<!ENTITY remainingTime "Verbleibende Zeit:">
+<!ENTITY seconds "Sekunde(n)">
+<!ENTITY language "Gekürzte Texte für dieses Add On verwenden">
+<!ENTITY general "Allgemein">
 <!ENTITY lists "Listen">
 <!ENTITY activated "Vertrauenswürdige Domains aktiviert">
 <!ENTITY userlinks "Liste der User-Domains">
@@ -28,7 +31,7 @@
 <!ENTITY next "Weiter">
 <!ENTITY back "Zurück">
 <!ENTITY redirection "Weiterleitungen">
-<!ENTITY redirect "Zeige tatsächliche URL.">
+<!ENTITY redirect "Zeige Zieladresse">
 <!ENTITY noredirect "Domains nicht auf Weiterleitungen prüfen">
 <!ENTITY manualredirect "Domains manuell auf Weiterleitungen prüfen">
 <!ENTITY autoredirect "Domains automatisch auf Weiterleitungen prüfen">

@@ -1,4 +1,5 @@
 pref("extensions.torpedo.firstrun", true);
+pref("extensions.torpedo.language", false);
 pref("extensions.torpedo.checkedTimer", true);
 pref("extensions.torpedo.blockingTimer", 3);
 pref("extensions.torpedo.checkedGreenList", true);
