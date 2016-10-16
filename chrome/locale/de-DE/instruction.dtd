@@ -4,30 +4,33 @@
 <!ENTITY save "Speichern">
 <!ENTITY default_settings "Standard-Einstellungen">
 <!ENTITY sure_defaultsettings "Standard-Einstellungen wiederherstellen?">
-<!ENTITY attention_defaultsettings "Einträge in User-Domains löschen">
+<!ENTITY attention_defaultsettings "Einträge in von Ihnen als vertrauenswürdig eingestuften Domains löschen">
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
 <!ENTITY remainingTime "Verbleibende Zeit:">
 <!ENTITY seconds "Sekunde(n)">
 <!ENTITY language "Gekürzte Texte für dieses Add On verwenden">
 <!ENTITY general "Allgemein">
 <!ENTITY lists "Listen">
-<!ENTITY activated "Vertrauenswürdige Domains aktiviert">
-<!ENTITY userlinks "Liste der User-Domains">
 <!ENTITY userdomains "Domains, die mind. 2x aufgerufen wurden">
-<!ENTITY editentries "Anzeigen und einzelne Einträge löschen">
+<!ENTITY editentries "Liste anzeigen und bearbeiten">
+<!ENTITY addentries "Hinzufügen>
+<!ENTITY add "Hinzufügen>
+<!ENTITY wrongurl "Sie haben versucht, einen Eintrag hinzuzufügen, welcher keine gültige Domain darstellt.">
 <!ENTITY clearentries "Alle Einträge löschen">
-<!ENTITY showdefaults "Zeige Liste der vertrauenswürdigen Domains">
-<!ENTITY controluserdefaults "Von Ihnen hinzugefügte vertrauenswürdige Domains:">
+<!ENTITY showdefaults "Liste anzeigen">
+<!ENTITY activated "Liste aktiviert">
+<!ENTITY userlinks "Domains, die Sie als 'niedriges Risiko' eingestuft haben (blau)">
+<!ENTITY controluserdefaults "Domains, die Sie als 'niedriges Risiko' eingestuft haben (grün)">
 <!ENTITY deleteEntries "Einträge löschen">
 <!ENTITY pickEdit "Welchen der Einträge möchten Sie löschen?">
 <!ENTITY option "Optionen">
 <!ENTITY close "Schließen">
-<!ENTITY listofdefaults "Liste der als vertrauenswürdig eingestuften Domains">
+<!ENTITY listofdefaults "Domains, die von den Entwicklern als 'niedriges Risiko' eingestuft wurden (grün)">
 <!ENTITY delete "Löschen">
 <!ENTITY settings "Einstellungen">
 <!ENTITY checkedtimer "Timer aktiviert">
-<!ENTITY activatedgreen "Timer bei vertrauenswürdigen Domains">
-<!ENTITY activatedorange "Timer bei User-Domains">
+<!ENTITY activatedgreen "Timer aktivieren bei von Entwicklern als niedriges Risiko eingestuften Domains (grün)">
+<!ENTITY activatedorange "Timer aktivieren bei von Ihnen als niedriges Risiko eingestuften Domains (blau)">
 <!ENTITY next "Weiter">
 <!ENTITY back "Zurück">
 <!ENTITY redirection "Weiterleitungen">
@@ -42,5 +45,8 @@
 <!ENTITY warning "Achtung! Dies könnte ein Phishing-Angriff sein, da die angezeigte Domain nicht mit der tatsächlichen übereinstimmt.">
 <!ENTITY tooearly "Bitte warten Sie, bis der Timer abgelaufen ist! Diese Funktion können Sie in den Einstellungen ändern.">
 <!ENTITY opensettings "Einstellungen öffnen">
-<!ENTITY addtotrusted "Domain zu vertrauenswürdigen Links hinzufügen">
+<!ENTITY addtotrusted "Domain als niedriges Risiko einstufen">
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
+<!ENTITY textsize "Schriftgröße">
+<!ENTITY textsizenormal "Normal">
+<!ENTITY textsizenormal "Groß">

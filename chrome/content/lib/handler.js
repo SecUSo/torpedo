@@ -10,9 +10,11 @@ torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
 torpedo.handler.timeOut;
 mouseon = false;
+mouseout = [false, false];
 torpedo.handler.mouseOverTooltipPane = function (event)
 {
 	mouseon = true;
+	mouseout[0] = true;
 	clearTimeout(torpedo.handler.MouseLeavetimer); 
 	var panel = document.getElementById("tooltippanel");
 	$(panel).contextmenu(function(){
@@ -29,7 +31,7 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 	var menuwindow = document.getElementById("menuwindow");
 	if(menuwindow.state != "open"){
 		mouseon = false;
-		torpedo.handler.timeOut = 1000;
+		torpedo.handler.timeOut = 1500;
 		if(torpedo.functions.loop >= 0){
 			torpedo.handler.timeOut = 3000;
 		}
@@ -56,6 +58,10 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 torpedo.handler.title = "";
 torpedo.handler.mouseOverHref = function (event, aElement)
 {
+	if(mouseout[0]) {
+		mouseout = [false,true];
+	}
+	else mouseout = [false,false];
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 	var panel = document.getElementById("tooltippanel");
 	if(tempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
@@ -72,7 +78,6 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 			if(url != "" && url != null && url != undefined ){
 				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 				torpedo.handler.Url = url;
-				torpedo.hideButton = false;  
 				
 				clearTimeout(torpedo.handler.MouseLeavetimer);
 				alreadyClicked = "";
@@ -116,7 +121,8 @@ torpedo.handler.mouseDownHref = function (event)
 {
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e)
 	{
-		if(!mouseon){
+		if(mouseout[1]) torpedo.handler.mouseDownTooltipPane(event);
+		else if(!mouseon){
 			document.getElementById("tooltippanel").hidePopup();
 			torpedo.handler.TempTarget = null;
 			if(countDownTimer != null)
@@ -191,7 +197,9 @@ torpedo.handler.mouseClickRedirectButton = function (event){
 torpedo.handler.mouseClickRedirectShow = function (event) {
 	torpedo.dialogmanager.showRedirects();
 };
-
+torpedo.handler.mouseClickAddButton = function(event){
+	torpedo.dialogmanager.showAdd();
+}
 torpedo.handler.loadOptions = function (){
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 	document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('checkedTimer');

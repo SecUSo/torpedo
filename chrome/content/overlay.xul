@@ -24,28 +24,32 @@
 		        	<hbox id="redirectBox">
 						<description id="redirect" flex="1"/>
 					</hbox>
-			        <button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
-					<hbox id="url-box">
+					<hbox>
 						<vbox>
-						<hbox id="url1andbase">
-							<label id="url1" />
-							<label id="baseDomain" />
-						</hbox>
-						<label id="url2"  />
+					        <button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
+							<hbox id="url-box">
+								<vbox>
+								<hbox id="url1andbase">
+									<label id="url1" />
+									<label id="baseDomain" />
+								</hbox>
+								<label id="url2"  />
+								</vbox>
+							</hbox>
+							<vbox id="seconds-box">
+								<label id="linkDeactivate" />
+								<hbox id="countdownbox">
+									<label value="&remainingTime;" />
+									<label id="countdown"/>
+									<label id="secs" value="&secs;"/>
+								</hbox>
+							</vbox>
+						</vbox>
+						<vbox id="info-box">
+							<spacer flex="1"/>
+							<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 						</vbox>
 					</hbox>
-					<vbox id="seconds-box">
-						<label id="linkDeactivate" />
-						<hbox>
-							<label value="&remainingTime;" />
-							<label id="countdown"/>
-							<label id="secs" value="&secs;"/>
-						</hbox>
-					</vbox>
-				</vbox>
-				<vbox id="info-box">
-					<spacer flex="1"/>
-					<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 				</vbox>
 			</hbox>
         </panel>

@@ -21,6 +21,8 @@
     <prefpane>
 		<preferences>
             <preference id="firefox-language" name="extensions.torpedo.language" type="bool"/>
+            <preference id="firefox-textsizenormal" name="extensions.torpedo.textsizenormal" type="bool"/>
+            <preference id="firefox-textsizebig" name="extensions.torpedo.textsizebig" type="bool"/>
             <preference id="firefox-checked-timer" name="extensions.torpedo.checkedTimer" type="bool"/>
 			<preference id="firefox-blocking-timer" name="extensions.torpedo.blockingTimer" type="int"/>
             <preference id="firefox-checked-greenlist" name="extensions.torpedo.checkedGreenList" type="bool"/>
@@ -31,7 +33,7 @@
             <preference id="firefox-redirection2" name="extensions.torpedo.redirection2" type="bool"/>
 	   </preferences>
 
-        <tabbox style="max-width:400px">
+        <tabbox id="editor" style="max-width:400px">
             <tabs>
                 <tab label="&general;"/>
                 <tab label="Timer"/>
@@ -42,6 +44,10 @@
                 <tabpanel id="generaltab" orient="horizontal">
                     <vbox>
                         <checkbox id="language" label="&language;" preference="firefox-language" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('language'));" oncommand="torpedo.functions.changeLanguage();"/>
+                        <label value="&textsize;" style="margin-top:20px; font-weight:bold" />
+                        <checkbox id="textsizenormal" label="&textsizenormal;" preference="firefox-textsizenormal" oncommand="torpedo.functions.changeTextsize('normal');"/>
+                        <checkbox id="textsizebig" label="&textsizebig;" preference="firefox-textsizebig" oncommand="torpedo.functions.changeTextsize('big');"/>
+
                     </vbox>
                 </tabpanel>
 				<tabpanel id="timertab" orient="horizontal">
@@ -56,25 +62,26 @@
                     </vbox>
                 </tabpanel>
                 <tabpanel id="listtab" orient="horizontal">
-                     <vbox>
-                            <label value="&listofdefaults;" style="font-weight:bold; color:green;margin-top:10px; margin-bottom:10px"/>
+                    <vbox>
+                            <label value="&listofdefaults;" style="font-weight:bold; margin-top:10px; margin-bottom:10px"/>
                             <checkbox id="greenlist" label="&activated;" preference="firefox-checked-greenlist" oncommand="torpedo.functions.changeChecked();" />
-                            <button id="showDefaults" label="&showdefaults;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
-                            <label value="&controluserdefaults;" style="font-weight:bold; color:green;margin-top:10px; margin-bottom:10px"/>
+                            <button id="showDefaults" label="&showdefaults;" style="margin-top:10px;margin-bottom:10px;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
+                            <label value="&controluserdefaults;" style="font-weight:bold; margin-top:10px; margin-bottom:10px"/>
                             <button id="editDefaults" label="&editentries;" onclick="torpedo.handler.mouseClickDefaultsEditButton();" />
-                            <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; color:orange;margin-top:30px; margin-bottom:10px;"/>
+                            <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>
+                            <button id="addSecond" label="&addentries;" onclick="torpedo.handler.mouseClickAddButton();" />
                             <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
                             <button id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();" />
                     </vbox>    			
 				</tabpanel>
                 <tabpanel id="redirecttab" orient="horizontal">
                     <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:300px; ">
-                        <description id="redirectdescription" style="margin-top:10px; width: 400px; font-size:75%;"/>
+                        <description id="redirectdescription" style="margin-top:10px; width: 400px;"/>
                         <checkbox id="redirect0" label="&noredirect;" preference="firefox-redirection0" style="margin-top:10px;" oncommand="torpedo.functions.redirect(0);" />
                         <checkbox id="redirect1" label="&manualredirect;" preference="firefox-redirection1" oncommand="torpedo.functions.redirect(1);" />
                         <checkbox id="redirect2" label="&autoredirect;" preference="firefox-redirection2" oncommand="torpedo.functions.redirect(2);" />
                         <button id="showRedirects" label="&showredirects;" onclick="torpedo.handler.mouseClickRedirectShow();" />
-                        <description id="redirectwarning" style="margin-top:10px; width: 400px; font-size:75%;"/>
+                        <description id="redirectwarning" style="margin-top:10px; width: 400px;"/>
                     </vbox>
                 </tabpanel>
 			</tabpanels>

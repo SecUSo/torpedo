@@ -2,11 +2,44 @@ var torpedo = torpedo || {};
 var lastBrowserStatus;
 torpedo.instructionSize = {width: 800,height: 460};
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
-
-torpedo.hideButton = true;  
+ 
 torpedo.baseDomain;
 torpedo.updateTooltip = function (url)
 {
+	// Initializaion
+	var redirect = document.getElementById("redirect");
+	var panel = document.getElementById("tooltippanel");
+	var secondsbox = document.getElementById("seconds-box");
+	var warningpic = document.getElementById("warning-pic");
+	var redirectButton = document.getElementById("redirectButton");
+	var redirectBox = document.getElementById("redirectBox");
+	var urlBox = document.getElementById("url-box");
+	var url1andbase = document.getElementById("url1andbase");
+	var url2 = document.getElementById("url2");
+	var nore = torpedo.prefs.getBoolPref("redirection0");
+	var manure = torpedo.prefs.getBoolPref("redirection1");
+	var autore = torpedo.prefs.getBoolPref("redirection2");
+	var isRedirect = torpedo.functions.isRedirect(url);
+	var shortenText = torpedo.prefs.getBoolPref("language");
+	var gmxRedirect = false;
+	var old = "";
+	redirectButton.disabled = true;
+	secondsbox.hidden = false;
+	warningpic.hidden = true;
+
+	// check if url is a "redirectUrl=" url
+	var redirectUrl = torpedo.functions.resolveRedirect(url);
+	if(redirectUrl != url){
+		gmxRedirect = true;
+		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('redirect');
+		else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
+		old = url;
+		url = redirectUrl;
+		if(torpedo.functions.isRedirect(redirectUrl)) torpedo.functions.containsRedirect(url);
+	}
+
+	// assert url to tooltip
+	torpedo.functions.setHref(url);
 	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	document.getElementById("baseDomain").textContent = torpedo.baseDomain;
 	var split = url.indexOf(torpedo.baseDomain);
@@ -19,37 +52,19 @@ torpedo.updateTooltip = function (url)
 	if(after.length > 200){
 		after = after.substr(0,200) + "...";
 	}
-
 	//avoid unnessecary slash
 	if (after.length > 1) document.getElementById("url2").textContent = after;
 
-	var redirect = document.getElementById("redirect");
-	var panel = document.getElementById("tooltippanel");
-	var secondsbox = document.getElementById("seconds-box");
-	var warningpic = document.getElementById("warning-pic");
-	var redirectButton = document.getElementById("redirectButton");
-	var redirectBox = document.getElementById("redirectBox");
-	var urlBox = document.getElementById("url-box");
-	var url1andbase = document.getElementById("url1andbase");
-	var url2 = document.getElementById("url2");
-
-	redirectButton.disabled = true;
-	secondsbox.hidden = false;
-	warningpic.hidden = true;
-
-	document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('warn');
+	// document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('warn');
 	
-	var nore = torpedo.prefs.getBoolPref("redirection0");
-	var manure = torpedo.prefs.getBoolPref("redirection1");
-	var autore = torpedo.prefs.getBoolPref("redirection2");
-	var isRedirect = torpedo.functions.isRedirect(url);
-	var shortenText = torpedo.prefs.getBoolPref("language");
-
+	// show or hide redirectButton 
     if(!(isRedirect && manure)) redirectButton.hidden = true;
-    else if(!torpedo.hideButton){
-            redirectButton.hidden = false;
-            redirectButton.disabled = false;
+    else{
+    	redirectButton.hidden = false;
+        redirectButton.disabled = false;
     }
+
+    // settings for tooltip border colors & texts
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
@@ -73,59 +88,44 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	else{
-		panel.style.borderColor = "black";		
-		if(shortenText) {
-			redirect.textContent = torpedo.stringsBundle.getString('check');
-		}
-		else redirect.textContent = torpedo.stringsBundle.getString('highrisk');
+		panel.style.borderColor = "black";
 	}
+	
+	// settings for redirect case	
 	if(isRedirect){
 		if(torpedo.functions.loop < 0) {
-			if(torpedo.functions.inRedirectList())  {
-				if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('url');
-				else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
-			}
-			else {
-				if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('redirect');
-				else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
-			}
+			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('url');
+			else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
 		}
-        else {
-        	redirectButton.hidden = true;
-        }        
-    	if(autore){
+	    else {
+	        redirectButton.hidden = true;
+	    }        
+	    if(autore){
 			secondsbox.hidden = true;
 		}
-		
 	}
+
+	// settings for phish case 
 	var title = torpedo.handler.title;
 	if(title != "" && title != undefined && torpedo.functions.isURL(title)){
+		if(gmxRedirect) url = old;
+		torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 		if(titleDomain != torpedo.baseDomain){
 			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('warn_short');
 			else redirect.textContent = torpedo.stringsBundle.getString('warn');
 			warningpic.hidden = false;
 			panel.style.borderColor = "red";
-		} 
-		else{
-			if(!isRedirect){
-				redirect.textContent = "";
-			} 
 		}
 	}
-	torpedo.functions.setHref(url);
-	/*panel.openPopup(tempTarget, "after_start",0,0, false, false);
 
+	// determine length of first text segment in tooltip
+	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 	var width;
-	if(($(url2).width() + $(url1andbase).width()+4) < 399){
-	 urlBox.style.minWidth = "200px";
-	 if(torpedo.baseDomain.length + after.length <= 25){
-	 	urlBox.style.minWidth = "100px";
-	 }
-	 width = $(url2).width() + $(url1andbase).width()+1;
-	}
-	else width = ($(url2).width() > $(url1andbase).width())? $(url2).width()+1 : $(url1andbase).width()+1;
-	urlBox.style.width = ""+width+"px";*/
+	width = ($(url2).width() > $(url1andbase).width())? $(url2).width() : $(url1andbase).width();
+	redirect.style.width = ""+width+"px";
+	Application.console.log(width);
+	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
 

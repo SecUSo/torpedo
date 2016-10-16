@@ -3,7 +3,7 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		title="&listofdefaults;"
+		title="&showdefaults;"
 		buttons="cancel"
 		buttonlabelcancel="&close;"
 		ondialogcancel="return true;"

@@ -195,3 +195,45 @@ torpedo.db.restoreSettings = function(){
 	torpedo.prefs.resetPrefs(false);
 	return true;
 }
+
+torpedo.db.addEntries = function(){
+	var addSites = document.getElementById("addEntries").value;
+	addSites.toLowerCase();
+	addSites = addSites.replace(/\s+/g, '');
+	addSites = addSites + ",";
+
+	var addList = [];
+	var i = 0;
+	var erase = true;
+	while(addSites.indexOf(",") > 0){
+		var split = addSites.indexOf(",");
+		var url = addSites.substring(0,split); 
+		Application.console.log(url);
+		if(!url.startsWith("http")) url = "http://" + url;
+		if(torpedo.functions.isURL(url)){
+			var split = url.indexOf("://");
+			url = url.substring(split+3,url.length);
+			Application.console.log(url);
+			addList[i] = url;
+			i++;
+		}
+		else{ 
+			erase = false;
+			var message = document.getElementById("errormessage");
+			message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
+			setTimeout(function (e)
+			{
+				message.hidePopup();
+			}, 4500);
+		}
+		addSites = addSites.substring(split+1, addSites.length);
+	}
+	var list = document.getElementById('addList');
+
+	for (i = 0; i < addList.length; i++) {
+		var row = document.createElement('listitem');
+	    if(addList[i].length > 0) row.setAttribute('label', addList[i]);
+	    list.appendChild(row);
+	}
+	if(erase) document.getElementById("addEntries").value = "";
+}

@@ -101,7 +101,7 @@ torpedo.functions.traceUrl = function (url, redirect) {
     torpedo.updateTooltip(url);
     OldUrl = url;
     if(redirect){
-        torpedo.functions.containsUrl(url);
+        torpedo.functions.containsRedirect(url);
     }
 };
 
@@ -109,12 +109,12 @@ torpedo.functions.trace = function (url){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onload = function () {
-        torpedo.functions.containsUrl(xhr.responseURL);
+        torpedo.functions.containsRedirect(xhr.responseURL);
     };
     xhr.send(null);
 };
 
-torpedo.functions.containsUrl = function(url){
+torpedo.functions.containsRedirect = function(url){
     torpedo.functions.loop++;
     torpedo.handler.title = "";
     torpedo.handler.clickEnabled = false;
@@ -136,17 +136,10 @@ torpedo.functions.containsUrl = function(url){
             torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
                 redirect.textContent = torpedo.stringsBundle.getString('wait');
-                if(url.indexOf("redirectUrl") > -1) {
-                    url = torpedo.functions.containsRedirect(decodeURIComponent(url));
-                    torpedo.functions.containsUrl(url);
-                }
-                else {
-                    torpedo.functions.trace(url);
-                }
+                torpedo.functions.trace(url);
             }
             else{                
-                if(torpedo.functions.inRedirectList())  redirect.textContent = torpedo.stringsBundle.getString('shorturl');
-                else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
+                torpedo.stringsBundle.getString('shorturl');
                 torpedo.handler.Url = url;
                 torpedo.updateTooltip(url);
             }
@@ -220,11 +213,38 @@ torpedo.functions.getHref = function () {
     return Url;
 }
 
+// text settings
+
 var e = torpedo.prefs.getBoolPref("language");
 
 torpedo.functions.changeLanguage = function(){
     e = !e;
     torpedo.prefs.setBoolPref("language", e);
+}
+
+torpedo.functions.changeTextsize = function(size){
+    var notsize;
+    var editor = document.getElementById("editor");
+    var panel = document.getElementById("tooltippanel");
+    if(size=="normal"){
+        notsize = "big";
+        editor.style.fontSize="100%";
+        panel.style.fontSize="100%";
+    }
+    else {
+        notsize = "normal";
+        editor.style.fontSize="115%";
+        panel.style.fontSize="115%";
+    }
+
+    torpedo.prefs.setBoolPref("textsize"+size,true);
+    torpedo.prefs.setBoolPref("textsize"+notsize,false);
+
+
+     // prevent user from selecting no option at all in settings
+    if(document.getElementById("textsize"+size).checked == false){
+        document.getElementById("textsize"+size).checked = true;
+    }
 }
 
 // list settings
@@ -291,21 +311,15 @@ torpedo.functions.redirect = function (id){
 * contains "redirect" or contains domain from list of redirections
 */
 torpedo.functions.isRedirect = function(url){
-    if(url.indexOf("redirect") > -1) return true;
-    var result = torpedo.functions.inRedirectList();
-    return result;
-};
-
-torpedo.functions.inRedirectList = function(){
     for(var i = 0; i < redirects.length; i++){
         if(torpedo.baseDomain == redirects[i]) {
             return true;
         }
     }
     return false;
-}
+};
 
-torpedo.functions.containsRedirect = function(url){
+torpedo.functions.resolveRedirect = function(url){
     var index = 0;
     var reUrl = url.indexOf("redirectUrl=");
     var re = url.indexOf("redirect=");
@@ -316,9 +330,6 @@ torpedo.functions.containsRedirect = function(url){
         var index = re+9;
     }
     var temp = url.slice(index, url.length);
-    if(torpedo.functions.isURL(temp)){
-        url = temp;
-    }
-
+    url = decodeURIComponent(temp);
     return url;
 }

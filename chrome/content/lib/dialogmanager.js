@@ -33,6 +33,10 @@ torpedo.dialogmanager.showRedirects = function(){
 	window.openDialog("chrome://torpedo/content/dialog/redirects.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
 
+torpedo.dialogmanager.showAdd = function(){
+	window.openDialog("chrome://torpedo/content/dialog/add.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
+};
+
 torpedo.dialogmanager.createWelcome = function()
 {
     windowWidth=900;
