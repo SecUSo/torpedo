@@ -51,7 +51,7 @@ torpedo.prefs = function () {
 				prefManager.clearUserPref("firstrun");
 				prefManager.clearUserPref("URLSecondList");
 				prefManager.clearUserPref("URLFirstList");
-				prefManager.clearUserPref("URLDefaultUserList");
+				prefManager.clearUserPref("URLUserList");
 			}
 			prefManager.clearUserPref("language");
 			prefManager.clearUserPref("textsizenormal");

@@ -4,28 +4,33 @@
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&addentries;"
-		buttons="cancel"
+		buttons="accept,cancel"
+		buttonlabelaccept="&save;"
 		buttonlabelcancel="&close;"
-		ondialogcancel="return true;">
+		ondialogaccept="torpedo.db.saveAddedEntries(); torpedo.dialogmanager.createAddInfo(); return false;"
+		ondialogcancel="return true;"
+		onload="torpedo.handler.loadAddOptionsInfo();">
 	
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
+    <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
 	<stringbundleset>
         <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
-
+    
 	<vbox>
-		<listbox id="addList" width="400">
+		<description id="addEntryDialog" style="width:380px" />
+		<listbox id="addList" width="380px" height="180px">
 			<listcols>
 				<listcol flex="1"/>
 			</listcols>
 		</listbox>
 		<hbox>
-			<textbox id="addEntries" style="margin-top:10px; max-width:200px; max-height:30px"/>
+			<textbox id="addEntries" style="margin-top:10px; width:350px; max-height:30px"/>
 			<button id="addButton" label="&add;" oncommand="torpedo.db.addEntries();" />
 		</hbox>
 	</vbox>
@@ -34,6 +39,14 @@
         <panel type="arrow" id="errormessage" fade="slow">
             <hbox class="mainBox">
                 <label id="error" value="&wrongurl;"/>
+            </hbox>
+        </panel>
+    </popupset>
+
+    <popupset>
+        <panel type="arrow" id="alreadyinside" fade="slow">
+            <hbox class="mainBox">
+                <label id="error" value="&alreadyinside;"/>
             </hbox>
         </panel>
     </popupset>

@@ -205,4 +205,18 @@ torpedo.handler.loadOptions = function (){
 	document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('checkedTimer');
     document.getElementById('redirectdescription').textContent = torpedo.stringsBundle.getString('description');
     document.getElementById('redirectwarning').textContent = torpedo.stringsBundle.getString('warning');
+    document.getElementById('listofdefaults').textContent = torpedo.stringsBundle.getString('listofdefaults');
+    document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
+    document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
+}
+
+torpedo.handler.loadAddInfo = function(){
+	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
+    document.getElementById('entriesadded').textContent = torpedo.stringsBundle.getString('entriesadded') 
+    	+ torpedo.prefs.getComplexValue("URLUserList", Components.interfaces.nsISupportsString).data;
+};
+
+torpedo.handler.loadAddOptionsInfo = function(){
+	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
+    document.getElementById('addEntryDialog').textContent = torpedo.stringsBundle.getString('addentries');
 }

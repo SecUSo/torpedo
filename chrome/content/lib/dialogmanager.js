@@ -36,6 +36,13 @@ torpedo.dialogmanager.showRedirects = function(){
 torpedo.dialogmanager.showAdd = function(){
 	window.openDialog("chrome://torpedo/content/dialog/add.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
+torpedo.dialogmanager.createAddInfo = function(){
+	var text = torpedo.prefs.getComplexValue("URLUserList", Components.interfaces.nsISupportsString).data;
+	text = text.replace(/\s+/g, '');
+	if(text != ""){
+		window.openDialog("chrome://torpedo/content/dialog/addinfo.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
+	}
+};
 
 torpedo.dialogmanager.createWelcome = function()
 {

@@ -17,6 +17,7 @@
 <!ENTITY addentries "Add entries">
 <!ENTITY add "Add">
 <!ENTITY wrongurl "You tried to add an entry which is not a valid domain.">
+<!ENTITY alreadyinside "This entry already is in the list of trustworthy domains.">
 <!ENTITY userdomains "Domains which were called at least 2 times">
 <!ENTITY clearentries "Delete all entries">
 <!ENTITY showdefaults "Show list">
@@ -24,13 +25,10 @@
 <!ENTITY pickEdit "Which of the entries do you want to delete?">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY listofdefaults "Domains the developer considered as trustworthy (green)">
 <!ENTITY controluserdefaults "Domains you considered as trustworthy (green)">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
 <!ENTITY checkedtimer "Timer activated">
-<!ENTITY activatedgreen "Activate timer on domains the developer considered as trustworthy (green)">
-<!ENTITY activatedorange "Activate timer on domains you considered as trustworthy (blue)">
 <!ENTITY next "Next">
 <!ENTITY back "Back">
 <!ENTITY redirection "Redirections">

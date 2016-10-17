@@ -14,7 +14,6 @@ torpedo.db.pushUrl = function (website)
 	}
 	else if (torpedo.db.inList(website, "URLFirstList") && !isRedirect){
 		torpedo.db.putInsideSecond(website);
-
 		return 3;
 	}
 	else {
@@ -149,44 +148,6 @@ torpedo.db.fillDefault = function(list){
 	}
 };
 
-userDefaults = [];
-torpedo.db.fillUserDefaults = function(){
-	torpedo.db.fillDefault("URLDefaultUserList");
-	var defaultList = firstList;
-	torpedo.db.fillDefault("URLDefaultList");
-	userDefaults = [];
-	var j = 0;
-	for(var i = defaultList.length; i < firstList.length; i++){
-		userDefaults[j] = firstList[i];
-		j++;
-	}
-
-}
-torpedo.db.getUserDefaults = function(){
-	torpedo.db.fillUserDefaults();
-	userDefaults.sort();
-	for (i = 0; i < userDefaults.length; i++) {
-		var row = document.createElement('listitem');
-	    if(userDefaults[i].length > 0) row.setAttribute('label', userDefaults[i]);
-	    document.getElementById("theDefaultList").appendChild(row);
-	}
-}
-
-torpedo.db.deleteSomeUserDefaults = function(){
-	var str = Components.classes["@mozilla.org/supports-string;1"]
-		      .createInstance(Components.interfaces.nsISupportsString);
-
-	torpedo.db.fillUserDefaults();
-	var defaultSites = torpedo.prefs.getComplexValue("URLDefaultList", Components.interfaces.nsISupportsString).data;
-	if(userDefaults.length > 0){
-		str.data = defaultSites.replace(userDefaults[selected]+",", "");
-		torpedo.prefs.setComplexValue("URLDefaultList", Components.interfaces.nsISupportsString, str);
-
-		var theDefaultList = document.getElementById('theDefaultList');
-		theDefaultList.removeChild(theDefaultList.getItemAtIndex(selected));
-	}
-}
-
 torpedo.db.restoreSettings = function(){
 	var del = document.getElementById("defaultdelete").checked;
 	if(del) {
@@ -195,39 +156,53 @@ torpedo.db.restoreSettings = function(){
 	torpedo.prefs.resetPrefs(false);
 	return true;
 }
-
+var addList=[];
 torpedo.db.addEntries = function(){
 	var addSites = document.getElementById("addEntries").value;
+	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 	addSites.toLowerCase();
 	addSites = addSites.replace(/\s+/g, '');
 	addSites = addSites + ",";
 
-	var addList = [];
+	addList = [];
+	var text = "";
 	var i = 0;
 	var erase = true;
 	while(addSites.indexOf(",") > 0){
 		var split = addSites.indexOf(",");
 		var url = addSites.substring(0,split); 
-		Application.console.log(url);
+		addSites = addSites.substring(split+1, addSites.length);
 		if(!url.startsWith("http")) url = "http://" + url;
 		if(torpedo.functions.isURL(url)){
 			var split = url.indexOf("://");
 			url = url.substring(split+3,url.length);
-			Application.console.log(url);
-			addList[i] = url;
-			i++;
+			url = torpedo.functions.getDomainWithFFSuffix(url);
+			if(torpedo.db.inList(url, "URLDefaultList") || torpedo.db.inList(url,"URLSecondList")){
+				erase = false;
+				var message = document.getElementById("alreadyinside");
+				message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
+				setTimeout(function (e){
+					message.hidePopup();
+				}, 4500);
+			}
+			else{
+				addList[i] = url;
+				text = text+ " " + url + ",";
+				i++;
+			}
 		}
 		else{ 
 			erase = false;
 			var message = document.getElementById("errormessage");
 			message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
-			setTimeout(function (e)
-			{
+			setTimeout(function (e){
 				message.hidePopup();
 			}, 4500);
 		}
-		addSites = addSites.substring(split+1, addSites.length);
 	}
+    str.data = text.substring(0,text.length-1);
+	torpedo.prefs.setComplexValue("URLUserList", Components.interfaces.nsISupportsString, str);
+
 	var list = document.getElementById('addList');
 
 	for (i = 0; i < addList.length; i++) {
@@ -236,4 +211,12 @@ torpedo.db.addEntries = function(){
 	    list.appendChild(row);
 	}
 	if(erase) document.getElementById("addEntries").value = "";
-}
+
+};
+
+torpedo.db.saveAddedEntries = function(){
+	var i = 0;
+	for(i=0; i<addList.length;i++){
+		torpedo.db.putInsideSecond(addList[i]);
+	}
+};

@@ -11,6 +11,6 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 
 	<vbox>
-		<label value="&entries_gone;"/>
+		<label value="&entries_gone;" align="center"/>
 	</vbox>
 </dialog>

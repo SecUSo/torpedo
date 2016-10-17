@@ -13,9 +13,10 @@
 <!ENTITY lists "Listen">
 <!ENTITY userdomains "Domains, die mind. 2x aufgerufen wurden">
 <!ENTITY editentries "Liste anzeigen und bearbeiten">
-<!ENTITY addentries "Hinzufügen>
-<!ENTITY add "Hinzufügen>
+<!ENTITY addentries "Hinzufügen">
+<!ENTITY add "Hinzufügen">
 <!ENTITY wrongurl "Sie haben versucht, einen Eintrag hinzuzufügen, welcher keine gültige Domain darstellt.">
+<!ENTITY alreadyinside "Dieser Eintrag befindet sich bereits in der Liste der vertrauenswürdigen Domains.">
 <!ENTITY clearentries "Alle Einträge löschen">
 <!ENTITY showdefaults "Liste anzeigen">
 <!ENTITY activated "Liste aktiviert">
@@ -25,12 +26,9 @@
 <!ENTITY pickEdit "Welchen der Einträge möchten Sie löschen?">
 <!ENTITY option "Optionen">
 <!ENTITY close "Schließen">
-<!ENTITY listofdefaults "Domains, die von den Entwicklern als 'niedriges Risiko' eingestuft wurden (grün)">
 <!ENTITY delete "Löschen">
 <!ENTITY settings "Einstellungen">
 <!ENTITY checkedtimer "Timer aktiviert">
-<!ENTITY activatedgreen "Timer aktivieren bei von Entwicklern als niedriges Risiko eingestuften Domains (grün)">
-<!ENTITY activatedorange "Timer aktivieren bei von Ihnen als niedriges Risiko eingestuften Domains (blau)">
 <!ENTITY next "Weiter">
 <!ENTITY back "Zurück">
 <!ENTITY redirection "Weiterleitungen">
@@ -49,4 +47,4 @@
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
 <!ENTITY textsize "Schriftgröße">
 <!ENTITY textsizenormal "Normal">
-<!ENTITY textsizenormal "Groß">
+<!ENTITY textsizebig "Groß">
