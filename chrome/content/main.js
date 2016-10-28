@@ -4,6 +4,7 @@ torpedo.instructionSize = {width: 800,height: 460};
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
  
 torpedo.baseDomain;
+torpedo.textSize;
 torpedo.updateTooltip = function (url)
 {
 	// Initializaion
@@ -54,8 +55,6 @@ torpedo.updateTooltip = function (url)
 	}
 	//avoid unnessecary slash
 	if (after.length > 1) document.getElementById("url2").textContent = after;
-
-	// document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('warn');
 	
 	// show or hide redirectButton 
     if(!(isRedirect && manure)) redirectButton.hidden = true;
@@ -88,6 +87,8 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	else{
+		if(shortenText) redirect.textContent = "";
+		else redirect.textContent = torpedo.stringsBundle.getString('highrisk');
 		panel.style.borderColor = "black";
 	}
 	
@@ -124,7 +125,7 @@ torpedo.updateTooltip = function (url)
 	var width;
 	width = ($(url2).width() > $(url1andbase).width())? $(url2).width() : $(url1andbase).width();
 	redirect.style.width = ""+width+"px";
-	Application.console.log(width);
+
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
@@ -141,25 +142,26 @@ torpedo.processDOM = function ()
 		$(document.getElementById("deleteSecond")).bind("click",torpedo.handler.mouseClickDeleteButton);
 		$(document.getElementById("editSecond")).bind("click",torpedo.handler.mouseClickEditButton);
 
-        var messagepane = document.getElementById("messagepane"); // tunderbird message pane
+        var messagepane = document.getElementById("messagepane");
         if(messagepane)
 		{
 			messagepane.addEventListener("load", function(event) { onPageLoad(event); }, true);
         }
-        
-	}
+    }
 
 	function onPageLoad(event){
 		var doc = event.originalTarget;  // doc is document that triggered "onload" event
 		var linkElement = doc.getElementsByTagName("a");
 		var linkNumber = linkElement.length;
 
+		//Application.console.log(doc.body.innerHTML);
 		if(linkNumber > 0)
 		{
 			for(var i = 0; i<linkNumber;i++)
 			{
 				var aElement = linkElement[i];
 				var hrefValue = aElement.getAttribute("href");
+
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
 						$(aElement).bind("mouseenter", function(event){
@@ -172,6 +174,10 @@ torpedo.processDOM = function ()
 				}
 			}
 		}
+        var content = document.getElementById("tooltipcontent");
+		if(torpedo.prefs.getBoolPref("textsizenormal")) torpedo.textSize = 100;
+    	else torpedo.textSize = 115;    	
+    	content.style.fontSize=""+torpedo.textSize+"%";
 	}
 	init();
 };

@@ -52,7 +52,7 @@ torpedo.db.putInsideSecond = function(website){
 	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
 	str.data = secondSites + website + ",";
 	torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
-
+	
 	// delete website out of first clicked links
 	var myString = firstSites.substring(firstSites.indexOf(website), firstSites.indexOf(website)+website.length+1);
 	if(myString.indexOf(",") >= 0) website = website + ",";
@@ -99,10 +99,13 @@ torpedo.db.deleteSomeSecond = function () {
 
 		var theList = document.getElementById('theList');
 		theList.removeChild(theList.getItemAtIndex(selected));
+		theList.selectedIndex = selected+1;
 	}
 };
 
 torpedo.db.getSecond = function () {
+	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
+    document.getElementById('addEntryDialog').textContent = torpedo.stringsBundle.getString('addentries');
 	var theList = document.getElementById('theList');
 	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
 	var i = 0;
@@ -159,11 +162,13 @@ torpedo.db.restoreSettings = function(){
 var addList=[];
 torpedo.db.addEntries = function(){
 	var addSites = document.getElementById("addEntries").value;
-	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	var message = document.getElementById("errormessage");
+	var error = document.getElementById("error");
+	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
+	
 	addSites.toLowerCase();
 	addSites = addSites.replace(/\s+/g, '');
 	addSites = addSites + ",";
-
 	addList = [];
 	var text = "";
 	var i = 0;
@@ -172,51 +177,54 @@ torpedo.db.addEntries = function(){
 		var split = addSites.indexOf(",");
 		var url = addSites.substring(0,split); 
 		addSites = addSites.substring(split+1, addSites.length);
-		if(!url.startsWith("http")) url = "http://" + url;
-		if(torpedo.functions.isURL(url)){
-			var split = url.indexOf("://");
-			url = url.substring(split+3,url.length);
-			url = torpedo.functions.getDomainWithFFSuffix(url);
-			if(torpedo.db.inList(url, "URLDefaultList") || torpedo.db.inList(url,"URLSecondList")){
-				erase = false;
-				var message = document.getElementById("alreadyinside");
-				message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
-				setTimeout(function (e){
-					message.hidePopup();
-				}, 4500);
-			}
-			else{
-				addList[i] = url;
-				text = text+ " " + url + ",";
-				i++;
-			}
-		}
-		else{ 
+		if(url.length > 500){
 			erase = false;
-			var message = document.getElementById("errormessage");
+			error.textContent = torpedo.stringsBundle.getString('toolong');
 			message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
 			setTimeout(function (e){
 				message.hidePopup();
 			}, 4500);
 		}
+		else {
+			if (!url.startsWith("http")) url = "http://" + url;
+			if(torpedo.functions.isURL(url)){
+				var split = url.indexOf("://");
+				url = url.substring(split+3,url.length);
+				url = torpedo.functions.getDomainWithFFSuffix(url);
+				if(torpedo.db.inList(url, "URLDefaultList") || torpedo.db.inList(url,"URLSecondList")){
+					erase = false;
+					error.textContent = torpedo.stringsBundle.getString('alreadyinside');
+					message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
+					setTimeout(function (e){
+						message.hidePopup();
+					}, 4500);
+				}
+				else{
+					addList[i] = url;
+					text = text+ " " + url + ",";
+					i++;
+				}
+			}
+			else{ 
+				allList[j] = url;
+				j++;
+				error.textContent = torpedo.stringsBundle.getString('wrongurl');
+				message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
+				setTimeout(function (e){
+					message.hidePopup();
+				}, 4500);
+			}
+		}
 	}
-    str.data = text.substring(0,text.length-1);
-	torpedo.prefs.setComplexValue("URLUserList", Components.interfaces.nsISupportsString, str);
-
-	var list = document.getElementById('addList');
-
 	for (i = 0; i < addList.length; i++) {
-		var row = document.createElement('listitem');
-	    if(addList[i].length > 0) row.setAttribute('label', addList[i]);
-	    list.appendChild(row);
+	    if(addList[i].length > 0){
+		    torpedo.db.putInsideSecond(addList[i]);
+	    }
 	}
 	if(erase) document.getElementById("addEntries").value = "";
-
-};
-
-torpedo.db.saveAddedEntries = function(){
-	var i = 0;
-	for(i=0; i<addList.length;i++){
-		torpedo.db.putInsideSecond(addList[i]);
+	var list = document.getElementById('theList');
+	while (list.firstChild){
+    	list.removeChild(list.firstChild);
 	}
+	torpedo.db.getSecond();
 };

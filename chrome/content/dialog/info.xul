@@ -6,11 +6,14 @@
 		title="Information"
 		buttons="cancel"
 		buttonlabelcancel="OK"
-		ondialogcancel="return true;">
+		ondialogcancel="return true;"
+		onload='var torpedo = torpedo || {}; 	
+				if(torpedo.textSize="100%") document.getElementById("infopopup").style.fontSize="100%";
+    			else document.getElementById("infopopup").style.fontSize="115%";'>
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 
 	<vbox>
-		<label value="&entries_gone;" align="center"/>
+		<label id="infopopup" value="&entries_gone;" align="center"/>
 	</vbox>
 </dialog>

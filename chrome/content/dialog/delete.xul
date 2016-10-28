@@ -8,7 +8,10 @@
 		buttonlabelcancel="&no;"
 		buttonlabelaccept="&yes;"
 		ondialogaccept="torpedo.dialogmanager.createInfo(); torpedo.db.deleteAllSecond();return false;"
-		ondialogcancel="return true;">
+		ondialogcancel="return true;"
+		onload='var torpedo = torpedo || {}; 	
+				if(torpedo.textSize="100%") document.getElementById("deleteInfo").style.fontSize="100%";
+    			else document.getElementById("deleteInfo").style.fontSize="115%";'>
 	
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
@@ -20,6 +23,6 @@
     </stringbundleset>
 
 	<vbox>
-		<label value="&sure;"/>
+		<label id="deleteInfo" value="&sure;"/>
 	</vbox>
 </dialog>

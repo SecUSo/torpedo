@@ -4,24 +4,44 @@
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&editentries;"
-		buttons="accept,cancel"
-		buttonlabelaccept="&delete;"
-		buttonlabelcancel="&close;"
-		ondialogaccept="torpedo.db.deleteSomeSecond(); return false;"
-		ondialogcancel="return true;"
-		onload="torpedo.db.getSecond();">
+		buttons="accept,cancel, extra1"
+		buttonlabelaccept="&add;"
+		buttonlabelcancel="&delete;"
+		buttonlabelextra1="&close;"
+		ondialogaccept="torpedo.db.addEntries();return false;"
+		ondialogcancel="torpedo.db.deleteSomeSecond(); return false;"
+		ondialogextra1="return true;"
+		onload='torpedo.db.getSecond();'>
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
     <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
+    <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+	<script type="application/x-javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 	
 	<stringbundleset>
         <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
 
-		<vbox>
-			<label value="&pickEdit;" />
-			<listbox id="theList" width="400" onselect="torpedo.db.select(this.selectedIndex);">
-			</listbox>
-		</vbox>
+	<vbox>
+		<label value="&userlinks;" />
+		<listbox id="theList" width="380" height="200" onselect="torpedo.db.select(this.selectedIndex);" />
+		<description id="addEntryDialog" style="width:380px; margin-top:10px" />
+		<hbox>
+			<textbox id="addEntries" style="margin-top:10px; width:380px; max-height:30px"/>
+		</hbox>
+	</vbox>
+
+   	<popupset>
+        <panel type="arrow" id="errormessage" fade="slow">
+            <hbox class="mainBox">
+                <label id="error"/>
+            </hbox>
+        </panel>
+    </popupset>
+
+	<stringbundleset>
+        <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
+    </stringbundleset>
 </dialog>

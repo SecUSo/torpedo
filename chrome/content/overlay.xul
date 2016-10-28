@@ -16,7 +16,7 @@
 
 	<popupset>
         <panel id="tooltippanel">
-        	<hbox>
+        	<hbox id="tooltipcontent">
         		<vbox id="warning-box">
         			<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
         		</vbox>
@@ -45,11 +45,11 @@
 								</hbox>
 							</vbox>
 						</vbox>
-						<vbox id="info-box">
-							<spacer flex="1"/>
-							<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
-						</vbox>
 					</hbox>
+				</vbox>
+				<vbox id="info-box">
+					<spacer flex="1"/>
+					<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 				</vbox>
 			</hbox>
         </panel>
@@ -65,7 +65,7 @@
 
     <popupset>
 	  <menupopup id="menuwindow">
-	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond(website);"/>
+	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.handler.Url);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
 	    <menuitem label="&opensettings;" onclick="window.openDialog('chrome://torpedo/content/options.xul','bmarks','chrome=yes, dialog,resizable=no, modal, centerscreen');  torpedo.handler.TempTarget = ''"/>
 	  </menupopup>

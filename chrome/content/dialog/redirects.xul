@@ -7,15 +7,15 @@
 		buttons="cancel"
 		buttonlabelcancel="&close;"
 		ondialogcancel="return true;"
-		onload="getRedirects();">
+		onload='getRedirects();'>
 
     <script type="application/javascript"  src="chrome://torpedo/content/dialog/redirects.js" />
 
-		<vbox>
+		<vbox id="redirectsBox">
 			<listbox id="redirectsList" width="400">
 			  <listcols>
 			    <listcol flex="1"/>
-			  </listcols>
+			  </listcols> 
 			</listbox>
 		</vbox>
 </dialog>

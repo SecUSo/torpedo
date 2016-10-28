@@ -20,7 +20,7 @@ torpedo.handler.mouseOverTooltipPane = function (event)
 	$(panel).contextmenu(function(){
 		var menuwindow = document.getElementById("menuwindow");
 		var urlbox = document.getElementById("url-box");
-		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) document.getElementById("addtotrusted").disabled = true;
+		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")) document.getElementById("addtotrusted").disabled = true;
 		else  document.getElementById("addtotrusted").disabled = false;
 		menuwindow.openPopup(urlbox, "after_start",0,0, false, false);
 	});
@@ -208,6 +208,9 @@ torpedo.handler.loadOptions = function (){
     document.getElementById('listofdefaults').textContent = torpedo.stringsBundle.getString('listofdefaults');
     document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
     document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
+    var element = document.getElementById("editor");
+    if(torpedo.prefs.getBoolPref("textsizenormal")) element.style.fontSize="100%";
+    else element.style.fontSize="115%";
 }
 
 torpedo.handler.loadAddInfo = function(){
@@ -215,8 +218,3 @@ torpedo.handler.loadAddInfo = function(){
     document.getElementById('entriesadded').textContent = torpedo.stringsBundle.getString('entriesadded') 
     	+ torpedo.prefs.getComplexValue("URLUserList", Components.interfaces.nsISupportsString).data;
 };
-
-torpedo.handler.loadAddOptionsInfo = function(){
-	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
-    document.getElementById('addEntryDialog').textContent = torpedo.stringsBundle.getString('addentries');
-}

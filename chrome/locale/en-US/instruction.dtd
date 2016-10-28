@@ -16,16 +16,14 @@
 <!ENTITY editentries "Edit and delete entries">
 <!ENTITY addentries "Add entries">
 <!ENTITY add "Add">
-<!ENTITY wrongurl "You tried to add an entry which is not a valid domain.">
-<!ENTITY alreadyinside "This entry already is in the list of trustworthy domains.">
 <!ENTITY userdomains "Domains which were called at least 2 times">
 <!ENTITY clearentries "Delete all entries">
 <!ENTITY showdefaults "Show list">
 <!ENTITY deleteEntries "Delete entries">
-<!ENTITY pickEdit "Which of the entries do you want to delete?">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY controluserdefaults "Domains you considered as trustworthy (green)">
+<!ENTITY activategreen "Activate timer on domains the developer considered as trustworthy (green)">
+<!ENTITY controluserdefaults "Domains the developer considered as trustworthy (green)">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
 <!ENTITY checkedtimer "Timer activated">
@@ -37,7 +35,7 @@
 <!ENTITY manualredirect "Check domains manually for forwarding">
 <!ENTITY autoredirect "Check domains automatically for forwarding">
 <!ENTITY secs "second(s)">
-<!ENTITY entries_gone "Success">
+<!ENTITY entries_gone "Successfully deleted">
 <!ENTITY showredirects "Show all redirection domains">
 <!ENTITY redirectList "List of redirection domains">
 <!ENTITY warning "Warning! This could be a phishing attack, because the displayed domain differs from the actual domain.">

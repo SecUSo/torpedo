@@ -15,13 +15,11 @@
 <!ENTITY editentries "Liste anzeigen und bearbeiten">
 <!ENTITY addentries "Hinzufügen">
 <!ENTITY add "Hinzufügen">
-<!ENTITY wrongurl "Sie haben versucht, einen Eintrag hinzuzufügen, welcher keine gültige Domain darstellt.">
-<!ENTITY alreadyinside "Dieser Eintrag befindet sich bereits in der Liste der vertrauenswürdigen Domains.">
 <!ENTITY clearentries "Alle Einträge löschen">
 <!ENTITY showdefaults "Liste anzeigen">
 <!ENTITY activated "Liste aktiviert">
 <!ENTITY userlinks "Domains, die Sie als 'niedriges Risiko' eingestuft haben (blau)">
-<!ENTITY controluserdefaults "Domains, die Sie als 'niedriges Risiko' eingestuft haben (grün)">
+<!ENTITY controluserdefaults "Domains, die der Entwickler als 'niedriges Risiko' eingestuft hat (grün)">
 <!ENTITY deleteEntries "Einträge löschen">
 <!ENTITY pickEdit "Welchen der Einträge möchten Sie löschen?">
 <!ENTITY option "Optionen">
