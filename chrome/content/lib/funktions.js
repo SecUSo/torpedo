@@ -59,8 +59,15 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 
 torpedo.functions.isURL = function (url) {
     if(url.length <= 500){
-        var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
-        if (regex.test(url)) {
+        url = url.replace(" ", "");
+        if (url.match(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})))(?::\d{2,5})?(?:\/[^\s]*)?$/i)) {
+
+            // check if part after domain is too long, f.e. www.abc.abcd
+            var pos = url.lastIndexOf(".");
+            url = url.substring(pos+1, url.length);
+            if(url.length > 3){
+                if(url[2].match(/^[A-Za-z]+$/) && url[3].match(/^[A-Za-z]+$/)) return false;
+            }
             return true;
         }
     }
@@ -69,7 +76,7 @@ torpedo.functions.isURL = function (url) {
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
   var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
-  
+  var oldUrl = url;
   try {
     var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
     var baseDomain = eTLDService.getBaseDomain(tempURI);
@@ -88,21 +95,26 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
     }
     var regex_var = new RegExp(/[^.]*\.[^.]{2,3}(?:\.[^.]{2,3})?$/);
     var array = regex_var.exec(url);
-    url = array[0];
-    array = url.split(".");
-    if(array[0] == "www" || array[0].indexOf("http") > -1){
-        url = "";
-        for(var i = 1; i < array.length-1; i++){
-            url += array[i] + ".";
+    try{
+        url = array[0];
+        array = url.split(".");
+        if(array[0] == "www" || array[0].indexOf("http") > -1){
+            url = "";
+            for(var i = 1; i < array.length-1; i++){
+                url += array[i] + ".";
+            }
+            url += array[array.length-1];
         }
-        url += array[array.length-1];
+        return url;
     }
-    return url;
+    catch(err){
+        return oldUrl;
+    }
   }
 };
 
 OldUrl = "";
-torpedo.functions.loop = -1;
+torpedo.functions.loop;
 torpedo.functions.loopTimer = 2000;
 
 torpedo.functions.traceUrl = function (url, redirect) {
@@ -147,7 +159,6 @@ torpedo.functions.containsRedirect = function(url){
                 torpedo.functions.trace(url);
             }
             else{                
-                torpedo.stringsBundle.getString('shorturl');
                 torpedo.handler.Url = url;
                 torpedo.updateTooltip(url);
             }
@@ -171,6 +182,9 @@ torpedo.functions.countdown = function (timee, id, url) {
     function showTime() {
         var second = startTime % 60;
         var urlBox = document.getElementById("url-box");
+        var url1 = document.getElementById("url1");
+        var url2 = document.getElementById("url2");
+        var base = document.getElementById("baseDomain");
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
         $("#" + id).html(strZeit);
 
@@ -183,6 +197,9 @@ torpedo.functions.countdown = function (timee, id, url) {
             $(urlBox).bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
+            $(url1).css("cursor", "pointer");
+            $(url2).css("cursor", "pointer");
+            $(base).css("cursor", "pointer");
         }
         else {
             document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
@@ -190,7 +207,9 @@ torpedo.functions.countdown = function (timee, id, url) {
             $(urlBox).bind("click", torpedo.handler.mouseClickHrefError);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
-
+            $(url1).css("cursor", "wait");
+            $(url2).css("cursor", "wait");
+            $(base).css("cursor", "wait");
         }
     }
 
@@ -236,22 +255,18 @@ torpedo.functions.changeTextsize = function(size){
 
     if(size=="normal"){
         notsize = "big";
+        torpedo.prefs.setIntPref("textsize", 100); 
         torpedo.textSize = 100;
         editor.style.fontSize="100%";
     }
     else {
         notsize = "normal";
+        torpedo.prefs.setIntPref("textsize", 115);
         torpedo.textSize = 115;
         editor.style.fontSize="115%";
     }
-
-    torpedo.prefs.setBoolPref("textsize"+size,true);
-    torpedo.prefs.setBoolPref("textsize"+notsize,false);
-
-     // prevent user from selecting no option at all in settings
-    if(document.getElementById("textsize"+size).checked == false){
-        document.getElementById("textsize"+size).checked = true;
-    }
+    document.getElementById("textsize"+size).checked = true;
+    document.getElementById("textsize"+notsize).checked = false;
 }
 
 // list settings

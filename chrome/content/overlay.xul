@@ -20,32 +20,31 @@
         		<vbox id="warning-box">
         			<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
         		</vbox>
-	        	<vbox id="mainbox">
-		        	<hbox id="redirectBox">
-						<description id="redirect" flex="1"/>
+        		<vbox id="mainbox">
+		       		<hbox id="phishBox">
+						<description id="phish" flex="1"/>
 					</hbox>
-					<hbox>
+					<hbox id="url-box">
 						<vbox>
-					        <button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
-							<hbox id="url-box">
-								<vbox>
-								<hbox id="url1andbase">
-									<label id="url1" />
-									<label id="baseDomain" />
-								</hbox>
-								<label id="url2"  />
-								</vbox>
+							<hbox id="url1andbase">
+								<description id="url1" />
+								<description id="baseDomain" />
 							</hbox>
-							<vbox id="seconds-box">
-								<label id="linkDeactivate" />
-								<hbox id="countdownbox">
-									<label value="&remainingTime;" />
-									<label id="countdown"/>
-									<label id="secs" value="&secs;"/>
-								</hbox>
-							</vbox>
+							<description id="url2"  />
 						</vbox>
 					</hbox>
+				    <button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
+		       		<hbox id="redirectBox">
+						<description id="redirect" flex="1"/>
+					</hbox>
+					<vbox id="seconds-box">
+						<label id="linkDeactivate" />
+						<hbox id="countdownbox">
+							<label value="&remainingTime;" />
+							<label id="countdown"/>
+							<label id="secs" value="&secs;"/>
+						</hbox>
+					</vbox>
 				</vbox>
 				<vbox id="info-box">
 					<spacer flex="1"/>

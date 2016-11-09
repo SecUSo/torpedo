@@ -51,11 +51,10 @@ torpedo.prefs = function () {
 				prefManager.clearUserPref("firstrun");
 				prefManager.clearUserPref("URLSecondList");
 				prefManager.clearUserPref("URLFirstList");
-				prefManager.clearUserPref("URLUserList");
 			}
 			prefManager.clearUserPref("language");
-			prefManager.clearUserPref("textsizenormal");
-			prefManager.clearUserPref("textsizebig");
+			prefManager.clearUserPref("selected");
+			prefManager.clearUserPref("textsize");
 			prefManager.clearUserPref("checkedTimer");
 			prefManager.clearUserPref("blockingTimer");
 			prefManager.clearUserPref("checkedGreenList");

@@ -44,9 +44,10 @@ torpedo.db.putInsideDefault = function(website){
 };
 
 torpedo.db.putInsideSecond = function(website){
-	var str = Components.classes["@mozilla.org/supports-string;1"]
-		      .createInstance(Components.interfaces.nsISupportsString);
+	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 
+	if(website=="add") website = torpedo.baseDomain;
+	
 	// put website into user list
 	var firstSites = torpedo.prefs.getComplexValue("URLFirstList", Components.interfaces.nsISupportsString).data;
 	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
@@ -69,10 +70,31 @@ torpedo.db.putInsideFirst = function(website){
 	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
 };
 
-var selected;
-var secondList = [];
-var firstList = [];
-var newList = [];
+secondList = [];
+firstList = [];
+newList = [];
+
+torpedo.db.deleteSomeSecond = function () {
+	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
+	var theList = document.getElementById('theList');
+	var selected = theList.selectedIndex;
+
+	if(secondSites.length > 0){
+		// cut selected element out of list of trustworthy domains
+		var listElement = secondList[selected];
+		var cutOut = secondSites.substring(secondSites.indexOf(listElement), secondSites.length);
+		var comma = secondSites.indexOf(",");
+		cutOut = cutOut.substring(0, comma+1);
+		str.data = secondSites.replace(cutOut, "");
+		torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
+
+		// remove entry from list
+		theList.removeChild(theList.getItemAtIndex(selected));
+		theList.selectedIndex = selected;
+	}
+	torpedo.prefs.setIntPref("selected", theList.selectedIndex);
+};
 
 torpedo.db.deleteAllSecond = function () {
 	var str = Components.classes["@mozilla.org/supports-string;1"]
@@ -83,30 +105,11 @@ torpedo.db.deleteAllSecond = function () {
 	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
 };
 
-torpedo.db.deleteSomeSecond = function () {
-	var str = Components.classes["@mozilla.org/supports-string;1"]
-		      .createInstance(Components.interfaces.nsISupportsString);
-
-	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
-	if(secondSites.length > 0){
-		var listElement = secondList[selected];
-		var cutOut = secondSites.substring(secondSites.indexOf(listElement), secondSites.length);
-		var comma = secondSites.indexOf(",");
-		cutOut = cutOut.substring(0, comma+1);
-		str.data = secondSites.replace(cutOut, "");
-
-		torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
-
-		var theList = document.getElementById('theList');
-		theList.removeChild(theList.getItemAtIndex(selected));
-		theList.selectedIndex = selected+1;
-	}
-};
-
 torpedo.db.getSecond = function () {
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
     document.getElementById('addEntryDialog').textContent = torpedo.stringsBundle.getString('addentries');
-	var theList = document.getElementById('theList');
+    var theList = document.getElementById("theList");
+	document.documentElement.getButton("extra1").disabled = true;
 	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
 	var i = 0;
 	secondList = [];
@@ -122,10 +125,6 @@ torpedo.db.getSecond = function () {
 	    row.setAttribute('label', secondList[i]);
 	    theList.appendChild(row);
 	}
-};
-
-torpedo.db.select = function(index){
-	selected = index;
 };
 
 torpedo.db.getDefaults = function (){
@@ -158,12 +157,14 @@ torpedo.db.restoreSettings = function(){
 	}
 	torpedo.prefs.resetPrefs(false);
 	return true;
-}
-var addList=[];
+};
+
+addList=[];
 torpedo.db.addEntries = function(){
 	var addSites = document.getElementById("addEntries").value;
 	var message = document.getElementById("errormessage");
 	var error = document.getElementById("error");
+	var panel = document.getElementById("addEntries");
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 	
 	addSites.toLowerCase();
@@ -173,6 +174,7 @@ torpedo.db.addEntries = function(){
 	var text = "";
 	var i = 0;
 	var erase = true;
+	var openpopup = false;
 	while(addSites.indexOf(",") > 0){
 		var split = addSites.indexOf(",");
 		var url = addSites.substring(0,split); 
@@ -180,10 +182,7 @@ torpedo.db.addEntries = function(){
 		if(url.length > 500){
 			erase = false;
 			error.textContent = torpedo.stringsBundle.getString('toolong');
-			message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
-			setTimeout(function (e){
-				message.hidePopup();
-			}, 4500);
+			openpopup = true;
 		}
 		else {
 			if (!url.startsWith("http")) url = "http://" + url;
@@ -191,13 +190,15 @@ torpedo.db.addEntries = function(){
 				var split = url.indexOf("://");
 				url = url.substring(split+3,url.length);
 				url = torpedo.functions.getDomainWithFFSuffix(url);
-				if(torpedo.db.inList(url, "URLDefaultList") || torpedo.db.inList(url,"URLSecondList")){
+				if(torpedo.db.inList(url, "URLDefaultList")){
 					erase = false;
 					error.textContent = torpedo.stringsBundle.getString('alreadyinside');
-					message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
-					setTimeout(function (e){
-						message.hidePopup();
-					}, 4500);
+					openpopup = true;
+				}
+				else if(torpedo.db.inList(url,"URLSecondList")){
+					erase = false;
+					error.textContent = torpedo.stringsBundle.getString('alreadyinlist');
+					openpopup = true;
 				}
 				else{
 					addList[i] = url;
@@ -206,14 +207,17 @@ torpedo.db.addEntries = function(){
 				}
 			}
 			else{ 
-				allList[j] = url;
-				j++;
+				erase = false;
 				error.textContent = torpedo.stringsBundle.getString('wrongurl');
-				message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
-				setTimeout(function (e){
-					message.hidePopup();
-				}, 4500);
+				openpopup = true;
 			}
+		}
+		if(openpopup){
+			message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
+			setTimeout(function (e){
+				message.hidePopup();
+			}, 4500);
+			panel.select();
 		}
 	}
 	for (i = 0; i < addList.length; i++) {

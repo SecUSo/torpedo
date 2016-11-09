@@ -58,35 +58,41 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 torpedo.handler.title = "";
 torpedo.handler.mouseOverHref = function (event, aElement)
 {
-	if(mouseout[0]) {
-		mouseout = [false,true];
-	}
-	else mouseout = [false,false];
+	mouseout = mouseout[0] ? [false,true] : [false,false];
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 	var panel = document.getElementById("tooltippanel");
-	if(tempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
-			if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
-				panel.hidePopup();
-			}
-			redirect = false;
-			var url = tempTarget.getAttribute("href");
-			torpedo.handler.TempTarget = tempTarget;
-			torpedo.handler.title = torpedo.handler.TempTarget.innerHTML;
-		    torpedo.handler.clickEnabled = true;
-			torpedo.functions.loop = -1;
-			torpedo.functions.loopTimer = 2000;
-			if(url != "" && url != null && url != undefined ){
-				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-				torpedo.handler.Url = url;
-				
-				clearTimeout(torpedo.handler.MouseLeavetimer);
-				alreadyClicked = "";
 
-				if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
-					redirect = true;
-				}
-			    torpedo.functions.traceUrl(url, redirect);
+	if(tempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
+		if(torpedo.handler.TempTarget != undefined && tempTarget != torpedo.handler.TempTarget){
+			panel.hidePopup();
+		}
+		redirect = false;
+		var url = tempTarget.getAttribute("href");
+		torpedo.handler.TempTarget = tempTarget;
+		torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ","");
+		torpedo.handler.clickEnabled = true;
+		torpedo.functions.loop = -1;
+		torpedo.functions.loopTimer = 2000;
+		if(url != "" && url != null && url != undefined ){
+			// check if url is a "redirectUrl=" url
+			var redirectUrl = torpedo.functions.resolveRedirect(url);
+			if(redirectUrl != url){
+				url = redirectUrl;
+				torpedo.gmxRedirect = true;				
 			}
+			else torpedo.gmxRedirect = false;
+			
+			torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
+			torpedo.handler.Url = url;
+			
+			clearTimeout(torpedo.handler.MouseLeavetimer);
+			alreadyClicked = "";
+
+			if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
+				redirect = true;
+			}
+		    torpedo.functions.traceUrl(url, redirect);
+		}
 	}
 };
 
@@ -209,12 +215,12 @@ torpedo.handler.loadOptions = function (){
     document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
     document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
     var element = document.getElementById("editor");
-    if(torpedo.prefs.getBoolPref("textsizenormal")) element.style.fontSize="100%";
-    else element.style.fontSize="115%";
-}
+    element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
 
-torpedo.handler.loadAddInfo = function(){
-	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
-    document.getElementById('entriesadded').textContent = torpedo.stringsBundle.getString('entriesadded') 
-    	+ torpedo.prefs.getComplexValue("URLUserList", Components.interfaces.nsISupportsString).data;
-};
+    var textsize = torpedo.prefs.getIntPref("textsize");
+    torpedo.prefs.setIntPref("selected", -1);
+    var size = (textsize == 100)? "normal" : "big";
+    var notsize = (size=="normal")? "big" : "normal";;
+    document.getElementById("textsize"+size).checked = true;
+    document.getElementById("textsize"+notsize).checked = false;
+}

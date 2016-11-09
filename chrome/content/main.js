@@ -5,64 +5,64 @@ var Application = Components.classes["@mozilla.org/steel/application;1"].getServ
  
 torpedo.baseDomain;
 torpedo.textSize;
+torpedo.gmxRedirect;
+
 torpedo.updateTooltip = function (url)
 {
 	// Initializaion
-	var redirect = document.getElementById("redirect");
+	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var panel = document.getElementById("tooltippanel");
+	var redirect = document.getElementById("redirect");
+	var phish = document.getElementById("phish");
 	var secondsbox = document.getElementById("seconds-box");
 	var warningpic = document.getElementById("warning-pic");
 	var redirectButton = document.getElementById("redirectButton");
 	var redirectBox = document.getElementById("redirectBox");
 	var urlBox = document.getElementById("url-box");
-	var url1andbase = document.getElementById("url1andbase");
+	var linkDeactivate = document.getElementById("linkDeactivate");
+	var baseDomain = document.getElementById("baseDomain");
+	var url1 = document.getElementById("url1");
 	var url2 = document.getElementById("url2");
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
 	var isRedirect = torpedo.functions.isRedirect(url);
 	var shortenText = torpedo.prefs.getBoolPref("language");
-	var gmxRedirect = false;
 	var old = "";
 	redirectButton.disabled = true;
+	redirectBox.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
+	linkDeactivate.hidden = shortenText;
+	phish.hidden = true;
 
-	// check if url is a "redirectUrl=" url
-	var redirectUrl = torpedo.functions.resolveRedirect(url);
-	if(redirectUrl != url){
-		gmxRedirect = true;
-		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('redirect');
-		else redirect.textContent = torpedo.stringsBundle.getString('alert_redirect');
-		old = url;
-		url = redirectUrl;
-		if(torpedo.functions.isRedirect(redirectUrl)) torpedo.functions.containsRedirect(url);
+	if(torpedo.gmxRedirect){
+		phish.hidden = false;
+		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
 	}
 
 	// assert url to tooltip
 	torpedo.functions.setHref(url);
-	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-	document.getElementById("baseDomain").textContent = torpedo.baseDomain;
+	baseDomain.textContent = torpedo.baseDomain;
 	var split = url.indexOf(torpedo.baseDomain);
 	var before = url.substring(0, split);
 	var after = url.substring(split+torpedo.baseDomain.length, url.length);
 
-	document.getElementById("url1").textContent = before;
-	document.getElementById("url2").textContent = "";
+	url1.textContent = before;
+	url2.textContent = "";
 
 	if(after.length > 200){
 		after = after.substr(0,200) + "...";
 	}
 	//avoid unnessecary slash
-	if (after.length > 1) document.getElementById("url2").textContent = after;
+	if (after.length > 1) url2.textContent = after;
 	
 	// show or hide redirectButton 
-    if(!(isRedirect && manure)) redirectButton.hidden = true;
+    if(((!isRedirect && manure) || torpedo.gmxRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
     else{
     	redirectButton.hidden = false;
-        redirectButton.disabled = false;
+        if(isRedirect && manure) redirectButton.disabled = false;
     }
-
     // settings for tooltip border colors & texts
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
@@ -87,44 +87,46 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	else{
-		if(shortenText) redirect.textContent = "";
+		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('highrisk_short');
 		else redirect.textContent = torpedo.stringsBundle.getString('highrisk');
 		panel.style.borderColor = "black";
 	}
-	
 	// settings for redirect case	
 	if(isRedirect){
 		if(torpedo.functions.loop < 0) {
-			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('url');
+			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('shorturl_short');
 			else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
 		}
-	    else {
+	    else{
 	        redirectButton.hidden = true;
-	    }        
+	    }
 	    if(autore){
 			secondsbox.hidden = true;
 		}
 	}
-
-	// settings for phish case 
+	// settings for phish case
 	var title = torpedo.handler.title;
-	if(title != "" && title != undefined && torpedo.functions.isURL(title)){
-		if(gmxRedirect) url = old;
-		torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-		var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
-		if(titleDomain != torpedo.baseDomain){
-			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('warn_short');
-			else redirect.textContent = torpedo.stringsBundle.getString('warn');
-			warningpic.hidden = false;
-			panel.style.borderColor = "red";
+	if(title != "" && title != undefined && !torpedo.gmxRedirect && !torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && 
+			!torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
+		if(torpedo.functions.isURL(title)){
+			if(torpedo.gmxRedirect) url = old;
+			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
+			if(titleDomain != torpedo.baseDomain){
+				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
+				else phish.textContent = torpedo.stringsBundle.getString('warn');
+				warningpic.hidden = false;
+				panel.style.borderColor = "red";
+				redirectBox.hidden = true;
+				Application.console.log("hidden");
+				phish.hidden = false;
+			}
 		}
 	}
 
-	// determine length of first text segment in tooltip
-	panel.openPopup(tempTarget, "after_start",0,0, false, false);
-	var width;
-	width = ($(url2).width() > $(url1andbase).width())? $(url2).width() : $(url1andbase).width();
-	redirect.style.width = ""+width+"px";
+	// set text size of tooltip
+    var content = document.getElementById("tooltipcontent");
+	torpedo.textSize = torpedo.prefs.getIntPref("textsize");
+    content.style.fontSize=""+torpedo.textSize+"%";
 
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
@@ -153,7 +155,6 @@ torpedo.processDOM = function ()
 		var doc = event.originalTarget;  // doc is document that triggered "onload" event
 		var linkElement = doc.getElementsByTagName("a");
 		var linkNumber = linkElement.length;
-
 		//Application.console.log(doc.body.innerHTML);
 		if(linkNumber > 0)
 		{
@@ -174,10 +175,6 @@ torpedo.processDOM = function ()
 				}
 			}
 		}
-        var content = document.getElementById("tooltipcontent");
-		if(torpedo.prefs.getBoolPref("textsizenormal")) torpedo.textSize = 100;
-    	else torpedo.textSize = 115;    	
-    	content.style.fontSize=""+torpedo.textSize+"%";
 	}
 	init();
 };

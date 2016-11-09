@@ -5,12 +5,13 @@
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&editentries;"
 		buttons="accept,cancel, extra1"
+		buttonalign="start"
 		buttonlabelaccept="&add;"
-		buttonlabelcancel="&delete;"
-		buttonlabelextra1="&close;"
-		ondialogaccept="torpedo.db.addEntries();return false;"
-		ondialogcancel="torpedo.db.deleteSomeSecond(); return false;"
-		ondialogextra1="return true;"
+		buttonlabelcancel="&close;"
+		buttonlabelextra1="&delete;"
+		ondialogaccept="torpedo.db.addEntries(); return false;"
+		ondialogcancel="return true;"
+		ondialogextra1="torpedo.db.deleteSomeSecond();"
 		onload='torpedo.db.getSecond();'>
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
@@ -26,7 +27,7 @@
 
 	<vbox>
 		<label value="&userlinks;" />
-		<listbox id="theList" width="380" height="200" onselect="torpedo.db.select(this.selectedIndex);" />
+		<listbox id="theList" width="380" height="200" onselect="document.documentElement.getButton('extra1').disabled = false;"/>
 		<description id="addEntryDialog" style="width:380px; margin-top:10px" />
 		<hbox>
 			<textbox id="addEntries" style="margin-top:10px; width:380px; max-height:30px"/>
