@@ -191,7 +191,7 @@ torpedo.db.addEntries = function(){
 			}
 		}
 		if(openpopup){
-			message.openPopup(document.getElementById("addEntries"), "before_start",0,0, false, false);
+			message.openPopup(panel, "before_start",0,0, false, false);
 			setTimeout(function (e){
 				message.hidePopup();
 			}, 4500);

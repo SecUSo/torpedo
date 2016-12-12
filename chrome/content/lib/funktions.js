@@ -357,6 +357,23 @@ torpedo.functions.changeCheckedTimer = function (){
     }
 }
 
+torpedo.functions.setTimerRange = function(){
+  timer = torpedo.prefs.getIntPref("blockingTimer");
+	var message = document.getElementById("timerTooHigh");
+	var error = document.getElementById("errorTooHigh");
+  var panel = document.getElementById("countdown");
+
+  if(timer > 100){
+    torpedo.prefs.setIntPref("blockingTimer", 100);
+    error.textContent = torpedo.stringsBundle.getString('toohigh');
+		message.openPopup(panel, "before_start",0,0, false, false);
+	  setTimeout(function (e){
+      message.hidePopup();
+    }, 4500);
+		panel.select();
+  }
+}
+
 // redirection settings
 
 torpedo.functions.redirect = function (id){
