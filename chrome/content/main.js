@@ -2,7 +2,7 @@ var torpedo = torpedo || {};
 var lastBrowserStatus;
 torpedo.instructionSize = {width: 800,height: 460};
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
- 
+
 torpedo.baseDomain;
 torpedo.textSize;
 torpedo.gmxRedirect;
@@ -17,7 +17,6 @@ torpedo.updateTooltip = function (url)
 	var secondsbox = document.getElementById("seconds-box");
 	var warningpic = document.getElementById("warning-pic");
 	var redirectButton = document.getElementById("redirectButton");
-	var redirectBox = document.getElementById("redirectBox");
 	var urlBox = document.getElementById("url-box");
 	var linkDeactivate = document.getElementById("linkDeactivate");
 	var baseDomain = document.getElementById("baseDomain");
@@ -30,7 +29,7 @@ torpedo.updateTooltip = function (url)
 	var shortenText = torpedo.prefs.getBoolPref("language");
 	var old = "";
 	redirectButton.disabled = true;
-	redirectBox.hidden = false;
+	redirect.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
 	linkDeactivate.hidden = shortenText;
@@ -50,20 +49,19 @@ torpedo.updateTooltip = function (url)
 
 	url1.textContent = before;
 	url2.textContent = "";
-
-	if(after.length > 200){
-		after = after.substr(0,200) + "...";
-	}
 	//avoid unnessecary slash
 	if (after.length > 1) url2.textContent = after;
-	
-	// show or hide redirectButton 
-    if(((!isRedirect && manure) || torpedo.gmxRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
-    else{
-    	redirectButton.hidden = false;
-        if(isRedirect && manure) redirectButton.disabled = false;
-    }
-    // settings for tooltip border colors & texts
+
+	// show or hide redirectButton
+  if(((!isRedirect && manure) || torpedo.gmxRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
+  else{
+  	redirectButton.hidden = false;
+      if(isRedirect && manure) redirectButton.disabled = false;
+  }
+	if(redirectButton.disabled) $("#redirectButton").css("cssText", "cursor:wait !important;");
+	else $("#redirectButton").css("cssText", "cursor:pointer !important;");
+
+  // settings for tooltip border colors & texts
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
@@ -89,9 +87,9 @@ torpedo.updateTooltip = function (url)
 	else{
 		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('highrisk_short');
 		else redirect.textContent = torpedo.stringsBundle.getString('highrisk');
-		panel.style.borderColor = "black";
+		panel.style.borderColor = " #bfb9b9";
 	}
-	// settings for redirect case	
+	// settings for redirect case
 	if(isRedirect){
 		if(torpedo.functions.loop < 0) {
 			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('shorturl_short');
@@ -106,7 +104,7 @@ torpedo.updateTooltip = function (url)
 	}
 	// settings for phish case
 	var title = torpedo.handler.title;
-	if(title != "" && title != undefined && !torpedo.gmxRedirect && !torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && 
+	if(title != "" && title != undefined && !torpedo.gmxRedirect && !torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") &&
 			!torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		if(torpedo.functions.isURL(title)){
 			if(torpedo.gmxRedirect) url = old;
@@ -116,45 +114,46 @@ torpedo.updateTooltip = function (url)
 				else phish.textContent = torpedo.stringsBundle.getString('warn');
 				warningpic.hidden = false;
 				panel.style.borderColor = "red";
-				redirectBox.hidden = true;
-				Application.console.log("hidden");
+				redirect.hidden = true;
 				phish.hidden = false;
 			}
 		}
 	}
 
 	// set text size of tooltip
-    var content = document.getElementById("tooltipcontent");
+  var content = document.getElementById("tooltippanel");
 	torpedo.textSize = torpedo.prefs.getIntPref("textsize");
-    content.style.fontSize=""+torpedo.textSize+"%";
-
+  content.style.fontSize=""+torpedo.textSize+"%";
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
+	$(panel).not("#url-box").bind("mousewheel", function(){
+		panel.hidePopup();
+	});
+	document.addEventListener("wheel", function(){
+		});
 };
+torpedo.doc = null;
 
-torpedo.processDOM = function ()
-{
-	function init()
-	{
-		var panel = document.getElementById("tooltippanel");
+torpedo.processDOM = function (){
+	function init(){
+		$("#tooltippanel").bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
+		$("#tooltippanel").bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
+		$("#info-pic").bind("click",torpedo.handler.mouseClickInfoButton);
+		$("#deleteSecond").bind("click",torpedo.handler.mouseClickDeleteButton);
+		$("#editSecond").bind("click",torpedo.handler.mouseClickEditButton);
+		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
 
-		$(panel).bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
-		$(panel).bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
-		$(document.getElementById("info-pic")).bind("click",torpedo.handler.mouseClickInfoButton);
-		$(document.getElementById("deleteSecond")).bind("click",torpedo.handler.mouseClickDeleteButton);
-		$(document.getElementById("editSecond")).bind("click",torpedo.handler.mouseClickEditButton);
-
-        var messagepane = document.getElementById("messagepane");
-        if(messagepane)
-		{
+    var messagepane = document.getElementById("messagepane");
+    if(messagepane){
 			messagepane.addEventListener("load", function(event) { onPageLoad(event); }, true);
-        }
-    }
+		}
+	}
 
 	function onPageLoad(event){
-		var doc = event.originalTarget;  // doc is document that triggered "onload" event
-		var linkElement = doc.getElementsByTagName("a");
+		torpedo.doc = event.originalTarget;  // doc is document that triggered "onload" event
+		var linkElement = torpedo.doc.getElementsByTagName("a");
 		var linkNumber = linkElement.length;
+
 		//Application.console.log(doc.body.innerHTML);
 		if(linkNumber > 0)
 		{
@@ -165,8 +164,8 @@ torpedo.processDOM = function ()
 
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
-						$(aElement).bind("mouseenter", function(event){
-							torpedo.handler.mouseOverHref(event);
+						$(aElement).bind({
+  						mouseenter: function(event) {torpedo.handler.mouseOverHref(event);}
 						});
 						$(aElement).bind("mouseleave", function(event){
 							torpedo.handler.mouseDownHref(event);

@@ -15,14 +15,14 @@ torpedo.handler.mouseOverTooltipPane = function (event)
 {
 	mouseon = true;
 	mouseout[0] = true;
-	clearTimeout(torpedo.handler.MouseLeavetimer); 
+	clearTimeout(torpedo.handler.MouseLeavetimer);
 	var panel = document.getElementById("tooltippanel");
 	$(panel).contextmenu(function(){
 		var menuwindow = document.getElementById("menuwindow");
 		var urlbox = document.getElementById("url-box");
 		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")) document.getElementById("addtotrusted").disabled = true;
 		else  document.getElementById("addtotrusted").disabled = false;
-		menuwindow.openPopup(urlbox, "after_start",0,0, false, false);
+	  menuwindow.openPopup(urlbox, "after_start",0,0, false, false);
 	});
 };
 
@@ -56,7 +56,7 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 };
 
 torpedo.handler.title = "";
-torpedo.handler.mouseOverHref = function (event, aElement)
+torpedo.handler.mouseOverHref = function (event)
 {
 	mouseout = mouseout[0] ? [false,true] : [false,false];
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
@@ -78,20 +78,20 @@ torpedo.handler.mouseOverHref = function (event, aElement)
 			var redirectUrl = torpedo.functions.resolveRedirect(url);
 			if(redirectUrl != url){
 				url = redirectUrl;
-				torpedo.gmxRedirect = true;				
+				torpedo.gmxRedirect = true;
 			}
 			else torpedo.gmxRedirect = false;
-			
+
 			torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 			torpedo.handler.Url = url;
-			
+
 			clearTimeout(torpedo.handler.MouseLeavetimer);
 			alreadyClicked = "";
 
 			if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
 				redirect = true;
 			}
-		    torpedo.functions.traceUrl(url, redirect);
+		  torpedo.functions.traceUrl(url, redirect);
 		}
 	}
 };
@@ -147,8 +147,8 @@ torpedo.handler.mouseDownHref = function (event)
 
 torpedo.handler.mouseClickHref = function (event)
 {
-	//only do sth if left mouse button is clicked 
-	if(event.button == 0){	
+	//only do sth if left mouse button is clicked
+	if(event.button == 0){
 		var url = torpedo.functions.getHref();
 		if(alreadyClicked == ""){
 			alreadyClicked = url;
@@ -197,6 +197,7 @@ torpedo.handler.mouseClickDefaultsButton = function (event) {
 
 torpedo.handler.clickEnabled = true;
 torpedo.handler.mouseClickRedirectButton = function (event){
+	event.stopPropagation();
 	if(torpedo.handler.clickEnabled) torpedo.functions.traceUrl(torpedo.handler.Url, true);
 };
 
@@ -218,7 +219,6 @@ torpedo.handler.loadOptions = function (){
     element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
 
     var textsize = torpedo.prefs.getIntPref("textsize");
-    torpedo.prefs.setIntPref("selected", -1);
     var size = (textsize == 100)? "normal" : "big";
     var notsize = (size=="normal")? "big" : "normal";;
     document.getElementById("textsize"+size).checked = true;

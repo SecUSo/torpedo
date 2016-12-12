@@ -45,38 +45,40 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
     var parent = event.target.parentNode;
     for( var j = 0; j < 5; j++){
         if(parent.nodeName == aTag){
-            tempTarget = parent;
-            var classValue = $(tempTarget).attr("class");
-            if(classValue != null && classValue != undefined){
-                if(classValue == "tooltip" || classValue == "skinnytip") parent.setAttribute("class", "");
-            } 
             return parent;
         }
-        parent = parent.parentNode;        
+        parent = parent.parentNode;
     }
     return undefined;
 }
 
 torpedo.functions.isURL = function (url) {
-    if(url.length <= 500){
-        url = url.replace(" ", "");
-        if (url.match(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})))(?::\d{2,5})?(?:\/[^\s]*)?$/i)) {
-
-            // check if part after domain is too long, f.e. www.abc.abcd
-            var pos = url.lastIndexOf(".");
-            url = url.substring(pos+1, url.length);
-            if(url.length > 3){
-                if(url[2].match(/^[A-Za-z]+$/) && url[3].match(/^[A-Za-z]+$/)) return false;
-            }
-            return true;
-        }
+  url = url.replace(" ", "");
+  var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+  if (regex.test(url)) {
+    // check if part after domain is too long, f.e. www.abc.abcd
+    var pos = url.lastIndexOf(".");
+    url = url.substring(pos+1, url.length);
+    if(url.length > 3){
+      if(url[2].match(/^[A-Za-z]+$/) && url[3].match(/^[A-Za-z]+$/)) return false;
     }
-    return false;
+    return true;
+  }
+  if (url.match(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})))(?::\d{2,5})?(?:\/[^\s]*)?$/i)) {
+    return true;
+  }
+  return false;
 };
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
   var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
   var oldUrl = url;
+  var isIP = String(url).match(/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g);
+  if(isIP){
+    start = url.indexOf("://")+3
+    var baseDomain = url.substr(start,url.length-2);
+    return baseDomain;
+  }
   try {
     var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
     var baseDomain = eTLDService.getBaseDomain(tempURI);
@@ -88,7 +90,7 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
   }
   catch(err) {
     if (url.indexOf("://") > -1) {
-        url = url.split('/')[2];      
+        url = url.split('/')[2];
     }
     else {
         url = url.split('/')[0];
@@ -120,7 +122,25 @@ torpedo.functions.loopTimer = 2000;
 torpedo.functions.traceUrl = function (url, redirect) {
     torpedo.updateTooltip(url);
     OldUrl = url;
-    if(redirect){
+    unknown = true;
+
+    var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
+    if(requestList.contains(url)){
+      unknown = false;
+      var requestArray = requestList.split(",");
+      var i = 0;
+      var urlPos = 0;
+      for(i=0; i<requestArray.length;i++){
+        if(requestArray[i] == url){
+          urlPos = i;
+        }
+      }
+      var answerList = torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data;
+      var answerArray = answerList.split(",");
+      url = answerArray[urlPos];
+      torpedo.updateTooltip(url);
+    }
+    if(redirect && unknown){
         torpedo.functions.containsRedirect(url);
     }
 };
@@ -130,6 +150,7 @@ torpedo.functions.trace = function (url){
     xhr.open('GET', url, true);
     xhr.onload = function () {
         torpedo.functions.containsRedirect(xhr.responseURL);
+        torpedo.functions.saveRedirection(OldUrl, xhr.responseURL);
     };
     xhr.send(null);
 };
@@ -144,7 +165,7 @@ torpedo.functions.containsRedirect = function(url){
     document.getElementById("redirectButton").disabled = true;
     setTimeout(function(e){
         if(torpedo.functions.loop >= 5){
-            $(document.getElementById("url-box")).bind("click", torpedo.handler.mouseClickHref);
+            $(document.getElementById("tooltippanel")).bind("click", torpedo.handler.mouseClickHref);
             torpedo.handler.Url = url;
             torpedo.updateTooltip(url);
         }
@@ -152,19 +173,46 @@ torpedo.functions.containsRedirect = function(url){
             if(torpedo.functions.loop >= 0){
                 torpedo.functions.loopTimer = 0;
             }
-            $(document.getElementById("url-box")).unbind("click", torpedo.handler.mouseClickHref);
+            $(document.getElementById("tooltippanel")).unbind("click", torpedo.handler.mouseClickHref);
             torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
                 redirect.textContent = torpedo.stringsBundle.getString('wait');
                 torpedo.functions.trace(url);
             }
-            else{                
+            else{
                 torpedo.handler.Url = url;
                 torpedo.updateTooltip(url);
             }
         }
     }, torpedo.functions.loopTimer);
 };
+
+torpedo.functions.saveRedirection = function(url, response){
+  // save redirection URL in user data
+  var str1 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+  var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+  var preVal1 = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
+  var preVal2 = torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data;
+  var request = preVal1 + url + ",";
+  var answer = preVal2 + response + ",";
+  str1.data = request;
+  str2.data = answer;
+  if(!preVal1.contains(url)){
+    torpedo.prefs.setComplexValue("URLRequestList", Components.interfaces.nsISupportsString, str1);
+    torpedo.prefs.setComplexValue("URLAnswerList", Components.interfaces.nsISupportsString, str2);
+    var requestArray = request.split(",");
+
+    // if list of saved redirections has more than 100 entries
+    if(requestArray.length>100){
+      var reqWithoutFirst = request.substr(request.indexOf(",")+1,request.length);
+      var ansWithoutFirst = answer.substr(answer.indexOf(",")+1,answer.length);
+      str1.data = reqWithoutFirst;
+      str2.data = ansWithoutFirst;
+      torpedo.prefs.setComplexValue("URLRequestList", Components.interfaces.nsISupportsString, str1);
+      torpedo.prefs.setComplexValue("URLAnswerList", Components.interfaces.nsISupportsString, str2);
+    }
+  }
+}
 
 // Countdown functions
 
@@ -181,10 +229,10 @@ torpedo.functions.countdown = function (timee, id, url) {
 
     function showTime() {
         var second = startTime % 60;
-        var urlBox = document.getElementById("url-box");
-        var url1 = document.getElementById("url1");
-        var url2 = document.getElementById("url2");
-        var base = document.getElementById("baseDomain");
+        var panel = document.getElementById("tooltippanel");
+        var content = document.getElementById("tooltipcontent");
+        //var url2 = document.getElementById("url2");
+        //var base = document.getElementById("baseDomain");
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
         $("#" + id).html(strZeit);
 
@@ -193,23 +241,19 @@ torpedo.functions.countdown = function (timee, id, url) {
             document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('click_link');
 
             // make URL in tooltip clickable
-            $(urlBox).unbind("click");
-            $(urlBox).bind("click", torpedo.handler.mouseClickHref);
+            $(panel).not("#redirectButton").unbind("click");
+            $(panel).not("#redirectButton").bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
-            $(url1).css("cursor", "pointer");
-            $(url2).css("cursor", "pointer");
-            $(base).css("cursor", "pointer");
+            $(panel).find('*').not("#redirectButton").css("cssText", "cursor:pointer !important;");
         }
         else {
             document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
-            $(urlBox).unbind("click");
-            $(urlBox).bind("click", torpedo.handler.mouseClickHrefError);
+            $(panel).not("#redirectButton").unbind("click");
+            $(panel).not("#redirectButton").bind("click", torpedo.handler.mouseClickHrefError);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
-            $(url1).css("cursor", "wait");
-            $(url2).css("cursor", "wait");
-            $(base).css("cursor", "wait");
+            $(panel).find('*').not("#redirectButton").css("cssText", "cursor:wait !important;");
         }
     }
 
@@ -255,18 +299,18 @@ torpedo.functions.changeTextsize = function(size){
 
     if(size=="normal"){
         notsize = "big";
-        torpedo.prefs.setIntPref("textsize", 100); 
+        torpedo.prefs.setIntPref("textsize", 100);
         torpedo.textSize = 100;
-        editor.style.fontSize="100%";
+        if(editor!=null) editor.style.fontSize="100%";
     }
     else {
         notsize = "normal";
         torpedo.prefs.setIntPref("textsize", 115);
         torpedo.textSize = 115;
-        editor.style.fontSize="115%";
+        if(editor!=null) editor.style.fontSize="115%";
     }
-    document.getElementById("textsize"+size).checked = true;
-    document.getElementById("textsize"+notsize).checked = false;
+    if(editor!=null) document.getElementById("textsize"+size).checked = true;
+    if(editor!=null) document.getElementById("textsize"+notsize).checked = false;
 }
 
 // list settings

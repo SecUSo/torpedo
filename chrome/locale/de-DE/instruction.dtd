@@ -4,7 +4,7 @@
 <!ENTITY save "Speichern">
 <!ENTITY default_settings "Standard-Einstellungen">
 <!ENTITY sure_defaultsettings "Standard-Einstellungen wiederherstellen?">
-<!ENTITY attention_defaultsettings "Einträge in von Ihnen als vertrauenswürdig eingestuften Domains löschen">
+<!ENTITY attention_defaultsettings "Alle von Ihnen als niedriges Risiko eingestufte Domains löschen">
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
 <!ENTITY remainingTime "Verbleibende Zeit:">
 <!ENTITY seconds "Sekunde(n)">
@@ -44,5 +44,5 @@
 <!ENTITY addtotrusted "Domain als niedriges Risiko einstufen">
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
 <!ENTITY textsize "Schriftgröße">
-<!ENTITY textsizenormal "Normal">
-<!ENTITY textsizebig "Groß">
+<!ENTITY textsizenormal "normal">
+<!ENTITY textsizebig "groß">

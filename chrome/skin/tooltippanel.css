@@ -1,15 +1,16 @@
 #warning-pic
 {
-    width: 36px;
-    max-height: 40px;
-    margin: 5px 5px 5px 8px;
+  width: 60px;
+  height: 35px;
+	margin-right: 5px;
+	margin-top: 5px;
 }
 #redirect
 {
 	display: block;
 	margin-left: 6px;
 	margin-top: 2px;
-    max-width: 325px;
+  max-width: 325px;
 }
 #phish
 {
@@ -20,53 +21,60 @@
 	margin-left: 5px;
 	margin-top: 2px;
 	margin-bottom: 5px;
+  cursor: pointer;
 }
 #url-box
 {
 	font-weight: normal;
 	word-break: break-all;
 	white-space: normal;
-    color: #333333;
-	margin: 4px 2px 3px 2px;
-	display: inline-block;
+  color: #333333;
+  margin: 4px 2px 3px 2px;
 }
 #baseDomain
 {
 	font-weight:bold;
 	margin-right: 2px;
 	margin-bottom: 0px;
-    letter-spacing: 2px;
-    max-width: 325px;
+  letter-spacing: 2px;
+  max-width: 325px;
 }
 #url1,#url2
 {
 	margin-right: 1px;
 	color: #404040;
 	white-space: pre-wrap;
-    max-width: 325px;
-    margin-bottom:0px;
+  max-width: 325px;
+  margin-bottom:0px;
+}
+#url1andbase{
+  max-height: 20px;
+}
+#url2{
+  max-height: 30px;
 }
 #tooltippanel
 {
 	-moz-appearance: none !important;
 	background-color: #FFFFFF;
 	border: solid 2.5px red;
-    border-radius: 5px;
-    color: #000000;
+  border-radius: 5px;
+  color: #000000;
+  font-size: 100px
 }
 #mainbox
-{	
-	width: 325px;	
+{
+	width: 325px;
 }
 #info-pic
 {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+  max-width: 27px;
+  height: 28px;
+  cursor: pointer;
 	margin-right: 5px;
 	margin-bottom: 5px;
 }
 #info-box
 {
-	max-width: 27px;
+	max-width: 35px;
 }

@@ -15,28 +15,23 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
 
 	<popupset>
-        <panel id="tooltippanel">
-        	<hbox id="tooltipcontent">
-        		<vbox id="warning-box">
-        			<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
-        		</vbox>
-        		<vbox id="mainbox">
-		       		<hbox id="phishBox">
+    <panel id="tooltippanel" backdrag="true" align="center">
+    	<hbox id="tooltipcontent">
+    		<vbox id="mainbox">
+		   		<hbox id="phishBox">
 						<description id="phish" flex="1"/>
 					</hbox>
-					<hbox id="url-box">
-						<vbox>
+					<hbox id="url-box" align="center">
+						<arrowscrollbox orient="vertical" smoothscroll="true">
 							<hbox id="url1andbase">
 								<description id="url1" />
 								<description id="baseDomain" />
 							</hbox>
-							<description id="url2"  />
-						</vbox>
+							<description id="url2"/>
+						</arrowscrollbox>
 					</hbox>
-				    <button id="redirectButton" label="&redirect;" hidden="true" onclick="torpedo.handler.mouseClickRedirectButton();"/>
-		       		<hbox id="redirectBox">
-						<description id="redirect" flex="1"/>
-					</hbox>
+					<button id="redirectButton" label="&redirect;" hidden="true"/>
+				  <description id="redirect" flex="1"/>
 					<vbox id="seconds-box">
 						<label id="linkDeactivate" />
 						<hbox id="countdownbox">
@@ -47,12 +42,13 @@
 					</vbox>
 				</vbox>
 				<vbox id="info-box">
-					<spacer flex="1"/>
+					<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
+					<spacer flex="1" />
 					<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 				</vbox>
 			</hbox>
-        </panel>
-    </popupset>
+    </panel>
+  </popupset>
 
     <popupset>
     	<panel type="arrow" id="errorpanel" fade="slow">
@@ -63,11 +59,13 @@
     </popupset>
 
     <popupset>
-	  <menupopup id="menuwindow">
+	  <menupopup id="menuwindow" onpopupshowing="$('#tooltippanel').unbind('mouseleave',torpedo.handler.mouseDownTooltipPane)" onpopuphiding="$('#tooltippanel').bind('mouseenter',torpedo.handler.mouseOverTooltipPane)">
 	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.handler.Url);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
-	    <menuitem label="&opensettings;" onclick="window.openDialog('chrome://torpedo/content/options.xul','bmarks','chrome=yes, dialog,resizable=no, modal, centerscreen');  torpedo.handler.TempTarget = ''"/>
-	  </menupopup>
+			<menuitem label="&opensettings;" onclick="window.openDialog('chrome://torpedo/content/options.xul','bmarks','chrome=yes, dialog,resizable=no, modal, centerscreen');  torpedo.handler.TempTarget = ''"/>
+			<menuitem label="&textsize; &textsizenormal;" onclick="torpedo.functions.changeTextsize('normal'); torpedo.updateTooltip(torpedo.handler.Url);"/>
+			<menuitem label="&textsize; &textsizebig;" onclick="torpedo.functions.changeTextsize('big'); torpedo.updateTooltip(torpedo.handler.Url);"/>
+		</menupopup>
 	</popupset>
 
 	<stringbundleset>

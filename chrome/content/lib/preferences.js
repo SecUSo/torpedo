@@ -3,7 +3,7 @@ var torpedo = torpedo || {};
 torpedo.prefs = function () {
 	const contentPrefService = Components.classes["@mozilla.org/content-pref/service;1"]
                          .getService(Components.interfaces.nsIContentPrefService);
-	
+
     const prefManager =
         Components.classes["@mozilla.org/preferences-service;1"]
             .getService(Components.interfaces.nsIPrefService)
@@ -18,42 +18,43 @@ torpedo.prefs = function () {
         setStringPref: prefManager.setCharPref,
         setComplexValue: prefManager.setComplexValue,
 
-		
-        addonUninstallingListener: function () 
+        addonUninstallingListener: function ()
 		{
 			var listener =
 			{
-				onUninstalling: function(addon) 
+				onUninstalling: function(addon)
 				{
-					if (addon.id == "torpedo@tu-darmstadt.de") 
-					{				
+					if (addon.id == "torpedo@tu-darmstadt.de")
+					{
 						// It will be automatically removed if the default value is set
 						torpedo.prefs.resetPrefs(true);
 					}
 				}
 			};
-			
-			try 
+
+			try
 			{
 				Components.utils.import("resource://gre/modules/AddonManager.jsm");
 				AddonManager.addAddonListener(listener);
 			}
-			catch (ex) 
+			catch (ex)
 			{
-				
+
 			}
         },
-		
-		resetPrefs: function (all) 
+
+		resetPrefs: function (all)
 		{
             // reset all prefs manually
 			if(all){
 				prefManager.clearUserPref("firstrun");
 				prefManager.clearUserPref("URLSecondList");
 				prefManager.clearUserPref("URLFirstList");
+				prefManager.clearUserPref("URLRequestList");
+				prefManager.clearUserPref("URLAnswerList");
+				prefManager.clearUserPref("RedirectionList");
 			}
 			prefManager.clearUserPref("language");
-			prefManager.clearUserPref("selected");
 			prefManager.clearUserPref("textsize");
 			prefManager.clearUserPref("checkedTimer");
 			prefManager.clearUserPref("blockingTimer");
@@ -64,6 +65,6 @@ torpedo.prefs = function () {
 			prefManager.clearUserPref("redirection1");
 			prefManager.clearUserPref("redirection2");
 			prefManager.clearUserPref("URLDefaultList");
-		}		
+		}
     };
 }();

@@ -8,12 +8,12 @@
 		buttonlabelcancel="&no;"
 		buttonlabelaccept="&yes;"
 		ondialogaccept="torpedo.db.restoreSettings();">
-	
-    <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
-	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 
-	<vbox>
-		<label value="&sure_defaultsettings;"/>
-        <checkbox id="defaultdelete" label="&attention_defaultsettings;"/>
-	</vbox>
+		<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
+		<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+
+		<vbox>
+			<label value="&sure_defaultsettings;"/>
+      <checkbox id="defaultdelete" label="&attention_defaultsettings;"/>
+		</vbox>
 </dialog>

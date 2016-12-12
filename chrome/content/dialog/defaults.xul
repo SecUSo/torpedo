@@ -10,14 +10,14 @@
 		onload='torpedo.db.getDefaults();'>
 
     <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
-	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
-	
-	<stringbundleset>
-        <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
+		<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+
+		<stringbundleset>
+      <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
 
 		<vbox>
-			<listbox id="defaultList" width="400">
+			<listbox id="defaultList" width="350">
 			  <listcols>
 			    <listcol flex="1"/>
 			  </listcols>

@@ -4,7 +4,7 @@
 <!ENTITY save "Save">
 <!ENTITY default_settings "Default settings">
 <!ENTITY sure_defaultsettings "Restore default settings?">
-<!ENTITY attention_defaultsettings "Delete entries in domains you considered as trustworthy (blue)">
+<!ENTITY attention_defaultsettings "Delete all domains you considered as low risk">
 <!ENTITY sure "Do you really want to delete all entries?">
 <!ENTITY remainingTime "Time remaining:">
 <!ENTITY seconds "second(s)">
@@ -44,5 +44,5 @@
 <!ENTITY addtotrusted "Mark domain as trustworthy">
 <!ENTITY searchfor "Check domain with google.com">
 <!ENTITY textsize "Font size">
-<!ENTITY textsizenormal "Normal">
-<!ENTITY textsizebig "Large">
+<!ENTITY textsizenormal "normal">
+<!ENTITY textsizebig "large">
