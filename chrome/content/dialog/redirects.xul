@@ -14,7 +14,7 @@
 	ondialogextra1="torpedo.redirect.delete();"
 	onload='torpedo.redirect.getRedirects();'>
 
-  <script type="application/javascript"  src="chrome://torpedo/content/dialog/redirects.js" />
+  <script type="application/javascript"  src="chrome://torpedo/content/lib/redirects.js" />
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
@@ -26,7 +26,7 @@
 		<listbox id="redirectsList" height="200" style="width:350px; overflow-x:scroll;" onselect="document.documentElement.getButton('extra1').disabled = false;" />
 		<description id="addDialog" style="width:350px; margin-top:10px" />
 		<hbox>
-			<textbox id="add" style="margin-top:10px; width:350px; max-height:30px"/>
+			<textbox id="add" onfocus="document.documentElement.getButton('accept').disabled = false;" style="margin-top:10px; width:350px; max-height:30px"/>
 		</hbox>
 	</vbox>
 

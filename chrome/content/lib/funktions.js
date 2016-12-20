@@ -57,13 +57,19 @@ torpedo.functions.isURL = function (url) {
   var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
   if (regex.test(url)) {
     // check if part after domain is too long, f.e. www.abc.abcd
-    var pos = url.lastIndexOf(".");
-    url = url.substring(pos+1, url.length);
-    if(url.length > 3){
-      if(url[2].match(/^[A-Za-z]+$/) && url[3].match(/^[A-Za-z]+$/)) return false;
+    try{
+      url = torpedo.functions.getDomainWithFFSuffix(url)
+      var pos = url.lastIndexOf(".");
+      url = url.substring(pos+1, url.length);
+      if(url.length > 3){
+        if(url[2].match(/^[A-Za-z]+$/) && url[3].match(/^[A-Za-z]+$/)) return false;
+      }
+    }
+    catch(e){
     }
     return true;
   }
+  // for problems with first pattern
   if (url.match(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})))(?::\d{2,5})?(?:\/[^\s]*)?$/i)) {
     return true;
   }
@@ -72,7 +78,6 @@ torpedo.functions.isURL = function (url) {
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
   var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
-  var oldUrl = url;
   var isIP = String(url).match(/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g);
   if(isIP){
     start = url.indexOf("://")+3
@@ -110,22 +115,21 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
         return url;
     }
     catch(err){
-        return oldUrl;
+        return torpedo.oldUrl;
     }
   }
 };
 
-OldUrl = "";
 torpedo.functions.loop;
 torpedo.functions.loopTimer = 2000;
 
 torpedo.functions.traceUrl = function (url, redirect) {
+    // not opening popup yet, first some initializaion
     torpedo.updateTooltip(url);
-    OldUrl = url;
     unknown = true;
-
+    // check if url is redirect and already in our list of saved entries
     var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
-    if(requestList.contains(url)){
+    if(redirect && requestList.includes(torpedo.functions.getDomainWithFFSuffix(url)+",")){
       unknown = false;
       var requestArray = requestList.split(",");
       var i = 0;
@@ -140,6 +144,7 @@ torpedo.functions.traceUrl = function (url, redirect) {
       url = answerArray[urlPos];
       torpedo.updateTooltip(url);
     }
+    // if redirect and not in our list, start redirect resolving
     if(redirect && unknown){
         torpedo.functions.containsRedirect(url);
     }
@@ -150,7 +155,7 @@ torpedo.functions.trace = function (url){
     xhr.open('GET', url, true);
     xhr.onload = function () {
         torpedo.functions.containsRedirect(xhr.responseURL);
-        torpedo.functions.saveRedirection(OldUrl, xhr.responseURL);
+        torpedo.functions.saveRedirection(torpedo.oldUrl, xhr.responseURL);
     };
     xhr.send(null);
 };
@@ -165,7 +170,7 @@ torpedo.functions.containsRedirect = function(url){
     document.getElementById("redirectButton").disabled = true;
     setTimeout(function(e){
         if(torpedo.functions.loop >= 5){
-            $(document.getElementById("tooltippanel")).bind("click", torpedo.handler.mouseClickHref);
+            $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
             torpedo.handler.Url = url;
             torpedo.updateTooltip(url);
         }
@@ -173,7 +178,7 @@ torpedo.functions.containsRedirect = function(url){
             if(torpedo.functions.loop >= 0){
                 torpedo.functions.loopTimer = 0;
             }
-            $(document.getElementById("tooltippanel")).unbind("click", torpedo.handler.mouseClickHref);
+            $("#clickbox").unbind("click", torpedo.handler.mouseClickHref);
             torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
                 redirect.textContent = torpedo.stringsBundle.getString('wait');
@@ -197,7 +202,9 @@ torpedo.functions.saveRedirection = function(url, response){
   var answer = preVal2 + response + ",";
   str1.data = request;
   str2.data = answer;
-  if(!preVal1.contains(url)){
+  Application.console.log("request: " + torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data);
+  Application.console.log("answer: " + torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data);
+  if(!preVal1.includes(url + ",")){
     torpedo.prefs.setComplexValue("URLRequestList", Components.interfaces.nsISupportsString, str1);
     torpedo.prefs.setComplexValue("URLAnswerList", Components.interfaces.nsISupportsString, str2);
     var requestArray = request.split(",");
@@ -237,23 +244,20 @@ torpedo.functions.countdown = function (timee, id, url) {
         $("#" + id).html(strZeit);
 
         if (second == 0) {
-            //change text from tooltip to "you can click link now"
-            document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('click_link');
-
             // make URL in tooltip clickable
-            $(panel).not("#redirectButton").unbind("click");
-            $(panel).not("#redirectButton").bind("click", torpedo.handler.mouseClickHref);
+            $("#clickbox").unbind("click");
+            $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
-            $(panel).find('*').not("#redirectButton").css("cssText", "cursor:pointer !important;");
+            $(panel).find('*').not("#redirectButton, #infobox, #moreinfobox").css("cssText", "cursor:pointer !important;");
         }
         else {
             document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
-            $(panel).not("#redirectButton").unbind("click");
-            $(panel).not("#redirectButton").bind("click", torpedo.handler.mouseClickHrefError);
+            $("#clickbox").unbind("click");
+            $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
-            $(panel).find('*').not("#redirectButton").css("cssText", "cursor:wait !important;");
+            $(panel).find('*').not("#redirectButton, #infobox, #moreinfobox").css("cssText", "cursor:wait !important;");
         }
     }
 
@@ -332,14 +336,20 @@ torpedo.functions.changeChecked = function (){
     torpedo.prefs.setBoolPref("checkedGreenlist", a);
 };
 
-torpedo.functions.changeActivatedGreen = function (){
+torpedo.functions.changeActivatedGreen = function (click){
     b = !b;
     torpedo.prefs.setBoolPref("activatedGreenlist", b);
+    if(click){
+      document.getElementById("greenlistactivated").checked = b;
+    }
 };
 
-torpedo.functions.changeActivatedOrange = function (){
+torpedo.functions.changeActivatedOrange = function (click){
     c = !c;
     torpedo.prefs.setBoolPref("activatedOrangelist", c);
+    if(click){
+      document.getElementById("orangelistactivated").checked = c;
+    }
 };
 
 // timer settings

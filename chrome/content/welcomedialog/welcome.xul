@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		title="&windowheader;"
+		onload="torpedo.welcome.picture(0);">
+
+	<script type="application/javascript"  src="chrome://torpedo/content/welcomedialog/welcome.js" />
+	<script type="application/javascript"  src="chrome://torpedo/content/lib/dialogmanager.js" />
+
+	<vbox style="padding: 2px; width: 880px; height: 495px;">
+			<image id="welcomePic" flex="0" align="start" width="900" height="500"/>
+			<button label="Continue to tutorial" oncommand="torpedo.dialogmanager.welcome1()"/>
+			<button label="Continue to Thunderbird" oncommand="window.close()"/>
+	</vbox>
+</window>

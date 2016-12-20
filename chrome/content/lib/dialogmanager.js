@@ -1,7 +1,7 @@
 var torpedo = torpedo || {};
 torpedo.dialogmanager = torpedo.dialogmanager || {};
 
-torpedo.dialogmanager.createInstruction = function () {	
+torpedo.dialogmanager.createInstruction = function () {
     windowWidth=1100;
 	windowHeight=690;
     var left = (screen.width/2)-(windowWidth/2);
@@ -33,10 +33,30 @@ torpedo.dialogmanager.showRedirects = function(){
 	window.openDialog("chrome://torpedo/content/dialog/redirects.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
 
-torpedo.dialogmanager.createWelcome = function(){
-    windowWidth=900;
+torpedo.dialogmanager.createUnknownInfo = function(){
+
+  window.addEventListener("load", function load(event){
+  	window.moveTo(window.arguments[1],window.arguments[0])
+  }, false);
+
+  windowWidth=900;
 	windowHeight=580;
-    var left = (screen.width/2)-(windowWidth/2);
-    var top = (screen.height/2)-(windowHeight/2);
-	window.openDialog("chrome://torpedo/content/dialog/welcome.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
+  var left = (screen.width/2)-(windowWidth/2);
+  var top = (screen.height/2)-(windowHeight/2);
+  window.openDialog("chrome://torpedo/content/dialog/unknown.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
+};
+
+torpedo.dialogmanager.createWelcome = function(){
+  windowWidth=900;
+	windowHeight=580;
+  var left = (screen.width/2)-(windowWidth/2);
+  var top = (screen.height/2)-(windowHeight/2);
+	window.openDialog("chrome://torpedo/content/welcomedialog/welcome.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
+};
+torpedo.dialogmanager.welcome1 = function(){
+  windowWidth=900;
+	windowHeight=580;
+  var left = (screen.width/2)-(windowWidth/2);
+  var top = (screen.height/2)-(windowHeight/2);
+	window.openDialog("chrome://torpedo/content/welcomedialog/welcome1.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };

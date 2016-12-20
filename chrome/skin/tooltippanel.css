@@ -1,26 +1,42 @@
 #warning-pic
 {
-  width: 60px;
-  height: 35px;
-	margin-right: 5px;
-	margin-top: 5px;
+  max-width: 60px;
+  max-height: 35px;
+	margin-right: 2px;
+	margin-top: 8px;
+  margin-bottom: 10px;
 }
 #redirect
 {
-	display: block;
+  display: block;
+  display: inline;
+  white-space: pre-wrap;
 	margin-left: 6px;
 	margin-top: 2px;
-  max-width: 325px;
+  max-width: 330px;
+  margin-top: 7px;
 }
-#phish
+#advice{
+  display: block;
+  display: inline;
+  white-space: pre-wrap;
+  max-width: 330px;
+  margin-top:3px;
+  margin-bottom:5px;
+}
+#moreinfos
 {
-	margin-bottom: 2px;
+  display: block;
+  display: inline;
+  white-space: pre-wrap;
+  font-style: italic;
+  max-width: 330px;
 }
 #redirectButton
 {
 	margin-left: 5px;
 	margin-top: 2px;
-	margin-bottom: 5px;
+	margin-bottom: 2px;
   cursor: pointer;
 }
 #url-box
@@ -29,7 +45,7 @@
 	word-break: break-all;
 	white-space: normal;
   color: #333333;
-  margin: 4px 2px 3px 2px;
+  margin: 4px 2px 2px 2px;
 }
 #baseDomain
 {
@@ -37,20 +53,21 @@
 	margin-right: 2px;
 	margin-bottom: 0px;
   letter-spacing: 2px;
-  max-width: 325px;
+  max-width: 330px;
 }
 #url1,#url2
 {
 	margin-right: 1px;
 	color: #404040;
 	white-space: pre-wrap;
-  max-width: 325px;
+  max-width: 330px;
   margin-bottom:0px;
 }
 #url1andbase{
   max-height: 20px;
 }
-#url2{
+#url2
+{
   max-height: 30px;
 }
 #tooltippanel
@@ -60,11 +77,18 @@
 	border: solid 2.5px red;
   border-radius: 5px;
   color: #000000;
-  font-size: 100px
+  font-size: 100px;
+	width: 330px;
 }
-#mainbox
+#advicebox
 {
-	width: 325px;
+  margin-left: 2px;
+}
+#infobox{
+  margin-top:25px;
+  margin-left: 2px;
+  margin-bottom: 0px;
+  cursor: pointer !important;
 }
 #info-pic
 {
@@ -74,7 +98,16 @@
 	margin-right: 5px;
 	margin-bottom: 5px;
 }
-#info-box
+#advice-pic
 {
-	max-width: 35px;
+  max-width: 27px;
+  max-height: 28px;
+  margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+#infotext
+{
+  margin-top: 5px;
+	text-decoration: underline;
 }

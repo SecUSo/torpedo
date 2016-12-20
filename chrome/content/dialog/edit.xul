@@ -30,7 +30,7 @@
 		<listbox id="theList" width="350" height="160" onselect="document.documentElement.getButton('extra1').disabled = false;"/>
 		<description id="addEntryDialog" style="width:350px; margin-top:10px" />
 		<hbox>
-			<textbox id="addEntries" style="margin-top:10px; width:350px; max-height:30px"/>
+			<textbox id="addEntries" onfocus='document.documentElement.getButton("accept").disabled = false;' style="margin-top:10px; width:350px; max-height:30px"/>
 		</hbox>
 	</vbox>
 

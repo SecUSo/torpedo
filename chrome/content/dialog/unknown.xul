@@ -11,9 +11,9 @@
 		ondialogcancel="return true;"
 		onload="onLoad();">
 
-	<script type="application/javascript" src="chrome://torpedo/content/dialog/instruction.js"></script>
+	<script type="application/javascript" src="chrome://torpedo/content/dialog/unknown.js"></script>
 
 	<vbox style="padding: 2px;">
-		<image id="instructionPic" flex="0" width="1080px" height="607.5px"/>
+		<image id="unknownPic" width="700px" height="400px"/>
 	</vbox>
 </dialog>

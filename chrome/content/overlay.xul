@@ -7,7 +7,7 @@
 	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-3.0.0.min.js"/>
 	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-1.12.4.min.js"/>
 	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-3.1.0.min.js"/>
-	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
@@ -16,9 +16,10 @@
 
 	<popupset>
     <panel id="tooltippanel" backdrag="true" align="center">
-    	<hbox id="tooltipcontent">
-    		<vbox id="mainbox">
+    	<vbox id="tooltipcontent">
+				<vbox id="clickbox">
 		   		<hbox id="phishBox">
+						<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
 						<description id="phish" flex="1"/>
 					</hbox>
 					<hbox id="url-box" align="center">
@@ -30,23 +31,31 @@
 							<description id="url2"/>
 						</arrowscrollbox>
 					</hbox>
-					<button id="redirectButton" label="&redirect;" hidden="true"/>
 				  <description id="redirect" flex="1"/>
-					<vbox id="seconds-box">
-						<label id="linkDeactivate" />
-						<hbox id="countdownbox">
-							<label value="&remainingTime;" />
-							<label id="countdown"/>
-							<label id="secs" value="&secs;"/>
-						</hbox>
-					</vbox>
+					<hbox id="advicebox">
+						<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
+						<description id="advice" flex="1"/>
+						<separator class="thin" orient="vertical"/>
+					</hbox>
 				</vbox>
-				<vbox id="info-box">
-					<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
-					<spacer flex="1" />
+				<separator class="thin" orient="horizontal"/>
+				<hbox id="infobox">
 					<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
+					<label id="infotext" value="&moreinformation;" />
+				</hbox>
+				<hbox id="moreinfobox">
+					<description id="moreinfos" flex="1" />
+				</hbox>
+				<button id="redirectButton" label="&redirect;" hidden="true"/>
+				<vbox id="seconds-box">
+					<label id="linkDeactivate" />
+					<hbox id="countdownbox">
+						<label value="&remainingTime;" />
+						<label id="countdown"/>
+						<label id="secs" value="&secs;"/>
+					</hbox>
 				</vbox>
-			</hbox>
+			</vbox>
     </panel>
   </popupset>
 

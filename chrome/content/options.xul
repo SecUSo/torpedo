@@ -11,9 +11,9 @@
         onload="torpedo.handler.loadOptions();">
 
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
-    <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
-    <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
-    <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
     <stringbundleset>
         <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
@@ -47,6 +47,8 @@
               <label value="&textsize;" style="margin-top:20px; font-weight:bold" />
               <checkbox id="textsizenormal" label="&textsizenormal;" oncommand="torpedo.functions.changeTextsize('normal');"/>
               <checkbox id="textsizebig" label="&textsizebig;" oncommand="torpedo.functions.changeTextsize('big');"/>
+              <spacer flex="1"/>
+              <button id="opentutorial" label="Open tutorial" oncommand="torpedo.dialogmanager.createWelcome()" />
             </vbox>
           </tabpanel>
           <tabpanel id="timertab" orient="horizontal">
@@ -58,12 +60,12 @@
               </hbox>
               <hbox>
                 <vbox>
-                  <checkbox id="greenlistactivated" preference="firefox-checked-greenlistactivated" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen();" />
-                  <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:20px;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange();" />
+                  <checkbox id="greenlistactivated" preference="firefox-checked-greenlistactivated" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen(false);" />
+                  <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:20px;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange(false);" />
                 </vbox>
                 <vbox>
-                  <description id="activategreen" style="width:330px; margin-top:10px" />
-                  <description id="activateorange" style="width:330px" tooltiptext="&userdomains;"/>
+                  <description id="activategreen" style="width:330px; margin-top:10px" onclick="torpedo.functions.changeActivatedGreen(true)"/>
+                  <description id="activateorange" style="width:330px" tooltiptext="&userdomains;" onclick="torpedo.functions.changeActivatedOrange(true)"/>
                 </vbox>
               </hbox>
             </vbox>

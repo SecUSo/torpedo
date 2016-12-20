@@ -12,7 +12,7 @@
 <!ENTITY language "Use shortened texts for this addon">
 <!ENTITY general "General">
 <!ENTITY activated "Activate list">
-<!ENTITY userlinks "Domains you considered as trustworthy (blue)">
+<!ENTITY userlinks "Domains you considered as low risk (blue)">
 <!ENTITY editentries "Edit and delete entries">
 <!ENTITY addentries "Add entries">
 <!ENTITY add "Add">
@@ -22,8 +22,8 @@
 <!ENTITY deleteEntries "Delete entries">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY activategreen "Activate timer on domains the developer considered as trustworthy (green)">
-<!ENTITY controluserdefaults "Domains the developer considered as trustworthy (green)">
+<!ENTITY activategreen "Activate timer on domains the developer considered as low risk (green)">
+<!ENTITY controluserdefaults "Domains the developer considered as low risk (green)">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
 <!ENTITY checkedtimer "Timer activated">
@@ -46,3 +46,4 @@
 <!ENTITY textsize "Font size">
 <!ENTITY textsizenormal "normal">
 <!ENTITY textsizebig "large">
+<!ENTITY moreinformation "More information on risk consideration">

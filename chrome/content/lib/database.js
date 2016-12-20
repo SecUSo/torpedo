@@ -34,6 +34,13 @@ torpedo.db.inList = function (website, list){
 	return (sites.indexOf(website) > -1);
 };
 
+torpedo.db.unknown = function(website){
+	if(!torpedo.db.inList(website, "URLDefaultList") && !torpedo.db.inList(website, "URLSecondList")){
+		return true;
+	}
+	return false;
+}
+
 torpedo.db.putInsideDefault = function(website){
 	var str = Components.classes["@mozilla.org/supports-string;1"]
 		      .createInstance(Components.interfaces.nsISupportsString);
@@ -45,9 +52,9 @@ torpedo.db.putInsideDefault = function(website){
 
 torpedo.db.putInsideSecond = function(url){
 	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-
-	if(url=="add") url = torpedo.baseDomain;
-
+	if(url=="add"){
+		url = torpedo.baseDomain;
+	}
 	// put website into user list
 	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
 	str.data = secondSites + url + ",";
@@ -106,7 +113,10 @@ torpedo.db.getSecond = function () {
 	// remove all elements first
   while (theList.firstChild) theList.removeChild(theList.firstChild);
 
+	// disable buttons
 	document.documentElement.getButton("extra1").disabled = true;
+	document.documentElement.getButton("accept").disabled = true;
+
 	secondList = secondSites.split(",");
 	secondList.sort();
 	var i = 0;

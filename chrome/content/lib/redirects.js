@@ -11,6 +11,7 @@ torpedo.redirect.getRedirects = function(){
   while (reList.firstChild) reList.removeChild(reList.firstChild);
 
   document.documentElement.getButton("extra1").disabled = true;
+  document.documentElement.getButton("accept").disabled = true;
   var redirectList = redirects.split(",");
   redirectList = redirectList.sort();
   var i;

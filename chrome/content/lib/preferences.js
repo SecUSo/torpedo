@@ -45,15 +45,15 @@ torpedo.prefs = function () {
 
 		resetPrefs: function (all)
 		{
-            // reset all prefs manually
+      // reset all prefs manually
 			if(all){
-				prefManager.clearUserPref("firstrun");
 				prefManager.clearUserPref("URLSecondList");
 				prefManager.clearUserPref("URLFirstList");
 				prefManager.clearUserPref("URLRequestList");
 				prefManager.clearUserPref("URLAnswerList");
 				prefManager.clearUserPref("RedirectionList");
 			}
+			prefManager.clearUserPref("firstrun");
 			prefManager.clearUserPref("language");
 			prefManager.clearUserPref("textsize");
 			prefManager.clearUserPref("checkedTimer");

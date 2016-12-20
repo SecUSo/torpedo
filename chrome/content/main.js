@@ -6,6 +6,9 @@ var Application = Components.classes["@mozilla.org/steel/application;1"].getServ
 torpedo.baseDomain;
 torpedo.textSize;
 torpedo.gmxRedirect;
+torpedo.redirectClicked;
+torpedo.oldUrl;
+torpedo.infotext = "";
 
 torpedo.updateTooltip = function (url)
 {
@@ -22,6 +25,8 @@ torpedo.updateTooltip = function (url)
 	var baseDomain = document.getElementById("baseDomain");
 	var url1 = document.getElementById("url1");
 	var url2 = document.getElementById("url2");
+	var advice = document.getElementById("advice");
+	var infotext = document.getElementById("infotext");
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
@@ -34,11 +39,7 @@ torpedo.updateTooltip = function (url)
 	warningpic.hidden = true;
 	linkDeactivate.hidden = shortenText;
 	phish.hidden = true;
-
-	if(torpedo.gmxRedirect){
-		phish.hidden = false;
-		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
-	}
+	advice.textContent = torpedo.stringsBundle.getString('knownadvice');
 
 	// assert url to tooltip
 	torpedo.functions.setHref(url);
@@ -65,6 +66,7 @@ torpedo.updateTooltip = function (url)
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
+		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.infotext = torpedo.stringsBundle.getString('infosongreen');
 		if(shortenText) redirect.textContent = "";
 		else redirect.textContent = torpedo.stringsBundle.getString('lowrisk');
 
@@ -76,6 +78,7 @@ torpedo.updateTooltip = function (url)
 	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "#1a509d";
+		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.infotext = torpedo.stringsBundle.getString('infosonblue');
 		if(shortenText) redirect.textContent = "";
 		else redirect.textContent = torpedo.stringsBundle.getString('userrisk');
 
@@ -85,15 +88,26 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	else{
+		advice.textContent = torpedo.stringsBundle.getString('unknownadvice');
+		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
+			torpedo.infotext = ""
+		}
 		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('highrisk_short');
 		else redirect.textContent = torpedo.stringsBundle.getString('highrisk');
 		panel.style.borderColor = " #bfb9b9";
+	}
+	if(torpedo.gmxRedirect){
+		phish.hidden = false;
+		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
+		torpedo.infotext = torpedo.stringsBundle.getString('infosongmxredirect');
 	}
 	// settings for redirect case
 	if(isRedirect){
 		if(torpedo.functions.loop < 0) {
 			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('shorturl_short');
 			else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
+			torpedo.infotext = torpedo.stringsBundle.getString('infosonredirect');
+			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
 		}
 	    else{
 	        redirectButton.hidden = true;
@@ -112,25 +126,26 @@ torpedo.updateTooltip = function (url)
 			if(titleDomain != torpedo.baseDomain){
 				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
 				else phish.textContent = torpedo.stringsBundle.getString('warn');
+				document.getElementById("infobox").style.marginTop = "43px";
+				panel.style.backgroundColor = "#feffcc";
 				warningpic.hidden = false;
 				panel.style.borderColor = "red";
-				redirect.hidden = true;
+				redirect.textContent = "";
 				phish.hidden = false;
+				advice.textContent = torpedo.stringsBundle.getString('phishadvice');
+				torpedo.infotext = torpedo.stringsBundle.getString('infosonred');
 			}
 		}
 	}
-
 	// set text size of tooltip
   var content = document.getElementById("tooltippanel");
 	torpedo.textSize = torpedo.prefs.getIntPref("textsize");
   content.style.fontSize=""+torpedo.textSize+"%";
+
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
-	$(panel).not("#url-box").bind("mousewheel", function(){
-		panel.hidePopup();
-	});
-	document.addEventListener("wheel", function(){
-		});
+	document.getElementById("info-pic").style.cursor = "pointer";
+	document.getElementById("infotext").style.cursor = "pointer";
 };
 torpedo.doc = null;
 
@@ -138,10 +153,11 @@ torpedo.processDOM = function (){
 	function init(){
 		$("#tooltippanel").bind("mouseenter",torpedo.handler.mouseOverTooltipPane);
 		$("#tooltippanel").bind("mouseleave",torpedo.handler.mouseDownTooltipPane);
-		$("#info-pic").bind("click",torpedo.handler.mouseClickInfoButton);
 		$("#deleteSecond").bind("click",torpedo.handler.mouseClickDeleteButton);
 		$("#editSecond").bind("click",torpedo.handler.mouseClickEditButton);
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
+		$("#infobox").click(function(event){torpedo.handler.mouseClickInfoButton(event)});
+		$("#moreinfobox").click(function(event){event.stopPropagation();moreinfos.textContent = ""});
 
     var messagepane = document.getElementById("messagepane");
     if(messagepane){
@@ -161,9 +177,10 @@ torpedo.processDOM = function (){
 			{
 				var aElement = linkElement[i];
 				var hrefValue = aElement.getAttribute("href");
-
+				//Application.console.log(hrefValue)
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
+					//Application.console.log(hrefValue + " is url")
 						$(aElement).bind({
   						mouseenter: function(event) {torpedo.handler.mouseOverHref(event);}
 						});
