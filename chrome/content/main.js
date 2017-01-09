@@ -8,7 +8,7 @@ torpedo.textSize;
 torpedo.gmxRedirect;
 torpedo.redirectClicked;
 torpedo.oldUrl;
-torpedo.infotext = "";
+torpedo.infotext;
 
 torpedo.updateTooltip = function (url)
 {
@@ -45,14 +45,17 @@ torpedo.updateTooltip = function (url)
 	torpedo.functions.setHref(url);
 	baseDomain.textContent = torpedo.baseDomain;
 	var split = url.indexOf(torpedo.baseDomain);
-	var before = url.substring(0, split);
-	var after = url.substring(split+torpedo.baseDomain.length, url.length);
+	var beginning = url.substring(0, split);
+	var end = url.substring(split+torpedo.baseDomain.length, url.length);
 
-	url1.textContent = before;
+	url1.textContent = beginning;
 	url2.textContent = "";
 	//avoid unnessecary slash
-	if (after.length > 1) url2.textContent = after;
-
+	if(end.length > 1) url2.textContent = end;
+	if(end.length > 500) {
+		end = end.substring(0,500);
+		url2.textcontent = end;
+	}
 	// show or hide redirectButton
   if(((!isRedirect && manure) || torpedo.gmxRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
   else{
@@ -147,8 +150,6 @@ torpedo.updateTooltip = function (url)
 
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
-	document.getElementById("info-pic").style.cursor = "pointer";
-	document.getElementById("infotext").style.cursor = "pointer";
 };
 torpedo.doc = null;
 
@@ -159,8 +160,7 @@ torpedo.processDOM = function (){
 		$("#deleteSecond").bind("click",torpedo.handler.mouseClickDeleteButton);
 		$("#editSecond").bind("click",torpedo.handler.mouseClickEditButton);
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
-		$("#infobox").click(function(event){torpedo.handler.mouseClickInfoButton(event)});
-		$("#moreinfobox").click(function(event){event.stopPropagation();moreinfos.textContent = ""});
+		$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
 
     var messagepane = document.getElementById("messagepane");
     if(messagepane){

@@ -59,9 +59,10 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 torpedo.handler.title = "";
 torpedo.handler.mouseOverHref = function (event)
 {
+	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	// do nothing when user reads infotext
-	if(panel.state == "closed" || torpedo.infotext == ""){
+	if(panel.state == "closed" || torpedo.infotext == "" || moreinfos.textContent == ""){
 		mouseout = mouseout[0] ? [false,true] : [false,false];
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 		var url = tempTarget.getAttribute("href");
@@ -88,7 +89,6 @@ torpedo.handler.mouseOverHref = function (event)
 				clearTimeout(torpedo.handler.MouseLeavetimer);
 				alreadyClicked = "";
 				var redirect = false;
-				var moreinfos = document.getElementById("moreinfos");
 				moreinfos.textContent = "";
 				torpedo.infotext = "";
 
@@ -195,15 +195,17 @@ torpedo.handler.mouseClickHrefError = function(event){
 torpedo.handler.mouseClickInfoButton = function (event)
 {
 	//torpedo.dialogmanager.createInstruction(1080,607.5);
-	event.stopPropagation();
-	moreinfos = document.getElementById("moreinfos");
-	panel = document.getElementById("tooltippanel");
-	warningpic = document.getElementById("warning-pic");
+	Application.console.log("click")
+	var moreinfos = document.getElementById("moreinfos");
+	var panel = document.getElementById("tooltippanel");
+	var warningpic = document.getElementById("warning-pic");
 	if(torpedo.db.unknown(torpedo.oldUrl) && !torpedo.functions.isRedirect(torpedo.oldUrl) && !torpedo.gmxRedirect && 	warningpic.hidden){
 		torpedo.dialogmanager.createUnknownInfo();
 	}
 	else{
-		if(moreinfos.textContent != "") moreinfos.textContent = ""
+		if(moreinfos.textContent != ""){
+			moreinfos.textContent = "";
+		}
 		else moreinfos.textContent = torpedo.infotext;
 	}
 	//torpedo.updateTooltip(torpedo.handler.Url);

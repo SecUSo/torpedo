@@ -249,7 +249,7 @@ torpedo.functions.countdown = function (timee, id, url) {
             $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
-            $(panel).find('*').not("#redirectButton, #infobox, #moreinfobox").css("cssText", "cursor:pointer !important;");
+            $("#clickbox").css("cssText", "cursor:pointer !important");
         }
         else {
             document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
@@ -257,7 +257,7 @@ torpedo.functions.countdown = function (timee, id, url) {
             $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
-            $(panel).find('*').not("#redirectButton, #infobox, #moreinfobox").css("cssText", "cursor:wait !important;");
+            $("#clickbox").css("cssText", "cursor:wait !important;");
         }
     }
 

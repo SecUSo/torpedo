@@ -22,15 +22,13 @@
 						<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
 						<description id="phish" flex="1"/>
 					</hbox>
-					<hbox id="url-box" align="center">
-						<arrowscrollbox orient="vertical" smoothscroll="true">
-							<hbox id="url1andbase">
-								<description id="url1" />
-								<description id="baseDomain" />
-							</hbox>
-							<description id="url2"/>
-						</arrowscrollbox>
-					</hbox>
+					<vbox id="url-box">
+						<hbox id="url1andbase">
+							<description id="url1" />
+							<description id="baseDomain" />
+						</hbox>
+						<description id="url2"/>
+					</vbox>
 				  <description id="redirect" flex="1"/>
 					<hbox id="advicebox">
 						<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
@@ -39,13 +37,15 @@
 					</hbox>
 				</vbox>
 				<separator class="thin" orient="horizontal"/>
-				<hbox id="infobox">
-					<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
-					<label id="infotext" value="&moreinformation;" />
-				</hbox>
-				<hbox id="moreinfobox">
-					<description id="moreinfos" flex="1" />
-				</hbox>
+				<vbox id="infos">
+					<hbox id="infobox">
+						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
+						<label id="infotext" value="&moreinformation;" />
+					</hbox>
+					<hbox id="moreinfobox">
+						<description id="moreinfos" flex="1" />
+					</hbox>
+				</vbox>
 				<button id="redirectButton" label="&redirect;" hidden="true"/>
 				<vbox id="seconds-box">
 					<label id="linkDeactivate" />

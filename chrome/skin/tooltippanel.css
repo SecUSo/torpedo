@@ -84,11 +84,13 @@
 {
   margin-left: 2px;
 }
+#infos{
+  cursor: pointer !important;
+}
 #infobox{
   margin-top:25px;
   margin-left: 2px;
-  margin-bottom: 0px;
-  cursor: pointer !important;
+  margin-bottom: 0px
 }
 #info-pic
 {
@@ -110,4 +112,5 @@
 {
   margin-top: 5px;
 	text-decoration: underline;
+  cursor: pointer;
 }
