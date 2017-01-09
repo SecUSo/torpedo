@@ -4,7 +4,7 @@
 
 <window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&windowheader;"
-		onload="torpedo.welcome.picture(1);">
+		onload="torpedo.welcome.picture(7);">
 
 	<script type="application/javascript"  src="chrome://torpedo/content/welcomedialog/welcome.js" />
 	<script type="application/javascript"  src="chrome://torpedo/content/lib/dialogmanager.js" />
@@ -13,14 +13,14 @@
 		<hbox>
 			<image id="greyPic" style="width:200px; height:495px; margin-right:15px;" src="chrome://torpedo/skin/greybox.png"/>
 			<vbox style="padding: 2px;">
-				<image id="welcomePic1" style="margin-top:10px" flex="0" align="start" width="800" height="600"/>
+				<image id="welcomePic7" style="margin-top:10px" flex="0" align="start" width="800" height="600"/>
 			</vbox>
 		</hbox>
 		<hbox style="margin-top:15px">
 			<spacer flex="1" />
-			<button label="Back" flex="1" oncommand="torpedo.dialogmanager.createWelcome()"/>
+			<button label="Back" flex="1" oncommand="torpedo.dialogmanager.welcome6()"/>
 			<button label="Skip" flex="1" oncommand="window.close()"/>
-			<button label="Next" flex="1" oncommand="torpedo.dialogmanager.welcome2()"/>
+			<button label="Next" flex="1" oncommand="torpedo.dialogmanager.welcome8()"/>
 		</hbox>
 	</vbox>
 </window>

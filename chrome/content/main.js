@@ -50,12 +50,10 @@ torpedo.updateTooltip = function (url)
 
 	url1.textContent = beginning;
 	url2.textContent = "";
+	if(end.length > 75) end = end.substring(0,75) +  "...";
 	//avoid unnessecary slash
 	if(end.length > 1) url2.textContent = end;
-	if(end.length > 500) {
-		end = end.substring(0,500);
-		url2.textcontent = end;
-	}
+
 	// show or hide redirectButton
   if(((!isRedirect && manure) || torpedo.gmxRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
   else{
@@ -147,7 +145,13 @@ torpedo.updateTooltip = function (url)
   var content = document.getElementById("tooltippanel");
 	torpedo.textSize = torpedo.prefs.getIntPref("textsize");
   content.style.fontSize=""+torpedo.textSize+"%";
-
+	Application.console.log("textsize;"+torpedo.textSize)
+	if(torpedo.textSize == "115"){
+		if(navigator.language.indexOf("de") > -1){
+			document.getElementById("infobox").style.marginTop = "48px";
+		}
+		else document.getElementById("infobox").style.marginTop = "32px";
+		}
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
@@ -207,6 +211,7 @@ window.addEventListener("load", function load(event){
 
     if(torpedo.prefs.getBoolPref("firstrun")){
 		torpedo.prefs.setBoolPref("firstrun",false);
+		torpedo.dialogmanager.createUpdate();
 		torpedo.dialogmanager.createWelcome();
 	}
 }, false);
