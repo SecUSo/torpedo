@@ -27,6 +27,7 @@
 <!ENTITY delete "Löschen">
 <!ENTITY settings "Einstellungen">
 <!ENTITY checkedtimer "Timer aktiviert">
+<!ENTITY messagetimer "Timer beträgt:">
 <!ENTITY next "Weiter">
 <!ENTITY back "Zurück">
 <!ENTITY redirection "Weiterleitungen">
@@ -52,3 +53,4 @@
 <!ENTITY kapitel4 "Spezialfälle">
 <!ENTITY kapitel5 "Menü">
 <!ENTITY kapitel6 "Einstellungen">
+<!ENTITY delay "Link-Verzögerung">

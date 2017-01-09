@@ -4,29 +4,30 @@
 <!ENTITY save "Save">
 <!ENTITY default_settings "Default settings">
 <!ENTITY sure_defaultsettings "Restore default settings?">
-<!ENTITY attention_defaultsettings "Delete all domains you considered as low-risk">
+<!ENTITY attention_defaultsettings "Delete all domains you considered as 'low-risk'">
 <!ENTITY sure "Do you really want to delete all entries?">
 <!ENTITY remainingTime "Time remaining:">
 <!ENTITY seconds "second(s)">
 <!ENTITY lists "Lists">
 <!ENTITY language "Use shortened texts for this addon">
 <!ENTITY general "General">
-<!ENTITY activated "Activate list">
-<!ENTITY userlinks "Domains you considered as low-risk (blue)">
+<!ENTITY activated "Activate list of domains the developers consider as 'low-risk'">
+<!ENTITY userlinks "Domains you considered as 'low-risk' (blue)">
 <!ENTITY editentries "Edit and delete entries">
 <!ENTITY addentries "Add entries">
 <!ENTITY add "Add">
 <!ENTITY userdomains "Domains which were called at least 2 times">
 <!ENTITY clearentries "Delete all entries">
-<!ENTITY showdefaults "Show list">
+<!ENTITY showdefaults "Show entries">
 <!ENTITY deleteEntries "Delete entries">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY activategreen "Activate timer on domains the developer considered as low-risk (green)">
-<!ENTITY controluserdefaults "Domains the developer considered as low-risk (green)">
+<!ENTITY activategreen "Activate timer on domains the developer considered as 'low-risk' (green)">
+<!ENTITY controluserdefaults "Domains the developer considered as 'low-risk' (green)">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
-<!ENTITY checkedtimer "Timer activated">
+<!ENTITY checkedtimer "Link deactivation delay timer activated">
+<!ENTITY messagetimer "Link deactivation timer set to">
 <!ENTITY next "Next">
 <!ENTITY back "Back">
 <!ENTITY redirection "Redirections">
@@ -52,3 +53,4 @@
 <!ENTITY kapitel4 "Special cases">
 <!ENTITY kapitel5 "Menu">
 <!ENTITY kapitel6 "Settings">
+<!ENTITY delay "Link delay">

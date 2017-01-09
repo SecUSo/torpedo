@@ -32,6 +32,7 @@
 		<hbox>
 			<textbox id="addEntries" onfocus='document.documentElement.getButton("accept").disabled = false;' style="margin-top:10px; width:350px; max-height:30px"/>
 		</hbox>
+		<button style="color: #cc0000" id="deleteSecond" label="&clearentries;" onclick="torpedo.handler.mouseClickDeleteButton();" />
 	</vbox>
 
 	<popupset>

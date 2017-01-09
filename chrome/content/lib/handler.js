@@ -240,17 +240,17 @@ torpedo.handler.mouseClickAddButton = function(event){
 torpedo.handler.loadOptions = function (){
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 	document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('checkedTimer');
-    document.getElementById('redirectdescription').textContent = torpedo.stringsBundle.getString('description');
-    document.getElementById('redirectwarning').textContent = torpedo.stringsBundle.getString('warning');
-    document.getElementById('listofdefaults').textContent = torpedo.stringsBundle.getString('listofdefaults');
-    document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
-    document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
-    var element = document.getElementById("editor");
-    element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
-
-    var textsize = torpedo.prefs.getIntPref("textsize");
-    var size = (textsize == 100)? "normal" : "big";
-    var notsize = (size=="normal")? "big" : "normal";;
-    document.getElementById("textsize"+size).checked = true;
-    document.getElementById("textsize"+notsize).checked = false;
+  document.getElementById('listofdefaults').textContent = torpedo.stringsBundle.getString('listofdefaults');
+  document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
+  document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
+  var element = document.getElementById("editor");
+  element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
+	if (navigator.language.indexOf("de") > -1){
+		document.getElementById("delay1").src = "chrome://torpedo/skin/delay1_de.png";
+		document.getElementById("delay2").src = "chrome://torpedo/skin/delay2_de.png";
+	}
+	else {
+		document.getElementById("delay1").src = "chrome://torpedo/skin/delay1_en.png";
+		document.getElementById("delay2").src = "chrome://torpedo/skin/delay2_en.png";
+	}
 }
