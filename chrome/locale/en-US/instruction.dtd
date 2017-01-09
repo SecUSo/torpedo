@@ -46,3 +46,9 @@
 <!ENTITY moreinformation "More information on risk consideration">
 <!ENTITY toTutorial ">> Continue to tutorial (recommended for first time users)">
 <!ENTITY thunderbird "Back to Thunderbird">
+<!ENTITY kapitel1 "Basic informations">
+<!ENTITY kapitel2 "Tooltip types">
+<!ENTITY kapitel3 "Url checking">
+<!ENTITY kapitel4 "Special cases">
+<!ENTITY kapitel5 "Menu">
+<!ENTITY kapitel6 "Settings">

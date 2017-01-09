@@ -46,3 +46,9 @@
 <!ENTITY moreinformation "Mehr Informationen über die Risikoeinschätzung">
 <!ENTITY toTutorial ">> Weiter zum Tutorial (Empfehlung bei Erstinstallation)">
 <!ENTITY thunderbird "Zurück zu Thunderbird">
+<!ENTITY kapitel1 "Basisinformationen">
+<!ENTITY kapitel2 "Tooltiptypen">
+<!ENTITY kapitel3 "Urlprüfung">
+<!ENTITY kapitel4 "Spezialfälle">
+<!ENTITY kapitel5 "Menü">
+<!ENTITY kapitel6 "Einstellungen">
