@@ -43,11 +43,6 @@
         <tabpanels>
           <tabpanel id="generaltab" orient="horizontal">
             <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:250px;">
-              <checkbox id="language" label="&language;" preference="firefox-language" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('language'));" oncommand="torpedo.functions.changeLanguage();"/>
-              <label value="&textsize;" style="margin-top:20px; font-weight:bold" />
-              <checkbox id="textsizenormal" label="&textsizenormal;" oncommand="torpedo.functions.changeTextsize('normal');"/>
-              <checkbox id="textsizebig" label="&textsizebig;" oncommand="torpedo.functions.changeTextsize('big');"/>
-              <spacer flex="1"/>
               <button id="opentutorial" label="Open tutorial" oncommand="torpedo.dialogmanager.createWelcome()" />
             </vbox>
           </tabpanel>

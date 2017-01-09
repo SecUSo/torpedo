@@ -34,107 +34,102 @@ torpedo.dialogmanager.showRedirects = function(){
 };
 
 torpedo.dialogmanager.createUnknownInfo = function(){
-
-  window.addEventListener("load", function load(event){
-  	window.moveTo(window.arguments[1],window.arguments[0])
-  }, false);
-
-  windowWidth=900;
-	windowHeight=580;
+  windowWidth=700;
+	windowHeight=500;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
   window.openDialog("chrome://torpedo/content/dialog/unknown.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.createUpdate = function(){
-  windowWidth=690;
-	windowHeight=266;
+  windowWidth=600;
+	windowHeight=390;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/update.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.createWelcome = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 torpedo.dialogmanager.welcome1 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome1.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 torpedo.dialogmanager.welcome2 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome2.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome3 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome3.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome4 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome4.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome5 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome5.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome6 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome6.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome7 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome7.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome8 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome8.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome9 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome9.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.welcome10 = function(){
-  windowWidth=1100;
-	windowHeight=816;
+  windowWidth=900;
+	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome10.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);

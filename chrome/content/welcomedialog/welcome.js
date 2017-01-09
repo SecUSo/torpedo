@@ -64,6 +64,6 @@ torpedo.welcome.picture = function(picture) {
 	}
 }
 
-/*window.addEventListener("load", function load(event){
+window.addEventListener("load", function load(event){
 	window.moveTo(window.arguments[1],window.arguments[0])
-}, false);*/
+}, false);

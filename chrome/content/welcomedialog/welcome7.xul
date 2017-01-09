@@ -11,9 +11,9 @@
 
 	<vbox>
 		<hbox>
-			<image id="greyPic" style="width:200px; height:495px; margin-right:15px;" src="chrome://torpedo/skin/greybox.png"/>
-			<vbox style="padding: 2px;">
-				<image id="welcomePic7" style="margin-top:10px" flex="0" align="start" width="800" height="600"/>
+			<image id="greyPic" style="width:200px; height:495px;" src="chrome://torpedo/skin/greybox.png"/>
+			<vbox>
+				<image id="welcomePic7" flex="0" align="start" width="800" height="580"/>
 			</vbox>
 		</hbox>
 		<hbox style="margin-top:15px">
