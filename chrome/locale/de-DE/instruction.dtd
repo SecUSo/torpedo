@@ -43,7 +43,6 @@
 <!ENTITY opensettings "Einstellungen öffnen">
 <!ENTITY addtotrusted "Domain als niedriges Risiko einstufen">
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
-<!ENTITY textsize "Schriftgröße">
-<!ENTITY textsizenormal "normal">
-<!ENTITY textsizebig "groß">
 <!ENTITY moreinformation "Mehr Informationen über die Risikoeinschätzung">
+<!ENTITY toTutorial ">> Weiter zum Tutorial (Empfehlung bei Erstinstallation)">
+<!ENTITY thunderbird "Zurück zu Thunderbird">

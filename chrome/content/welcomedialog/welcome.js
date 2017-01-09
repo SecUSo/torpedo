@@ -5,7 +5,7 @@ torpedo.welcome.picture = function(picture) {
 	if(picture==-1){
 		if (navigator.language.indexOf("de") > -1)
 			document.getElementById("updatePic").src="chrome://torpedo/skin/update_de.png";
-		else document.getElementById("updatePic").src="chrome://torpedo/skin/update_de.png";
+		else document.getElementById("updatePic").src="chrome://torpedo/skin/update_en.png";
 	}
 	if(picture==0){
 		if (navigator.language.indexOf("de") > -1)

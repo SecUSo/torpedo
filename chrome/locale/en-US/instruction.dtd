@@ -43,7 +43,6 @@
 <!ENTITY opensettings "Open settings window">
 <!ENTITY addtotrusted "Mark domain as trustworthy">
 <!ENTITY searchfor "Check domain with google.com">
-<!ENTITY textsize "Font size">
-<!ENTITY textsizenormal "normal">
-<!ENTITY textsizebig "large">
 <!ENTITY moreinformation "More information on risk consideration">
+<!ENTITY toTutorial ">> Continue to tutorial (recommended for first time users)">
+<!ENTITY thunderbird "Back to Thunderbird">

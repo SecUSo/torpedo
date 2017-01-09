@@ -295,26 +295,28 @@ var e = torpedo.prefs.getBoolPref("language");
 torpedo.functions.changeLanguage = function(){
     e = !e;
     torpedo.prefs.setBoolPref("language", e);
+    if(e) document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('longtext');
+    else document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
 }
 
-torpedo.functions.changeTextsize = function(size){
+torpedo.functions.changeTextsize = function(){
     var notsize;
     var editor = document.getElementById("editor");
-
-    if(size=="normal"){
-        notsize = "big";
-        torpedo.prefs.setIntPref("textsize", 100);
-        torpedo.textSize = 100;
-        if(editor!=null) editor.style.fontSize="100%";
+    var panel = document.getElementById("changeSize")
+    if(panel.textContent == torpedo.stringsBundle.getString('smalltext')){
+  		panel.textContent = torpedo.stringsBundle.getString('bigtext');
+      notsize = "big";
+      torpedo.prefs.setIntPref("textsize", 100);
+      torpedo.textSize = 100;
+      if(editor!=null) editor.style.fontSize="100%";
     }
     else {
+  		  document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('smalltext');
         notsize = "normal";
         torpedo.prefs.setIntPref("textsize", 115);
         torpedo.textSize = 115;
         if(editor!=null) editor.style.fontSize="115%";
     }
-    if(editor!=null) document.getElementById("textsize"+size).checked = true;
-    if(editor!=null) document.getElementById("textsize"+notsize).checked = false;
 }
 
 // list settings

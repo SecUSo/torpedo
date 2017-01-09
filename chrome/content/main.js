@@ -145,13 +145,15 @@ torpedo.updateTooltip = function (url)
   var content = document.getElementById("tooltippanel");
 	torpedo.textSize = torpedo.prefs.getIntPref("textsize");
   content.style.fontSize=""+torpedo.textSize+"%";
-	Application.console.log("textsize;"+torpedo.textSize)
+
 	if(torpedo.textSize == "115"){
 		if(navigator.language.indexOf("de") > -1){
 			document.getElementById("infobox").style.marginTop = "48px";
 		}
-		else document.getElementById("infobox").style.marginTop = "32px";
+		else{
+			document.getElementById("infobox").style.marginTop = "32px";
 		}
+	}
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
@@ -166,6 +168,9 @@ torpedo.processDOM = function (){
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
 		$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
 
+		document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('bigtext');
+		document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
+		
     var messagepane = document.getElementById("messagepane");
     if(messagepane){
 			messagepane.addEventListener("load", function(event) { onPageLoad(event); }, true);
@@ -207,9 +212,9 @@ window.addEventListener("load", function load(event){
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 
 	torpedo.prefs.addonUninstallingListener();
-    torpedo.processDOM();
-
-    if(torpedo.prefs.getBoolPref("firstrun")){
+  torpedo.processDOM();
+	torpedo.prefs.setBoolPref("firstrun",true);
+  if(torpedo.prefs.getBoolPref("firstrun")){
 		torpedo.prefs.setBoolPref("firstrun",false);
 		torpedo.dialogmanager.createUpdate();
 		torpedo.dialogmanager.createWelcome();

@@ -15,7 +15,12 @@
 			<image id="welcomePic" flex="0" align="start" width="800" height="600"/>
 			<image id="whitePic" style="width:100px; height:495px; margin-right:15px;" src="chrome://torpedo/skin/whitebox.png"/>
 		</hbox>
-			<button label="Continue to tutorial" oncommand="torpedo.dialogmanager.welcome1()"/>
-			<button label="Continue to Thunderbird" oncommand="window.close()"/>
+		<hbox>
+			<spacer flex="1" />
+			<button label="&thunderbird;" oncommand="window.close()"/>
+			<spacer flex="2" />
+			<button label="&toTutorial;" oncommand="torpedo.dialogmanager.welcome1()"/>
+			<spacer flex="1" />
+		</hbox>
 	</vbox>
 </window>
