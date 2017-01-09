@@ -81,7 +81,10 @@ torpedo.handler.mouseOverHref = function (event)
 			  torpedo.oldUrl = torpedo.baseDomain;
 				torpedo.redirectClicked = false;
 				panel.style.backgroundColor = "white";
-				document.getElementById("infobox").style.marginTop = "25px";
+				if(navigator.language.indexOf("de") > -1){
+					document.getElementById("infobox").style.marginTop = "25px";
+				}
+				else document.getElementById("infobox").style.marginTop = "10px";
 				clearTimeout(torpedo.handler.MouseLeavetimer);
 				alreadyClicked = "";
 				var redirect = false;

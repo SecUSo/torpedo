@@ -23,7 +23,7 @@
 	</stringbundleset>
 
 	<vbox id="redirectsBox">
-		<listbox id="redirectsList" height="200" style="width:350px; overflow-x:scroll;" onselect="document.documentElement.getButton('extra1').disabled = false;" />
+		<listbox id="redirectsList" height="200" style="width:350px;" onselect="document.documentElement.getButton('extra1').disabled = false;" />
 		<description id="addDialog" style="width:350px; margin-top:10px" />
 		<hbox>
 			<textbox id="add" onfocus="document.documentElement.getButton('accept').disabled = false;" style="margin-top:10px; width:350px; max-height:30px"/>

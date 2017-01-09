@@ -4,7 +4,7 @@
 <!ENTITY save "Save">
 <!ENTITY default_settings "Default settings">
 <!ENTITY sure_defaultsettings "Restore default settings?">
-<!ENTITY attention_defaultsettings "Delete all domains you considered as low risk">
+<!ENTITY attention_defaultsettings "Delete all domains you considered as low-risk">
 <!ENTITY sure "Do you really want to delete all entries?">
 <!ENTITY remainingTime "Time remaining:">
 <!ENTITY seconds "second(s)">
@@ -12,7 +12,7 @@
 <!ENTITY language "Use shortened texts for this addon">
 <!ENTITY general "General">
 <!ENTITY activated "Activate list">
-<!ENTITY userlinks "Domains you considered as low risk (blue)">
+<!ENTITY userlinks "Domains you considered as low-risk (blue)">
 <!ENTITY editentries "Edit and delete entries">
 <!ENTITY addentries "Add entries">
 <!ENTITY add "Add">
@@ -22,8 +22,8 @@
 <!ENTITY deleteEntries "Delete entries">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY activategreen "Activate timer on domains the developer considered as low risk (green)">
-<!ENTITY controluserdefaults "Domains the developer considered as low risk (green)">
+<!ENTITY activategreen "Activate timer on domains the developer considered as low-risk (green)">
+<!ENTITY controluserdefaults "Domains the developer considered as low-risk (green)">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
 <!ENTITY checkedtimer "Timer activated">

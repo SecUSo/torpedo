@@ -126,7 +126,10 @@ torpedo.updateTooltip = function (url)
 			if(titleDomain != torpedo.baseDomain){
 				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
 				else phish.textContent = torpedo.stringsBundle.getString('warn');
-				document.getElementById("infobox").style.marginTop = "43px";
+				if(navigator.language.indexOf("de") > -1){
+					document.getElementById("infobox").style.marginTop = "43px";
+				}
+				else document.getElementById("infobox").style.marginTop = "27px";
 				panel.style.backgroundColor = "#feffcc";
 				warningpic.hidden = false;
 				panel.style.borderColor = "red";
