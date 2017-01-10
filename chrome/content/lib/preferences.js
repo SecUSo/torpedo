@@ -8,6 +8,9 @@ torpedo.prefs = function () {
         Components.classes["@mozilla.org/preferences-service;1"]
             .getService(Components.interfaces.nsIPrefService)
             .getBranch("extensions.torpedo.");
+		//AddonManager.getAddonByID("torpedo@tu-darmstadt.de", function(addon) {
+		//	Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication).console.log("My extension's version is " + addon.version);
+		//});
     return {
         getBoolPref: prefManager.getBoolPref,
         getIntPref: prefManager.getIntPref,
@@ -31,10 +34,8 @@ torpedo.prefs = function () {
 					}
 				}
 			};
-
 			try
 			{
-				Components.utils.import("resource://gre/modules/AddonManager.jsm");
 				AddonManager.addAddonListener(listener);
 			}
 			catch (ex)
@@ -43,6 +44,26 @@ torpedo.prefs = function () {
 			}
         },
 
+		addonInstallingListener: function ()
+				{
+				var listener =
+				{
+				onInstalling: function(addon)
+				{
+					if (addon.id == "torpedo@tu-darmstadt.de"){
+						prefManager.clearUserPref("firstrun");
+					}
+				}
+				};
+				try
+				{
+					Components.utils.import("resource://gre/modules/AddonManager.jsm");
+					AddonManager.addAddonListener(listener);
+				}
+				catch (ex)
+				{
+				}
+					},
 		resetPrefs: function (all)
 		{
       // reset all prefs manually
@@ -66,5 +87,5 @@ torpedo.prefs = function () {
 			prefManager.clearUserPref("redirection2");
 			prefManager.clearUserPref("URLDefaultList");
 		}
-    };
+  };
 }();

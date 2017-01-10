@@ -43,7 +43,6 @@ torpedo.updateTooltip = function (url)
 	advice.textContent = torpedo.stringsBundle.getString('knownadvice');
 	advicebox.hidden = false;
 	// assert url to tooltip
-	torpedo.functions.setHref(url);
 	baseDomain.textContent = torpedo.baseDomain;
 	var split = url.indexOf(torpedo.baseDomain);
 	var beginning = url.substring(0, split);
@@ -113,27 +112,29 @@ torpedo.updateTooltip = function (url)
 			torpedo.infotext = torpedo.stringsBundle.getString('infosonredirect');
 			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
 		}
-	    else{
-	        redirectButton.hidden = true;
-	    }
-	    if(autore){
+	  else{
+	    redirectButton.hidden = true;
+	  }
+	  if(autore){
 			secondsbox.hidden = true;
 		}
 	}
 	// settings for phish case
 	var title = torpedo.handler.title;
-	if(title != "" && title != undefined && !torpedo.gmxRedirect && !torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") &&
-			!torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
+	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect){
 		if(torpedo.functions.isURL(title)){
 			if(torpedo.gmxRedirect) url = old;
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 			if(titleDomain != torpedo.baseDomain){
 				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
 				else phish.textContent = torpedo.stringsBundle.getString('warn');
-				document.getElementById("infobox").style.marginTop = "60px";
-			  panel.style.backgroundColor = "#feffcc";
+				document.getElementById("infobox").style.marginTop = "45px";
+				if(!torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") &&
+						!torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
+			  		panel.style.backgroundColor = "#feffcc";
+						panel.style.borderColor = "red";
+				}
 				warningpic.hidden = false;
-				panel.style.borderColor = "red";
 				redirect.textContent = "";
 				phish.hidden = false;
 				advice.textContent = torpedo.stringsBundle.getString('phishadvice');
@@ -154,6 +155,7 @@ torpedo.updateTooltip = function (url)
 			document.getElementById("infobox").style.marginTop = "32px";
 		}
 	}
+	torpedo.functions.setHref(url);
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
@@ -212,11 +214,12 @@ window.addEventListener("load", function load(event){
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 
 	torpedo.prefs.addonUninstallingListener();
+	torpedo.prefs.addonInstallingListener();
   torpedo.processDOM();
-	torpedo.prefs.setBoolPref("firstrun",true);
+	//torpedo.prefs.setBoolPref("firstrun",true);
   if(torpedo.prefs.getBoolPref("firstrun")){
 		torpedo.prefs.setBoolPref("firstrun",false);
-		torpedo.dialogmanager.createUpdate();
+		//torpedo.dialogmanager.createUpdate();
 		torpedo.dialogmanager.createWelcome();
 	}
 }, false);

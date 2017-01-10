@@ -2,7 +2,7 @@ pref("extensions.torpedo.firstrun", true);
 pref("extensions.torpedo.language", false);
 pref("extensions.torpedo.textsize", 100);
 pref("extensions.torpedo.checkedTimer", true);
-pref("extensions.torpedo.blockingTimer", 5);
+pref("extensions.torpedo.blockingTimer", 3);
 pref("extensions.torpedo.checkedGreenList", true);
 pref("extensions.torpedo.activatedGreenList", false);
 pref("extensions.torpedo.activatedOrangeList", false);

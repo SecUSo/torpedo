@@ -111,31 +111,24 @@ torpedo.handler.mouseOverHref = function (event)
 	}
 };
 
-torpedo.handler.setCountDownTimer = function (url) {
+torpedo.handler.resetCountDownTimer = function (){
+	if(countDownTimer != null){
+		clearInterval(countDownTimer);
+		countDownTimer = null;
+	}
+	if(clickTimer != null){
+		clearTimeout(clickTimer);
+	}
 	if(countDownTimer == null){
-		countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown', url);
-		clickTimer = setTimeout(function()
-		{
-			if(clickTimer != null)
-			{
+		if(document.getElementById("phish").hidden)
+			countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"),'countdown', Url);
+		else countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer")+2,'countdown', Url);
+		clickTimer = setTimeout(function(){
+			if(clickTimer != null){
 				clearTimeout(clickTimer);
 			}
 		}, torpedo.prefs.getIntPref("blockingTimer")*1000);
 	}
-};
-
-torpedo.handler.resetCountDownTimer = function (){
-	if(countDownTimer != null)
-		{
-			clearInterval(countDownTimer);
-			countDownTimer = null;
-		}
-
-		if(clickTimer != null)
-		{
-			clearTimeout(clickTimer);
-		}
-	torpedo.handler.setCountDownTimer(Url);
 };
 
 torpedo.handler.mouseDownHref = function (event)
