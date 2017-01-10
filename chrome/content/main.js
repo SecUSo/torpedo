@@ -49,12 +49,12 @@ torpedo.updateTooltip = function (url)
 	var beginning = url.substring(0, split);
 	var end = url.substring(split+torpedo.baseDomain.length, url.length);
 	if(navigator.language.indexOf("de") > -1){
-		document.getElementById("phish").style.marginBottom = "15px";
+		phish.style.marginBottom = "10px";
 		document.getElementById("infobox").style.marginTop = "15px";
 	}
 	else{
 		document.getElementById("infobox").style.marginTop = "25px";
-		document.getElementById("phish").style.marginBottom = "0px";
+		phish.style.marginBottom = "10px";
 	}
 
 	url1.textContent = beginning;
@@ -154,6 +154,12 @@ torpedo.updateTooltip = function (url)
 						!torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
 			  		panel.style.backgroundColor = "#feffcc";
 						panel.style.borderColor = "red";
+				}
+				if(navigator.language.indexOf("de") > -1){
+					phish.style.marginBottom = "52px";
+				}
+				else{
+					phish.style.marginBottom = "15px";
 				}
 				warningpic.hidden = false;
 				redirect.textContent = "";
