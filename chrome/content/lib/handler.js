@@ -76,6 +76,7 @@ torpedo.handler.mouseOverHref = function (event)
 				torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ","");
 				torpedo.handler.clickEnabled = true;
 				torpedo.functions.loop = -1;
+				torpedo.state = 0;
 				torpedo.functions.loopTimer = 2000;
 				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 				torpedo.handler.Url = url;

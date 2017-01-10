@@ -9,6 +9,7 @@ torpedo.gmxRedirect;
 torpedo.redirectClicked;
 torpedo.oldUrl;
 torpedo.infotext;
+torpedo.state; // 0 is unknown, 1 is green, 2 is blue, 3 is grey, 4 is redirect, 5 is gmxredirect, 6 is phish
 
 torpedo.updateTooltip = function (url)
 {
@@ -47,6 +48,14 @@ torpedo.updateTooltip = function (url)
 	var split = url.indexOf(torpedo.baseDomain);
 	var beginning = url.substring(0, split);
 	var end = url.substring(split+torpedo.baseDomain.length, url.length);
+	if(navigator.language.indexOf("de") > -1){
+		document.getElementById("phish").style.marginBottom = "15px";
+		document.getElementById("infobox").style.marginTop = "15px";
+	}
+	else{
+		document.getElementById("infobox").style.marginTop = "25px";
+		document.getElementById("phish").style.marginBottom = "0px";
+	}
 
 	url1.textContent = beginning;
 	url2.textContent = "";
@@ -67,6 +76,7 @@ torpedo.updateTooltip = function (url)
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
+		torpedo.state = 1;
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.infotext = torpedo.stringsBundle.getString('infosongreen');
 		//if(shortenText) redirect.textContent = "";
 		//else
@@ -80,6 +90,7 @@ torpedo.updateTooltip = function (url)
 	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "#1a509d";
+		torpedo.state = 2;
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.infotext = torpedo.stringsBundle.getString('infosonblue');
 		if(shortenText) redirect.textContent = "";
 		else redirect.textContent = torpedo.stringsBundle.getString('userrisk');
@@ -90,6 +101,10 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	else{
+		torpedo.state = 3;
+		if(navigator.language.indexOf("de") > -1)
+			document.getElementById("infobox").style.marginTop = "40px";
+		else document.getElementById("infobox").style.marginTop = "25px";
 		advice.textContent = torpedo.stringsBundle.getString('unknownadvice');
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
 			torpedo.infotext = ""
@@ -99,6 +114,7 @@ torpedo.updateTooltip = function (url)
 		panel.style.borderColor = " #bfb9b9";
 	}
 	if(torpedo.gmxRedirect){
+		torpedo.state = 5;
 		phish.hidden = false;
 		advice.hidden = false;
 		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
@@ -107,10 +123,12 @@ torpedo.updateTooltip = function (url)
 	// settings for redirect case
 	if(isRedirect){
 		if(torpedo.functions.loop < 0) {
+			torpedo.state = 4;
 			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('shorturl_short');
 			else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
 			torpedo.infotext = torpedo.stringsBundle.getString('infosonredirect');
 			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
+			document.getElementById("infobox").style.marginTop = "45px";
 		}
 	  else{
 	    redirectButton.hidden = true;
@@ -119,9 +137,11 @@ torpedo.updateTooltip = function (url)
 			secondsbox.hidden = true;
 		}
 	}
+
+	var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
 	// settings for phish case
 	var title = torpedo.handler.title;
-	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect){
+	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect && !requestList.includes(torpedo.functions.getDomainWithFFSuffix(torpedo.oldUrl)+",")){
 		if(torpedo.functions.isURL(title)){
 			if(torpedo.gmxRedirect) url = old;
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
@@ -129,6 +149,7 @@ torpedo.updateTooltip = function (url)
 				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
 				else phish.textContent = torpedo.stringsBundle.getString('warn');
 				document.getElementById("infobox").style.marginTop = "45px";
+				torpedo.state = 6;
 				if(!torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") &&
 						!torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
 			  		panel.style.backgroundColor = "#feffcc";
@@ -147,14 +168,14 @@ torpedo.updateTooltip = function (url)
 	torpedo.textSize = torpedo.prefs.getIntPref("textsize");
   content.style.fontSize=""+torpedo.textSize+"%";
 
-	if(torpedo.textSize == "115"){
+	/*if(torpedo.textSize == "115"){
 		if(navigator.language.indexOf("de") > -1){
 			document.getElementById("infobox").style.marginTop = "48px";
 		}
 		else{
 			document.getElementById("infobox").style.marginTop = "32px";
 		}
-	}
+	}*/
 	torpedo.functions.setHref(url);
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);

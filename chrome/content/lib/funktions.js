@@ -309,6 +309,15 @@ torpedo.functions.changeTextsize = function(){
       torpedo.prefs.setIntPref("textsize", 100);
       torpedo.textSize = 100;
       if(editor!=null) editor.style.fontSize="100%";
+      /*if(torpedo.state == 1) document.getElementById("infobox").style.marginTop = "2px";
+      if(torpedo.state == 2) document.getElementById("infobox").style.marginTop = "2px";
+      if(torpedo.state == 3) document.getElementById("infobox").style.marginTop = "10px";
+      if(torpedo.state == 4) document.getElementById("infobox").style.marginTop = "45px";
+      if(torpedo.state == 5) document.getElementById("infobox").style.marginTop = "2px";
+      if(torpedo.state == 6) {
+        document.getElementById("url-box").style.marginTop = "10px";
+        document.getElementById("infobox").style.marginTop = "45px";
+      }*/
     }
     else {
   		  document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('smalltext');
@@ -316,6 +325,15 @@ torpedo.functions.changeTextsize = function(){
         torpedo.prefs.setIntPref("textsize", 115);
         torpedo.textSize = 115;
         if(editor!=null) editor.style.fontSize="115%";
+        /*if(torpedo.state == 1) document.getElementById("infobox").style.marginTop = "0px";
+        if(torpedo.state == 2) document.getElementById("infobox").style.marginTop = "0px";
+        if(torpedo.state == 3) document.getElementById("infobox").style.marginTop = "0px";
+        if(torpedo.state == 4) document.getElementById("infobox").style.marginTop = "55px";
+        if(torpedo.state == 5) document.getElementById("infobox").style.marginTop = "0px";
+        if(torpedo.state == 6) {
+          document.getElementById("url-box").style.marginTop = "20px";
+          document.getElementById("infobox").style.marginTop = "65px";
+        }*/
     }
 }
 

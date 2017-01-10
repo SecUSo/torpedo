@@ -10,13 +10,13 @@
   display: inline;
   white-space: pre-wrap;
   margin: 7px 0px 0px 6px;
-  max-width: 330px;
+  max-width: 350px;
 }
 #advice{
   display: block;
   display: inline;
   white-space: pre-wrap;
-  max-width: 330px;
+  max-width: 350px;
   margin-top:3px;
   margin-bottom:5px;
 }
@@ -26,7 +26,7 @@
   display: inline;
   white-space: pre-wrap;
   font-style: italic;
-  max-width: 330px;
+  max-width: 350px;
 }
 #redirectButton
 {
@@ -49,7 +49,7 @@
 	margin-right: 2px;
 	margin-bottom: 0px;
   letter-spacing: 2px;
-  max-width: 330px;
+  max-width: 350px;
 }
 #url1,#url2
 {
@@ -74,11 +74,12 @@
   border-radius: 5px;
   color: #000000;
   font-size: 100px;
-	width: 330px;
+	width: 350px;
 }
 #advicebox
 {
   margin-left: 2px;
+  margin-bottom:5px;
 }
 #infos{
   margin-top: 0px;

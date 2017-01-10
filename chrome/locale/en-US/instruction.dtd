@@ -31,7 +31,7 @@
 <!ENTITY next "Next">
 <!ENTITY back "Back">
 <!ENTITY redirection "Redirections">
-<!ENTITY redirect "Click to show destination address">
+<!ENTITY redirect "Deduce target URL">
 <!ENTITY noredirect "Do not check domains for forwarding">
 <!ENTITY manualredirect "Check domains manually for forwarding">
 <!ENTITY autoredirect "Check domains automatically for forwarding">
