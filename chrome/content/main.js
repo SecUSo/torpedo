@@ -50,10 +50,10 @@ torpedo.updateTooltip = function (url)
 	var end = url.substring(split+torpedo.baseDomain.length, url.length);
 	if(navigator.language.indexOf("de") > -1){
 		phish.style.marginBottom = "10px";
-		document.getElementById("infobox").style.marginTop = "15px";
+		document.getElementById("infobox").style.marginTop = "7px";
 	}
 	else{
-		document.getElementById("infobox").style.marginTop = "25px";
+		document.getElementById("infobox").style.marginTop = "7px";
 		phish.style.marginBottom = "10px";
 	}
 
@@ -103,8 +103,8 @@ torpedo.updateTooltip = function (url)
 	else{
 		torpedo.state = 3;
 		if(navigator.language.indexOf("de") > -1)
-			document.getElementById("infobox").style.marginTop = "40px";
-		else document.getElementById("infobox").style.marginTop = "25px";
+			document.getElementById("infobox").style.marginTop = "42px";
+		else document.getElementById("infobox").style.marginTop = "10px";
 		advice.textContent = torpedo.stringsBundle.getString('unknownadvice');
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
 			torpedo.infotext = ""
@@ -119,6 +119,12 @@ torpedo.updateTooltip = function (url)
 		advice.hidden = false;
 		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
 		torpedo.infotext = torpedo.stringsBundle.getString('infosongmxredirect');
+		if(navigator.language.indexOf("de") > -1){
+			phish.style.marginBottom = "5px";
+		}
+		else{
+			phish.style.marginBottom = "5px";
+		}
 	}
 	// settings for redirect case
 	if(isRedirect){
@@ -128,7 +134,10 @@ torpedo.updateTooltip = function (url)
 			else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
 			torpedo.infotext = torpedo.stringsBundle.getString('infosonredirect');
 			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
-			document.getElementById("infobox").style.marginTop = "45px";
+			if(navigator.language.indexOf("de") > -1)
+				document.getElementById("infobox").style.marginTop = "30px";
+			else document.getElementById("infobox").style.marginTop = "45px";
+
 		}
 	  else{
 	    redirectButton.hidden = true;
@@ -143,23 +152,35 @@ torpedo.updateTooltip = function (url)
 	var title = torpedo.handler.title;
 	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect && !requestList.includes(torpedo.functions.getDomainWithFFSuffix(torpedo.oldUrl)+",")){
 		if(torpedo.functions.isURL(title)){
-			if(torpedo.gmxRedirect) url = old;
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
-			if(titleDomain != torpedo.baseDomain){
+			var a = titleDomain.split(".");
+			var b = torpedo.baseDomain.split(".");
+			Application.console.log(!(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1]))
+			if(titleDomain != torpedo.baseDomain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
 				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
 				else phish.textContent = torpedo.stringsBundle.getString('warn');
-				document.getElementById("infobox").style.marginTop = "45px";
 				torpedo.state = 6;
 				if(!torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") &&
 						!torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
 			  		panel.style.backgroundColor = "#feffcc";
 						panel.style.borderColor = "red";
-				}
-				if(navigator.language.indexOf("de") > -1){
-					phish.style.marginBottom = "52px";
+						if(navigator.language.indexOf("de") > -1){
+							phish.style.marginBottom = "52px";
+							document.getElementById("infobox").style.marginTop = "55px";
+						}
+						else{
+							phish.style.marginBottom = "15px";
+							document.getElementById("infobox").style.marginTop = "45px";
+						}
 				}
 				else{
-					phish.style.marginBottom = "15px";
+					if(navigator.language.indexOf("de") > -1){
+						phish.style.marginBottom = "55px";
+						document.getElementById("infobox").style.marginTop = "0px";
+					}
+					else{
+						document.getElementById("infobox").style.marginTop = "0px";
+					}
 				}
 				warningpic.hidden = false;
 				redirect.textContent = "";

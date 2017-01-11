@@ -115,7 +115,7 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
         return url;
     }
     catch(err){
-        return torpedo.oldUrl;
+        return url;
     }
   }
 };
