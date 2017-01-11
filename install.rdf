@@ -6,8 +6,8 @@
 
     <em:id>torpedo@tu-darmstadt.de</em:id>
     <em:version>1.0.13</em:version>
-    <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
-    <em:description>TOrPeDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TOrPeDO displays the correct web address in a tooltip and helps you to analyze it.
+    <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+    <em:description>TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.
 
 Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
     <em:creator>TU Darmstadt SECUSO</em:creator>
@@ -20,8 +20,8 @@ Trustworthy links are displayed in a green box. Links you opened at least two ti
       <Description>
         <em:locale>de-DE</em:locale>
         <em:creator>TU Darmstadt - SECUSO</em:creator>
-        <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
-        <em:description>TOrPeDO ist ein Tool zum Erkennen von betrügerischen Links (Phishing). Bewegen Sie die Maus über einen Link in einer Email. TOrPeDO zeigt Ihnen die tatsächliche Webadresse in einem Tooltip an und hilft Ihnen, diese zu untersuchen.
+        <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:description>TORPEDO ist ein Tool zum Erkennen von betrügerischen Links (Phishing). Bewegen Sie die Maus über einen Link in einer Email. TORPEDO zeigt Ihnen die tatsächliche Webadresse in einem Tooltip an und hilft Ihnen, diese zu untersuchen.
 
 Als vertrauenswürdig eingestufte Webadressen haben eine grüne Umrandung im Popup. Webadressen, die Sie zweimal geöffnet haben, sind orange umrandet.</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/de/secuso/forschung/ergebnisse/torpedo/</em:homepageURL>
@@ -32,8 +32,8 @@ Als vertrauenswürdig eingestufte Webadressen haben eine grüne Umrandung im Pop
       <Description>
         <em:locale>en-US</em:locale>
         <em:creator>TU Darmstadt - SECUSO</em:creator>
-        <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
-        <em:description>TOrPeDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TOrPeDO displays the correct web address in a tooltip and helps you to analyze it.
+        <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:description>TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.
 
 Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/en/secuso-home/research/results/torpedo/</em:homepageURL>
@@ -44,8 +44,8 @@ Trustworthy links are displayed in a green box. Links you opened at least two ti
       <Description>
         <em:locale>en-GB</em:locale>
         <em:creator>TU Darmstadt - SECUSO</em:creator>
-        <em:name>TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
-        <em:description>TOrPeDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TOrPeDO displays the correct web address in a tooltip and helps you to analyze it.
+        <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:description>TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.
 
 Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
         <em:homepageURL>https://www.secuso.informatik.tu-darmstadt.de/en/secuso-home/research/results/torpedo/</em:homepageURL>

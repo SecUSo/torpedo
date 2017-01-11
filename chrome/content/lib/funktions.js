@@ -377,13 +377,22 @@ torpedo.functions.changeActivatedOrange = function (click){
 torpedo.functions.changeCheckedTimer = function (){
     d = !d;
     torpedo.prefs.setBoolPref("checkedTimer", d);
+    Application.console.log(document.getElementById("listofdefaults").style.color);
     if(!d){
         torpedo.prefs.setIntPref("blockingTimer", 0);
         document.getElementById("countdown").disabled = true;
+        document.getElementById("greenlistactivated").disabled = true;
+        document.getElementById("activategreen").style.color = "grey";
+        document.getElementById("orangelistactivated").disabled = true;
+        document.getElementById("activateorange").style.color = "grey";
     }
     else{
         torpedo.prefs.setIntPref("blockingTimer", 3);
         document.getElementById("countdown").disabled = false;
+        document.getElementById("greenlistactivated").disabled = false;
+        document.getElementById("activategreen").style.color = "#644156";
+        document.getElementById("orangelistactivated").disabled = false;
+        document.getElementById("activateorange").style.color = "#644156";
     }
 }
 

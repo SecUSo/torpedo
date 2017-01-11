@@ -25,9 +25,9 @@
 		</hbox>
 		<hbox style="margin-top:15px">
 			<spacer flex="1" />
-			<button label="Back" flex="1" oncommand="torpedo.dialogmanager.welcome3()"/>
-			<button label="Skip" flex="1" oncommand="window.close()"/>
-			<button label="Next" flex="1" oncommand="torpedo.dialogmanager.welcome5()"/>
+			<button label="&back;" flex="1" oncommand="torpedo.dialogmanager.welcome3()"/>
+			<button label="&skip;" flex="1" oncommand="window.close()"/>
+			<button label="&next;" flex="1" oncommand="torpedo.dialogmanager.welcome5()"/>
 		</hbox>
 	</vbox>
 </window>

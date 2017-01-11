@@ -1,4 +1,4 @@
-<!ENTITY windowheader "TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn">
+<!ENTITY windowheader "TORPEDO - TOoltip-poweRed Phishing Email DetectiOn">
 <!ENTITY yes "Yes">
 <!ENTITY no "No">
 <!ENTITY save "Save">
@@ -29,6 +29,7 @@
 <!ENTITY checkedtimer "Link deactivation delay timer activated">
 <!ENTITY messagetimer "Link deactivation timer set to">
 <!ENTITY next "Next">
+<!ENTITY skip "Skip">
 <!ENTITY back "Back">
 <!ENTITY redirection "Redirections">
 <!ENTITY redirect "Deduce target URL">

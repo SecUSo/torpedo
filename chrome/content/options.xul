@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
-<prefwindow id="optionwindow" title="TOrPeDO &settings;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+<prefwindow id="optionwindow" title="TORPEDO &settings;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="extra1,accept,cancel"
         buttonlabelextra1="&default_settings;"
         buttonlabelcancel="&close;"
@@ -28,7 +28,7 @@
         <preference id="firefox-checked-orangelistactivated" name="extensions.torpedo.activatedOrangeList" type="bool"/>
       </preferences>
 
-      <tabbox id="editor" style="max-width:600px">
+      <tabbox id="editor" style="width:400px;">
         <tabs>
           <tab label="&delay;"/>
           <tab label="Domains"/>
@@ -46,14 +46,10 @@
                 <checkbox id="greenlistactivated" preference="firefox-checked-greenlistactivated" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen(false);" />
                 <description id="activategreen" style="width:330px; margin-top:10px" onclick="torpedo.functions.changeActivatedGreen(true)"/>
               </hbox>
-              <image id="delay1" flex="0" align="start" />
               <hbox>
                 <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:20px;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange(false);" />
                 <description id="activateorange" style="width:330px; margin-top:10px" tooltiptext="&userdomains;" onclick="torpedo.functions.changeActivatedOrange(true)"/>
               </hbox>
-              <image id="delay2" flex="0" align="start" />
-              <spacer flex="1" />
-              <button id="opentutorial" label="Open tutorial" oncommand="torpedo.dialogmanager.createWelcome()" />
             </vbox>
           </tabpanel>
           <tabpanel id="listtab" orient="horizontal">

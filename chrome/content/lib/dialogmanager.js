@@ -9,8 +9,12 @@ torpedo.dialogmanager.createInstruction = function () {
 	window.openDialog("chrome://torpedo/content/dialog/instruction.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal,top='+top+',left='+left+', width='+width+',height='+height+'", top,left);
 };
 
-torpedo.dialogmanager.createDelete = function (windowWidth,windowHeight)  {
-	window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome, dialog,resizable=no,centerscreen, modal,width='+windowWidth+',height='+windowHeight+'");
+torpedo.dialogmanager.createDelete = function ()  {
+  windowWidth=700;
+	windowHeight=500;
+  var left = (screen.width/2)-(windowWidth/2);
+  var top = (screen.height/2)-(windowHeight/2);
+  window.open("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.createDefaultDelete = function (windowWidth,windowHeight)  {
@@ -27,10 +31,6 @@ torpedo.dialogmanager.createInfo = function () {
 
 torpedo.dialogmanager.showDefaults = function(){
 	window.openDialog("chrome://torpedo/content/dialog/defaults.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
-};
-
-torpedo.dialogmanager.showRedirects = function(){
-	window.openDialog("chrome://torpedo/content/dialog/redirects.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
 
 torpedo.dialogmanager.createUnknownInfo = function(){

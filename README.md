@@ -1,4 +1,4 @@
-# TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn
+# TORPEDO - TOoltip-poweRed Phishing Email DetectiOn
 
 ## Download
 Das Add-on kann von der offiziellen [Add-on Webseite](https://addons.mozilla.org/de/thunderbird/addon/torpedo-phishing-detection/) von Mozilla heruntergeladen werden.
@@ -41,4 +41,4 @@ Open Thunderbird and choose Tools -> "Add Ons". In the Add Ons screen, click on 
 
 ## Lizenz
 
-TOrPeDO ist mit der GPLv3 lizenziert.
+TORPEDO ist mit der GPLv3 lizenziert.

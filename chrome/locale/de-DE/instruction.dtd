@@ -1,4 +1,4 @@
-<!ENTITY windowheader "TOrPeDO - TOoltip-poweRed Phishing Email DetectiOn">
+<!ENTITY windowheader "TORPEDO - TOoltip-poweRed Phishing Email DetectiOn">
 <!ENTITY yes "Ja">
 <!ENTITY no "Nein">
 <!ENTITY save "Speichern">
@@ -12,23 +12,24 @@
 <!ENTITY general "Allgemein">
 <!ENTITY lists "Listen">
 <!ENTITY userdomains "Domains, die mind. 2x aufgerufen wurden">
-<!ENTITY editentries "Liste anzeigen und bearbeiten">
+<!ENTITY editentries "Bearbeiten / Löschen von Einträgen">
 <!ENTITY addentries "Hinzufügen">
 <!ENTITY add "Hinzufügen">
 <!ENTITY clearentries "Alle Einträge löschen">
-<!ENTITY showdefaults "Liste anzeigen">
-<!ENTITY activated "Liste aktiviert">
-<!ENTITY userlinks "Domains, die Sie als 'niedriges Risiko' eingestuft haben (blau)">
-<!ENTITY controluserdefaults "Domains, die der Entwickler als 'niedriges Risiko' eingestuft hat (grün)">
+<!ENTITY showdefaults "Anzeigen der Einträge">
+<!ENTITY activated "Liste der Entwickler aktivieren">
+<!ENTITY userlinks "Domains, die von Ihnen als niedrig riskant eingestuft wurden">
+<!ENTITY controluserdefaults "Domains, die vom Entwickler als niedrig riskant eingestuft wurden">
 <!ENTITY deleteEntries "Einträge löschen">
 <!ENTITY pickEdit "Welchen der Einträge möchten Sie löschen?">
 <!ENTITY option "Optionen">
 <!ENTITY close "Schließen">
 <!ENTITY delete "Löschen">
 <!ENTITY settings "Einstellungen">
-<!ENTITY checkedtimer "Timer aktiviert">
-<!ENTITY messagetimer "Timer beträgt:">
+<!ENTITY checkedtimer "Link-Verzögerung aktiviert">
+<!ENTITY messagetimer "Link-Verzögerung Zeit auf:">
 <!ENTITY next "Weiter">
+<!ENTITY skip "Überspringen">
 <!ENTITY back "Zurück">
 <!ENTITY redirection "Weiterleitungen">
 <!ENTITY redirect "Zeige Zieladresse">
@@ -49,7 +50,7 @@
 <!ENTITY thunderbird "Zurück zu Thunderbird">
 <!ENTITY kapitel1 "Basisinformationen">
 <!ENTITY kapitel2 "Tooltiptypen">
-<!ENTITY kapitel3 "Urlprüfung">
+<!ENTITY kapitel3 "URL-Prüfung">
 <!ENTITY kapitel4 "Spezialfälle">
 <!ENTITY kapitel5 "Menü">
 <!ENTITY kapitel6 "Einstellungen">

@@ -56,7 +56,7 @@ torpedo.updateTooltip = function (url)
 		document.getElementById("infobox").style.marginTop = "7px";
 		phish.style.marginBottom = "10px";
 	}
-
+	if(torpedo.prefs.getIntPref("blockingTimer")==0) secondsbox.hidden = true;
 	url1.textContent = beginning;
 	url2.textContent = "";
 	if(end.length > 75) end = end.substring(0,75) +  "...";
@@ -103,7 +103,7 @@ torpedo.updateTooltip = function (url)
 	else{
 		torpedo.state = 3;
 		if(navigator.language.indexOf("de") > -1)
-			document.getElementById("infobox").style.marginTop = "42px";
+			document.getElementById("infobox").style.marginTop = "45px";
 		else document.getElementById("infobox").style.marginTop = "10px";
 		advice.textContent = torpedo.stringsBundle.getString('unknownadvice');
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
@@ -135,16 +135,12 @@ torpedo.updateTooltip = function (url)
 			torpedo.infotext = torpedo.stringsBundle.getString('infosonredirect');
 			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
 			if(navigator.language.indexOf("de") > -1)
-				document.getElementById("infobox").style.marginTop = "30px";
+				document.getElementById("infobox").style.marginTop = "33px";
 			else document.getElementById("infobox").style.marginTop = "45px";
-
 		}
 	  else{
 	    redirectButton.hidden = true;
 	  }
-	  if(autore){
-			secondsbox.hidden = true;
-		}
 	}
 
 	var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
@@ -155,35 +151,33 @@ torpedo.updateTooltip = function (url)
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 			var a = titleDomain.split(".");
 			var b = torpedo.baseDomain.split(".");
-			Application.console.log(!(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1]))
 			if(titleDomain != torpedo.baseDomain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
 				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
 				else phish.textContent = torpedo.stringsBundle.getString('warn');
 				torpedo.state = 6;
-				if(!torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") &&
-						!torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
-			  		panel.style.backgroundColor = "#feffcc";
-						panel.style.borderColor = "red";
-						if(navigator.language.indexOf("de") > -1){
-							phish.style.marginBottom = "52px";
-							document.getElementById("infobox").style.marginTop = "55px";
-						}
-						else{
-							phish.style.marginBottom = "15px";
-							document.getElementById("infobox").style.marginTop = "45px";
-						}
-				}
-				else{
+				if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
 					if(navigator.language.indexOf("de") > -1){
-						phish.style.marginBottom = "55px";
 						document.getElementById("infobox").style.marginTop = "0px";
 					}
 					else{
 						document.getElementById("infobox").style.marginTop = "0px";
 					}
+					phish.textContent = torpedo.stringsBundle.getString('actual');
 				}
-				warningpic.hidden = false;
-				redirect.textContent = "";
+				else{
+					panel.style.backgroundColor = "#feffcc";
+					panel.style.borderColor = "red";
+					redirect.textContent = "";
+					if(navigator.language.indexOf("de") > -1){
+						phish.style.marginBottom = "52px";
+						document.getElementById("infobox").style.marginTop = "55px";
+					}
+					else{
+						phish.style.marginBottom = "15px";
+						document.getElementById("infobox").style.marginTop = "45px";
+					}
+					warningpic.hidden = false;
+				}
 				phish.hidden = false;
 				advice.textContent = torpedo.stringsBundle.getString('phishadvice');
 				torpedo.infotext = torpedo.stringsBundle.getString('infosonred');
