@@ -202,8 +202,6 @@ torpedo.functions.saveRedirection = function(url, response){
   var answer = preVal2 + response + ",";
   str1.data = request;
   str2.data = answer;
-  Application.console.log("request: " + torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data);
-  Application.console.log("answer: " + torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data);
   if(!preVal1.includes(url + ",")){
     torpedo.prefs.setComplexValue("URLRequestList", Components.interfaces.nsISupportsString, str1);
     torpedo.prefs.setComplexValue("URLAnswerList", Components.interfaces.nsISupportsString, str2);

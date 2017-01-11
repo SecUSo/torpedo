@@ -189,7 +189,6 @@ torpedo.handler.mouseClickHrefError = function(event){
 torpedo.handler.mouseClickInfoButton = function (event)
 {
 	//torpedo.dialogmanager.createInstruction(1080,607.5);
-	Application.console.log("click")
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	var warningpic = document.getElementById("warning-pic");

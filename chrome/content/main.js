@@ -197,8 +197,8 @@ torpedo.processDOM = function (){
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
 		$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
 
-		document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('bigtext');
-		document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
+		//document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('bigtext');
+		///document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
 
     var messagepane = document.getElementById("messagepane");
     if(messagepane){

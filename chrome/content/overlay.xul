@@ -70,8 +70,6 @@
 	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.handler.Url);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
 			<menuitem label="&opensettings;" onclick="window.openDialog('chrome://torpedo/content/options.xul','bmarks','chrome=yes, dialog,resizable=no, modal, centerscreen');  torpedo.handler.TempTarget = ''"/>
-			<menuitem id="changeSize" onclick="torpedo.functions.changeTextsize(); torpedo.updateTooltip(torpedo.handler.Url);"/>
-			<menuitem id="changeLang" onclick="torpedo.functions.changeLanguage(); torpedo.updateTooltip(torpedo.handler.Url);"/>
 		</menupopup>
 	</popupset>
 
