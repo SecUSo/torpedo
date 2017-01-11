@@ -153,9 +153,11 @@ torpedo.functions.traceUrl = function (url, redirect) {
 torpedo.functions.trace = function (url){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
-    xhr.onload = function () {
+    xhr.onreadystatechange = function(){
+      if(this.readyState == 4){
         torpedo.functions.containsRedirect(xhr.responseURL);
-        torpedo.functions.saveRedirection(torpedo.oldUrl, xhr.responseURL);
+        torpedo.functions.saveRedirection(url, xhr.responseURL);
+      }
     };
     xhr.send(null);
 };
