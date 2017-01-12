@@ -6,7 +6,7 @@ torpedo.dialogmanager.createDelete = function ()  {
 	windowHeight=500;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
-  window.open("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
+  window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
 torpedo.dialogmanager.createDefaultDelete = function (windowWidth,windowHeight)  {

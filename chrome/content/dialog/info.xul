@@ -7,9 +7,7 @@
 		buttons="cancel"
 		buttonlabelcancel="OK"
 		ondialogcancel="return true;"
-		onload='var torpedo = torpedo || {}; 	
-				if(torpedo.textSize="100%") document.getElementById("infopopup").style.fontSize="100%";
-    			else document.getElementById("infopopup").style.fontSize="115%";'>
+		onload='var torpedo = torpedo || {}'>
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 

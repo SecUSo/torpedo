@@ -88,7 +88,7 @@ torpedo.updateTooltip = function (url)
 		redirectButton.hidden = true;
 		if(torpedo.functions.isRedirect(torpedo.oldUrl)){
 			if(navigator.language.indexOf("de") > -1)
-				infos.style.marginBottom = "200px";
+				infos.style.marginBottom = "190px";
 			else infos.style.marginBottom = "200px";
 		}
 		// if timer is off in trustworthy domains
@@ -111,7 +111,7 @@ torpedo.updateTooltip = function (url)
 		}
 		if(torpedo.functions.isRedirect(torpedo.oldUrl)){
 			if(navigator.language.indexOf("de") > -1)
-				infos.style.marginBottom = "200px";
+				infos.style.marginBottom = "150px";
 			else infos.style.marginBottom = "200px";
 		}
 	}
@@ -126,7 +126,7 @@ torpedo.updateTooltip = function (url)
 		}
 		else if(!isRedirect){
 			if(navigator.language.indexOf("de") > -1)
-				infos.style.marginBottom = "100px";
+				infos.style.marginBottom = "20px";
 			else infos.style.marginBottom = "100px";
 
 		}
@@ -236,7 +236,6 @@ torpedo.processDOM = function (){
 		$("#editSecond").bind("click",torpedo.handler.mouseClickEditButton);
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
 		$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
-
 		//document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('bigtext');
 		///document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
 

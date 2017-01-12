@@ -11,22 +11,15 @@
 
 	<vbox>
 		<hbox>
-			<vbox width="200" height="580" style="background-color: #cccccc">
-				<label value="&kapitel1;" id="kap1" style="margin-top:35px; margin-left:20px" onclick="torpedo.dialogmanager.welcome1()"/>
-				<label value="&kapitel2;" id="kap2" style="margin-top:15px; margin-left:20px" onclick="torpedo.dialogmanager.welcome2()"/>
-				<label value="&kapitel3;" id="kap3" style="margin-top:15px; margin-left:20px" onclick="torpedo.dialogmanager.welcome3()"/>
-				<label value="&kapitel4;" id="kap4" style="margin-top:15px; margin-left:20px" onclick="torpedo.dialogmanager.welcome6()"/>
-				<label value="&kapitel5;" id="kap5" style="margin-top:15px; margin-left:20px" onclick="torpedo.dialogmanager.welcome9()"/>
-				<label value="&kapitel6;" id="kap6" style="margin-top:15px; margin-left:20px" onclick="torpedo.dialogmanager.welcome10()"/>
-			</vbox>
+			<vbox width="200" height="580" style="background-color: #cccccc" />
 			<vbox>
 				<image id="welcomePic" flex="0" align="start" width="800" height="580"/>
 			</vbox>
 		</hbox>
-		<hbox style="margin-top:15px; margin-left:100px">
-			<spacer flex="1" />
-			<button label="&thunderbird;" oncommand="window.close()"/>
+		<hbox style="margin-top:15px;">
 			<spacer flex="2" />
+			<button label="&thunderbird;" oncommand="window.close()" />
+			<spacer flex="3" />
 			<button label="&toTutorial;" oncommand="torpedo.dialogmanager.welcome1()"/>
 			<spacer flex="1" />
 		</hbox>

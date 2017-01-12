@@ -189,10 +189,11 @@ torpedo.handler.mouseClickInfoButton = function (event)
 	var panel = document.getElementById("tooltippanel");
 	var warningpic = document.getElementById("warning-pic");
 	if(torpedo.db.unknown(torpedo.baseDomain) && !torpedo.functions.isRedirect(torpedo.oldUrl) && !torpedo.gmxRedirect){
-		if(warningpic.hidden) torpedo.dialogmanager.createUnknownInfo();
-		else {
-			document.getElementById("infocheck").hidden = false;
+		if(warningpic.hidden){
+			torpedo.dialogmanager.createUnknownInfo();
 		}
+		document.getElementById("infocheck").hidden = false;
+		moreinfos.textContent = torpedo.infotext;
 	}
 	else{
 		if(moreinfos.textContent != ""){
@@ -203,6 +204,7 @@ torpedo.handler.mouseClickInfoButton = function (event)
 };
 
 torpedo.handler.mouseClickDeleteButton = function(event){
+	Application.console.log("2")
 	torpedo.dialogmanager.createDelete();
 };
 torpedo.handler.mouseClickDefaultsEditButton = function(event){

@@ -44,7 +44,7 @@
 <!ENTITY addtotrusted "Mark domain as trustworthy">
 <!ENTITY searchfor "Check domain with google.com">
 <!ENTITY moreinformation "More information on risk consideration">
-<!ENTITY infocheckURL "More information on how to check the URL">
+<!ENTITY infocheckURL "How to check the URL">
 <!ENTITY toTutorial ">> Continue to tutorial (recommended for first time users)">
 <!ENTITY opentutorial "Open tutorial">
 <!ENTITY thunderbird "Back to Thunderbird">
