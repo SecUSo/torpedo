@@ -39,7 +39,7 @@
               <checkbox id="checkedtimer" label="&checkedtimer;" preference="firefox-checked-timer" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('checkedTimer'));" oncommand="torpedo.functions.changeCheckedTimer();"/>
               <hbox>
                 <label value="&messagetimer;" style="margin-top:15px" />
-                <textbox type="number" id="countdown" preference="firefox-blocking-timer" onchange="torpedo.functions.setTimerRange()" style="margin-top:10px; max-width:70px; max-height:30px"/>
+                <textbox type="number" id="countdown" preference="firefox-blocking-timer" min="0" max="100" onchange="torpedo.functions.setTimerRange()" style="margin-top:10px; max-width:70px; max-height:30px"/>
                 <label value="&seconds;" style="margin-top:15px" />
               </hbox>
               <hbox>

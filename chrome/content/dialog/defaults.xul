@@ -16,7 +16,7 @@
       <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
     </stringbundleset>
 
-		<vbox style="min-height:400px">
+		<vbox style="min-height:380px">
 			<listbox id="defaultList" width="300"  style="min-height:360px">
 			  <listcols>
 			    <listcol flex="1"/>

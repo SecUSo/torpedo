@@ -127,6 +127,8 @@ torpedo.db.getSecond = function () {
 	  	theList.appendChild(row);
 		}
 	}
+ 	document.getElementById("deleteSecond").disabled = 	(document.getElementById("theList").itemCount == 0)? true:false;
+
 };
 
 torpedo.db.getDefaults = function (){
@@ -156,7 +158,7 @@ torpedo.db.addEntries = function(){
 	var error = document.getElementById("error");
 	var panel = document.getElementById("addEntries");
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
-
+	
 	addSites.toLowerCase();
 	addSites = addSites.replace(/\s+/g, '');
 	addSites = addSites + ",";

@@ -88,6 +88,7 @@ torpedo.handler.mouseOverHref = function (event)
 				var redirect = false;
 				moreinfos.textContent = "";
 				torpedo.infotext = "";
+				document.getElementById("infocheck").hidden = true;
 
 				// check if url is a "redirectUrl=" url (gmxredirect)
 				var redirectUrl = torpedo.functions.resolveRedirect(url);
@@ -184,12 +185,14 @@ torpedo.handler.mouseClickHrefError = function(event){
 
 torpedo.handler.mouseClickInfoButton = function (event)
 {
-	//torpedo.dialogmanager.createInstruction(1080,607.5);
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	var warningpic = document.getElementById("warning-pic");
-	if(torpedo.db.unknown(torpedo.baseDomain) && !torpedo.functions.isRedirect(torpedo.oldUrl) && !torpedo.gmxRedirect &&	warningpic.hidden){
-		torpedo.dialogmanager.createUnknownInfo();
+	if(torpedo.db.unknown(torpedo.baseDomain) && !torpedo.functions.isRedirect(torpedo.oldUrl) && !torpedo.gmxRedirect){
+		if(warningpic.hidden) torpedo.dialogmanager.createUnknownInfo();
+		else {
+			document.getElementById("infocheck").hidden = false;
+		}
 	}
 	else{
 		if(moreinfos.textContent != ""){
@@ -197,7 +200,6 @@ torpedo.handler.mouseClickInfoButton = function (event)
 		}
 		else moreinfos.textContent = torpedo.infotext;
 	}
-	//torpedo.updateTooltip(torpedo.handler.Url);
 };
 
 torpedo.handler.mouseClickDeleteButton = function(event){
@@ -242,4 +244,8 @@ torpedo.handler.loadOptions = function (){
 		document.getElementById("delay1").src = "chrome://torpedo/skin/delay1_en.png";
 		document.getElementById("delay2").src = "chrome://torpedo/skin/delay2_en.png";
 	}*/
+}
+
+torpedo.handler.tutorial = function(){
+	torpedo.dialogmanager.welcome1();
 }

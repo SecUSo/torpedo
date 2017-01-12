@@ -34,9 +34,6 @@
 <!ENTITY end "Exit">
 <!ENTITY redirection "Redirections">
 <!ENTITY redirect "Deduce target URL">
-<!ENTITY noredirect "Do not check domains for forwarding">
-<!ENTITY manualredirect "Check domains manually for forwarding">
-<!ENTITY autoredirect "Check domains automatically for forwarding">
 <!ENTITY secs "second(s)">
 <!ENTITY entries_gone "Successfully deleted">
 <!ENTITY showredirects "Show all redirection domains">
@@ -47,7 +44,9 @@
 <!ENTITY addtotrusted "Mark domain as trustworthy">
 <!ENTITY searchfor "Check domain with google.com">
 <!ENTITY moreinformation "More information on risk consideration">
+<!ENTITY infocheckURL "More information on how to check the URL">
 <!ENTITY toTutorial ">> Continue to tutorial (recommended for first time users)">
+<!ENTITY opentutorial "Open tutorial">
 <!ENTITY thunderbird "Back to Thunderbird">
 <!ENTITY kapitel1 "Basic informations">
 <!ENTITY kapitel2 "Tooltip types">

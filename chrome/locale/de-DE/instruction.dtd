@@ -47,7 +47,9 @@
 <!ENTITY addtotrusted "Domain als niedriges Risiko einstufen">
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
 <!ENTITY moreinformation "Mehr Informationen über die Risikoeinschätzung">
+<!ENTITY infocheckURL "Mehr Informationen zur Durchführung der Überprüfung">
 <!ENTITY toTutorial ">> Weiter zum Tutorial (Empfehlung bei Erstinstallation)">
+<!ENTITY opentutorial "Tutorial öffnen">
 <!ENTITY thunderbird "Zurück zu Thunderbird">
 <!ENTITY kapitel1 "Basisinformationen">
 <!ENTITY kapitel2 "Tooltip-Typen">

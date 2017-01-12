@@ -43,6 +43,7 @@
 					<hbox id="moreinfobox">
 						<description id="moreinfos" flex="1" />
 					</hbox>
+					<button id="infocheck" label="&infocheckURL;" hidden="true" onclick="torpedo.dialogmanager.createUnknownInfo();"/>
 				</vbox>
 				<button id="redirectButton" label="&redirect;" hidden="true"/>
 				<vbox id="seconds-box">
@@ -70,6 +71,7 @@
 	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.handler.Url);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
 			<menuitem label="&opensettings;" onclick="window.openDialog('chrome://torpedo/content/options.xul','bmarks','chrome=yes, dialog,resizable=no, modal, centerscreen');  torpedo.handler.TempTarget = ''"/>
+			<menuitem label="&opentutorial;" onclick="torpedo.handler.tutorial()"/>
 		</menupopup>
 	</popupset>
 

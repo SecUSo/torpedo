@@ -124,7 +124,7 @@ torpedo.functions.loop;
 torpedo.functions.loopTimer = 2000;
 
 torpedo.functions.traceUrl = function (url, redirect) {
-    // not opening popup yet, first some initializaion
+    // not opening new popup yet, first some initializaion
     torpedo.updateTooltip(url);
     unknown = true;
     // check if url is redirect and already in our list of saved entries
@@ -168,7 +168,7 @@ torpedo.functions.containsRedirect = function(url){
     torpedo.handler.clickEnabled = false;
     var redirect = document.getElementById("redirect");
     redirect.textContent = torpedo.stringsBundle.getString('wait');
-    document.getElementById("seconds-box").hidden = true;
+    //document.getElementById("seconds-box").hidden = true;
     document.getElementById("redirectButton").disabled = true;
     setTimeout(function(e){
         if(torpedo.functions.loop >= 5){
@@ -228,7 +228,8 @@ torpedo.functions.countdown = function (timee, id, url) {
 
     var setBaseDomain = document.getElementById("baseDomain");
     var noTimer = ((!torpedo.functions.isChecked("greenActivated") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) ||
-            (!torpedo.functions.isChecked("orangeActivated") && torpedo.db.inList(torpedo.baseDomain, "URLSecondList")));
+            (!torpedo.functions.isChecked("orangeActivated") && torpedo.db.inList(torpedo.baseDomain, "URLSecondList")) ||
+          (document.getElementById("redirect").textContent == torpedo.stringsBundle.getString('wait')));
 
     if (noTimer) {
         startTime = 0;
@@ -238,12 +239,10 @@ torpedo.functions.countdown = function (timee, id, url) {
         var second = startTime % 60;
         var panel = document.getElementById("tooltippanel");
         var content = document.getElementById("tooltipcontent");
-        //var url2 = document.getElementById("url2");
-        //var base = document.getElementById("baseDomain");
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
         $("#" + id).html(strZeit);
 
-        if (second == 0) {
+        if (second == 0 && (document.getElementById("redirect").textContent != torpedo.stringsBundle.getString('wait'))) {
             // make URL in tooltip clickable
             $("#clickbox").unbind("click");
             $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
@@ -436,7 +435,7 @@ torpedo.functions.redirect = function (id){
 */
 torpedo.functions.isRedirect = function(url){
     for(var i = 0; i < redirects.length; i++){
-        if(torpedo.baseDomain == redirects[i]) {
+        if(torpedo.functions.getDomainWithFFSuffix(url) == redirects[i]) {
             return true;
         }
     }
