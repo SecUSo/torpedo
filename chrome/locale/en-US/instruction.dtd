@@ -31,6 +31,7 @@
 <!ENTITY next "Next">
 <!ENTITY skip "Skip">
 <!ENTITY back "Back">
+<!ENTITY end "Exit">
 <!ENTITY redirection "Redirections">
 <!ENTITY redirect "Deduce target URL">
 <!ENTITY noredirect "Do not check domains for forwarding">
@@ -50,7 +51,7 @@
 <!ENTITY thunderbird "Back to Thunderbird">
 <!ENTITY kapitel1 "Basic informations">
 <!ENTITY kapitel2 "Tooltip types">
-<!ENTITY kapitel3 "Url checking">
+<!ENTITY kapitel3 "URL checking">
 <!ENTITY kapitel4 "Special cases">
 <!ENTITY kapitel5 "Menu">
 <!ENTITY kapitel6 "Settings">

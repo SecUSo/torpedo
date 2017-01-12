@@ -382,17 +382,19 @@ torpedo.functions.changeCheckedTimer = function (){
         torpedo.prefs.setIntPref("blockingTimer", 0);
         document.getElementById("countdown").disabled = true;
         document.getElementById("greenlistactivated").disabled = true;
-        document.getElementById("activategreen").style.color = "grey";
+        document.getElementById("activategreen").setAttribute("style","color:grey;width:330px; margin-top:10px");
         document.getElementById("orangelistactivated").disabled = true;
-        document.getElementById("activateorange").style.color = "grey";
+        document.getElementById("activateorange").setAttribute("style","color:grey;width:330px; margin-top:15px");
     }
     else{
         torpedo.prefs.setIntPref("blockingTimer", 3);
         document.getElementById("countdown").disabled = false;
         document.getElementById("greenlistactivated").disabled = false;
-        document.getElementById("activategreen").style.color = "#644156";
+        document.getElementById("activategreen").removeAttribute("style");
+        document.getElementById("activategreen").setAttribute("style","width:330px; margin-top:10px");
         document.getElementById("orangelistactivated").disabled = false;
-        document.getElementById("activateorange").style.color = "#644156";
+        document.getElementById("activateorange").removeAttribute("style");
+        document.getElementById("activateorange").setAttribute("style","width:330px; margin-top:15px");
     }
 }
 

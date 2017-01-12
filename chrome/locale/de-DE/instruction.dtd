@@ -31,6 +31,7 @@
 <!ENTITY next "Weiter">
 <!ENTITY skip "Überspringen">
 <!ENTITY back "Zurück">
+<!ENTITY end "Beenden">
 <!ENTITY redirection "Weiterleitungen">
 <!ENTITY redirect "Zeige Zieladresse">
 <!ENTITY noredirect "Domains nicht auf Weiterleitungen prüfen">
@@ -49,7 +50,7 @@
 <!ENTITY toTutorial ">> Weiter zum Tutorial (Empfehlung bei Erstinstallation)">
 <!ENTITY thunderbird "Zurück zu Thunderbird">
 <!ENTITY kapitel1 "Basisinformationen">
-<!ENTITY kapitel2 "Tooltiptypen">
+<!ENTITY kapitel2 "Tooltip-Typen">
 <!ENTITY kapitel3 "URL-Prüfung">
 <!ENTITY kapitel4 "Spezialfälle">
 <!ENTITY kapitel5 "Menü">

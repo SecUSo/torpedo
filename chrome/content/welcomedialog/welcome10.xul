@@ -27,7 +27,7 @@
 			<spacer flex="1" />
 			<button label="&back;" flex="1" oncommand="torpedo.dialogmanager.welcome9()"/>
 			<button label="&skip;" flex="1" oncommand="window.close()"/>
-			<button label="&thunderbird;" flex="1" oncommand="window.close()"/>
+			<button label="&end;" flex="1" oncommand="window.close()"/>
 		</hbox>
 	</vbox>
 </window>

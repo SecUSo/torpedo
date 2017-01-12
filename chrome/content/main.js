@@ -103,7 +103,7 @@ torpedo.updateTooltip = function (url)
 	else{
 		torpedo.state = 3;
 		if(navigator.language.indexOf("de") > -1)
-			document.getElementById("infobox").style.marginTop = "45px";
+			document.getElementById("infobox").style.marginTop = "23px";
 		else document.getElementById("infobox").style.marginTop = "10px";
 		advice.textContent = torpedo.stringsBundle.getString('unknownadvice');
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
@@ -135,8 +135,8 @@ torpedo.updateTooltip = function (url)
 			torpedo.infotext = torpedo.stringsBundle.getString('infosonredirect');
 			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
 			if(navigator.language.indexOf("de") > -1)
-				document.getElementById("infobox").style.marginTop = "33px";
-			else document.getElementById("infobox").style.marginTop = "45px";
+				document.getElementById("infobox").style.marginTop = "25px";
+			else document.getElementById("infobox").style.marginTop = "25px";
 		}
 	  else{
 	    redirectButton.hidden = true;
@@ -157,10 +157,12 @@ torpedo.updateTooltip = function (url)
 				torpedo.state = 6;
 				if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
 					if(navigator.language.indexOf("de") > -1){
-						document.getElementById("infobox").style.marginTop = "0px";
+						phish.style.marginBottom = "0px";
+						document.getElementById("infobox").style.marginTop = "2px";
 					}
 					else{
-						document.getElementById("infobox").style.marginTop = "0px";
+						phish.style.marginBottom = "0px";
+						document.getElementById("infobox").style.marginTop = "2px";
 					}
 					phish.textContent = torpedo.stringsBundle.getString('actual');
 				}
@@ -169,12 +171,12 @@ torpedo.updateTooltip = function (url)
 					panel.style.borderColor = "red";
 					redirect.textContent = "";
 					if(navigator.language.indexOf("de") > -1){
-						phish.style.marginBottom = "52px";
-						document.getElementById("infobox").style.marginTop = "55px";
+						phish.style.marginBottom = "47px";
+						document.getElementById("infobox").style.marginTop = "22px";
 					}
 					else{
 						phish.style.marginBottom = "15px";
-						document.getElementById("infobox").style.marginTop = "45px";
+						document.getElementById("infobox").style.marginTop = "25px";
 					}
 					warningpic.hidden = false;
 				}

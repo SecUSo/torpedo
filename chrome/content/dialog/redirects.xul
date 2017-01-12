@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&redirectList;"
+	buttons="accept,cancel, extra1"
+	buttonalign="start"
+	buttonlabelaccept="&add;"
+	buttonlabelcancel="&close;"
+	buttonlabelextra1="&delete;"
+	ondialogaccept="torpedo.redirect.add(); return false;"
+	ondialogcancel="return true;"
+	ondialogextra1="torpedo.redirect.delete();"
+	onload='torpedo.redirect.getRedirects();'>
+
+  <script type="application/javascript"  src="chrome://torpedo/content/lib/redirects.js" />
+	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/x-javascript" src="chrome://torpedo/content/lib/funktions.js"/>
+
+	<stringbundleset>
+		<stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
+	</stringbundleset>
+
+	<vbox id="redirectsBox">
+		<listbox id="redirectsList" height="200" style="width:350px;" onselect="document.documentElement.getButton('extra1').disabled = false;" />
+		<description id="addDialog" style="width:350px; margin-top:10px" />
+		<hbox>
+			<textbox id="add" onfocus="document.documentElement.getButton('accept').disabled = false;" style="margin-top:10px; width:350px; max-height:30px"/>
+		</hbox>
+	</vbox>
+
+	<popupset>
+		<panel type="arrow" id="errormessage" fade="slow">
+			<hbox class="mainBox">
+				<label id="error"/>
+			</hbox>
+		</panel>
+	</popupset>
+</dialog>

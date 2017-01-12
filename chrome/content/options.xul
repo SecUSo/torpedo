@@ -47,8 +47,8 @@
                 <description id="activategreen" style="width:330px; margin-top:10px" onclick="torpedo.functions.changeActivatedGreen(true)"/>
               </hbox>
               <hbox>
-                <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:20px;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange(false);" />
-                <description id="activateorange" style="width:330px; margin-top:10px" tooltiptext="&userdomains;" onclick="torpedo.functions.changeActivatedOrange(true)"/>
+                <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:15px;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange(false);" />
+                <description id="activateorange" style="width:330px; margin-top:15px" tooltiptext="&userdomains;" onclick="torpedo.functions.changeActivatedOrange(true)"/>
               </hbox>
             </vbox>
           </tabpanel>

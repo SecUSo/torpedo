@@ -1,14 +1,6 @@
 var torpedo = torpedo || {};
 torpedo.dialogmanager = torpedo.dialogmanager || {};
 
-torpedo.dialogmanager.createInstruction = function () {
-  windowWidth=1100;
-	windowHeight=890;
-  var left = (screen.width/2)-(windowWidth/2);
-  var top = (screen.height/2)-(windowHeight/2);
-	window.openDialog("chrome://torpedo/content/dialog/instruction.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal,top='+top+',left='+left+', width='+width+',height='+height+'", top,left);
-};
-
 torpedo.dialogmanager.createDelete = function ()  {
   windowWidth=700;
 	windowHeight=500;
