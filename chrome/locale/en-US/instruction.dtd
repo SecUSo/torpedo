@@ -22,7 +22,6 @@
 <!ENTITY deleteEntries "Delete entries">
 <!ENTITY option "Options">
 <!ENTITY close "Close">
-<!ENTITY activategreen "Activate timer on domains the developer considered as 'low-risk' (green)">
 <!ENTITY controluserdefaults "Domains the developer considered as 'low-risk' (green)">
 <!ENTITY delete "Delete">
 <!ENTITY settings "Settings">
