@@ -147,7 +147,7 @@ torpedo.updateTooltip = function (url)
 		phish.hidden = false;
 		advice.hidden = false;
 		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
-		infotext.textContent = torpedo.stringsBundle.getString('moreinforedirect');
+		infotext.textContent = torpedo.stringsBundle.getString('moreinfogmxredirect');
 		torpedo.info = torpedo.stringsBundle.getString('infosongmxredirect');
 		if(navigator.language.indexOf("de") > -1){
 			phish.style.marginBottom = "5px";
@@ -155,8 +155,8 @@ torpedo.updateTooltip = function (url)
 		else{
 			phish.style.marginBottom = "5px";
 		}
-		infotext.style.margin = "4px 0px 0px 6px";
-		infopic.style.marginTop = "0px";
+		infotext.style.margin = "4px 0px 20px 6px"
+		infopic.style.marginTop = "6px"
 	}
 	// settings for redirect case
 	if(isRedirect){
@@ -173,8 +173,8 @@ torpedo.updateTooltip = function (url)
 			else{
 				infobox.style.marginTop = "25px";
 			}
-			infotext.style.margin = "4px 0px 0px 6px";
-			infopic.style.marginTop = "0px";
+			infotext.style.margin = "4px 0px 20px 6px"
+			infopic.style.marginTop = "6px"
 		}
 	  else{
 	    redirectButton.hidden = true;

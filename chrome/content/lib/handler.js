@@ -188,6 +188,7 @@ torpedo.handler.mouseClickInfoButton = function (event)
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	var warningpic = document.getElementById("warning-pic");
+	var phish = document.getElementById("phish");
 	if(torpedo.db.unknown(torpedo.baseDomain) && !torpedo.functions.isRedirect(torpedo.oldUrl) && !torpedo.gmxRedirect){
 		if(warningpic.hidden){
 			torpedo.dialogmanager.createUnknownInfo();
@@ -201,6 +202,7 @@ torpedo.handler.mouseClickInfoButton = function (event)
 		}
 		else moreinfos.textContent = torpedo.info;
 	}
+	if(torpedo.functions.isRedirect(torpedo.oldUrl) || torpedo.gmxRedirect || torpedo.state == 5 || torpedo.state == 6 || torpedo.state == 4) document.getElementById("infocheck").hidden = false;
 };
 
 torpedo.handler.mouseClickDeleteButton = function(event){
@@ -237,14 +239,6 @@ torpedo.handler.loadOptions = function (){
   document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
   var element = document.getElementById("editor");
   element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
-	/*if (navigator.language.indexOf("de") > -1){
-		document.getElementById("delay1").src = "chrome://torpedo/skin/delay1_de.png";
-		document.getElementById("delay2").src = "chrome://torpedo/skin/delay2_de.png";
-	}
-	else {
-		document.getElementById("delay1").src = "chrome://torpedo/skin/delay1_en.png";
-		document.getElementById("delay2").src = "chrome://torpedo/skin/delay2_en.png";
-	}*/
 }
 
 torpedo.handler.tutorial = function(){
