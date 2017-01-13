@@ -102,7 +102,6 @@ torpedo.db.deleteAllSecond = function () {
     str.data = "";
 	torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
 	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
-	torpedo.db.getSecond();
 };
 
 torpedo.db.getSecond = function () {

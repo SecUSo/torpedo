@@ -3,11 +3,12 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		id="infodialog"
 		title="Info"
 		buttons="cancel"
 		buttonlabelcancel="OK"
 		ondialogcancel="return true;"
-		onload='var torpedo = torpedo || {}'>
+		onload='var torpedo = torpedo || {};'>
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 

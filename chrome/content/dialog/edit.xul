@@ -12,6 +12,7 @@
 		ondialogaccept="torpedo.db.addEntries(); return false;"
 		ondialogcancel="return true;"
 		ondialogextra1="torpedo.db.deleteSomeSecond();"
+		onfocus="torpedo.db.getSecond();"
 		onload='torpedo.db.getSecond();'>
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
