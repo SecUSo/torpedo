@@ -91,7 +91,7 @@
 #info-pic
 {
   max-width: 27px;
-  height: 28px;
+  max-height: 28px;
   cursor: pointer;
 	margin-right: 2px;
 }

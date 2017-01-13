@@ -376,7 +376,6 @@ torpedo.functions.changeActivatedOrange = function (click){
 torpedo.functions.changeCheckedTimer = function (){
     d = !d;
     torpedo.prefs.setBoolPref("checkedTimer", d);
-    Application.console.log(document.getElementById("listofdefaults").style.color);
     if(!d){
         torpedo.prefs.setIntPref("blockingTimer", 0);
         document.getElementById("countdown").disabled = true;
@@ -395,23 +394,6 @@ torpedo.functions.changeCheckedTimer = function (){
         document.getElementById("activateorange").removeAttribute("style");
         document.getElementById("activateorange").setAttribute("style","width:330px; margin-top:15px");
     }
-}
-
-torpedo.functions.setTimerRange = function(){
-  timer = torpedo.prefs.getIntPref("blockingTimer");
-	var message = document.getElementById("timerTooHigh");
-	var error = document.getElementById("errorTooHigh");
-  var panel = document.getElementById("countdown");
-
-  if(timer > 100){
-    torpedo.prefs.setIntPref("blockingTimer", 100);
-    error.textContent = torpedo.stringsBundle.getString('toohigh');
-		message.openPopup(panel, "before_start",0,0, false, false);
-	  setTimeout(function (e){
-      message.hidePopup();
-    }, 4500);
-		panel.select();
-  }
 }
 
 // redirection settings

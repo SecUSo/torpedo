@@ -8,7 +8,7 @@ torpedo.textSize;
 torpedo.gmxRedirect;
 torpedo.redirectClicked;
 torpedo.oldUrl;
-torpedo.infotext;
+torpedo.info;
 torpedo.state; // 0 is unknown, 1 is green, 2 is blue, 3 is grey, 4 is redirect, 5 is gmxredirect, 6 is phish
 
 torpedo.updateTooltip = function (url)
@@ -29,6 +29,7 @@ torpedo.updateTooltip = function (url)
 	var advice = document.getElementById("advice");
 	var advicebox = document.getElementById("advicebox");
 	var infotext = document.getElementById("infotext");
+	var infopic = document.getElementById("info-pic");
 	var infobox = document.getElementById("infobox");
 	var infos = document.getElementById("infos");
 	var nore = torpedo.prefs.getBoolPref("redirection0");
@@ -44,6 +45,7 @@ torpedo.updateTooltip = function (url)
 	linkDeactivate.hidden = shortenText;
 	phish.hidden = true;
 	advice.textContent = torpedo.stringsBundle.getString('knownadvice');
+	infotext.textContent = torpedo.stringsBundle.getString('moreinfolowrisk');
 	advicebox.hidden = false;
 	// assert url to tooltip
 	baseDomain.textContent = torpedo.baseDomain;
@@ -51,14 +53,17 @@ torpedo.updateTooltip = function (url)
 	var beginning = url.substring(0, split);
 	var end = url.substring(split+torpedo.baseDomain.length, url.length);
 	infos.style.marginBottom = "0px";
+	phish.style.marginBottom = "10px";
+	infobox.style.marginTop = "7px";
 	if(navigator.language.indexOf("de") > -1){
-		phish.style.marginBottom = "10px";
-		infobox.style.marginTop = "7px";
+		infotext.style.margin = "4px 0px 20px 6px"
+		infopic.style.marginTop = "6px"
 	}
 	else{
-		infobox.style.marginTop = "7px";
-		phish.style.marginBottom = "10px";
+		infotext.style.margin = "4px 0px 0px 6px";
+		infopic.style.marginTop = "0px";
 	}
+
 	if(torpedo.prefs.getIntPref("blockingTimer")==0) secondsbox.hidden = true;
 	url1.textContent = beginning;
 	url2.textContent = "";
@@ -80,7 +85,7 @@ torpedo.updateTooltip = function (url)
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
 		torpedo.state = 1;
-		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.infotext = torpedo.stringsBundle.getString('infosongreen');
+		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.info = torpedo.stringsBundle.getString('infosongreen');
 		//if(shortenText) redirect.textContent = "";
 		//else
 		redirect.textContent = torpedo.stringsBundle.getString('lowrisk');
@@ -100,7 +105,7 @@ torpedo.updateTooltip = function (url)
 	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "#1a509d";
 		torpedo.state = 2;
-		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.infotext = torpedo.stringsBundle.getString('infosonblue');
+		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.info = torpedo.stringsBundle.getString('infosonblue');
 		if(shortenText) redirect.textContent = "";
 		else redirect.textContent = torpedo.stringsBundle.getString('userrisk');
 		advicebox.hidden = true;
@@ -121,8 +126,9 @@ torpedo.updateTooltip = function (url)
 			infobox.style.marginTop = "23px";
 		else infobox.style.marginTop = "10px";
 		advice.textContent = torpedo.stringsBundle.getString('unknownadvice');
+		infotext.textContent = torpedo.stringsBundle.getString('moreinfogrey');
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
-			torpedo.infotext = "";
+			torpedo.info = "";
 		}
 		else if(!isRedirect){
 			if(navigator.language.indexOf("de") > -1)
@@ -141,13 +147,16 @@ torpedo.updateTooltip = function (url)
 		phish.hidden = false;
 		advice.hidden = false;
 		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
-		torpedo.infotext = torpedo.stringsBundle.getString('infosongmxredirect');
+		infotext.textContent = torpedo.stringsBundle.getString('moreinforedirect');
+		torpedo.info = torpedo.stringsBundle.getString('infosongmxredirect');
 		if(navigator.language.indexOf("de") > -1){
 			phish.style.marginBottom = "5px";
 		}
 		else{
 			phish.style.marginBottom = "5px";
 		}
+		infotext.style.margin = "4px 0px 0px 6px";
+		infopic.style.marginTop = "0px";
 	}
 	// settings for redirect case
 	if(isRedirect){
@@ -155,11 +164,17 @@ torpedo.updateTooltip = function (url)
 			torpedo.state = 4;
 			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('shorturl_short');
 			else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
-			torpedo.infotext = torpedo.stringsBundle.getString('infosonredirect');
+			torpedo.info = torpedo.stringsBundle.getString('infosonredirect');
 			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
-			if(navigator.language.indexOf("de") > -1)
+			infotext.textContent = torpedo.stringsBundle.getString('moreinforedirect');
+			if(navigator.language.indexOf("de") > -1){
 				infobox.style.marginTop = "25px";
-			else infobox.style.marginTop = "25px";
+			}
+			else{
+				infobox.style.marginTop = "25px";
+			}
+			infotext.style.margin = "4px 0px 0px 6px";
+			infopic.style.marginTop = "0px";
 		}
 	  else{
 	    redirectButton.hidden = true;
@@ -205,7 +220,10 @@ torpedo.updateTooltip = function (url)
 				}
 				phish.hidden = false;
 				advice.textContent = torpedo.stringsBundle.getString('phishadvice');
-				torpedo.infotext = torpedo.stringsBundle.getString('infosonred');
+				infotext.textContent = torpedo.stringsBundle.getString('moreinfophish');
+				infotext.style.margin = "4px 0px 20px 6px"
+				infopic.style.marginTop = "6px"
+				torpedo.info = torpedo.stringsBundle.getString('infosonred');
 			}
 		}
 	}

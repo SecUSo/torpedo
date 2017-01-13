@@ -46,7 +46,6 @@
 <!ENTITY opensettings "Einstellungen öffnen">
 <!ENTITY addtotrusted "Domain als niedriges Risiko einstufen">
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
-<!ENTITY moreinformation "Mehr Informationen über die Risikoeinschätzung">
 <!ENTITY infocheckURL "Informationen zur Durchführung der Überprüfung">
 <!ENTITY toTutorial ">> Weiter zum Tutorial (Empfehlung bei Erstinstallation)">
 <!ENTITY opentutorial "Tutorial öffnen">

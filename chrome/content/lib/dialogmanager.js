@@ -6,9 +6,12 @@ torpedo.dialogmanager.createDelete = function ()  {
 	windowHeight=500;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
-  window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
+  window.openDialog("chrome://torpedo/content/dialog/delete.xul", "bmarksdelete", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
+torpedo.dialogmanager.options = function() {
+  window.openDialog('chrome://torpedo/content/options.xul','bmarksoptions','chrome=yes, dialog,resizable=no, modal, centerscreen');
+}
 torpedo.dialogmanager.createDefaultDelete = function (windowWidth,windowHeight)  {
 	window.openDialog("chrome://torpedo/content/dialog/defaultdelete.xul", "bmarks", "chrome, dialog,resizable=no,centerscreen, modal,width='+windowWidth+',height='+windowHeight+'");
 };
@@ -18,7 +21,7 @@ torpedo.dialogmanager.createEdit = function () {
 };
 
 torpedo.dialogmanager.createInfo = function () {
-	window.openDialog("chrome://torpedo/content/dialog/info.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen");
+	window.openDialog("chrome://torpedo/content/dialog/info.xul", "bmarksinfo", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };
 
 torpedo.dialogmanager.showDefaults = function(){

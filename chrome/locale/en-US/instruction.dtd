@@ -43,7 +43,6 @@
 <!ENTITY opensettings "Open settings window">
 <!ENTITY addtotrusted "Mark domain as trustworthy">
 <!ENTITY searchfor "Check domain with google.com">
-<!ENTITY moreinformation "More information on risk consideration">
 <!ENTITY infocheckURL "How to check the URL">
 <!ENTITY toTutorial ">> Continue to tutorial (recommended for first time users)">
 <!ENTITY opentutorial "Open tutorial">

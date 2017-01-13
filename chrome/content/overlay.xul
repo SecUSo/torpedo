@@ -38,7 +38,7 @@
 				<vbox id="infos">
 					<hbox id="infobox">
 						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
-						<label id="infotext" value="&moreinformation;" />
+						<description id="infotext" flex="1"/>
 					</hbox>
 					<hbox id="moreinfobox">
 						<description id="moreinfos" flex="1" />
@@ -70,7 +70,7 @@
 	  <menupopup id="menuwindow" onpopupshowing="$('#tooltippanel').unbind('mouseleave',torpedo.handler.mouseDownTooltipPane)" onpopuphiding="$('#tooltippanel').bind('mouseenter',torpedo.handler.mouseOverTooltipPane)">
 	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.handler.Url);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
-			<menuitem label="&opensettings;" onclick="window.openDialog('chrome://torpedo/content/options.xul','bmarks','chrome=yes, dialog,resizable=no, modal, centerscreen');  torpedo.handler.TempTarget = ''"/>
+			<menuitem label="&opensettings;" onclick="torpedo.dialogmanager.options(); torpedo.handler.TempTarget = ''"/>
 			<menuitem label="&opentutorial;" onclick="torpedo.handler.tutorial()"/>
 		</menupopup>
 	</popupset>

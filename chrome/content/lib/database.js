@@ -102,6 +102,7 @@ torpedo.db.deleteAllSecond = function () {
     str.data = "";
 	torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
 	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
+	torpedo.db.getSecond();
 };
 
 torpedo.db.getSecond = function () {
@@ -158,7 +159,7 @@ torpedo.db.addEntries = function(){
 	var error = document.getElementById("error");
 	var panel = document.getElementById("addEntries");
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
-	
+
 	addSites.toLowerCase();
 	addSites = addSites.replace(/\s+/g, '');
 	addSites = addSites + ",";

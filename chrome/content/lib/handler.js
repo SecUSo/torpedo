@@ -62,7 +62,7 @@ torpedo.handler.mouseOverHref = function (event)
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	// do nothing when user reads infotext
-	if(panel.state == "closed" || torpedo.infotext == "" || moreinfos.textContent == ""){
+	if(panel.state == "closed" || torpedo.info == "" || moreinfos.textContent == ""){
 		mouseout = mouseout[0] ? [false,true] : [false,false];
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 		var url = tempTarget.getAttribute("href");
@@ -87,7 +87,7 @@ torpedo.handler.mouseOverHref = function (event)
 				alreadyClicked = "";
 				var redirect = false;
 				moreinfos.textContent = "";
-				torpedo.infotext = "";
+				torpedo.info = "";
 				document.getElementById("infocheck").hidden = true;
 
 				// check if url is a "redirectUrl=" url (gmxredirect)
@@ -193,18 +193,17 @@ torpedo.handler.mouseClickInfoButton = function (event)
 			torpedo.dialogmanager.createUnknownInfo();
 		}
 		document.getElementById("infocheck").hidden = false;
-		moreinfos.textContent = torpedo.infotext;
+		moreinfos.textContent = torpedo.info;
 	}
 	else{
 		if(moreinfos.textContent != ""){
 			moreinfos.textContent = "";
 		}
-		else moreinfos.textContent = torpedo.infotext;
+		else moreinfos.textContent = torpedo.info;
 	}
 };
 
 torpedo.handler.mouseClickDeleteButton = function(event){
-	Application.console.log("2")
 	torpedo.dialogmanager.createDelete();
 };
 torpedo.handler.mouseClickDefaultsEditButton = function(event){

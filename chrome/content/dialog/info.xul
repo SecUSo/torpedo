@@ -3,7 +3,7 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		title="Information"
+		title="Info"
 		buttons="cancel"
 		buttonlabelcancel="OK"
 		ondialogcancel="return true;"
@@ -11,7 +11,7 @@
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 
-	<vbox>
+	<vbox width="200">
 		<label id="infopopup" value="&entries_gone;" align="center"/>
 	</vbox>
 </dialog>
