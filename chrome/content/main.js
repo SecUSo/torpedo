@@ -4,6 +4,7 @@ torpedo.instructionSize = {width: 800,height: 460};
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.baseDomain;
+torpedo.installVersion;
 torpedo.textSize;
 torpedo.gmxRedirect;
 torpedo.redirectClicked;
@@ -303,7 +304,7 @@ window.addEventListener("load", function load(event){
 	//torpedo.prefs.setBoolPref("firstrun",true);
   if(torpedo.prefs.getBoolPref("firstrun")){
 		torpedo.prefs.setBoolPref("firstrun",false);
-		//torpedo.dialogmanager.createUpdate();
-		torpedo.dialogmanager.createWelcome();
+		if(torpedo.installVersion == "2.0.1")
+			torpedo.dialogmanager.createWelcome();
 	}
 }, false);

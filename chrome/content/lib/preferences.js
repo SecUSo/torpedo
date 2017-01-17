@@ -8,9 +8,9 @@ torpedo.prefs = function () {
         Components.classes["@mozilla.org/preferences-service;1"]
             .getService(Components.interfaces.nsIPrefService)
             .getBranch("extensions.torpedo.");
-		//AddonManager.getAddonByID("torpedo@tu-darmstadt.de", function(addon) {
-		//	Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication).console.log("My extension's version is " + addon.version);
-		//});
+		AddonManager.getAddonByID("torpedo@tu-darmstadt.de", function(addon) {
+			torpedo.installVersion = addon.version;
+		});
     return {
         getBoolPref: prefManager.getBoolPref,
         getIntPref: prefManager.getIntPref,
