@@ -304,7 +304,6 @@ window.addEventListener("load", function load(event){
 	//torpedo.prefs.setBoolPref("firstrun",true);
   if(torpedo.prefs.getBoolPref("firstrun")){
 		torpedo.prefs.setBoolPref("firstrun",false);
-<<<<<<< HEAD
 		var str = Components.classes["@mozilla.org/supports-string;1"]
 						.createInstance(Components.interfaces.nsISupportsString);
 		try{
