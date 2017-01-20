@@ -8,6 +8,7 @@ torpedo.prefs = function () {
         Components.classes["@mozilla.org/preferences-service;1"]
             .getService(Components.interfaces.nsIPrefService)
             .getBranch("extensions.torpedo.");
+		Components.utils.import("resource://gre/modules/AddonManager.jsm");
 		AddonManager.getAddonByID("torpedo@tu-darmstadt.de", function(addon) {
 			torpedo.installVersion = addon.version;
 		});
