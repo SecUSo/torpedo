@@ -314,7 +314,7 @@ window.addEventListener("load", function load(event){
 				str.data = "2.0.2"
 				torpedo.prefs.setComplexValue("version", Components.interfaces.nsISupportsString, str);
 		}
-		if(torpedo.installVersion == "2.0.2"){
+		if(torpedo.installVersion == "2.0.1"){
 				torpedo.dialogmanager.createWelcome();
 		}
 	}
