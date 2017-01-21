@@ -306,14 +306,9 @@ window.addEventListener("load", function load(event){
 		torpedo.prefs.setBoolPref("firstrun",false);
 		var str = Components.classes["@mozilla.org/supports-string;1"]
 						.createInstance(Components.interfaces.nsISupportsString);
-		try{
-			torpedo.prefs.getComplexValue("version", Components.interfaces.nsISupportsString).data;
-		}catch(e){
-				torpedo.dialogmanager.createWelcome();
-				str.data = "2.0.2"
-				torpedo.prefs.setComplexValue("version", Components.interfaces.nsISupportsString, str);
-		}
-		if(torpedo.installVersion == "2.0.1"){
+		str.data = "2.0.3"
+		torpedo.prefs.setComplexValue("version", Components.interfaces.nsISupportsString, str);
+		if(torpedo.installVersion == "2.0.3"){
 				torpedo.dialogmanager.createWelcome();
 		}
 	}
