@@ -30,7 +30,7 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 {
 	var menuwindow = document.getElementById("menuwindow");
 	var moreinfos = document.getElementById("moreinfos");
-	if(menuwindow.state != "open" && moreinfos.textContent == "" && !torpedo.redirectClicked){
+	if(!torpedo.redirectClicked && menuwindow.state != "open" && moreinfos.textContent == "" && !torpedo.redirectClicked){
 		mouseon = false;
 		torpedo.handler.timeOut = 1500;
 		if(torpedo.functions.loop >= 0){
@@ -61,8 +61,10 @@ torpedo.handler.mouseOverHref = function (event)
 {
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
-	// do nothing when user reads infotext
-	if(panel.state == "closed" || torpedo.info == "" || moreinfos.textContent == ""){
+	// do nothing when user reads infotext or deduces target url
+	Application.console.log(torpedo.redirectClicked);
+	if((!torpedo.redirectClicked || panel.state == "closed") && (panel.state == "closed" || torpedo.info == "" || moreinfos.textContent == "")){
+		torpedo.redirectClicked = false;
 		mouseout = mouseout[0] ? [false,true] : [false,false];
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 		var url = tempTarget.getAttribute("href");
@@ -81,7 +83,6 @@ torpedo.handler.mouseOverHref = function (event)
 				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 				torpedo.handler.Url = url;
 			  torpedo.oldUrl = torpedo.baseDomain;
-				torpedo.redirectClicked = false;
 				panel.style.backgroundColor = "white";
 				clearTimeout(torpedo.handler.MouseLeavetimer);
 				alreadyClicked = "";
@@ -91,12 +92,11 @@ torpedo.handler.mouseOverHref = function (event)
 				document.getElementById("infocheck").hidden = true;
 
 				// check if url is a "redirectUrl=" url (gmxredirect)
-				var redirectUrl = torpedo.functions.resolveRedirect(url);
-				if(redirectUrl != url){
-					url = redirectUrl;
+				torpedo.gmxRedirect = false;
+				while(torpedo.functions.isGmxRedirect(url)){
+					url = torpedo.functions.resolveRedirect(url);
 					torpedo.gmxRedirect = true;
 				}
-				else torpedo.gmxRedirect = false;
 
 				// check if url is a normal redirect (tinyurl)
 				if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){

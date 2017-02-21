@@ -73,7 +73,7 @@ torpedo.updateTooltip = function (url)
 	if(end.length > 1) url2.textContent = end;
 
 	// show or hide redirectButton
-  if((!isRedirect || torpedo.gmxRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
+  if((!isRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
   else{
   	redirectButton.hidden = false;
     if(isRedirect) redirectButton.disabled = false;
@@ -87,16 +87,9 @@ torpedo.updateTooltip = function (url)
 		panel.style.borderColor = "green";
 		torpedo.state = 1;
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.info = torpedo.stringsBundle.getString('infosongreen');
-		//if(shortenText) redirect.textContent = "";
-		//else
 		redirect.textContent = torpedo.stringsBundle.getString('lowrisk');
 		advicebox.hidden = true;
 		redirectButton.hidden = true;
-		if(torpedo.functions.isRedirect(torpedo.oldUrl)){
-			if(navigator.language.indexOf("de") > -1)
-				infos.style.marginBottom = "190px";
-			else infos.style.marginBottom = "200px";
-		}
 		// if timer is off in trustworthy domains
 		if(!torpedo.functions.isChecked("greenActivated")) {
 			secondsbox.hidden = true;
@@ -115,11 +108,6 @@ torpedo.updateTooltip = function (url)
 		if(!torpedo.functions.isChecked("orangeActivated")) {
 			secondsbox.hidden = true;
 		}
-		if(torpedo.functions.isRedirect(torpedo.oldUrl)){
-			if(navigator.language.indexOf("de") > -1)
-				infos.style.marginBottom = "150px";
-			else infos.style.marginBottom = "200px";
-		}
 	}
 	else{
 		torpedo.state = 3;
@@ -131,12 +119,10 @@ torpedo.updateTooltip = function (url)
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
 			torpedo.info = "";
 		}
-		else if(!isRedirect){
-			if(navigator.language.indexOf("de") > -1)
-				infos.style.marginBottom = "20px";
-			else infos.style.marginBottom = "100px";
-
-		}
+		//else if(!isRedirect){
+		//	if(navigator.language.indexOf("de") > -1)
+				//infos.style.marginBottom = "20px";			// TODO: remove?
+	//	}
 		if(!isRedirect) redirectButton.hidden = true;
 
 		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('highrisk_short');

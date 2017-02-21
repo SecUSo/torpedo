@@ -174,6 +174,7 @@ torpedo.functions.containsRedirect = function(url){
         if(torpedo.functions.loop >= 5){
             $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
             torpedo.handler.Url = url;
+            Application.console.log("update tooltip with " + url);
             torpedo.updateTooltip(url);
         }
         else{
@@ -184,10 +185,20 @@ torpedo.functions.containsRedirect = function(url){
             torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
                 redirect.textContent = torpedo.stringsBundle.getString('wait');
+                Application.console.log("url is tinyurl");
                 torpedo.functions.trace(url);
+            }
+            else if(torpedo.functions.isGmxRedirect(url)){
+            Application.console.log("url is gmxredirect");
+              do{
+      					url = torpedo.functions.resolveRedirect(url);
+      					torpedo.gmxRedirect = true;
+      				}while(torpedo.functions.isGmxRedirect(url));
+              torpedo.functions.containsRedirect(url);
             }
             else{
                 torpedo.handler.Url = url;
+                Application.console.log("update tooltip now");
                 torpedo.updateTooltip(url);
             }
         }
@@ -308,15 +319,6 @@ torpedo.functions.changeTextsize = function(){
       torpedo.prefs.setIntPref("textsize", 100);
       torpedo.textSize = 100;
       if(editor!=null) editor.style.fontSize="100%";
-      /*if(torpedo.state == 1) document.getElementById("infobox").style.marginTop = "2px";
-      if(torpedo.state == 2) document.getElementById("infobox").style.marginTop = "2px";
-      if(torpedo.state == 3) document.getElementById("infobox").style.marginTop = "10px";
-      if(torpedo.state == 4) document.getElementById("infobox").style.marginTop = "45px";
-      if(torpedo.state == 5) document.getElementById("infobox").style.marginTop = "2px";
-      if(torpedo.state == 6) {
-        document.getElementById("url-box").style.marginTop = "10px";
-        document.getElementById("infobox").style.marginTop = "45px";
-      }*/
     }
     else {
   		  document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('smalltext');
@@ -324,15 +326,6 @@ torpedo.functions.changeTextsize = function(){
         torpedo.prefs.setIntPref("textsize", 115);
         torpedo.textSize = 115;
         if(editor!=null) editor.style.fontSize="115%";
-        /*if(torpedo.state == 1) document.getElementById("infobox").style.marginTop = "0px";
-        if(torpedo.state == 2) document.getElementById("infobox").style.marginTop = "0px";
-        if(torpedo.state == 3) document.getElementById("infobox").style.marginTop = "0px";
-        if(torpedo.state == 4) document.getElementById("infobox").style.marginTop = "55px";
-        if(torpedo.state == 5) document.getElementById("infobox").style.marginTop = "0px";
-        if(torpedo.state == 6) {
-          document.getElementById("url-box").style.marginTop = "20px";
-          document.getElementById("infobox").style.marginTop = "65px";
-        }*/
     }
 }
 
@@ -435,6 +428,11 @@ torpedo.functions.resolveRedirect = function(url){
         var index = re+9;
     }
     var temp = url.slice(index, url.length);
-    url = decodeURIComponent(temp);
+    temp = decodeURIComponent(temp);
+    if(torpedo.functions.isURL(temp)) url = temp;
     return url;
+}
+torpedo.functions.isGmxRedirect = function(url){
+  var temp = torpedo.functions.resolveRedirect(url);
+  return(temp != url);
 }
