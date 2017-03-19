@@ -54,7 +54,7 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 
 torpedo.functions.isURL = function (url) {
   url = url.replace(" ", "");
-  var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+  var regex = new RegExp("/^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?/g");
   if (regex.test(url)) {
     // check if part after domain is too long, f.e. www.abc.abcd
     try{
@@ -174,7 +174,6 @@ torpedo.functions.containsRedirect = function(url){
         if(torpedo.functions.loop >= 5){
             $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
             torpedo.handler.Url = url;
-            Application.console.log("update tooltip with " + url);
             torpedo.updateTooltip(url);
         }
         else{
@@ -185,11 +184,9 @@ torpedo.functions.containsRedirect = function(url){
             torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
                 redirect.textContent = torpedo.stringsBundle.getString('wait');
-                Application.console.log("url is tinyurl");
                 torpedo.functions.trace(url);
             }
             else if(torpedo.functions.isGmxRedirect(url)){
-            Application.console.log("url is gmxredirect");
               do{
       					url = torpedo.functions.resolveRedirect(url);
       					torpedo.gmxRedirect = true;
@@ -198,7 +195,6 @@ torpedo.functions.containsRedirect = function(url){
             }
             else{
                 torpedo.handler.Url = url;
-                Application.console.log("update tooltip now");
                 torpedo.updateTooltip(url);
             }
         }

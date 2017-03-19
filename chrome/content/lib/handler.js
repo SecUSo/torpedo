@@ -62,7 +62,6 @@ torpedo.handler.mouseOverHref = function (event)
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	// do nothing when user reads infotext or deduces target url
-	Application.console.log(torpedo.redirectClicked);
 	if((!torpedo.redirectClicked || panel.state == "closed") && (panel.state == "closed" || torpedo.info == "" || moreinfos.textContent == "")){
 		torpedo.redirectClicked = false;
 		mouseout = mouseout[0] ? [false,true] : [false,false];
