@@ -79,7 +79,6 @@ torpedo.handler.mouseOverHref = function (event)
 				torpedo.state = 0;
 				torpedo.functions.loopTimer = 2000;
 				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-				Application.console.log(torpedo.baseDomain);
 				torpedo.handler.Url = url;
 			  torpedo.oldUrl = torpedo.baseDomain;
 				panel.style.backgroundColor = "white";

@@ -173,7 +173,6 @@ torpedo.functions.containsRedirect = function(url){
     torpedo.handler.clickEnabled = false;
     var redirect = document.getElementById("redirect");
     redirect.textContent = torpedo.stringsBundle.getString('wait');
-    //document.getElementById("seconds-box").hidden = true;
     document.getElementById("redirectButton").disabled = true;
     setTimeout(function(e){
         if(torpedo.functions.loop >= 5){
