@@ -49,7 +49,7 @@ torpedo.dialogmanager.createWelcome = function(){
 	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
-	window.openDialog("chrome://torpedo/content/welcomedialog/welcome.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
+	window.openDialog("chrome://torpedo/content/welcomedialog/welcome.xul", "bmarks", "alwaysraised,chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 torpedo.dialogmanager.welcome1 = function(){
   windowWidth=900;

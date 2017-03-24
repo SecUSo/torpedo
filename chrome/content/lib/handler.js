@@ -62,13 +62,11 @@ torpedo.handler.mouseOverHref = function (event)
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	// do nothing when user reads infotext or deduces target url
-	Application.console.log(torpedo.redirectClicked);
 	if((!torpedo.redirectClicked || panel.state == "closed") && (panel.state == "closed" || torpedo.info == "" || moreinfos.textContent == "")){
 		torpedo.redirectClicked = false;
 		mouseout = mouseout[0] ? [false,true] : [false,false];
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 		var url = tempTarget.getAttribute("href");
-
 		// make sure that popup opens up even if popup from another URL is opened
 		if(url != "" && torpedo.oldUrl != url) panel.hidePopup();
 		if(panel.state == "closed"){
@@ -81,6 +79,7 @@ torpedo.handler.mouseOverHref = function (event)
 				torpedo.state = 0;
 				torpedo.functions.loopTimer = 2000;
 				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
+				Application.console.log(torpedo.baseDomain);
 				torpedo.handler.Url = url;
 			  torpedo.oldUrl = torpedo.baseDomain;
 				panel.style.backgroundColor = "white";

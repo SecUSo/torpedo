@@ -33,7 +33,7 @@
 <!ENTITY back "Zurück">
 <!ENTITY end "Beenden">
 <!ENTITY redirection "Weiterleitungen">
-<!ENTITY redirect "Zeige Zieladresse">
+<!ENTITY redirect "Ziel-URL ermitteln">
 <!ENTITY noredirect "Domains nicht auf Weiterleitungen prüfen">
 <!ENTITY manualredirect "Domains manuell auf Weiterleitungen prüfen">
 <!ENTITY autoredirect "Domains automatisch auf Weiterleitungen prüfen">

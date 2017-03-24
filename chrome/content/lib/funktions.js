@@ -80,8 +80,10 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
   var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
   var isIP = String(url).match(/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g);
   if(isIP){
-    start = url.indexOf("://")+3
-    var baseDomain = url.substr(start,url.length-2);
+    start = url.indexOf("://")+3;
+    url = url.substr(start, url.length);
+    end = url.indexOf("/");
+    var baseDomain = url.substr(0,end);
     return baseDomain;
   }
   try {
@@ -122,11 +124,13 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
 
 torpedo.functions.loop;
 torpedo.functions.loopTimer = 2000;
+resultUrl = "";
 
 torpedo.functions.traceUrl = function (url, redirect) {
     // not opening new popup yet, first some initializaion
     torpedo.updateTooltip(url);
     unknown = true;
+    resultUrl = url;
     // check if url is redirect and already in our list of saved entries
     var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
     if(redirect && requestList.includes(torpedo.functions.getDomainWithFFSuffix(url)+",")){
@@ -157,6 +161,7 @@ torpedo.functions.trace = function (url){
       if(this.readyState == 4){
         torpedo.functions.containsRedirect(xhr.responseURL);
         torpedo.functions.saveRedirection(url, xhr.responseURL);
+        resultUrl = xhr.responseURL;
       }
     };
     xhr.send(null);
@@ -174,7 +179,6 @@ torpedo.functions.containsRedirect = function(url){
         if(torpedo.functions.loop >= 5){
             $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
             torpedo.handler.Url = url;
-            Application.console.log("update tooltip with " + url);
             torpedo.updateTooltip(url);
         }
         else{
@@ -185,11 +189,9 @@ torpedo.functions.containsRedirect = function(url){
             torpedo.functions.loop++;
             if(torpedo.functions.isRedirect(url)){
                 redirect.textContent = torpedo.stringsBundle.getString('wait');
-                Application.console.log("url is tinyurl");
                 torpedo.functions.trace(url);
             }
             else if(torpedo.functions.isGmxRedirect(url)){
-            Application.console.log("url is gmxredirect");
               do{
       					url = torpedo.functions.resolveRedirect(url);
       					torpedo.gmxRedirect = true;
@@ -198,8 +200,7 @@ torpedo.functions.containsRedirect = function(url){
             }
             else{
                 torpedo.handler.Url = url;
-                Application.console.log("update tooltip now");
-                torpedo.updateTooltip(url);
+                torpedo.updateTooltip(resultUrl);
             }
         }
     }, torpedo.functions.loopTimer);

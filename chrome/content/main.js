@@ -68,7 +68,8 @@ torpedo.updateTooltip = function (url)
 	if(torpedo.prefs.getIntPref("blockingTimer")==0) secondsbox.hidden = true;
 	url1.textContent = beginning;
 	url2.textContent = "";
-	if(end.length > 75) end = end.substring(0,75) +  "...";
+	Application.console.log(url);
+	if(end.length > 75) end = end.substring(0,70) +  "...";
 	//avoid unnessecary slash
 	if(end.length > 1) url2.textContent = end;
 
@@ -119,10 +120,6 @@ torpedo.updateTooltip = function (url)
 		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
 			torpedo.info = "";
 		}
-		//else if(!isRedirect){
-		//	if(navigator.language.indexOf("de") > -1)
-				//infos.style.marginBottom = "20px";			// TODO: remove?
-	//	}
 		if(!isRedirect) redirectButton.hidden = true;
 
 		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('highrisk_short');
@@ -265,7 +262,7 @@ torpedo.processDOM = function (){
 				//Application.console.log(hrefValue)
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
-					//Application.console.log(hrefValue + " is url")
+					//	Application.console.log(hrefValue + " is url")
 						$(aElement).bind({
   						mouseenter: function(event) {torpedo.handler.mouseOverHref(event);}
 						});
