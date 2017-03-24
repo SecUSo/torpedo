@@ -270,6 +270,18 @@ torpedo.processDOM = function (){
 							torpedo.handler.mouseDownHref(event);
 						});
 					}
+					else {
+						if(torpedo.functions.isURL(decodeURIComponent(hrefValue))){
+							hrefValue = decodeURIComponent(hrefValue);
+							//Application.console.log(hrefValue + " is decode url")
+								$(aElement).bind({
+		  						mouseenter: function(event) {torpedo.handler.mouseOverHref(event);}
+								});
+								$(aElement).bind("mouseleave", function(event){
+									torpedo.handler.mouseDownHref(event);
+								});
+						}
+					}
 				}
 			}
 		}

@@ -54,7 +54,7 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 
 torpedo.functions.isURL = function (url) {
   url = url.replace(" ", "");
-  var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+  var regex = new RegExp("/^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
   if (regex.test(url)) {
     // check if part after domain is too long, f.e. www.abc.abcd
     try{
@@ -200,7 +200,11 @@ torpedo.functions.containsRedirect = function(url){
             }
             else{
                 torpedo.handler.Url = url;
+<<<<<<< HEAD
                 torpedo.updateTooltip(resultUrl);
+=======
+                torpedo.updateTooltip(url);
+>>>>>>> 273c775dc95e985f169d46e6d60e440b0bcfe28d
             }
         }
     }, torpedo.functions.loopTimer);
