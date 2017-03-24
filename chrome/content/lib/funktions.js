@@ -200,11 +200,8 @@ torpedo.functions.containsRedirect = function(url){
             }
             else{
                 torpedo.handler.Url = url;
-<<<<<<< HEAD
                 torpedo.updateTooltip(resultUrl);
-=======
                 torpedo.updateTooltip(url);
->>>>>>> 273c775dc95e985f169d46e6d60e440b0bcfe28d
             }
         }
     }, torpedo.functions.loopTimer);
