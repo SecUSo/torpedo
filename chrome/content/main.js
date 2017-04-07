@@ -68,7 +68,7 @@ torpedo.updateTooltip = function (url)
 	if(torpedo.prefs.getIntPref("blockingTimer")==0) secondsbox.hidden = true;
 	url1.textContent = beginning;
 	url2.textContent = "";
-	Application.console.log(url);
+
 	if(end.length > 75) end = end.substring(0,70) +  "...";
 	//avoid unnessecary slash
 	if(end.length > 1) url2.textContent = end;
@@ -169,7 +169,7 @@ torpedo.updateTooltip = function (url)
 	// settings for phish case
 	var title = torpedo.handler.title;
 	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect && !requestList.includes(torpedo.functions.getDomainWithFFSuffix(torpedo.oldUrl)+",")){
-		if(torpedo.functions.isURL(title)){
+		if(torpedo.functions.isURL(title) || torpedo.functions.isURL("http://" + title)){
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 			var a = titleDomain.split(".");
 			var b = torpedo.baseDomain.split(".");
@@ -262,7 +262,7 @@ torpedo.processDOM = function (){
 				//Application.console.log(hrefValue)
 				if(hrefValue != null && hrefValue != "" && hrefValue != undefined){
 					if(torpedo.functions.isURL(hrefValue)){
-					//	Application.console.log(hrefValue + " is url")
+					//Application.console.log(hrefValue + " is url")
 						$(aElement).bind({
   						mouseenter: function(event) {torpedo.handler.mouseOverHref(event);}
 						});

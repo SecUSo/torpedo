@@ -435,5 +435,5 @@ torpedo.functions.resolveRedirect = function(url){
 }
 torpedo.functions.isGmxRedirect = function(url){
   var temp = torpedo.functions.resolveRedirect(url);
-  return(temp != url);
+  return(torpedo.functions.getDomainWithFFSuffix(temp) != torpedo.functions.getDomainWithFFSuffix(url));
 }

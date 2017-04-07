@@ -36,21 +36,11 @@ torpedo.dialogmanager.createUnknownInfo = function(){
   window.openDialog("chrome://torpedo/content/dialog/unknown.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 
-torpedo.dialogmanager.createUpdate = function(){
-  windowWidth=600;
-	windowHeight=390;
-  var left = (screen.width/2)-(windowWidth/2);
-  var top = (screen.height/2)-(windowHeight/2);
-	var w = window.openDialog("chrome://torpedo/content/welcomedialog/update.xul", "bmarks", "alwaysontop=yes,chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
-  w.focus();
-};
-
 torpedo.dialogmanager.createWelcome = function(){
   windowWidth=900;
 	windowHeight=700;
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
-	window.openDialog("chrome://torpedo/content/welcomedialog/welcome.xul", "bmarks", "alwaysraised,chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 	var w = window.openDialog("chrome://torpedo/content/welcomedialog/welcome.xul", "bmarks", "alwaysontop=yes,chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
 };
 torpedo.dialogmanager.welcome1 = function(){
@@ -59,7 +49,6 @@ torpedo.dialogmanager.welcome1 = function(){
   var left = (screen.width/2)-(windowWidth/2);
   var top = (screen.height/2)-(windowHeight/2);
 	window.openDialog("chrome://torpedo/content/welcomedialog/welcome1.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
-  w.focus();
 };
 torpedo.dialogmanager.welcome2 = function(){
   windowWidth=900;
