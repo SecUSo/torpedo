@@ -301,9 +301,9 @@ window.addEventListener("load", function load(event){
 		torpedo.prefs.setBoolPref("firstrun",false);
 		var str = Components.classes["@mozilla.org/supports-string;1"]
 						.createInstance(Components.interfaces.nsISupportsString);
-		str.data = "2.0.3"
+		str.data = "2.0.4"
 		torpedo.prefs.setComplexValue("version", Components.interfaces.nsISupportsString, str);
-		if(torpedo.installVersion == "2.0.3"){
+		if(torpedo.installVersion == "2.0.4"){
 				torpedo.dialogmanager.createWelcome();
 		}
 	}
