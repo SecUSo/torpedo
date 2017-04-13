@@ -69,7 +69,7 @@ torpedo.updateTooltip = function (url)
 	url1.textContent = beginning;
 	url2.textContent = "";
 
-	if(end.length > 75) end = end.substring(0,70) +  "...";
+	if(end.length > 75) end = end.substring(0,75) +  "...";
 	//avoid unnessecary slash
 	if(end.length > 1) url2.textContent = end;
 
