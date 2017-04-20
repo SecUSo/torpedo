@@ -91,11 +91,11 @@ torpedo.handler.mouseOverHref = function (event)
 
 				// check if url is a "redirectUrl=" url (gmxredirect)
 				torpedo.gmxRedirect = false;
-				while(torpedo.functions.isGmxRedirect(url)){
+				while(url.contains("redirectUrl=") || url.contains("redirect=")){
 					url = torpedo.functions.resolveRedirect(url);
 					torpedo.gmxRedirect = true;
 				}
-				
+
 				// check if url is a normal redirect (tinyurl)
 				if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
 					redirect = true;
