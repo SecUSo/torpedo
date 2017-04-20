@@ -5,7 +5,7 @@
   <Description about="urn:mozilla:install-manifest">
 
     <em:id>torpedo@tu-darmstadt.de</em:id>
-    <em:version>2.0.4</em:version>
+    <em:version>2.0.5</em:version>
     <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
     <em:description>TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.
 
