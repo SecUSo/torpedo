@@ -74,6 +74,8 @@ torpedo.prefs = function () {
 				prefManager.clearUserPref("URLRequestList");
 				prefManager.clearUserPref("URLAnswerList");
 				prefManager.clearUserPref("RedirectionList");
+				prefManager.clearUserPref("redirectUrls");
+				prefManager.clearUserPref("redirectUrls2");
 			}
 			prefManager.clearUserPref("firstrun");
 			prefManager.clearUserPref("language");

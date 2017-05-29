@@ -13,6 +13,7 @@
 	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
     <stringbundleset>
@@ -32,6 +33,7 @@
         <tabs>
           <tab label="&delay;"/>
           <tab label="Domains"/>
+          <tab label="Referrer"/>
         </tabs>
         <tabpanels>
           <tabpanel orient="horizontal">
@@ -60,6 +62,34 @@
               <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>
               <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
               </vbox>
+          </tabpanel>
+          <tabpanel id="listtab" orient="horizontal">
+            <vbox style="overflow:auto">
+          		<description id="referrerDialog" style="width:370px; margin-top:10px" />
+          		<listbox id="referrerList" width="370" height="160" style="overflow:auto" onselect="document.getElementById('deleteReferrer').disabled = false;">
+                <listhead>
+                  <listheader label="Part 1" width="170"/>
+                  <listheader label="Part 2" width="170"/>
+                </listhead>
+              </listbox>
+          		<hbox>
+            		<button id="deleteReferrer" label="&deleteEntries;" onclick="torpedo.db.deleteReferrer()" disabled="true"/>
+            		<button id="clearReferrer" label="&clearentries;" onclick="torpedo.db.deleteAllReferrer()" />
+              </hbox>
+              <label value="&addentries;" style="font-weight:bold; margin-top: 10px;"/>
+              <label value="Part 1:" />
+              <textbox id="addPart1" onclick='document.getElementById("editReferrer").disabled = false; document.getElementById("addPart2").disabled = false;' style="width:350px; max-height:30px"/>
+              <label value="Part 2:" disabled="true"/>
+              <textbox id="addPart2" style="width:350px; max-height:30px"/>
+              <button id="editReferrer" label="&addentries;" onclick="torpedo.db.addReferrer();" disabled="true"/>
+          	</vbox>
+          	<popupset>
+          		<panel type="arrow" id="errormessage" fade="slow">
+          			<hbox class="mainBox">
+          				<label id="error"/>
+          			</hbox>
+          		</panel>
+          	</popupset>
           </tabpanel>
         </tabpanels>
       </tabbox>

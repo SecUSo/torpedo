@@ -91,7 +91,7 @@ torpedo.handler.mouseOverHref = function (event)
 
 				// check if url is a "redirectUrl=" url (gmxredirect)
 				torpedo.gmxRedirect = false;
-				while(url.contains("redirectUrl=") || url.contains("redirect=")){
+				if(torpedo.functions.isGmxRedirect(url)){
 					url = torpedo.functions.resolveRedirect(url);
 					torpedo.gmxRedirect = true;
 				}
@@ -235,6 +235,8 @@ torpedo.handler.loadOptions = function (){
   document.getElementById('listofdefaults').textContent = torpedo.stringsBundle.getString('listofdefaults');
   document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
   document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
+  document.getElementById('referrerDialog').textContent = torpedo.stringsBundle.getString('referrer');
+	torpedo.db.getReferrer();
   var element = document.getElementById("editor");
   element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
 }

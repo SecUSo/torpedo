@@ -53,71 +53,27 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 }
 
 torpedo.functions.isURL = function (url) {
-  url = url.replace(" ", "");
-  var regex = new RegExp("/^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([\u00C0-\u017F0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[\u00C0-\u017Fa-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?/g");
-  if (regex.test(url)) {
-    // check if part after domain is too long, f.e. www.abc.abcd
-    try{
-      url = torpedo.functions.getDomainWithFFSuffix(url)
-      var pos = url.lastIndexOf(".");
-      url = url.substring(pos+1, url.length);
-      if(url.length > 3){
-        if(url[2].match(/^[A-Za-z]+$/) && url[3].match(/^[A-Za-z]+$/)) return false;
-      }
-    }
-    catch(e){
-    }
+  if(url.startsWith("mailto:")) return false;
+  try{
+    const href = new URL(url);
     return true;
+  }catch(e){
+    return false;
   }
-  // for problems with first pattern
-  if (url.match(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})))(?::\d{2,5})?(?:\/[^\s]*)?$/i)) {
-    return true;
-  }
-  return false;
 };
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
-  var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
-  var isIP = String(url).match(/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g);
-  if(isIP){
-    start = url.indexOf("://")+3;
-    url = url.substr(start, url.length);
-    end = url.indexOf("/");
-    var baseDomain = url.substr(0,end);
-    return baseDomain;
-  }
-  try {
-    var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
-    var baseDomain = eTLDService.getBaseDomain(tempURI);
-    if(baseDomain.indexOf("www.")==0) {
-        var arr = baseDomain.split("www.");
-        baseDomain = arr[1];
-    }
-    return baseDomain;
-  }
-  catch(err) {
-    if (url.indexOf("://") > -1) {
-        url = url.split('/')[2];
-    }
-    else {
-        url = url.split('/')[0];
-    }
-    var regex_var = new RegExp(/[^.]*\.[^.]{2,3}(?:\.[^.]{2,3})?$/);
-    var array = regex_var.exec(url);
+  if(torpedo.functions.isURL(url)){
     try{
-        url = array[0];
-        array = url.split(".");
-        if(array[0] == "www" || array[0].indexOf("http") > -1){
-            url = "";
-            for(var i = 1; i < array.length-1; i++){
-                url += array[i] + ".";
-            }
-            url += array[array.length-1];
-        }
-        return url;
-    }
-    catch(err){
-        return url;
+      const href = new URL(url);
+      var host = href.hostname;
+      split = host.split(".");
+      if(split.length > 2){
+        host = split[split.length-2] + "." + split[split.length-1];
+      }
+      return host;
+    }catch(e){
+      return url;
     }
   }
 };
@@ -410,30 +366,44 @@ torpedo.functions.redirect = function (id){
 * contains "redirect" or contains domain from list of redirections
 */
 torpedo.functions.isRedirect = function(url){
+  if(torpedo.functions.isURL(url)){
     for(var i = 0; i < redirects.length; i++){
         if(torpedo.functions.getDomainWithFFSuffix(url) == redirects[i]) {
             return true;
         }
     }
-    return false;
+  }
+  return false;
 };
 
+torpedo.gmxRedirect;
 torpedo.functions.resolveRedirect = function(url){
-    var index = 0;
-    var reUrl = url.indexOf("redirectUrl=");
-    var re = url.indexOf("redirect=");
-    if(reUrl > -1 ){
-        index = reUrl+12;
+  var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
+  var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+  sites = sites.split(",");
+  sites2 = sites2.split(",");
+  if(torpedo.gmxRedirect > -1){
+    var compare = sites[torpedo.gmxRedirect];
+    if(sites2[torpedo.gmxRedirect] != "") compare = sites2[torpedo.gmxRedirect];
+    var index = url.indexOf(compare);
+    if(index > -1){
+      var temp = url.substring(index+compare.length, url.length);
+      temp = decodeURIComponent(temp);
+      if(torpedo.functions.isURL(temp)) url = temp;
     }
-    else if(re > -1){
-        var index = re+9;
-    }
-    var temp = url.slice(index, url.length);
-    temp = decodeURIComponent(temp);
-    if(torpedo.functions.isURL(temp)) url = temp;
-    return url;
-}
+  }
+  return url;
+};
+
 torpedo.functions.isGmxRedirect = function(url){
-  var temp = torpedo.functions.resolveRedirect(url);
-  return(torpedo.functions.getDomainWithFFSuffix(temp) != torpedo.functions.getDomainWithFFSuffix(url));
-}
+  var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
+  sites = sites.split(",");
+  for(var i = 0; i < sites.length; i++){
+    if(url.indexOf(sites[i]) >-1) {
+      torpedo.gmxRedirect = i;
+      return true;
+    }
+  }
+  torpedo.gmxRedirect = -1;
+  return false;
+};

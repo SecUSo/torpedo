@@ -128,7 +128,6 @@ torpedo.db.getSecond = function () {
 		}
 	}
  	document.getElementById("deleteSecond").disabled = 	(document.getElementById("theList").itemCount == 0)? true:false;
-
 };
 
 torpedo.db.getDefaults = function (){
@@ -143,6 +142,87 @@ torpedo.db.getDefaults = function (){
 	  	defaultList.appendChild(row);
 		}
 	}
+};
+
+torpedo.db.getReferrer = function (){
+	var referrerList = document.getElementById('referrerList');
+	var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
+	var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+
+	// remove all elements first
+	while (referrerList.firstChild) referrerList.removeChild(referrerList.firstChild);
+
+	// disable buttons
+	document.getElementById("editReferrer").disabled = true;
+	document.getElementById("addPart2").disabled = true;
+
+	sites = sites.split(",");
+	sites2 = sites2.split(",");
+	for (i = 0; i < sites.length; i++) {
+		var row = document.createElement('listitem');
+    var cell = document.createElement('listcell');
+    cell.setAttribute('label', sites[i]);
+    row.appendChild(cell);
+
+    cell = document.createElement('listcell');
+    cell.setAttribute('label', sites2[i]);
+    row.appendChild(cell);
+
+	  referrerList.appendChild(row);
+	}
+};
+
+torpedo.db.addReferrer = function (){
+	var add1 = document.getElementById("addPart1").value;
+	var add2 = document.getElementById("addPart2").value;
+	add1.toLowerCase();	add2.toLowerCase();
+	add1 = add1.replace(/\s+/g, ''); add2 = add2.replace(/\s+/g, '');
+	add1 = add1 + ",";
+	add2 = add2 + ",";
+
+	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
+	var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+	str.data = sites+add1;
+	torpedo.prefs.setComplexValue("redirectUrls", Components.interfaces.nsISupportsString, str);
+	str2.data = sites2+add2;;
+	torpedo.prefs.setComplexValue("redirectUrls2", Components.interfaces.nsISupportsString, str2);
+	
+	document.getElementById("addPart1").value = "";
+	document.getElementById("addPart2").value = "";
+	torpedo.db.getReferrer();
+};
+
+torpedo.db.deleteReferrer = function (){
+	var referrerList = document.getElementById('referrerList');
+	var del = referrerList.selectedIndex;
+
+	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
+	var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+	sites = sites.split(",");
+	sites.splice(del,1);
+	str.data = sites.toString();
+	sites2 = sites2.split(",");
+	sites2.splice(del,1);
+	str2.data = sites2.toString();
+	torpedo.prefs.setComplexValue("redirectUrls", Components.interfaces.nsISupportsString, str);
+	torpedo.prefs.setComplexValue("redirectUrls2", Components.interfaces.nsISupportsString, str2);
+
+	torpedo.db.getReferrer();
+};
+
+torpedo.db.deleteAllReferrer = function (){
+	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+	str.data = "";
+	str2.data = "";
+	torpedo.prefs.setComplexValue("redirectUrls", Components.interfaces.nsISupportsString, str);
+	torpedo.prefs.setComplexValue("redirectUrls2", Components.interfaces.nsISupportsString, str2);
+
+	torpedo.db.getReferrer();
 };
 
 torpedo.db.restoreSettings = function(){

@@ -169,7 +169,7 @@ torpedo.updateTooltip = function (url)
 	// settings for phish case
 	var title = torpedo.handler.title;
 	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect && !requestList.includes(torpedo.functions.getDomainWithFFSuffix(torpedo.oldUrl)+",")){
-		if(torpedo.functions.isURL(title) || torpedo.functions.isURL("http://" + title)){
+		if(torpedo.functions.isURL(title)){
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 			var a = titleDomain.split(".");
 			var b = torpedo.baseDomain.split(".");
