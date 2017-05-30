@@ -66,21 +66,27 @@
           <tabpanel id="listtab" orient="horizontal">
             <vbox style="overflow:auto">
           		<description id="referrerDialog" style="width:370px; margin-top:10px" />
-          		<listbox id="referrerList" width="370" height="160" style="overflow:auto" onselect="document.getElementById('deleteReferrer').disabled = false;">
-                <listhead>
-                  <listheader label="Part 1" width="170"/>
-                  <listheader label="Part 2" width="170"/>
-                </listhead>
-              </listbox>
+              <hbox>
+                <vbox>
+                  <label value="Part 1" />
+                  <richlistbox id="referrerList" width="170" height="160" onselect="document.getElementById('deleteReferrer').disabled = false; document.getElementById('referrerList2').selectedIndex = this.selectedIndex;" />
+                </vbox>
+                <spacer flex="1" />
+                <vbox>
+                  <label value="Part 2" />
+                  <richlistbox id="referrerList2" width="170" height="160" onselect="document.getElementById('deleteReferrer').disabled = false; document.getElementById('referrerList').selectedIndex = this.selectedIndex;" />
+                </vbox>
+              </hbox>
           		<hbox>
             		<button id="deleteReferrer" label="&deleteEntries;" onclick="torpedo.db.deleteReferrer()" disabled="true"/>
             		<button id="clearReferrer" label="&clearentries;" onclick="torpedo.db.deleteAllReferrer()" />
               </hbox>
               <label value="&addentries;" style="font-weight:bold; margin-top: 10px;"/>
+              <description id="referrerInfo" style="width:370px; margin-top:10px" />
               <label value="Part 1:" />
               <textbox id="addPart1" onclick='document.getElementById("editReferrer").disabled = false; document.getElementById("addPart2").disabled = false;' style="width:350px; max-height:30px"/>
               <label value="Part 2:" disabled="true"/>
-              <textbox id="addPart2" style="width:350px; max-height:30px"/>
+              <textbox id="addPart2" style="width:350px; max-height:30px; margin-bottom: 10px"/>
               <button id="editReferrer" label="&addentries;" onclick="torpedo.db.addReferrer();" disabled="true"/>
           	</vbox>
           	<popupset>

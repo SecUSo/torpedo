@@ -236,6 +236,7 @@ torpedo.handler.loadOptions = function (){
   document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
   document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
   document.getElementById('referrerDialog').textContent = torpedo.stringsBundle.getString('referrer');
+  document.getElementById('referrerInfo').textContent = torpedo.stringsBundle.getString('referrerInfo');
 	torpedo.db.getReferrer();
   var element = document.getElementById("editor");
   element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
