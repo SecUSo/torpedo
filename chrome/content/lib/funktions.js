@@ -150,7 +150,8 @@ torpedo.functions.containsRedirect = function(url){
               do{
       					url = torpedo.functions.resolveRedirect(url);
       					torpedo.gmxRedirect = true;
-      				}while(torpedo.functions.isGmxRedirect(url));
+                torpedo.functions.loop++;
+      				}while(torpedo.functions.isGmxRedirect(url) && torpedo.functions.loop < 5);
               torpedo.functions.containsRedirect(url);
             }
             else{
