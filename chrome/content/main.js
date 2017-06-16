@@ -10,12 +10,13 @@ torpedo.gmxRedirect;
 torpedo.redirectClicked;
 torpedo.oldUrl;
 torpedo.info;
-torpedo.state; // 0 is unknown, 1 is green, 2 is blue, 3 is grey, 4 is redirect, 5 is gmxredirect, 6 is phish
+torpedo.state; // 0:T1, 1:T2 ,2:T3, 3:T1PH, 4:T2PH, 5:T3PH, 6:URLnachErmittelnButton,
+// 7:T1*, 8:T2*, 9:T3*, 10:URLnachErmittelnButton2, 11:T1TH, 12:T2TH, 13:T3TH,
+// 14:T1PHTH, 15:T2PHTH, 16:T3PHTH, 17:WarnungPhish
 
 torpedo.updateTooltip = function (url)
 {
 	// Initializaion
-	torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 	var panel = document.getElementById("tooltippanel");
 	var redirect = document.getElementById("redirect");
 	var phish = document.getElementById("phish");
@@ -24,9 +25,6 @@ torpedo.updateTooltip = function (url)
 	var redirectButton = document.getElementById("redirectButton");
 	var urlBox = document.getElementById("url-box");
 	var linkDeactivate = document.getElementById("linkDeactivate");
-	var baseDomain = document.getElementById("baseDomain");
-	var url1 = document.getElementById("url1");
-	var url2 = document.getElementById("url2");
 	var advice = document.getElementById("advice");
 	var advicebox = document.getElementById("advicebox");
 	var infotext = document.getElementById("infotext");
@@ -37,22 +35,14 @@ torpedo.updateTooltip = function (url)
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
 	var isRedirect = torpedo.functions.isRedirect(url);
-	var shortenText = torpedo.prefs.getBoolPref("language");
-	var old = "";
+	var title = torpedo.handler.title;
 	redirectButton.disabled = true;
 	redirect.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
-	linkDeactivate.hidden = shortenText;
 	phish.hidden = true;
-	advice.textContent = torpedo.stringsBundle.getString('knownadvice');
-	infotext.textContent = torpedo.stringsBundle.getString('moreinfolowrisk');
 	advicebox.hidden = false;
-	// assert url to tooltip
-	baseDomain.textContent = torpedo.baseDomain;
-	var split = url.indexOf(torpedo.baseDomain);
-	var beginning = url.substring(0, split);
-	var end = url.substring(split+torpedo.baseDomain.length, url.length);
+
 	infos.style.marginBottom = "0px";
 	phish.style.marginBottom = "10px";
 	infobox.style.marginTop = "7px";
@@ -66,12 +56,6 @@ torpedo.updateTooltip = function (url)
 	}
 
 	if(torpedo.prefs.getIntPref("blockingTimer")==0) secondsbox.hidden = true;
-	url1.textContent = beginning;
-	url2.textContent = "";
-
-	if(end.length > 75) end = end.substring(0,75) +  "...";
-	//avoid unnessecary slash
-	if(end.length > 1) url2.textContent = end;
 
 	// show or hide redirectButton
   if((!isRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
@@ -86,9 +70,8 @@ torpedo.updateTooltip = function (url)
 	// trustworthy domains activated and url is in it
 	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
 		panel.style.borderColor = "green";
-		torpedo.state = 1;
-		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.info = torpedo.stringsBundle.getString('infosongreen');
-		redirect.textContent = torpedo.stringsBundle.getString('lowrisk');
+		torpedo.state = "T2";
+		if(torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state = "T2PH";
 		advicebox.hidden = true;
 		redirectButton.hidden = true;
 		// if timer is off in trustworthy domains
@@ -99,10 +82,8 @@ torpedo.updateTooltip = function (url)
 	// domain is in < 2 times clicked links
 	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
 		panel.style.borderColor = "#1a509d";
-		torpedo.state = 2;
-		if(!torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.info = torpedo.stringsBundle.getString('infosonblue');
-		if(shortenText) redirect.textContent = "";
-		else redirect.textContent = torpedo.stringsBundle.getString('userrisk');
+		torpedo.state = "T3";
+		if(torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state = "T3PH";
 		advicebox.hidden = true;
 		redirectButton.hidden = true;
 		// timer is off in clicked links
@@ -111,28 +92,28 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 	else{
-		torpedo.state = 3;
+		torpedo.state = "T1";
 		if(navigator.language.indexOf("de") > -1)
 			infobox.style.marginTop = "23px";
 		else infobox.style.marginTop = "10px";
-		advice.textContent = torpedo.stringsBundle.getString('unknownadvice');
-		infotext.textContent = torpedo.stringsBundle.getString('moreinfogrey');
-		if(!torpedo.functions.isRedirect(torpedo.oldUrl)){
-			torpedo.info = "";
-		}
+		if(torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state = "T1PH";
 		if(!isRedirect) redirectButton.hidden = true;
-
-		if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('highrisk_short');
-		else redirect.textContent = torpedo.stringsBundle.getString('highrisk');
 		panel.style.borderColor = " #bfb9b9";
 	}
 	if(torpedo.gmxRedirect){
-		torpedo.state = 5;
+		if(title != "" && title != undefined){
+			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
+			var a = titleDomain.split(".");
+			var b = torpedo.baseDomain.split(".");
+			if(titleDomain != torpedo.baseDomain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
+				if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) torpedo.state = "T2PHTH";
+				else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList")) torpedo.state = "T3PHTH";
+				else torpedo.state = "T1PHTH";
+			}
+		}
+		torpedo.state = "URLnachErmittelnButton2";
 		phish.hidden = false;
 		advice.hidden = false;
-		phish.textContent = shortenText ? torpedo.stringsBundle.getString('redirect') : torpedo.stringsBundle.getString('alert_redirect');
-		infotext.textContent = torpedo.stringsBundle.getString('moreinfogmxredirect');
-		torpedo.info = torpedo.stringsBundle.getString('infosongmxredirect');
 		if(navigator.language.indexOf("de") > -1){
 			phish.style.marginBottom = "5px";
 		}
@@ -145,12 +126,7 @@ torpedo.updateTooltip = function (url)
 	// settings for redirect case
 	if(isRedirect){
 		if(torpedo.functions.loop < 0) {
-			torpedo.state = 4;
-			if(shortenText) redirect.textContent = torpedo.stringsBundle.getString('shorturl_short');
-			else redirect.textContent = torpedo.stringsBundle.getString('shorturl');
-			torpedo.info = torpedo.stringsBundle.getString('infosonredirect');
-			advice.textContent = torpedo.stringsBundle.getString('redirectadvice');
-			infotext.textContent = torpedo.stringsBundle.getString('moreinforedirect');
+			torpedo.state = "URLnachErmittelnButton";
 			if(navigator.language.indexOf("de") > -1){
 				infobox.style.marginTop = "25px";
 			}
@@ -167,17 +143,15 @@ torpedo.updateTooltip = function (url)
 
 	var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
 	// settings for phish case
-	var title = torpedo.handler.title;
 	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect && !requestList.includes(torpedo.functions.getDomainWithFFSuffix(torpedo.oldUrl)+",")){
 		if(torpedo.functions.isURL(title)){
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 			var a = titleDomain.split(".");
 			var b = torpedo.baseDomain.split(".");
 			if(titleDomain != torpedo.baseDomain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
-				if(shortenText) phish.textContent = torpedo.stringsBundle.getString('warn_short');
-				else phish.textContent = torpedo.stringsBundle.getString('warn');
-				torpedo.state = 6;
 				if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
+					if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) torpedo.state = "T2TH";
+					else torpedo.state = "T3TH";
 					if(navigator.language.indexOf("de") > -1){
 						phish.style.marginBottom = "0px";
 						infobox.style.marginTop = "2px";
@@ -186,9 +160,9 @@ torpedo.updateTooltip = function (url)
 						phish.style.marginBottom = "0px";
 						infobox.style.marginTop = "2px";
 					}
-					phish.textContent = torpedo.stringsBundle.getString('actual');
 				}
 				else{
+					torpedo.state = "T1TH";
 					panel.style.backgroundColor = "#feffcc";
 					panel.style.borderColor = "red";
 					redirect.textContent = "";
@@ -203,28 +177,15 @@ torpedo.updateTooltip = function (url)
 					warningpic.hidden = false;
 				}
 				phish.hidden = false;
-				advice.textContent = torpedo.stringsBundle.getString('phishadvice');
-				infotext.textContent = torpedo.stringsBundle.getString('moreinfophish');
-				infotext.style.margin = "4px 0px 20px 6px"
-				infopic.style.marginTop = "6px"
-				torpedo.info = torpedo.stringsBundle.getString('infosonred');
+				infotext.style.margin = "4px 0px 20px 6px";
+				infopic.style.marginTop = "6px";
 			}
 		}
 	}
-	// set text size of tooltip
-  var content = document.getElementById("tooltippanel");
-	torpedo.textSize = torpedo.prefs.getIntPref("textsize");
-  content.style.fontSize=""+torpedo.textSize+"%";
 
-	/*if(torpedo.textSize == "115"){
-		if(navigator.language.indexOf("de") > -1){
-			infobox.style.marginTop = "48px";
-		}
-		else{
-			infobox.style.marginTop = "32px";
-		}
-	}*/
+	torpedo.texts.assignTexts(url);
 	torpedo.functions.setHref(url);
+	Application.console.log(panel.innerHTML);
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
@@ -237,7 +198,7 @@ torpedo.processDOM = function (){
 		$("#deleteSecond").bind("click",torpedo.handler.mouseClickDeleteButton);
 		$("#editSecond").bind("click",torpedo.handler.mouseClickEditButton);
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
-		$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
+		//$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
 		//document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('bigtext');
 		///document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
 

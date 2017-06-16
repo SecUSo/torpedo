@@ -1,3 +1,7 @@
+tooltippanel > description {
+  white-space: pre-wrap;
+}
+
 #warning-pic
 {
   max-width: 60px;
@@ -73,7 +77,6 @@
 	border: solid 2.5px red;
   border-radius: 5px;
   color: #000000;
-  font-size: 100px;
 	width: 350px;
 }
 #advicebox

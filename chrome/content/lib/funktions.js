@@ -209,9 +209,13 @@ torpedo.functions.countdown = function (timee, id, url) {
         var panel = document.getElementById("tooltippanel");
         var content = document.getElementById("tooltipcontent");
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
-        $("#" + id).html(strZeit);
+        document.getElementById("countdown").textContent = torpedo.stringsBundle.getString('VerbleibendeZeit');
+        Application.console.log(document.getElementById("countdown").textContent);
+        var remainingTimeText = document.getElementById("countdown").textContent.replace("<TIME>",strZeit);
+        Application.console.log(document.getElementById("countdown").textContent);
+        document.getElementById("countdown").textContent = remainingTimeText;
 
-        if (second == 0 && (document.getElementById("redirect").textContent != torpedo.stringsBundle.getString('wait'))) {
+        if (second == 0 /*&& (document.getElementById("redirect").textContent != torpedo.stringsBundle.getString('wait'))*/) {
             // make URL in tooltip clickable
             $("#clickbox").unbind("click");
             $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
@@ -220,7 +224,7 @@ torpedo.functions.countdown = function (timee, id, url) {
             $("#clickbox").css("cssText", "cursor:pointer !important");
         }
         else {
-            document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
+          //  document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
             $("#clickbox").unbind("click");
             $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
             $(torpedo.handler.TempTarget).unbind("click");
@@ -267,7 +271,7 @@ torpedo.functions.changeLanguage = function(){
     else document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
 }
 
-torpedo.functions.changeTextsize = function(){
+/*torpedo.functions.changeTextsize = function(){
     var notsize;
     var editor = document.getElementById("editor");
     var panel = document.getElementById("changeSize")
@@ -285,7 +289,7 @@ torpedo.functions.changeTextsize = function(){
         torpedo.textSize = 115;
         if(editor!=null) editor.style.fontSize="115%";
     }
-}
+}*/
 
 // list settings
 
@@ -329,7 +333,7 @@ torpedo.functions.changeCheckedTimer = function (){
     torpedo.prefs.setBoolPref("checkedTimer", d);
     if(!d){
         torpedo.prefs.setIntPref("blockingTimer", 0);
-        document.getElementById("countdown").disabled = true;
+        // TODO document.getElementById("countdown").disabled = true;
         document.getElementById("greenlistactivated").disabled = true;
         document.getElementById("activategreen").setAttribute("style","color:grey;width:330px; margin-top:10px");
         document.getElementById("orangelistactivated").disabled = true;
@@ -337,7 +341,7 @@ torpedo.functions.changeCheckedTimer = function (){
     }
     else{
         torpedo.prefs.setIntPref("blockingTimer", 3);
-        document.getElementById("countdown").disabled = false;
+      // TODO  document.getElementById("countdown").disabled = false;
         document.getElementById("greenlistactivated").disabled = false;
         document.getElementById("activategreen").removeAttribute("style");
         document.getElementById("activategreen").setAttribute("style","width:330px; margin-top:10px");
@@ -399,12 +403,12 @@ torpedo.functions.resolveRedirect = function(url){
 torpedo.functions.isGmxRedirect = function(url){
   var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
   sites = sites.split(",");
-  for(var i = 0; i < sites.length; i++){
-    if(url.indexOf(sites[i]) >-1) {
-      torpedo.gmxRedirect = i;
+  for(var i = 0; i < sites.length-1; i++){
+    if(url.startsWith(sites[i])) {
+      torpedo.gmxRedirect = true;
       return true;
     }
   }
-  torpedo.gmxRedirect = -1;
+  torpedo.gmxRedirect = false;
   return false;
 };

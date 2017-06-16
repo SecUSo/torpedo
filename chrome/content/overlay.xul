@@ -11,6 +11,7 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/main.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/texts.js"/>
 
 	<popupset>
     <panel id="tooltippanel" backdrag="true" align="center">
@@ -18,39 +19,35 @@
 				<vbox id="clickbox">
 		   		<hbox id="phishBox">
 						<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
-						<description id="phish" flex="1"/>
+						<description id="phish" flex="1" />
 					</hbox>
 					<vbox id="url-box">
 						<hbox id="url1andbase">
-							<description id="url1" />
-							<description id="baseDomain" />
+							<description id="url1"/>
+							<description id="baseDomain"/>
 						</hbox>
-						<description id="url2"/>
+						<description id="url2" />
 					</vbox>
-				  <description id="redirect" flex="1"/>
+				  <description id="redirect" flex="1" />
 					<hbox id="advicebox">
 						<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
-						<description id="advice" flex="1"/>
+						<description id="advice" flex="1" />
 					</hbox>
 				</vbox>
-				<vbox id="infos">
+				<vbox id="infos" onclick="$('#moreinfos').toggle(); $('#infocheck').toggle();">
 					<hbox id="infobox">
 						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
-						<description id="infotext" flex="1"/>
+						<description id="infotext" flex="1" />
 					</hbox>
 					<hbox id="moreinfobox">
-						<description id="moreinfos" flex="1" />
+						<description id="moreinfos" flex="1"  style="display: none; "/>
 					</hbox>
-					<button id="infocheck" label="&infocheckURL;" hidden="true" onclick="torpedo.dialogmanager.createUnknownInfo();"/>
+					<button id="infocheck" label="&infocheckURL;" style="display:none" onclick="torpedo.dialogmanager.createUnknownInfo();"/>
 				</vbox>
 				<button id="redirectButton" label="&redirect;" hidden="true"/>
 				<vbox id="seconds-box">
-					<label id="linkDeactivate" />
-					<hbox id="countdownbox">
-						<label value="&remainingTime;" />
-						<label id="countdown"/>
-						<label id="secs" value="&secs;"/>
-					</hbox>
+					<description id="linkDeactivate"/>
+					<description id="countdown"/>
 				</vbox>
 			</vbox>
     </panel>

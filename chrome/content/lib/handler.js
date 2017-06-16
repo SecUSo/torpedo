@@ -87,7 +87,6 @@ torpedo.handler.mouseOverHref = function (event)
 				var redirect = false;
 				moreinfos.textContent = "";
 				torpedo.info = "";
-				document.getElementById("infocheck").hidden = true;
 
 				// check if url is a "redirectUrl=" url (gmxredirect)
 				torpedo.gmxRedirect = false;
@@ -181,28 +180,6 @@ torpedo.handler.mouseClickHrefError = function(event){
 	}
 };
 
-torpedo.handler.mouseClickInfoButton = function (event)
-{
-	var moreinfos = document.getElementById("moreinfos");
-	var panel = document.getElementById("tooltippanel");
-	var warningpic = document.getElementById("warning-pic");
-	var phish = document.getElementById("phish");
-	if(torpedo.db.unknown(torpedo.baseDomain) && !torpedo.functions.isRedirect(torpedo.oldUrl) && !torpedo.gmxRedirect){
-		if(warningpic.hidden){
-			torpedo.dialogmanager.createUnknownInfo();
-		}
-		document.getElementById("infocheck").hidden = false;
-		moreinfos.textContent = torpedo.info;
-	}
-	else{
-		if(moreinfos.textContent != ""){
-			moreinfos.textContent = "";
-		}
-		else moreinfos.textContent = torpedo.info;
-	}
-	if(torpedo.functions.isRedirect(torpedo.oldUrl) || torpedo.gmxRedirect || torpedo.state == 5 || torpedo.state == 6 || torpedo.state == 4) document.getElementById("infocheck").hidden = false;
-};
-
 torpedo.handler.mouseClickDeleteButton = function(event){
 	torpedo.dialogmanager.createDelete();
 };
@@ -231,7 +208,7 @@ torpedo.handler.mouseClickAddButton = function(event){
 }
 torpedo.handler.loadOptions = function (){
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
-	document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('checkedTimer');
+	// TODO document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('checkedTimer');
   document.getElementById('listofdefaults').textContent = torpedo.stringsBundle.getString('listofdefaults');
   document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
   document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
