@@ -32,7 +32,6 @@
 <!ENTITY back "Back">
 <!ENTITY end "Exit">
 <!ENTITY redirection "Redirections">
-<!ENTITY redirect "Deduce target URL">
 <!ENTITY secs "second(s)">
 <!ENTITY entries_gone "Successfully deleted">
 <!ENTITY showredirects "Show all redirection domains">
@@ -42,7 +41,6 @@
 <!ENTITY opensettings "Open settings window">
 <!ENTITY addtotrusted "Mark domain as trustworthy">
 <!ENTITY searchfor "Check domain with google.com">
-<!ENTITY infocheckURL "How to check the URL">
 <!ENTITY toTutorial ">> Continue to tutorial (recommended for first time users)">
 <!ENTITY opentutorial "Open tutorial">
 <!ENTITY thunderbird "Back to Thunderbird">

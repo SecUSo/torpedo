@@ -20,7 +20,8 @@ torpedo.handler.mouseOverTooltipPane = function (event){
 	$(panel).contextmenu(function(){
 		var menuwindow = document.getElementById("menuwindow");
 		var urlbox = document.getElementById("url-box");
-		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")) document.getElementById("addtotrusted").disabled = true;
+		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList"))
+			document.getElementById("addtotrusted").disabled = true;
 		else  document.getElementById("addtotrusted").disabled = false;
 	  menuwindow.openPopup(urlbox, "after_start",0,0, false, false);
 	});
@@ -62,46 +63,43 @@ torpedo.handler.mouseOverHref = function (event)
 	var moreinfos = document.getElementById("moreinfos");
 	var panel = document.getElementById("tooltippanel");
 	// do nothing when user reads infotext or deduces target url
-	if((!torpedo.redirectClicked || panel.state == "closed") && (panel.state == "closed" || torpedo.info == "" || moreinfos.textContent == "")){
-		torpedo.redirectClicked = false;
-		mouseout = mouseout[0] ? [false,true] : [false,false];
-		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
-		var url = tempTarget.getAttribute("href");
-		// make sure that popup opens up even if popup from another URL is opened
-		if(url != "" && torpedo.oldUrl != url) panel.hidePopup();
-		if(panel.state == "closed"){
-			if(url != "" && url != null && url != undefined ){
-				// Initializaion of tooltip
-				torpedo.handler.TempTarget = tempTarget;
-				torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ","");
-				torpedo.handler.clickEnabled = true;
-				torpedo.functions.loop = -1;
-				torpedo.state = 0;
-				torpedo.functions.loopTimer = 2000;
-				torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-				torpedo.handler.Url = url;
-			  torpedo.oldUrl = torpedo.baseDomain;
-				panel.style.backgroundColor = "white";
-				clearTimeout(torpedo.handler.MouseLeavetimer);
-				alreadyClicked = "";
-				var redirect = false;
-				moreinfos.textContent = "";
-				torpedo.info = "";
-
-				// check if url is a "redirectUrl=" url (gmxredirect)
-				torpedo.gmxRedirect = false;
-				if(torpedo.functions.isGmxRedirect(url)){
-					url = torpedo.functions.resolveRedirect(url);
-					torpedo.gmxRedirect = true;
-				}
-
-				// check if url is a normal redirect (tinyurl)
-				if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
-					redirect = true;
-				}
-				// start with the opening process
-			  torpedo.functions.traceUrl(url, redirect);
+	if(panel.state == "open" && (torpedo.redirectClicked || $("#moreinfos").css("display") == "inline"))
+		return;
+	torpedo.redirectClicked = false;
+	mouseout = mouseout[0] ? [false,true] : [false,false];
+	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
+	var url = tempTarget.getAttribute("href");
+	// make sure that popup opens up even if popup from another URL is opened
+	if(url && torpedo.oldUrl != url) panel.hidePopup();
+	if(panel.state == "closed"){
+		if(url){
+			// Initializaion of tooltip
+			torpedo.handler.TempTarget = tempTarget;
+			torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ","");
+			torpedo.handler.clickEnabled = true;
+			torpedo.functions.loop = -1;
+			torpedo.state = 0;
+			torpedo.functions.loopTimer = 2000;
+			torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
+			torpedo.handler.Url = url;
+		  torpedo.oldUrl = torpedo.baseDomain;
+			panel.style.backgroundColor = "white";
+			clearTimeout(torpedo.handler.MouseLeavetimer);
+			$('#moreinfos').hide(); $('#infocheck').hide();
+			alreadyClicked = "";
+			var redirect = false;
+			// check if url is a "redirectUrl=" url (gmxredirect)
+			torpedo.gmxRedirect = false;
+			if(torpedo.functions.isGmxRedirect(url)){
+				url = torpedo.functions.resolveRedirect(url);
+				torpedo.gmxRedirect = true;
 			}
+			// check if url is a normal redirect (tinyurl)
+			if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
+				redirect = true;
+			}
+			// start with the opening process
+		  torpedo.functions.traceUrl(url, redirect);
 		}
 	}
 };

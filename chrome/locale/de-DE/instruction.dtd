@@ -33,7 +33,6 @@
 <!ENTITY back "Zurück">
 <!ENTITY end "Beenden">
 <!ENTITY redirection "Weiterleitungen">
-<!ENTITY redirect "Ziel-URL ermitteln">
 <!ENTITY noredirect "Domains nicht auf Weiterleitungen prüfen">
 <!ENTITY manualredirect "Domains manuell auf Weiterleitungen prüfen">
 <!ENTITY autoredirect "Domains automatisch auf Weiterleitungen prüfen">
@@ -46,7 +45,6 @@
 <!ENTITY opensettings "Einstellungen öffnen">
 <!ENTITY addtotrusted "Domain als niedriges Risiko einstufen">
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
-<!ENTITY infocheckURL "Informationen zur Durchführung der Überprüfung">
 <!ENTITY toTutorial ">> Weiter zum Tutorial (Empfehlung bei Erstinstallation)">
 <!ENTITY opentutorial "Tutorial öffnen">
 <!ENTITY thunderbird "Zurück zu Thunderbird">

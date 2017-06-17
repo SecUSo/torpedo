@@ -194,25 +194,23 @@ torpedo.functions.saveRedirection = function(url, response){
 
 torpedo.functions.countdown = function (timee, id, url) {
     var startTime = timee;
-
     var setBaseDomain = document.getElementById("baseDomain");
     var noTimer = ((!torpedo.functions.isChecked("greenActivated") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) ||
             (!torpedo.functions.isChecked("orangeActivated") && torpedo.db.inList(torpedo.baseDomain, "URLSecondList")) ||
-          (document.getElementById("redirect").textContent == torpedo.stringsBundle.getString('wait')));
-
+          (document.getElementById("redirect").textContent == torpedo.stringsBundle.getString('wait')) ||
+          (torpedo.prefs.getIntPref("blockingTimer")==0));
     if (noTimer) {
         startTime = 0;
+        $("#seconds-box").hide();
     }
-
+    else $("#seconds-box").show();
     function showTime() {
         var second = startTime % 60;
         var panel = document.getElementById("tooltippanel");
         var content = document.getElementById("tooltipcontent");
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
         document.getElementById("countdown").textContent = torpedo.stringsBundle.getString('VerbleibendeZeit');
-        Application.console.log(document.getElementById("countdown").textContent);
         var remainingTimeText = document.getElementById("countdown").textContent.replace("<TIME>",strZeit);
-        Application.console.log(document.getElementById("countdown").textContent);
         document.getElementById("countdown").textContent = remainingTimeText;
 
         if (second == 0 /*&& (document.getElementById("redirect").textContent != torpedo.stringsBundle.getString('wait'))*/) {
@@ -227,6 +225,7 @@ torpedo.functions.countdown = function (timee, id, url) {
           //  document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
             $("#clickbox").unbind("click");
             $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
+            // TODO: cant access dead object?
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
             $("#clickbox").css("cssText", "cursor:wait !important;");
@@ -382,19 +381,25 @@ torpedo.functions.isRedirect = function(url){
 };
 
 torpedo.gmxRedirect;
+torpedo.gmxRedirectIndex;
 torpedo.functions.resolveRedirect = function(url){
   var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
   var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
   sites = sites.split(",");
   sites2 = sites2.split(",");
-  if(torpedo.gmxRedirect > -1){
-    var compare = sites[torpedo.gmxRedirect];
-    if(sites2[torpedo.gmxRedirect] != "") compare = sites2[torpedo.gmxRedirect];
+  Application.console.log(sites);
+  Application.console.log(sites2);
+  if(torpedo.gmxRedirectIndex > -1){
+    var compare = sites[torpedo.gmxRedirectIndex];
+    Application.console.log(compare);
+    if(sites2[torpedo.gmxRedirectIndex] != "") compare = sites2[torpedo.gmxRedirectIndex];
     var index = url.indexOf(compare);
     if(index > -1){
       var temp = url.substring(index+compare.length, url.length);
       temp = decodeURIComponent(temp);
+      Application.console.log(temp);
       if(torpedo.functions.isURL(temp)) url = temp;
+      Application.console.log(url);
     }
   }
   return url;
@@ -406,6 +411,7 @@ torpedo.functions.isGmxRedirect = function(url){
   for(var i = 0; i < sites.length-1; i++){
     if(url.startsWith(sites[i])) {
       torpedo.gmxRedirect = true;
+      torpedo.gmxRedirectIndex = i;
       return true;
     }
   }

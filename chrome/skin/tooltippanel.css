@@ -1,114 +1,103 @@
 tooltippanel > description {
   white-space: pre-wrap;
 }
-
-#warning-pic
-{
-  max-width: 60px;
-  max-height: 35px;
-  margin: 8px 2px 10px 0px;
+#tooltippanel{
+	-moz-appearance: none !important;
+	background-color: #FFFFFF;
+	border: solid 2.5px grey;
+  border-radius: 5px;
+  color: #000000;
 }
-#redirect
-{
+#tooltipcontent{
+  width: 400px;
+}
+#warning-pic{
+  width: 30px;
+  height: 25px;
+  margin: 2px 2px 2px 2px;
+}
+#redirect{
   display: block;
-  display: inline;
   white-space: pre-wrap;
   margin: 7px 0px 0px 6px;
-  max-width: 350px;
+  width: 400px;
 }
-#advice{
-  display: block;
-  display: inline;
-  white-space: pre-wrap;
-  max-width: 350px;
-  margin-top:3px;
-  margin-bottom:5px;
-}
-#moreinfos
-{
-  display: block;
-  display: inline;
-  white-space: pre-wrap;
-  font-style: italic;
-  max-width: 350px;
-}
-#redirectButton
-{
-	margin-left: 5px;
-	margin-top: 2px;
-	margin-bottom: 2px;
-  cursor: pointer;
-}
-#url-box
-{
+#url-box{
 	font-weight: normal;
 	word-break: break-all;
 	white-space: normal;
   color: #333333;
   margin: 4px 2px 2px 2px;
+  padding: 2px;
+  width: 400px;
 }
-#baseDomain
-{
+#baseDomain{
 	font-weight:bold;
-	margin-right: 2px;
-	margin-bottom: 0px;
+	margin: 0 2px 0 0;
   letter-spacing: 2px;
-  max-width: 350px;
 }
-#url1,#url2
-{
-	margin-right: 1px;
+#url1,#url2{
 	color: #404040;
 	white-space: pre-wrap;
-  max-width: 330px;
-  margin-bottom:0px;
+  margin: 0 1px 0 0;
 }
 #url1andbase{
   max-height: 20px;
+  width: 380px;
 }
-#url2
-{
+#url2{
   max-height: 30px;
+  width: 380px;
 }
-#tooltippanel
-{
-	-moz-appearance: none !important;
-	background-color: #FFFFFF;
-	border: solid 2.5px red;
-  border-radius: 5px;
-  color: #000000;
-	width: 350px;
+#advicebox{
+  display: flex;
+  margin: 3px 0 5px 2px;
+  position: relative;
+  width: 400px;
 }
-#advicebox
-{
-  margin-left: 2px;
-  margin-bottom:5px;
+#advice{
+  display: inline;
+  float: right;
+  white-space: pre-wrap;
+  width: 360px;
+  margin-bottom: 0px;
+  padding: 0 0 2px 0;
+}
+#advice-pic{
+  float: left;
+  display: inline;
+  width: 27px;
+  height: 27px;
+  margin: 5px 5px 5px 0;
+  padding: 2px;
 }
 #infos{
-  margin-top: 0px;
+  display: block;
+  position: relative;
   cursor: pointer !important;
+  width: 400px;
 }
-#infobox{
-  margin: 25px 0px 0px 2px;
+#moreinfos{
+  display: block;
+  white-space: pre-wrap;
+  font-style: italic;
 }
-#info-pic
-{
+#info-pic{
   max-width: 27px;
   max-height: 28px;
   cursor: pointer;
-	margin-right: 2px;
+	margin: 0 2px 0 0;
 }
-#advice-pic
-{
-  max-width: 27px;
-  max-height: 28px;
-  margin-top: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-}
-#infotext
-{
-  margin-top: 4px;
+#infotext{
 	text-decoration: underline;
   cursor: pointer;
+  width: 400px;
+}
+#infocheck{
+  width: 350px;
+}
+#redirectButton{
+	margin: 2px 0 2px 5px;
+  cursor: pointer;
+  width: 350px;
 }

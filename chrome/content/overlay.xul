@@ -28,23 +28,23 @@
 						</hbox>
 						<description id="url2" />
 					</vbox>
-				  <description id="redirect" flex="1" />
-					<hbox id="advicebox">
-						<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
-						<description id="advice" flex="1" />
-					</hbox>
 				</vbox>
+				<description id="redirect" flex="1" />
+				<hbox id="advicebox">
+					<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
+					<description id="advice" flex="1" />
+				</hbox>
 				<vbox id="infos" onclick="$('#moreinfos').toggle(); $('#infocheck').toggle();">
 					<hbox id="infobox">
 						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 						<description id="infotext" flex="1" />
 					</hbox>
-					<hbox id="moreinfobox">
+					<hbox id="moreinfobox" flex="1">
 						<description id="moreinfos" flex="1"  style="display: none; "/>
 					</hbox>
-					<button id="infocheck" label="&infocheckURL;" style="display:none" onclick="torpedo.dialogmanager.createUnknownInfo();"/>
+					<button id="infocheck" flex="1" style="display:none" onclick="torpedo.dialogmanager.createUnknownInfo();"/>
 				</vbox>
-				<button id="redirectButton" label="&redirect;" hidden="true"/>
+				<button id="redirectButton" hidden="true"/>
 				<vbox id="seconds-box">
 					<description id="linkDeactivate"/>
 					<description id="countdown"/>

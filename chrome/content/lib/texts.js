@@ -9,11 +9,12 @@ torpedo.texts.assignTexts = function (url)
   Application.console.log(state);
 
   // get texts from textfile
-  var button = state.indexOf("URLnachErmittelnButton") > -1 ? torpedo.stringsBundle.getString('Button') : "";
+  var button = torpedo.stringsBundle.getString('ButtonWeiterleitung');
   var ueberschrift = torpedo.stringsBundle.getString(state+"Ueberschrift");
   var erklaerung = torpedo.stringsBundle.getString(state+"Erklaerung");
   var mehrInfo = torpedo.stringsBundle.getString(state+"MehrInfo");
   var infotext = torpedo.stringsBundle.getString(state+"Infotext").replace("<URL>", url);
+  var infoCheck = torpedo.stringsBundle.getString("Info");
   var gluehbirneText = torpedo.stringsBundle.getString(state+"GluehbirneText");
   var linkDeaktivierung = torpedo.stringsBundle.getString(state+"LinkDeaktivierung");
 
@@ -25,8 +26,7 @@ torpedo.texts.assignTexts = function (url)
   // remove end of URL if it is too long
 	if(suffix.length > 75) suffix = suffix.substring(0,75) +  "...";
 	//avoid unnessecary slash
-	if(suffix.length == 0) suffix = 0;
-
+	if(suffix == "/") suffix = "";
   var url1Text = torpedo.stringsBundle.getString("URLPrefix").replace("<PREFIX>", prefix);
   var baseDomain = torpedo.stringsBundle.getString("URLDomain").replace("<DOMAIN>", torpedo.baseDomain);
   var url2Text = torpedo.stringsBundle.getString("URLSuffix").replace("<SUFFIX>", suffix);
@@ -42,4 +42,9 @@ torpedo.texts.assignTexts = function (url)
   document.getElementById("moreinfos").textContent = infotext;
   document.getElementById("redirectButton").textContent = button;
   document.getElementById("linkDeactivate").textContent = linkDeaktivierung;
+  document.getElementById("infocheck").textContent = infoCheck;
+
+  // hide light bulb if no text is there
+  if(gluehbirneText) $("#advicebox").show()
+  else $("#advicebox").hide()
 };

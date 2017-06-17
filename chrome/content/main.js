@@ -40,22 +40,8 @@ torpedo.updateTooltip = function (url)
 	redirect.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
-	phish.hidden = true;
 	advicebox.hidden = false;
-
-	infos.style.marginBottom = "0px";
-	phish.style.marginBottom = "10px";
-	infobox.style.marginTop = "7px";
-	if(navigator.language.indexOf("de") > -1){
-		infotext.style.margin = "4px 0px 20px 6px"
-		infopic.style.marginTop = "6px"
-	}
-	else{
-		infotext.style.margin = "4px 0px 0px 6px";
-		infopic.style.marginTop = "0px";
-	}
-
-	if(torpedo.prefs.getIntPref("blockingTimer")==0) secondsbox.hidden = true;
+	panel.style.backgroundColor = "white";
 
 	// show or hide redirectButton
   if((!isRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
@@ -66,75 +52,43 @@ torpedo.updateTooltip = function (url)
 	if(redirectButton.disabled) $("#redirectButton").css("cssText", "cursor:wait !important;");
 	else $("#redirectButton").css("cssText", "cursor:pointer !important;");
 
-  // settings for tooltip border colors & texts
-	// trustworthy domains activated and url is in it
-	if(torpedo.functions.isChecked("green") && torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") && !isRedirect){
-		panel.style.borderColor = "green";
-		torpedo.state = "T2";
-		if(torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state = "T2PH";
-		advicebox.hidden = true;
-		redirectButton.hidden = true;
-		// if timer is off in trustworthy domains
-		if(!torpedo.functions.isChecked("greenActivated")) {
-			secondsbox.hidden = true;
-		}
+	// set border color and standard case
+	var borderColor = torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")? "green" : torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")? "blue" : "grey";
+	switch(borderColor){
+		case "green":
+			panel.style.borderColor = "green";
+			torpedo.state = "T2";
+			break;
+		case "blue":
+			panel.style.borderColor = "#1a509d";
+			torpedo.state = "T3";
+			break;
+		case "grey":
+			panel.style.borderColor = "#bfb9b9";
+			torpedo.state = "T1";
+			break;
 	}
-	// domain is in < 2 times clicked links
-	else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList") && !isRedirect){
-		panel.style.borderColor = "#1a509d";
-		torpedo.state = "T3";
-		if(torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state = "T3PH";
-		advicebox.hidden = true;
-		redirectButton.hidden = true;
-		// timer is off in clicked links
-		if(!torpedo.functions.isChecked("orangeActivated")) {
-			secondsbox.hidden = true;
-		}
-	}
-	else{
-		torpedo.state = "T1";
-		if(navigator.language.indexOf("de") > -1)
-			infobox.style.marginTop = "23px";
-		else infobox.style.marginTop = "10px";
-		if(torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state = "T1PH";
-		if(!isRedirect) redirectButton.hidden = true;
-		panel.style.borderColor = " #bfb9b9";
-	}
+	// check if url is resolved redirect, if yes -> add * to state
+	if(!isRedirect && torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state += "*";
+
 	if(torpedo.gmxRedirect){
+		if(torpedo.state.indexOf("*") > -1) torpedo.state = "URLnachErmittelnButton2";
+		else torpedo.state += "PH";
+		// mismatch case
 		if(title != "" && title != undefined){
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
 			var a = titleDomain.split(".");
 			var b = torpedo.baseDomain.split(".");
 			if(titleDomain != torpedo.baseDomain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
-				if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) torpedo.state = "T2PHTH";
-				else if(torpedo.db.inList(torpedo.baseDomain, "URLSecondList")) torpedo.state = "T3PHTH";
-				else torpedo.state = "T1PHTH";
+				torpedo.state = torpedo.state[0] + "" + torpedo.state[1];
+				torpedo.state += "PHTH";
 			}
 		}
-		torpedo.state = "URLnachErmittelnButton2";
-		phish.hidden = false;
-		advice.hidden = false;
-		if(navigator.language.indexOf("de") > -1){
-			phish.style.marginBottom = "5px";
-		}
-		else{
-			phish.style.marginBottom = "5px";
-		}
-		infotext.style.margin = "4px 0px 20px 6px"
-		infopic.style.marginTop = "6px"
 	}
-	// settings for redirect case
+	// redirect case
 	if(isRedirect){
 		if(torpedo.functions.loop < 0) {
 			torpedo.state = "URLnachErmittelnButton";
-			if(navigator.language.indexOf("de") > -1){
-				infobox.style.marginTop = "25px";
-			}
-			else{
-				infobox.style.marginTop = "25px";
-			}
-			infotext.style.margin = "4px 0px 20px 6px"
-			infopic.style.marginTop = "6px"
 		}
 	  else{
 	    redirectButton.hidden = true;
@@ -142,7 +96,7 @@ torpedo.updateTooltip = function (url)
 	}
 
 	var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
-	// settings for phish case
+	// phish case
 	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect && !requestList.includes(torpedo.functions.getDomainWithFFSuffix(torpedo.oldUrl)+",")){
 		if(torpedo.functions.isURL(title)){
 			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
@@ -152,40 +106,20 @@ torpedo.updateTooltip = function (url)
 				if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
 					if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) torpedo.state = "T2TH";
 					else torpedo.state = "T3TH";
-					if(navigator.language.indexOf("de") > -1){
-						phish.style.marginBottom = "0px";
-						infobox.style.marginTop = "2px";
-					}
-					else{
-						phish.style.marginBottom = "0px";
-						infobox.style.marginTop = "2px";
-					}
 				}
 				else{
 					torpedo.state = "T1TH";
 					panel.style.backgroundColor = "#feffcc";
 					panel.style.borderColor = "red";
-					redirect.textContent = "";
-					if(navigator.language.indexOf("de") > -1){
-						phish.style.marginBottom = "47px";
-						infobox.style.marginTop = "22px";
-					}
-					else{
-						phish.style.marginBottom = "15px";
-						infobox.style.marginTop = "25px";
-					}
 					warningpic.hidden = false;
 				}
-				phish.hidden = false;
-				infotext.style.margin = "4px 0px 20px 6px";
-				infopic.style.marginTop = "6px";
 			}
 		}
 	}
 
 	torpedo.texts.assignTexts(url);
 	torpedo.functions.setHref(url);
-	Application.console.log(panel.innerHTML);
+
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
