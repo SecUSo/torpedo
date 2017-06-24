@@ -61,7 +61,7 @@
               <button id="showDefaults" label="&showdefaults;" style="margin-top:10px;margin-bottom:10px;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
               <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>
               <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
-              </vbox>
+            </vbox>
           </tabpanel>
           <tabpanel id="listtab" orient="horizontal">
             <vbox style="overflow:auto">

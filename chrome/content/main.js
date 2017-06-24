@@ -4,7 +4,6 @@ torpedo.instructionSize = {width: 800,height: 460};
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.baseDomain;
-torpedo.installVersion;
 torpedo.textSize;
 torpedo.gmxRedirect;
 torpedo.redirectClicked;
@@ -133,8 +132,6 @@ torpedo.processDOM = function (){
 		$("#editSecond").bind("click",torpedo.handler.mouseClickEditButton);
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
 		//$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
-		//document.getElementById("changeSize").textContent = torpedo.stringsBundle.getString('bigtext');
-		///document.getElementById("changeLang").textContent = torpedo.stringsBundle.getString('shorttext');
 
     var messagepane = document.getElementById("messagepane");
     if(messagepane){
@@ -191,15 +188,8 @@ window.addEventListener("load", function load(event){
 	torpedo.prefs.addonUninstallingListener();
 	torpedo.prefs.addonInstallingListener();
   torpedo.processDOM();
-	//torpedo.prefs.setBoolPref("firstrun",true);
   if(torpedo.prefs.getBoolPref("firstrun")){
 		torpedo.prefs.setBoolPref("firstrun",false);
-		var str = Components.classes["@mozilla.org/supports-string;1"]
-						.createInstance(Components.interfaces.nsISupportsString);
-		str.data = "2.0.4"
-		torpedo.prefs.setComplexValue("version", Components.interfaces.nsISupportsString, str);
-		if(torpedo.installVersion == "2.0.4"){
-				torpedo.dialogmanager.createWelcome();
-		}
+		torpedo.dialogmanager.createWelcome();
 	}
 }, false);

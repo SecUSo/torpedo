@@ -6,7 +6,6 @@ var Application = Components.classes["@mozilla.org/steel/application;1"].getServ
 torpedo.texts.assignTexts = function (url)
 {
   var state = torpedo.state;
-  Application.console.log(state);
 
   // get texts from textfile
   var button = torpedo.stringsBundle.getString('ButtonWeiterleitung');

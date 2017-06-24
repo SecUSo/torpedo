@@ -387,19 +387,14 @@ torpedo.functions.resolveRedirect = function(url){
   var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
   sites = sites.split(",");
   sites2 = sites2.split(",");
-  Application.console.log(sites);
-  Application.console.log(sites2);
   if(torpedo.gmxRedirectIndex > -1){
     var compare = sites[torpedo.gmxRedirectIndex];
-    Application.console.log(compare);
     if(sites2[torpedo.gmxRedirectIndex] != "") compare = sites2[torpedo.gmxRedirectIndex];
     var index = url.indexOf(compare);
     if(index > -1){
       var temp = url.substring(index+compare.length, url.length);
       temp = decodeURIComponent(temp);
-      Application.console.log(temp);
       if(torpedo.functions.isURL(temp)) url = temp;
-      Application.console.log(url);
     }
   }
   return url;
