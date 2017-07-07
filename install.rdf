@@ -4,9 +4,10 @@
 
   <Description about="urn:mozilla:install-manifest">
 
-    <em:id>torpedo@tu-darmstadt.de</em:id>
-    <em:version>2.1</em:version>
-    <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+    <em:id>torpedobeta@tu-darmstadt.de</em:id>
+	<em:updateURL>https://addons.secuso.org/updates.rdf</em:updateURL>
+    <em:version>2.2</em:version>
+    <em:name>TORPEDO beta- TOoltip-poweRed Phishing Email DetectiOn</em:name>
     <em:description>TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.
 
 Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
@@ -20,7 +21,7 @@ Trustworthy links are displayed in a green box. Links you opened at least two ti
       <Description>
         <em:locale>de-DE</em:locale>
         <em:creator>TU Darmstadt - SECUSO</em:creator>
-        <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:name>TORPEDO beta - TOoltip-poweRed Phishing Email DetectiOn</em:name>
         <em:description>TORPEDO ist ein Tool zum Erkennen von betrügerischen Links (Phishing). Bewegen Sie die Maus über einen Link in einer Email. TORPEDO zeigt Ihnen die tatsächliche Webadresse in einem Tooltip an und hilft Ihnen, diese zu untersuchen.
 
 Als vertrauenswürdig eingestufte Webadressen haben eine grüne Umrandung im Popup. Webadressen, die Sie zweimal geöffnet haben, sind orange umrandet.</em:description>
@@ -32,7 +33,7 @@ Als vertrauenswürdig eingestufte Webadressen haben eine grüne Umrandung im Pop
       <Description>
         <em:locale>en-US</em:locale>
         <em:creator>TU Darmstadt - SECUSO</em:creator>
-        <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:name>TORPEDO beta - TOoltip-poweRed Phishing Email DetectiOn</em:name>
         <em:description>TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.
 
 Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
@@ -44,7 +45,7 @@ Trustworthy links are displayed in a green box. Links you opened at least two ti
       <Description>
         <em:locale>en-GB</em:locale>
         <em:creator>TU Darmstadt - SECUSO</em:creator>
-        <em:name>TORPEDO - TOoltip-poweRed Phishing Email DetectiOn</em:name>
+        <em:name>TORPEDO beta - TOoltip-poweRed Phishing Email DetectiOn</em:name>
         <em:description>TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.
 
 Trustworthy links are displayed in a green box. Links you opened at least two times are displayed in an orange box.</em:description>
@@ -57,7 +58,7 @@ Trustworthy links are displayed in a green box. Links you opened at least two ti
       <Description>
         <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
         <em:minVersion>26.0</em:minVersion>
-        <em:maxVersion>52.*</em:maxVersion>
+        <em:maxVersion>55.*</em:maxVersion>
       </Description>
     </em:targetApplication>
 
