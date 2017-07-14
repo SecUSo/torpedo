@@ -53,10 +53,12 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 }
 
 torpedo.functions.isURL = function (url) {
-  if(url.startsWith("mailto:")) return false;
+  Application.console.log(url);
   try{
     const href = new URL(url);
-    return true;
+    if(href.hostname)
+      return true;
+    else return false;
   }catch(e){
     return false;
   }
