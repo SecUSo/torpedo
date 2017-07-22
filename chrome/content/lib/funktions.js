@@ -53,7 +53,6 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 }
 
 torpedo.functions.isURL = function (url) {
-  Application.console.log(url);
   try{
     const href = new URL(url);
     if(href.hostname)
@@ -66,18 +65,23 @@ torpedo.functions.isURL = function (url) {
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
   if(torpedo.functions.isURL(url)){
-    try{
-      const href = new URL(url);
-      var host = href.hostname;
-      split = host.split(".");
-      if(split.length > 2){
-        host = split[split.length-2] + "." + split[split.length-1];
-      }
-      return host;
-    }catch(e){
-      return url;
+    var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
+    try {
+      var tempURI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(url, null, null);
+      var baseDomain = eTLDService.getBaseDomain(tempURI);
+      return baseDomain;
     }
+    catch(err) {}
   }
+  try{
+    const href = new URL(url);
+    var host = href.hostname;
+    split = host.split(".");
+    if(split.length > 2){
+      host = split[split.length-2] + "." + split[split.length-1];
+    }
+    return host;
+  }catch(e){}
 };
 
 torpedo.functions.loop;
