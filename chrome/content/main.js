@@ -52,7 +52,7 @@ torpedo.updateTooltip = function (url)
 	else $("#redirectButton").css("cssText", "cursor:pointer !important;");
 
 	// set border color and standard case
-	var borderColor = torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")? "green" : torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")? "blue" : "grey";
+	var borderColor = torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")? "green" : torpedo.db.inList(torpedo.baseDomain, "URLSecondList")? "blue" : "grey";
 	switch(borderColor){
 		case "green":
 			panel.style.borderColor = "green";
