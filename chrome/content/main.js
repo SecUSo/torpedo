@@ -8,9 +8,11 @@ torpedo.textSize;
 torpedo.gmxRedirect;
 torpedo.redirectClicked;
 torpedo.oldUrl;
+torpedo.currentURL;
+torpedo.currentDomain;
 torpedo.info;
 torpedo.state; // 0:T1, 1:T2 ,2:T3, 3:T1PH, 4:T2PH, 5:T3PH, 6:URLnachErmittelnButton,
-// 7:T1*, 8:T2*, 9:T3*, 10:URLnachErmittelnButton2, 11:T1TH, 12:T2TH, 13:T3TH,
+// 7:T1Stern, 8:T2Stern, 9:T3Stern, 10:URLnachErmittelnButton2, 11:T1TH, 12:T2TH, 13:T3TH,
 // 14:T1PHTH, 15:T2PHTH, 16:T3PHTH, 17:WarnungPhish
 
 torpedo.updateTooltip = function (url)
@@ -33,95 +35,156 @@ torpedo.updateTooltip = function (url)
 	var nore = torpedo.prefs.getBoolPref("redirection0");
 	var manure = torpedo.prefs.getBoolPref("redirection1");
 	var autore = torpedo.prefs.getBoolPref("redirection2");
-	var isRedirect = torpedo.functions.isRedirect(url);
-	var title = torpedo.handler.title;
 	redirectButton.disabled = true;
+	redirectButton.hidden = true;
 	redirect.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
 	advicebox.hidden = false;
-	panel.style.backgroundColor = "white";
+	panel.style.backgroundColor = 'white';
+	panel.style.borderColor = "#bfb9b9";
+  $("#redirectButton").css("cssText", "cursor:wait !important;");
 
-	// show or hide redirectButton
-  if((!isRedirect) && torpedo.functions.loop == -1) redirectButton.hidden = true;
-  else{
-  	redirectButton.hidden = false;
-    if(isRedirect) redirectButton.disabled = false;
-  }
-	if(redirectButton.disabled) $("#redirectButton").css("cssText", "cursor:wait !important;");
-	else $("#redirectButton").css("cssText", "cursor:pointer !important;");
+	if(torpedo.functions.isGmxRedirect(url)){ // redirect
+ 		torpedo.currentURL = torpedo.functions.resolveRedirect(url);
+		torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(torpedo.currentURL);
 
-	// set border color and standard case
-	var borderColor = torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")? "green" : torpedo.db.inList(torpedo.baseDomain, "URLSecondList")? "blue" : "grey";
-	switch(borderColor){
-		case "green":
-			panel.style.borderColor = "green";
-			torpedo.state = "T2";
-			break;
-		case "blue":
-			panel.style.borderColor = "#1a509d";
-			torpedo.state = "T3";
-			break;
-		case "grey":
-			panel.style.borderColor = "#bfb9b9";
-			torpedo.state = "T1";
-			break;
-	}
-	// check if url is resolved redirect, if yes -> add * to state
-	if(!isRedirect && torpedo.functions.isRedirect(torpedo.oldUrl)) torpedo.state += "*";
-
-	if(torpedo.gmxRedirect){
-		if(torpedo.state.indexOf("*") > -1) torpedo.state = "URLnachErmittelnButton2";
-		else torpedo.state += "PH";
-		// mismatch case
-		if(title != "" && title != undefined){
-			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
-			var a = titleDomain.split(".");
-			var b = torpedo.baseDomain.split(".");
-			if(titleDomain != torpedo.baseDomain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
-				torpedo.state = torpedo.state[0] + "" + torpedo.state[1];
-				torpedo.state += "PHTH";
+		if(torpedo.functions.isGmxRedirect(torpedo.currentURL)){// redirect + redirect
+			torpedo.state = "WarnungPhish";
+			panel.style.backgroundColor = '#feffcc';
+			panel.style.borderColor = "red";
+			warningpic.hidden = false;
+		}
+		else if(torpedo.functions.isRedirect(torpedo.currentURL)){ // redirect + short url
+			torpedo.state = "URLnachErmittelnButton2";
+			redirectButton.disabled = false;
+			redirectButton.hidden = false;
+			$("#redirectButton").css("cssText", "cursor:pointer !important;");
+		}
+		else if(torpedo.functions.isMismatch(torpedo.baseDomain)){ // redirect + mismatch
+			 if(torpedo.db.inList(torpedo.currentDomain, "URLDefaultList")){
+				 torpedo.state = "T2PHTH";
+		 		 panel.style.borderColor = "green";
+			 }
+			 else if(torpedo.db.inList(torpedo.currentDomain, "URLSecondList")){
+				 torpedo.state = "T3PHTH";
+		 		 panel.style.borderColor = "#1a509d";
+			 }
+			 else{
+				 torpedo.state = "T1PHTH";
+				 warningpic.hidden = false;
+				 panel.style.backgroundColor = '#feffcc';
+	 			 panel.style.borderColor = "red";
+			 }
+		}
+		else { // redirect
+			if(torpedo.db.inList(torpedo.currentDomain, "URLDefaultList")){
+				torpedo.state = "T2PH";
+				panel.style.borderColor = "green";
+			}
+			else if(torpedo.db.inList(torpedo.currentDomain, "URLSecondList")){
+				torpedo.state = "T3PH";
+				panel.style.borderColor = "#1a509d";
+			}
+			else{
+				torpedo.state = "T1PH";
 			}
 		}
 	}
-	// redirect case
-	if(isRedirect){
-		if(torpedo.functions.loop < 0) {
-			torpedo.state = "URLnachErmittelnButton";
+
+	else if(torpedo.functions.isRedirect(torpedo.currentURL)){ // short url
+		torpedo.currentURL = url;
+	 	torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
+		if(torpedo.functions.isMismatch(torpedo.baseDomain)){
+			torpedo.state = "WarnungPhish";
+			panel.style.backgroundColor = '#feffcc';
+			panel.style.borderColor = "red";
+			warningpic.hidden = false;
 		}
+		else{
+			torpedo.state = "URLnachErmittelnButton2";
+			redirectButton.disabled = false;
+			redirectButton.hidden = false;
+			$("#redirectButton").css("cssText", "cursor:pointer !important;");
+		}
+	}
+	else if(torpedo.functions.isMismatch(torpedo.baseDomain)){ // mismatch
+		torpedo.currentURL = url;
+	 	torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
+		if(torpedo.db.inList(torpedo.currentDomain, "URLDefaultList")){
+	 	 torpedo.state = "T2TH";
+ 			panel.style.borderColor = "green";
+	  }
+	  else if(torpedo.db.inList(torpedo.currentDomain, "URLSecondList")){
+	 	 torpedo.state = "T3TH";
+ 			panel.style.borderColor = "#1a509d";
+	  }
 	  else{
-	    redirectButton.hidden = true;
+	 	 torpedo.state = "T1TH";
+		 panel.style.backgroundColor = '#feffcc';
+	 	 warningpic.hidden = false;
 	  }
 	}
-
-	var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
-	// phish case
-	if(title != "" && title != undefined && !torpedo.gmxRedirect && !isRedirect && !requestList.includes(torpedo.functions.getDomainWithFFSuffix(torpedo.oldUrl)+",")){
-		if(torpedo.functions.isURL(title)){
-			var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
-			var a = titleDomain.split(".");
-			var b = torpedo.baseDomain.split(".");
-			if(titleDomain != torpedo.baseDomain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
-				if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList")){
-					if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList")) torpedo.state = "T2TH";
-					else torpedo.state = "T3TH";
-				}
-				else{
-					torpedo.state = "T1TH";
-					panel.style.backgroundColor = "#feffcc";
-					panel.style.borderColor = "red";
-					warningpic.hidden = false;
-				}
-			}
+	else{
+		torpedo.currentURL = url;
+	 	torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
+		if(torpedo.db.inList(torpedo.currentDomain, "URLDefaultList")){
+			torpedo.state = "T2";
+				panel.style.borderColor = "green";
+		}
+		else if(torpedo.db.inList(torpedo.currentDomain, "URLSecondList")){
+			torpedo.state = "T3";
+			panel.style.borderColor = "#1a509d";
+		}
+		else{
+			torpedo.state = "T1";
 		}
 	}
-
-	torpedo.texts.assignTexts(url);
-	torpedo.functions.setHref(url);
+	Application.console.log(torpedo.state);
+	torpedo.texts.assignTexts(torpedo.currentURL);
+	torpedo.functions.setHref(torpedo.currentURL);
 
 	// now open
 	panel.openPopup(tempTarget, "after_start",0,0, false, false);
 };
+
+torpedo.updateShortUrlResolved = function(url){
+	var panel = document.getElementById("tooltippanel");
+	var warningpic = document.getElementById("warning-pic");
+	var redirectButton = document.getElementById("redirectButton");
+	var domain = torpedo.functions.getDomainWithFFSuffix(url);
+	redirectButton.hidden = true;
+	torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
+
+	if( (torpedo.functions.isMismatch(torpedo.currentDomain)
+	 && torpedo.functions.isMismatch(torpedo.oldUrl)
+ 	 && torpedo.functions.isMismatch(domain) )
+ 	 ||
+	 (torpedo.functions.isRedirect(url) || torpedo.functions.isGmxRedirect(url))){
+		 torpedo.state = "WarnungPhish";
+		 panel.style.backgroundColor = '#feffcc';
+		 warningpic.hidden = false;
+	}
+	else{
+		if(torpedo.db.inList(torpedo.currentDomain, "URLDefaultList")){
+	 	 torpedo.state = "T2Stern";
+	  }
+	  else if(torpedo.db.inList(torpedo.currentDomain, "URLSecondList")){
+	 	 torpedo.state = "T3Stern";
+	  }
+	  else{
+	 	 torpedo.state = "T1Stern";
+	  }
+	}
+
+	torpedo.currentURL = url;
+	torpedo.currentDomain = domain;
+	Application.console.log(torpedo.state);
+	torpedo.texts.assignTexts(torpedo.currentURL);
+	torpedo.functions.setHref(torpedo.currentURL);
+};
+
+
 torpedo.doc = null;
 
 torpedo.processDOM = function (){

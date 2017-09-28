@@ -4,7 +4,7 @@ var redirects = [".tk","1u.ro","1url.com","2pl.us","2tu.us","3.ly","a.gd","a.gg"
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.functions = torpedo.functions || {};
-
+torpedo.currentlyRunning = false;
 torpedo.functions.manualRedirect = false;
 
 torpedo.functions.calcWindowPosition = function (windowWidth, windowHeight) {
@@ -90,7 +90,6 @@ resultUrl = "";
 
 torpedo.functions.traceUrl = function (url, redirect) {
     // not opening new popup yet, first some initializaion
-    torpedo.updateTooltip(url);
     unknown = true;
     resultUrl = url;
     // check if url is redirect and already in our list of saved entries
@@ -108,12 +107,8 @@ torpedo.functions.traceUrl = function (url, redirect) {
       var answerList = torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data;
       var answerArray = answerList.split(",");
       url = answerArray[urlPos];
-      torpedo.updateTooltip(url);
     }
-    // if redirect and not in our list, start redirect resolving
-    if(redirect && unknown){
-        torpedo.functions.containsRedirect(url);
-    }
+    torpedo.updateTooltip(url);
 };
 
 torpedo.functions.trace = function (url){
@@ -121,51 +116,23 @@ torpedo.functions.trace = function (url){
     xhr.open('GET', url, true);
     xhr.onreadystatechange = function(){
       if(this.readyState == 4){
-        torpedo.functions.containsRedirect(xhr.responseURL);
         torpedo.functions.saveRedirection(url, xhr.responseURL);
-        resultUrl = xhr.responseURL;
+        torpedo.updateShortUrlResolved(xhr.responseURL);
       }
     };
     xhr.send(null);
 };
 
 torpedo.functions.containsRedirect = function(url){
-    torpedo.functions.loop++;
-    torpedo.handler.title = "";
     torpedo.handler.clickEnabled = false;
     var redirect = document.getElementById("redirect");
     redirect.textContent = torpedo.stringsBundle.getString('wait');
     document.getElementById("redirectButton").disabled = true;
+    $("#clickbox").unbind("click", torpedo.handler.mouseClickHref);
     setTimeout(function(e){
-        if(torpedo.functions.loop >= 5){
-            $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
-            torpedo.handler.Url = url;
-            torpedo.updateTooltip(url);
-        }
-        else{
-            if(torpedo.functions.loop >= 0){
-                torpedo.functions.loopTimer = 0;
-            }
-            $("#clickbox").unbind("click", torpedo.handler.mouseClickHref);
-            torpedo.functions.loop++;
-            if(torpedo.functions.isRedirect(url)){
-                redirect.textContent = torpedo.stringsBundle.getString('wait');
-                torpedo.functions.trace(url);
-            }
-            else if(torpedo.functions.isGmxRedirect(url)){
-              do{
-      					url = torpedo.functions.resolveRedirect(url);
-      					torpedo.gmxRedirect = true;
-                torpedo.functions.loop++;
-      				}while(torpedo.functions.isGmxRedirect(url) && torpedo.functions.loop < 5);
-              torpedo.functions.containsRedirect(url);
-            }
-            else{
-                torpedo.handler.Url = url;
-                torpedo.updateTooltip(resultUrl);
-                torpedo.updateTooltip(url);
-            }
-        }
+      $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
+      torpedo.handler.Url = url;
+      torpedo.functions.trace(url);
     }, torpedo.functions.loopTimer);
 };
 
@@ -210,31 +177,41 @@ torpedo.functions.countdown = function (timee, id, url) {
         $("#seconds-box").hide();
     }
     else $("#seconds-box").show();
+    torpedo.currentlyRunning = true;
+
     function showTime() {
         var second = startTime % 60;
         var panel = document.getElementById("tooltippanel");
         var content = document.getElementById("tooltipcontent");
+        var a = torpedo.handler.TempTarget;
+        var alreadyVisited = !torpedo.currentlyRunning && a.classList.contains("torpedoVisited");
+
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
+        if(alreadyVisited) strZeit = 0;
         document.getElementById("countdown").textContent = torpedo.stringsBundle.getString('VerbleibendeZeit');
         var remainingTimeText = document.getElementById("countdown").textContent.replace("<TIME>",strZeit);
         document.getElementById("countdown").textContent = remainingTimeText;
 
-        if (second == 0 /*&& (document.getElementById("redirect").textContent != torpedo.stringsBundle.getString('wait'))*/) {
+        if (strZeit == 0 ) {
             // make URL in tooltip clickable
             $("#clickbox").unbind("click");
             $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
             $("#clickbox").css("cssText", "cursor:pointer !important");
+            torpedo.currentlyRunning = false;
+
+            // make sure countdown is not started all over again if we visit the same link again
+            // by adding "torpedoVisited" to the class of the visited link tag
+      			a.classList ? a.classList.add('torpedoVisited') : a.className += ' torpedoVisited';
         }
         else {
-          //  document.getElementById("linkDeactivate").textContent = torpedo.stringsBundle.getString('deactivated');
             $("#clickbox").unbind("click");
             $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
-            // TODO: cant access dead object?
             $(torpedo.handler.TempTarget).unbind("click");
             $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
             $("#clickbox").css("cssText", "cursor:wait !important;");
+            torpedo.currentlyRunning = true;
         }
     }
 
@@ -386,6 +363,19 @@ torpedo.functions.isRedirect = function(url){
   return false;
 };
 
+torpedo.functions.isMismatch = function(domain){
+  var title = torpedo.handler.title;
+  if(title == "" || title == undefined) return false;
+  if(!torpedo.functions.isURL(title)) return false;
+  var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
+  //var a = titleDomain.split(".");
+  //var b = domain.split(".");
+  return (titleDomain != domain);
+  /*if(titleDomain != domain && !(a.length != b.length && a[a.length-2] == b[b.length-2] &&  a[a.length-1] == b[b.length-1])){
+    return true;
+  }
+  return false;*/
+}
 torpedo.gmxRedirect;
 torpedo.gmxRedirectIndex;
 torpedo.functions.resolveRedirect = function(url){

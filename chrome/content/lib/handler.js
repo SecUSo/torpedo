@@ -5,7 +5,7 @@ var Application = Components.classes["@mozilla.org/steel/application;1"].getServ
 
 torpedo.handler = torpedo.handler || {};
 torpedo.handler.Url;
-
+torpedo.initialURL;
 torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
 torpedo.handler.timeOut;
@@ -20,9 +20,13 @@ torpedo.handler.mouseOverTooltipPane = function (event){
 	$(panel).contextmenu(function(){
 		var menuwindow = document.getElementById("menuwindow");
 		var urlbox = document.getElementById("url-box");
-		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") || torpedo.db.inList(torpedo.baseDomain, "URLSecondList"))
+		if(torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") ||
+		 	 torpedo.db.inList(torpedo.baseDomain, "URLSecondList") ||
+	 		 torpedo.functions.isGmxRedirect(torpedo.functions.getHref()) ||
+			 torpedo.functions.isRedirect(torpedo.functions.getHref())){
 			document.getElementById("addtotrusted").disabled = true;
-		else  document.getElementById("addtotrusted").disabled = false;
+		}
+		else document.getElementById("addtotrusted").disabled = false;
 	  menuwindow.openPopup(urlbox, "after_start",0,0, false, false);
 	});
 };
@@ -70,9 +74,8 @@ torpedo.handler.mouseOverHref = function (event)
 	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 	var url = tempTarget.getAttribute("href");
 	// make sure that popup opens up even if popup from another URL is opened
-	if(url && torpedo.oldUrl != url) panel.hidePopup();
+	if(torpedo.oldUrl != url) panel.hidePopup();
 	if(panel.state == "closed"){
-		if(url){
 			// Initializaion of tooltip
 			torpedo.handler.TempTarget = tempTarget;
 			torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ","");
@@ -82,8 +85,8 @@ torpedo.handler.mouseOverHref = function (event)
 			torpedo.functions.loopTimer = 2000;
 			torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 			torpedo.handler.Url = url;
+			torpedo.initialURL = url;
 		  torpedo.oldUrl = torpedo.baseDomain;
-			panel.style.backgroundColor = "white";
 			clearTimeout(torpedo.handler.MouseLeavetimer);
 			$('#moreinfos').hide(); $('#infocheck').hide();
 			alreadyClicked = "";
@@ -91,7 +94,6 @@ torpedo.handler.mouseOverHref = function (event)
 			// check if url is a "redirectUrl=" url (gmxredirect)
 			torpedo.gmxRedirect = false;
 			if(torpedo.functions.isGmxRedirect(url)){
-				url = torpedo.functions.resolveRedirect(url);
 				torpedo.gmxRedirect = true;
 			}
 			// check if url is a normal redirect (tinyurl)
@@ -100,7 +102,6 @@ torpedo.handler.mouseOverHref = function (event)
 			}
 			// start with the opening process
 		  torpedo.functions.traceUrl(url, redirect);
-		}
 	}
 };
 
@@ -195,7 +196,7 @@ torpedo.handler.clickEnabled = true;
 torpedo.handler.mouseClickRedirectButton = function (event){
 	torpedo.redirectClicked = true;
 	event.stopPropagation();
-	if(torpedo.handler.clickEnabled) torpedo.functions.traceUrl(torpedo.handler.Url, true);
+	if(torpedo.handler.clickEnabled) torpedo.functions.containsRedirect(torpedo.currentURL);
 };
 
 torpedo.handler.mouseClickRedirectShow = function (event) {

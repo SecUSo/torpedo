@@ -3,7 +3,6 @@ tooltippanel > description {
 }
 #tooltippanel{
 	-moz-appearance: none !important;
-	background-color: #FFFFFF;
 	border: solid 2.5px grey;
   border-radius: 5px;
   color: #000000;
@@ -20,7 +19,7 @@ tooltippanel > description {
   display: block;
   white-space: pre-wrap;
   margin: 7px 0px 0px 6px;
-  width: 400px;
+  width: 500px;
 }
 #url-box{
 	font-weight: normal;
@@ -29,7 +28,7 @@ tooltippanel > description {
   color: #333333;
   margin: 4px 2px 2px 2px;
   padding: 2px;
-  width: 400px;
+  width: 500px;
 }
 #baseDomain{
 	font-weight:bold;
@@ -43,23 +42,23 @@ tooltippanel > description {
 }
 #url1andbase{
   max-height: 20px;
-  width: 380px;
+  width: 480px;
 }
 #url2{
   max-height: 30px;
-  width: 380px;
+  width: 480px;
 }
 #advicebox{
   display: flex;
   margin: 3px 0 5px 2px;
   position: relative;
-  width: 400px;
+  width: 500px;
 }
 #advice{
   display: inline;
   float: right;
   white-space: pre-wrap;
-  width: 360px;
+  width: 470px;
   margin-bottom: 0px;
   padding: 0 0 2px 0;
 }
@@ -75,7 +74,7 @@ tooltippanel > description {
   display: block;
   position: relative;
   cursor: pointer !important;
-  width: 400px;
+  width: 500px;
 }
 #moreinfos{
   display: block;
@@ -86,18 +85,19 @@ tooltippanel > description {
   max-width: 27px;
   max-height: 28px;
   cursor: pointer;
-	margin: 0 2px 0 0;
+	margin: 3px 2px 0 5px;
 }
 #infotext{
 	text-decoration: underline;
   cursor: pointer;
-  width: 400px;
+  width: 500px;
+  margin-top: 4px;
 }
 #infocheck{
-  width: 350px;
+  width: 470px;
 }
 #redirectButton{
-	margin: 2px 0 2px 5px;
+	margin: 2px 5px 2px 5px;
   cursor: pointer;
-  width: 350px;
+  text-align:center;
 }
