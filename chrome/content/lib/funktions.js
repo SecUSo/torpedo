@@ -84,14 +84,7 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
   }catch(e){}
 };
 
-torpedo.functions.loop;
-torpedo.functions.loopTimer = 2000;
-resultUrl = "";
-
 torpedo.functions.traceUrl = function (url, redirect) {
-    // not opening new popup yet, first some initializaion
-    unknown = true;
-    resultUrl = url;
     // check if url is redirect and already in our list of saved entries
     var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
     if(redirect && requestList.includes(torpedo.functions.getDomainWithFFSuffix(url)+",")){
@@ -106,9 +99,8 @@ torpedo.functions.traceUrl = function (url, redirect) {
       }
       var answerList = torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data;
       var answerArray = answerList.split(",");
-      url = answerArray[urlPos];
+      torpedo.currentUrl = answerArray[urlPos];
     }
-    torpedo.updateTooltip(url);
 };
 
 torpedo.functions.trace = function (url){
@@ -133,7 +125,7 @@ torpedo.functions.containsRedirect = function(url){
       $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
       torpedo.handler.Url = url;
       torpedo.functions.trace(url);
-    }, torpedo.functions.loopTimer);
+    }, 2000);
 };
 
 torpedo.functions.saveRedirection = function(url, response){

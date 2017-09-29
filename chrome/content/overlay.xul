@@ -32,7 +32,7 @@
 				<description id="redirect" flex="1" />
 				<hbox id="advicebox">
 					<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
-					<description id="advice" flex="1" />
+					<description id="advice" flex="1"> </description>
 				</hbox>
 				<vbox id="infos" onclick="$('#moreinfos').toggle(); $('#infocheck').toggle();">
 					<hbox id="infobox">

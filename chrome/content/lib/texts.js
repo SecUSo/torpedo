@@ -16,6 +16,7 @@ torpedo.texts.assignTexts = function (url)
   var infoCheck = torpedo.stringsBundle.getString("Info");
   var gluehbirneText = torpedo.stringsBundle.getString(state+"GluehbirneText");
   var linkDeaktivierung = torpedo.stringsBundle.getString(state+"LinkDeaktivierung");
+  Application.console.log(gluehbirneText);
   // get parts of URL: Prefix, Domain and Suffix
   var domain = torpedo.functions.getDomainWithFFSuffix(url);
 	var split = url.indexOf(domain);
@@ -30,17 +31,17 @@ torpedo.texts.assignTexts = function (url)
   var url2Text = torpedo.stringsBundle.getString("URLSuffix").replace("<SUFFIX>", suffix);
 
   // assign texts
-  document.getElementById("phish").textContent = ueberschrift;
-  document.getElementById("url1").textContent = url1Text;
-  document.getElementById("baseDomain").textContent = domain;
-  document.getElementById("url2").textContent = url2Text;
-  document.getElementById("redirect").textContent = erklaerung;
-  document.getElementById("advice").textContent = gluehbirneText;
-  document.getElementById("infotext").textContent = mehrInfo;
-  document.getElementById("moreinfos").textContent = infotext;
-  document.getElementById("redirectButton").textContent = button;
-  document.getElementById("linkDeactivate").textContent = linkDeaktivierung;
-  document.getElementById("infocheck").textContent = infoCheck;
+  $("#phish").html(ueberschrift);
+  $("#url1").html(url1Text);
+  $("#baseDomain").html(domain);
+  $("#url2").html(url2Text);
+  $("#redirect").html(erklaerung);
+  $("#advice").html(gluehbirneText);
+  $("#infotext").html(mehrInfo);
+  $("#moreinfos").html(infotext);
+  $("#redirectButton").html(button);
+  $("#linkDeactivate").html(linkDeaktivierung);
+  $("#infocheck").html(infoCheck);
 
   // hide light bulb if no text is there
   if(gluehbirneText) $("#advicebox").show()

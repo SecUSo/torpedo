@@ -77,7 +77,7 @@ torpedo.updateTooltip = function (url)
 	 			 panel.style.borderColor = "red";
 			 }
 		}
-		else { // redirect
+		else { // simple redirect
 			if(torpedo.db.inList(torpedo.currentDomain, "URLDefaultList")){
 				torpedo.state = "T2PH";
 				panel.style.borderColor = "green";
@@ -92,7 +92,7 @@ torpedo.updateTooltip = function (url)
 		}
 	}
 
-	else if(torpedo.functions.isRedirect(torpedo.currentURL)){ // short url
+	else if(torpedo.functions.isRedirect(url)){ // short url
 		torpedo.currentURL = url;
 	 	torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
 		if(torpedo.functions.isMismatch(torpedo.baseDomain)){
@@ -102,7 +102,7 @@ torpedo.updateTooltip = function (url)
 			warningpic.hidden = false;
 		}
 		else{
-			torpedo.state = "URLnachErmittelnButton2";
+			torpedo.state = "ShortURL";
 			redirectButton.disabled = false;
 			redirectButton.hidden = false;
 			$("#redirectButton").css("cssText", "cursor:pointer !important;");
@@ -122,6 +122,7 @@ torpedo.updateTooltip = function (url)
 	  else{
 	 	 torpedo.state = "T1TH";
 		 panel.style.backgroundColor = '#feffcc';
+		 panel.style.borderColor = "red";
 	 	 warningpic.hidden = false;
 	  }
 	}
@@ -140,7 +141,6 @@ torpedo.updateTooltip = function (url)
 			torpedo.state = "T1";
 		}
 	}
-	Application.console.log(torpedo.state);
 	torpedo.texts.assignTexts(torpedo.currentURL);
 	torpedo.functions.setHref(torpedo.currentURL);
 
@@ -152,9 +152,9 @@ torpedo.updateShortUrlResolved = function(url){
 	var panel = document.getElementById("tooltippanel");
 	var warningpic = document.getElementById("warning-pic");
 	var redirectButton = document.getElementById("redirectButton");
-	var domain = torpedo.functions.getDomainWithFFSuffix(url);
 	redirectButton.hidden = true;
-	torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
+	var domain = torpedo.functions.getDomainWithFFSuffix(url);
+	panel.style.borderColor = "##bfb9b9";
 
 	if( (torpedo.functions.isMismatch(torpedo.currentDomain)
 	 && torpedo.functions.isMismatch(torpedo.oldUrl)
@@ -163,14 +163,17 @@ torpedo.updateShortUrlResolved = function(url){
 	 (torpedo.functions.isRedirect(url) || torpedo.functions.isGmxRedirect(url))){
 		 torpedo.state = "WarnungPhish";
 		 panel.style.backgroundColor = '#feffcc';
+		 panel.style.borderColor = "red";
 		 warningpic.hidden = false;
 	}
 	else{
-		if(torpedo.db.inList(torpedo.currentDomain, "URLDefaultList")){
+		if(torpedo.db.inList(domain, "URLDefaultList")){
 	 	 torpedo.state = "T2Stern";
+ 		 panel.style.borderColor = "green";
 	  }
-	  else if(torpedo.db.inList(torpedo.currentDomain, "URLSecondList")){
+	  else if(torpedo.db.inList(domain, "URLSecondList")){
 	 	 torpedo.state = "T3Stern";
+ 		 panel.style.borderColor = "#1a509d";
 	  }
 	  else{
 	 	 torpedo.state = "T1Stern";
@@ -179,7 +182,6 @@ torpedo.updateShortUrlResolved = function(url){
 
 	torpedo.currentURL = url;
 	torpedo.currentDomain = domain;
-	Application.console.log(torpedo.state);
 	torpedo.texts.assignTexts(torpedo.currentURL);
 	torpedo.functions.setHref(torpedo.currentURL);
 };

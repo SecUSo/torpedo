@@ -100,8 +100,9 @@ torpedo.handler.mouseOverHref = function (event)
 			if(torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")){
 				redirect = true;
 			}
-			// start with the opening process
 		  torpedo.functions.traceUrl(url, redirect);
+	    // now open tooltip
+	    torpedo.updateTooltip(url);
 	}
 };
 

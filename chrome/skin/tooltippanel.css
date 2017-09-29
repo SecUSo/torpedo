@@ -8,7 +8,12 @@ tooltippanel > description {
   color: #000000;
 }
 #tooltipcontent{
-  width: 400px;
+  width: 500px;
+}
+.highlight{
+  color: #262626;
+  font-weight: bold;
+  margin: 0;
 }
 #warning-pic{
   width: 30px;
@@ -59,8 +64,8 @@ tooltippanel > description {
   float: right;
   white-space: pre-wrap;
   width: 470px;
-  margin-bottom: 0px;
-  padding: 0 0 2px 0;
+  margin: 2px 0 2px 0;
+  padding-top: 3px;
 }
 #advice-pic{
   float: left;
@@ -100,4 +105,5 @@ tooltippanel > description {
 	margin: 2px 5px 2px 5px;
   cursor: pointer;
   text-align:center;
+  font-weight: bold;
 }
