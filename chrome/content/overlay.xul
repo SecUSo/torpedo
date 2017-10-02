@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://torpedo/skin/tooltippanel.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
-
 <overlay
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-3.2.1.slim.min.js"/>
@@ -34,13 +33,13 @@
 					<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
 					<description id="advice" flex="1"> </description>
 				</hbox>
-				<vbox id="infos" onclick="$('#moreinfos').toggle(); $('#infocheck').toggle();">
+				<vbox id="infos" onclick="$('#moreinfobox').toggle(); $('#infocheck').toggle();">
 					<hbox id="infobox">
 						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 						<description id="infotext" flex="1" />
 					</hbox>
 					<hbox id="moreinfobox" flex="1">
-						<description id="moreinfos" flex="1"  style="display: none; "/>
+						<description id="moreinfos" flex="1"/>
 					</hbox>
 					<button id="infocheck" flex="1" style="display:none" onclick="torpedo.dialogmanager.createUnknownInfo();"/>
 				</vbox>
@@ -66,7 +65,7 @@
 	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.handler.Url);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
 			<menuitem label="&opensettings;" onclick="torpedo.dialogmanager.options(); torpedo.handler.TempTarget = ''"/>
-			<menuitem label="&opentutorial;" onclick="torpedo.handler.tutorial()"/>
+			<menuitem label="&opentutorial;" onclick="torpedo.dialogmanager.openTutorial()"/>
 		</menupopup>
 	</popupset>
 

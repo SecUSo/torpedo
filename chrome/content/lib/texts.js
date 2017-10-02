@@ -16,7 +16,7 @@ torpedo.texts.assignTexts = function (url)
   var infoCheck = torpedo.stringsBundle.getString("Info");
   var gluehbirneText = torpedo.stringsBundle.getString(state+"GluehbirneText");
   var linkDeaktivierung = torpedo.stringsBundle.getString(state+"LinkDeaktivierung");
-  Application.console.log(gluehbirneText);
+  
   // get parts of URL: Prefix, Domain and Suffix
   var domain = torpedo.functions.getDomainWithFFSuffix(url);
 	var split = url.indexOf(domain);

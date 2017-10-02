@@ -196,11 +196,15 @@ torpedo.processDOM = function (){
 		$("#deleteSecond").bind("click",torpedo.handler.mouseClickDeleteButton);
 		$("#editSecond").bind("click",torpedo.handler.mouseClickEditButton);
 		$("#redirectButton").click(function(event){torpedo.handler.mouseClickRedirectButton(event)});
-		//$("#infos").bind("click",torpedo.handler.mouseClickInfoButton);
 
     var messagepane = document.getElementById("messagepane");
     if(messagepane){
 			messagepane.addEventListener("load", function(event) { onPageLoad(event); }, true);
+
+		  if(torpedo.prefs.getBoolPref("firstrun")){
+				torpedo.prefs.setBoolPref("firstrun",false);
+				torpedo.dialogmanager.openTutorial();
+			}
 		}
 	}
 
@@ -253,8 +257,4 @@ window.addEventListener("load", function load(event){
 	torpedo.prefs.addonUninstallingListener();
 	torpedo.prefs.addonInstallingListener();
   torpedo.processDOM();
-  if(torpedo.prefs.getBoolPref("firstrun")){
-		torpedo.prefs.setBoolPref("firstrun",false);
-		torpedo.dialogmanager.createWelcome();
-	}
 }, false);

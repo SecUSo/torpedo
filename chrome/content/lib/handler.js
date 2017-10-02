@@ -62,25 +62,28 @@ torpedo.handler.mouseDownTooltipPane = function (event)
 };
 
 torpedo.handler.title = "";
-torpedo.handler.mouseOverHref = function (event)
+torpedo.handler.mouseOverHref = function (event,isTutorial,target)
 {
-	var moreinfos = document.getElementById("moreinfos");
-	var panel = document.getElementById("tooltippanel");
-	// do nothing when user reads infotext or deduces target url
-	if(panel.state == "open" && (torpedo.redirectClicked || $("#moreinfos").css("display") == "inline"))
-		return;
-	torpedo.redirectClicked = false;
-	mouseout = mouseout[0] ? [false,true] : [false,false];
-	tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
+	if(!isTutorial){
+		var moreinfos = document.getElementById("moreinfos");
+		var panel = document.getElementById("tooltippanel");
+		// do nothing when user reads infotext or deduces target url
+		if(panel.state == "open" && (torpedo.redirectClicked || $("#moreinfos").css("display") != "none"))
+			return;
+		torpedo.redirectClicked = false;
+		mouseout = mouseout[0] ? [false,true] : [false,false];
+		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
+	}
+	if(isTutorial) tempTarget = target;
+
 	var url = tempTarget.getAttribute("href");
 	// make sure that popup opens up even if popup from another URL is opened
-	if(torpedo.oldUrl != url) panel.hidePopup();
-	if(panel.state == "closed"){
+	if(!isTutorial && torpedo.oldUrl != url) panel.hidePopup();
+	if(isTutorial || panel.state == "closed"){
 			// Initializaion of tooltip
 			torpedo.handler.TempTarget = tempTarget;
 			torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ","");
 			torpedo.handler.clickEnabled = true;
-			torpedo.functions.loop = -1;
 			torpedo.state = 0;
 			torpedo.functions.loopTimer = 2000;
 			torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
@@ -88,7 +91,7 @@ torpedo.handler.mouseOverHref = function (event)
 			torpedo.initialURL = url;
 		  torpedo.oldUrl = torpedo.baseDomain;
 			clearTimeout(torpedo.handler.MouseLeavetimer);
-			$('#moreinfos').hide(); $('#infocheck').hide();
+			$('#moreinfobox').hide(); $('#infocheck').hide();
 			alreadyClicked = "";
 			var redirect = false;
 			// check if url is a "redirectUrl=" url (gmxredirect)
@@ -217,8 +220,4 @@ torpedo.handler.loadOptions = function (){
 	torpedo.db.getReferrer();
   var element = document.getElementById("editor");
   element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";
-}
-
-torpedo.handler.tutorial = function(){
-	torpedo.dialogmanager.welcome1();
 }
