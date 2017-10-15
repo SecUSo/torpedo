@@ -6,6 +6,8 @@ tooltippanel > description {
 	border: solid 2.5px grey;
   border-radius: 5px;
   color: #000000;
+  font-size:14px;
+  padding: 2px;
 }
 #tooltipcontent{
   width: 430px;

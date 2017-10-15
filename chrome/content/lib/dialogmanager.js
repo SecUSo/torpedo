@@ -39,9 +39,5 @@ torpedo.dialogmanager.createUnknownInfo = function(){
 };
 
 torpedo.dialogmanager.openTutorial = function(){
-  windowWidth=500;
-	windowHeight=400;
-  var left = (screen.width/2)-(windowWidth/2);
-  var top = (screen.height/2)-(windowHeight/2);
-	window.openDialog("chrome://torpedo/content/dialog/guide.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, top='+top+',left='+left+',width='+windowWidth+',height='+windowHeight+'",top,left);
+	window.openDialog("chrome://torpedo/content/dialog/guide.xul", "tutorial", "chrome=yes, dialog,resizable=no, modal");
 };
