@@ -64,19 +64,22 @@
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-case1">
                     <h2>&torpedo.guide.tooltips.case1.title;</h2>
                     <p>&torpedo.guide.tooltips.case1.description;</p>
-                    <a href="http://www.google.de/" id="link1">http://www.google.de/</a>
+                    <p class="guide-link">https://www.google.de/</p>
+                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.case1.image;"/>
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-case2">
                     <h2>&torpedo.guide.tooltips.case2.title;</h2>
                     <p>&torpedo.guide.tooltips.case2.description1;</p>
                     <p>&torpedo.guide.tooltips.case2.description2;</p>
                     <p>&torpedo.guide.tooltips.case2.description3;</p>
-                    <a href="http://www.secuso.org/" id="link2">http://www.secuso.org/</a>
+                    <p class="guide-link">https://www.secuso.org/</p>
+                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.case2.image;"/>
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-case3">
                     <h2>&torpedo.guide.tooltips.case3.title;</h2>
                     <p>&torpedo.guide.tooltips.case3.description;</p>
-                    <a href="http://www.shopping-total.de/" id="link3">http://www.shopping-total.de/</a>
+                    <p class="guide-link">https://www.iconfinder.com/</p>
+                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.case3.image;"/>
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-URL">
                     <h2>&torpedo.guide.extras.URL.title;</h2>
@@ -88,17 +91,20 @@
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-specialcase1">
                     <h2>&torpedo.guide.tooltips.specialcase1.title;</h2>
                     <p>&torpedo.guide.tooltips.specialcase1.description;</p>
-                    <a href="http://www.shopping-tolal.de/" id="speciallink1">http://www.shopping-total.de/</a>
+                    <p class="guide-link">https://www.google.de/</p>
+                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.specialcase1.image;"/>
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-specialcase2">
                     <h2>&torpedo.guide.tooltips.specialcase2.title;</h2>
                     <p>&torpedo.guide.tooltips.specialcase2.description;</p>
-                    <a href="http://www.tinyurl.com/vj5/" id="speciallink2">http://www.tinyurl.com/vj5/</a>
+                    <p class="guide-link">http://www.tinyurl.com/21342/</p>
+                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.specialcase2.image;"/>
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-specialcase3">
                     <h2>&torpedo.guide.tooltips.specialcase3.title;</h2>
                     <p>&torpedo.guide.tooltips.specialcase3.description;</p>
-                    <a href="https://deref-web-02.de/mail/client/beHwAYUTrMc/dereferrer/?redirectUrl=https%3A%2F%2Fshopping-total.de%2F" id="speciallink3">https://deref-web-02.de/mail/client/beHwAYUTrMc/dereferrer/?redirectUrl=https%3A%2F%2Fshopping-total.de%2F/</a>
+                    <p class="guide-link">https://deref-web-02.de/mail/client/beHwAYUTrMc/dereferrer/?redirectUrl=https%3A%2F%2Fgoogle.de%2F/</p>
+                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.specialcase3.image;"/>
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-menu">
                     <h2>&torpedo.guide.tooltips.menu.title;</h2>

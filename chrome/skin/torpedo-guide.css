@@ -7,6 +7,12 @@
 #guide-wrapper {
 }
 
+.guide-link{
+  margin-top: 5px;
+  color: black;
+  font-style: italic;
+}
+
 #guide-section-list-wrapper {
     background-color: #004064;
     color: #FFF;

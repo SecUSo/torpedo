@@ -1,4 +1,5 @@
 var torpedo = torpedo || {};
+torpedo.installName = "torpedobeta@tu-darmstadt.de";
 
 torpedo.prefs = function () {
 	const contentPrefService = Components.classes["@mozilla.org/content-pref/service;1"]
@@ -9,7 +10,7 @@ torpedo.prefs = function () {
             .getService(Components.interfaces.nsIPrefService)
             .getBranch("extensions.torpedo.");
 		Components.utils.import("resource://gre/modules/AddonManager.jsm");
-		AddonManager.getAddonByID("torpedo@tu-darmstadt.de", function(addon) {
+		AddonManager.getAddonByID(torpedo.installName, function(addon) {
 			torpedo.installVersion = addon.version;
 		});
     return {
@@ -28,7 +29,7 @@ torpedo.prefs = function () {
 			{
 				onUninstalling: function(addon)
 				{
-					if (addon.id == "torpedo@tu-darmstadt.de")
+					if (addon.id == torpedo.installName)
 					{
 						// It will be automatically removed if the default value is set
 						torpedo.prefs.resetPrefs(true);
@@ -51,7 +52,7 @@ torpedo.prefs = function () {
 				{
 				onInstalling: function(addon)
 				{
-					if (addon.id == "torpedo@tu-darmstadt.de"){
+					if (addon.id == torpedo.installName){
 						prefManager.clearUserPref("firstrun");
 					}
 				}

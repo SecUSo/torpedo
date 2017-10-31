@@ -29,31 +29,25 @@ const Guide = {
             section: "basic"
         }, {
             id: "guide-page-tooltips-case1",
-            section: "tooltips",
-            beforeHook:(self) => self.tooltipHandler.showTooltip("link1")
+            section: "tooltips"
         }, {
             id: "guide-page-tooltips-case2",
-            section: "tooltips",
-            beforeHook:(self) => self.tooltipHandler.showTooltip("link2")
+            section: "tooltips"
         }, {
             id: "guide-page-tooltips-case3",
-            section: "tooltips",
-            beforeHook:(self) => self.tooltipHandler.showTooltip("link3")
+            section: "tooltips"
         }, {
             id: "guide-page-tooltips-URL",
             section: "extras"
         }, {
             id: "guide-page-tooltips-specialcase1",
-            section: "specialcases",
-            beforeHook:(self) => self.tooltipHandler.showTooltip("speciallink1")
+            section: "specialcases"
         }, {
             id: "guide-page-tooltips-specialcase2",
-            section: "specialcases",
-            beforeHook:(self) => self.tooltipHandler.showTooltip("speciallink2")
+            section: "specialcases"
         }, {
             id: "guide-page-tooltips-specialcase3",
-            section: "specialcases",
-            beforeHook:(self) => self.tooltipHandler.showTooltip("speciallink3")
+            section: "specialcases"
         },{
             id: "guide-page-tooltips-menu",
             section: "menu"

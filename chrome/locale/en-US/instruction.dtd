@@ -52,59 +52,66 @@
 <!ENTITY kapitel6 "Settings">
 <!ENTITY delay "Link delay">
 <!ENTITY torpedo.guide.windowTitle "TORPEDO Tutorial">
-<!ENTITY torpedo.guide.finish "Fertigstellen">
+<!ENTITY torpedo.guide.finish "Finish">
 <!ENTITY torpedo.guide.finish.key "F">
-<!ENTITY torpedo.guide.next "Weiter">
+<!ENTITY torpedo.guide.next "Next">
 <!ENTITY torpedo.guide.next.key "W">
-<!ENTITY torpedo.guide.previous "Zurück">
+<!ENTITY torpedo.guide.previous "Back">
 <!ENTITY torpedo.guide.previous.key "Z">
-<!ENTITY torpedo.guide.close "Schließen">
-<!ENTITY torpedo.guide.basic "Basisinformationen">
-<!ENTITY torpedo.guide.tooltips "Tooltip-Typen">
-<!ENTITY torpedo.guide.extras "Prüfung der URL">
-<!ENTITY torpedo.guide.specialcases "Spezialfälle">
-<!ENTITY torpedo.guide.menu "Menü">
-<!ENTITY torpedo.guide.settings "Einstellungen">
-<!ENTITY torpedo.guide.basic.welcome.title "Ein herzliches Willkommen!">
-<!ENTITY torpedo.guide.basic.welcome.intro1 "Das TORPEDO Add-on wurde erfolgreich installiert. Im Folgen­den wird Ihnen erklärt, wie Sie mit Hilfe des Add-ons schad­hafte E-Mails erkennen können.">
-<!ENTITY torpedo.guide.basic.welcome.intro2 "Wir empfehlen auch denen, die TORPEDO bereits benutzen, das Tutorial anzuschauen, da es viele Neuerungen gibt. ">
-<!ENTITY torpedo.guide.basic.welcome.footnote "Dieses Add-on wurde in Zusammenarbeit mit der Forschungsgruppe SECUSO - Security, Usability and Society der TU Darmstadt, der Human-Centered Security Gruppe der Universität Glasgow und der Privacy und Security Gruppe der Universität Karlstad entwickelt.">
-<!ENTITY torpedo.guide.basic.why.title "Warum Sie den TORPEDO nutzen sollten?">
-<!ENTITY torpedo.guide.basic.why.description1 "TORPEDO hilft Ihnen dabei, Phishing E-Mails, d.h. gefährliche Links in E-Mails, zu erkennen.">
-<!ENTITY torpedo.guide.basic.why.description2 "Gefährliche Links verlinken auf...">
-<!ENTITY torpedo.guide.basic.why.description3 "...Malware, die Sie beim Anklicken herunterladen und die Ihnen schaden könnte, oder">
-<!ENTITY torpedo.guide.basic.why.description4 "... gefälschte Webseiten, die legitim aussehen. Wenn Sie auf einen solchen Link klicken und auf der Webseite Daten eingeben, können diese missbraucht werden.">
-<!ENTITY torpedo.guide.basic.why.usage.title "TORPEDO wird folgendermaßen verwendet:">
-<!ENTITY torpedo.guide.basic.why.usage.list "<li>Bewegen Sie die Maus über den Link. TORPEDO zeigt die tatsächliche URL hinter dem Link dann in einem Tooltip an. </li><li>Achten Sie auf die Farbe des Tooltip-Rahmens, die Informationen und die Instruktionen im Tooltip.</li><li>Für weitere Informationen klicken Sie auf den Text neben dem “i“.</li>">
-<!ENTITY torpedo.guide.basic.why.image "paypal.png">
-<!ENTITY torpedo.guide.tooltips.case1.title "Erklärungen der Tooltip-Typen, d.h. der Fälle, welche am häufigsten auftauchen sollten (1 von 3):">
-<!ENTITY torpedo.guide.tooltips.case1.description "Ein <strong>grüner Rahmen</strong> bedeutet, dass die Domain (d.h. der fett hervorgehobene Bereich der URL) von den TORPEDO-Entwicklern (d.h. Mitarbeitern der TU Darmstadt) in die Kategorie <strong>niedriges Risiko</strong> eingestuft wurde, weil sie zu den 100 meistbesuchten Webseiten in Deutschland gehört.">
-<!ENTITY torpedo.guide.tooltips.case2.title "Erklärungen der Tooltip-Typen, d.h. der Fälle, welche am häufigsten auftauchen sollten (2 von 3):">
-<!ENTITY torpedo.guide.tooltips.case2.description1 "Ein <strong>blauer Rahmen</strong> bedeutet, dass Sie zuvor die Domain (fett hervorgehobener Bereich der URL) als <strong>niedriges Risiko</strong> eingeordnet haben, d.h. ">
-<!ENTITY torpedo.guide.tooltips.case2.description2 "...Sie haben auf Links mit derselben Domain mindestens zweimal geklickt, seit sie TORPEDO installiert haben, oder">
-<!ENTITY torpedo.guide.tooltips.case2.description3 "...Sie haben die Domain manuell über die Einstellungen in die Liste der Domains mit niedrigem Risiko hinzugefügt.">
-<!ENTITY torpedo.guide.tooltips.case3.title "Erklärungen der Tooltip-Typen, d.h. der Fälle, welche am häufigsten auftauchen sollten (3 von 3): ">
-<!ENTITY torpedo.guide.tooltips.case3.description "Ein <strong>grauer Rahmen</strong> bedeutet, dass die Domain (fett hervorgehobener Bereich der URL) TORPEDO noch nicht bekannt ist. Dieser Fall liegt also sowohl dann vor, wenn es gefährlich ist auf den Link zu klicken, als auch bei Domains, die TORPEDO noch nicht kennt. Sie sollten <strong>die URL sorgfältig überprüfen und dabei den Fokus auf die Domain legen</strong>. Im Fall eines gefährlichen Links löschen Sie die E-Mail. Falls Sie die Domain grundsätzlich als niedriges Risiko einstufen möchten, können Sie dies über das Menü tun. Da Sie dazu angehalten sind diesen Fall sorgfältiger zu prüfen, ist die Möglichkeit den Link zu aktivieren verzögert (Sie können diese Verzögerung später ändern). Dies soll verhindern, dass Sie unabsichtlich den Link aktivieren.">
+<!ENTITY torpedo.guide.close "Close">
+<!ENTITY torpedo.guide.basic "Basic Information">
+<!ENTITY torpedo.guide.tooltips "Tooltip Types">
+<!ENTITY torpedo.guide.extras "Checking the URL">
+<!ENTITY torpedo.guide.specialcases "Special Cases">
+<!ENTITY torpedo.guide.menu "Menu">
+<!ENTITY torpedo.guide.settings "Settings">
+<!ENTITY torpedo.guide.basic.welcome.title "A warm welcome!">
+<!ENTITY torpedo.guide.basic.welcome.intro1 "The TORPEDO add-on has been installed successfully. Next you can find out how to detect phishing e-mails with the help of this add-on. ">
+<!ENTITY torpedo.guide.basic.welcome.intro2 "We recommend that you watch the tutorial even if you already use TORPEDO, because there are a number of new features in this new version. ">
+<!ENTITY torpedo.guide.basic.welcome.footnote "This add-on was developed in collaboration with the research group SECUSO - Security, Usability and Society at the TU Darmstadt, the Human Centred Security Group at the University of Glasgow and the Privacy and Security Group at the University of Karlstad.">
+<!ENTITY torpedo.guide.basic.why.title "Why you should use TORPEDO? ">
+<!ENTITY torpedo.guide.basic.why.description1 "TORPEDO helps you to detect phishing e-mails, i.e. dangerous links in e-mails.">
+<!ENTITY torpedo.guide.basic.why.description2 '"Dangerous links" means...'>
+<!ENTITY torpedo.guide.basic.why.description3 "...downloading malware when clicking or ">
+<!ENTITY torpedo.guide.basic.why.description4 "...entering credentials at fake websites (that look legitimate) that open when clicking. When doing so the ID theft was successful. ">
+<!ENTITY torpedo.guide.basic.why.usage.title "How to use TORDEDO:">
+<!ENTITY torpedo.guide.basic.why.usage.list "<li>Hover over the link with the mouse, so that TORPEDO displays the tooltip with the actual URL.</li><li>Pay attention to the tooltip frame colour, the information and instructions provided in the tooltip.</li>">
+<!ENTITY torpedo.guide.basic.why.image "start_en.png">
+<!ENTITY torpedo.guide.tooltips.case1.title "Explanations of the most recurrent tooltip types (1 of 3):">
+<!ENTITY torpedo.guide.tooltips.case1.description "A <strong>green frame</strong> means the domain (highlighted part of the URL) is classified as low-risk by the developers of TORPEDO (i.e. employees of TU Darmstadt) because it belongs to the 100 most frequented websites in Germany.">
+<!ENTITY torpedo.guide.tooltips.case1.image "google_en.png">
+<!ENTITY torpedo.guide.tooltips.case2.title "Explanations of the most recurrent tooltip types (2 of 3):">
+<!ENTITY torpedo.guide.tooltips.case2.description1 "A <strong>blue frame</strong> means that you <strong>previously indicated that the domain (highlighted part of the URL) is low-risk</strong>, i.e. ... ">
+<!ENTITY torpedo.guide.tooltips.case2.description2 "...you have clicked a link with the same domain at least twice since you installed TORPEDO or">
+<!ENTITY torpedo.guide.tooltips.case2.description3 '...you have whitelisted the domain (either by using the right-click option "classify domain as low-risk" or by changing the TORPEDO settings).'>
+<!ENTITY torpedo.guide.tooltips.case2.image "secuso_en.png">
+<!ENTITY torpedo.guide.tooltips.case3.title "Explanations of the most recurrent tooltip types (3 of 3):">
+<!ENTITY torpedo.guide.tooltips.case3.description "A <strong>grey frame</strong> means that this domain is unknown to TORPEDO. You should <strong>check the URL yourself very carefully and particularly focus on the domain.</strong> If you do not trust the domain, delete this e-mail. If you do trust the domain, you can use the menu to classify it as low-risk.
+Because you are supposed to check this case carefully, the possibility to click it is delayed (you can change the delay time in the settings). That is to prevent unintentional link activation.">
+<!ENTITY torpedo.guide.tooltips.case3.image "grey_en.png">
+<!ENTITY torpedo.guide.extras.URL.title "Explanations how to check URLs (in particular relevant for the grey case and special cases explained later on):">
+<!ENTITY torpedo.guide.extras.URL.description "<li><strong>Check whether the brand name</strong> (e.g. PayPal) <strong>is highlighted in bold.</strong>Consider only the highlighted part in order to detect deception attempts e.g. https://paypal.com. <strong>p a y - m e . c o m</strong> or https://www. <strong>p a y – s e c u r e . c o m</strong> /www.paypal.com .These are not PayPal URLs, but actually fake sites. Paypal.com is put in the URL to trick you.</li><li><strong>Check letter by letter</strong> to make sure it is really the brand name (e.g. Apple) that is highlighted in bold in order not to allow criminals to make you believe that e.g. https:// <strong>a p p e l . c o m</strong>/ is an Apple URL whereas it is actually a dangerous link. Criminals typically replace letters (e.g. m by r n) or swap letters. </li><li><strong>Be aware of extensions to the brand name:</strong> e.g. https://www. <strong>p a y p a l - s e c u r e . c o m</strong> / is not necessarily a PayPal URL. If you are unsure, you can use TORPEDO’s integrated search engine, i.e. right-click on the tooltip and then press „search engine“  in the menu. Check whether the highlighted part matches the search engine’s first suggestion. </li>">
 <!ENTITY torpedo.guide.extras.URL.title "Erklärungen zur Prüfung der URL (auch Web-Adresse genannt) hinter dem Link. Dies ist insbesondere für den grauen Fall und die Spezialfälle, die später erklärt werden, wichtig zu wissen. ">
-<!ENTITY torpedo.guide.extras.URL.description "<li><strong>Prüfen Sie, ob der Anbietername</strong> (z.B. PayPal) <strong>in der URL im Tooltip fett hervorgehoben ist.</strong> Betrachten Sie ausschließlich den hervorgehobenen Bereich, um zu verhindern, dass Kriminelle Ihnen weismachen wollen, dass z.B. https://paypal.com. <strong>p a y - m e . c o m</strong> oder https://www. <strong>p a y – s e c u r e . c o m</strong> /www.paypal.com eine PayPal URL ist, es sich aber tatsächlich um einen gefährlichen Link handelt.</li><li><strong>Prüfen Sie jeden Buchstaben in dem hervorgehobenen Bereich einzeln.</strong> Damit stellen Sie sicher, dass tatsächlich der Anbietername (z.B. Apple) im hervorgehobenen Bereich steht und Kriminelle Ih­nen nicht weismachen, dass z.B. https:// <strong>a p p e l . c o m</strong> / eine Apple URL ist, es sich aber tatsächlich um einen gefährlichen Link handelt. Vorsicht: Kriminelle ersetzen typischerweise Buchstaben (z.B. m durch r n) oder vertauschen Buch­staben.</li><li><strong>Achten Sie auf Erweiterungen zum Anbieternamen in dem hervorgehobenen Bereich:</strong> z.B. ist https://www. <strong>p a y p a l - s e c u r e . c o m</strong>/ nicht zwangsläufig eine PayPal-URL. Wenn Sie unsicher sind, können Sie die im Menü von TORPEDO eingebaute Anfrage bei einer Suchmaschine nutzen. Prüfen Sie, ob der hervorgehobene Bereich mit einem der ersten Vorschläge der Suchmaschine übereinstimmt.</li>">
-<!ENTITY torpedo.guide.extras.URL.title "Erklärungen zur Prüfung der URL (auch Web-Adresse genannt) hinter dem Link. Dies ist insbesondere für den grauen Fall und die Spezialfälle, die später erklärt werden, wichtig zu wissen. ">
-<!ENTITY torpedo.guide.extras.URL.tooltipinfo "Wenn Sie diese Informationen später erneut ansehen möchten, so können Sie dies über die weiter­führenden Informationen in den entsprechenden Tooltips tun.">
-<!ENTITY torpedo.guide.tooltips.specialcase1.title "Erklärungen zu den Spezialfällen (1 von 3):">
-<!ENTITY torpedo.guide.tooltips.specialcase1.description "Der erste Spezialfall ist der Fall <strong>„Unstimmigkeit“</strong>. Dies bedeutet, dass der tatsächliche Link und und der Link, der im E-Mail Text dargestellt ist, nicht übereinstimmen und darüber hinaus die Do­main (hervorgehobener Bereich) der tatsächlichen URL TORPEDO nicht bekannt ist (wie im grauen Fall). Obwohl das auch versehentlich vom Absender verursacht worden sein kann, wird dies von Kriminellen oft genutzt, um gefährliche Links zu verstecken. Kriminelle gehen davon aus, dass man normalerweise ausschließlich die URL im Text und nicht die tatsächliche URL betrachtet. Hier gel­ten die gleichen Empfehlungen zur Prüfung wie im grauen Fall.">
-<!ENTITY torpedo.guide.tooltips.specialcase2.title "Erklärungen zu den Spezialfällen (2 von 3): ">
-<!ENTITY torpedo.guide.tooltips.specialcase2.description "Der zweite Spezialfall ist der Fall <strong>„Kurz-URL“</strong>. Dies bedeutet, dass die URL hinter dem Link nicht die Ziel URL ist, sondern erst einmal ein sogenannter Kurz-URL-Dienst. Von dieser URL werden Sie automatisch zum tatsächlichen, vorgesehenen Ziel weitergeleitet. Relevant für die Frage, ob der Link gefährlich ist, ist die Beurteilung der tatsächlichen Ziel-URL. TORPEDO kann die Informationen über die tatsächliche Ziel-URL mit Hilfe eines webbasierten Services ermitteln (siehe Button) und dann anzeigen. Obwohl Kurz-URLs auch für vertrauenswürdige E-Mails genutzt werden, ist dies eine Technik die oft von Kriminellen genutzt wird. Sie gehen davon aus, dass man nicht weiß, wie man die tatsächliche Ziel-URL ermittelt, ohne auf den Link zu klicken.">
-<!ENTITY torpedo.guide.tooltips.specialcase3.title "Erklärungen zu den Spezialfällen (3 von 3):">
-<!ENTITY torpedo.guide.tooltips.specialcase3.description "Der dritte Spezialfall ist der Fall <strong>„Weiterleitung“</strong>. Dies bedeutet ebenfalls, dass die URL hinter dem Link nicht die Ziel-URL ist, sondern dass Sie von dieser URL automatisch auf die tatsächliche URL weitergeleitet werden. Manche E-Mail-Anbieter nutzen Weiterleitungen aus verschiedenen Gründen, z.B. um herauszufinden, ob Sie an einer Information interessiert waren oder um den Inhalt der Webseiten zu überprüfen. Relevant für die Frage, ob der Link gefährlich ist, ist auch hier die Beurteilung der tatsächlichen Ziel-URL. In diesem Fall kann TORPEDO die tatsächliche Ziel-URL selbstständig ableiten und zeigt Ihnen daher direkt die Informationen zur tatsächlichen Ziel-URL an.">
-<!ENTITY torpedo.guide.tooltips.menu.title "Sie können das TORPEDO Menü mit einem rechten Mausklick auf den Tooltip öffnen: ">
-<!ENTITY torpedo.guide.tooltips.menu.description1 "Derzeit haben Sie die folgenden Optionen: ">
-<!ENTITY torpedo.guide.tooltips.menu.description2 "<li>Die derzeitige Domain als niedriges Risiko einzustufen.</li><li>Die integrierte Suchmaschine zu nutzen, um die Ziel-URL zu ermitteln.</li><li>Die TORPEDO Einstellungen zu öffnen.</li><li>Das Tutorial zu öffnen.</li>">
-<!ENTITY torpedo.guide.tooltips.menu.image "menu.png">
-<!ENTITY torpedo.guide.settings.delay.title "In den Einstellungen finden Sie drei Reiter (Link Verzögerung,Domains, Referrer): ">
-<!ENTITY torpedo.guide.settings.delay.description "1) Aktivieren oder deaktivieren Sie die Verzögerung beim Klicken auf den Link oder ändern Sie die Zeit für die Verzögerung. Zusätzlich können Sie die Verzögerung auch für den grünen und/ oder den blauen Fall aktivieren.">
-<!ENTITY torpedo.guide.settings.delay.image "delay.png">
-<!ENTITY torpedo.guide.settings.domains.title "Einstellungen: Liste der Domains">
-<!ENTITY torpedo.guide.settings.domains.description "2) Schauen Sie sich die Liste der Domains an, die die Entwickler als ‚wenig riskant‘ hinterlegt haben sowie die Liste der Domains, die Sie so klassifiziert haben. Erstere können Sie auch deaktivieren und die zweite Liste können Sie bearbeiten.">
-<!ENTITY torpedo.guide.settings.domains.image "domains.png">
-<!ENTITY torpedo.guide.settings.referrer.title "Einstellungen: Liste der Referrer ">
-<!ENTITY torpedo.guide.settings.referrer.description "3) Referrer leiten, ähnlich wie Kurz-URLs, auf eine andere Seite weiter (siehe Spezialfall 3). Bei TORPEDO sind web.de und gmx.net als Standard-Referrer eingetragen. Sie können bei den Einstellungen auch eigene Referrer hinzufügen, welche TORPEDO dann automatisch für Sie auflöst.">
-<!ENTITY torpedo.guide.settings.referrer.image "referrer.png">
+<!ENTITY torpedo.guide.extras.URL.tooltipinfo "If you want to read this information again when actually using TORPEDO, click on ‘More information on this classification‘ in the corresponding tooltips.">
+<!ENTITY torpedo.guide.tooltips.specialcase1.title "Explanations of special cases (1 of 3):">
+<!ENTITY torpedo.guide.tooltips.specialcase1.description "The first special case is the so-called <strong>mismatch case</strong>. The mismatch case means that the URL displayed in the e-mail and the actual URL (the one displayed in the tooltip) do not match. Furthermore, the domain (highlighted part of the URL in the tooltip) is not yet known by TORPEDO. While this can happen by accident, criminals do so to obscure malicious links as they assume that people only consider the URL in the e-mail rather than the actual URL. In this case, the same recommendations for checking the URL apply as in the grey case.">
+<!ENTITY torpedo.guide.tooltips.specialcase1.image "phish_en.png">
+<!ENTITY torpedo.guide.tooltips.specialcase2.title "Further explanations of special cases (2 of 3):">
+<!ENTITY torpedo.guide.tooltips.specialcase2.description "The second special case is the so-called <strong>short URL case</strong>. The short URL case means that the URL behind this link is not the actual URL, but that it will redirect to the actual, intended URL. In order to decide whether the link is dangerous it is important to know the actual, intended URL. TORPEDO can deduce this information using a web service (see button). While short URLs may also be used in trustworthy e-mails, criminals do often use this technique, because they assume that people do not know how to get the information about the actual, intended URL without clicking on the link.">
+<!ENTITY torpedo.guide.tooltips.specialcase2.image "tinyurl_en.png">
+<!ENTITY torpedo.guide.tooltips.specialcase3.title "Further explanations of special cases (3 of 3):">
+<!ENTITY torpedo.guide.tooltips.specialcase3.description "The third special case is the so-called <strong>redirection case</strong>. The redirection case also means that this link is not the actual URL but it will redirect to another URL. Some e-mail providers use redirections for various reasons: e.g. to know whether you are interested in this information or to do some checks of the content of the webpage behind this URL. In this case, TORPEDO can deduce the actual URL without asking an external service, because this information is coded in the URL. Therefore, TORPEDO displays the information about the actual URL.">
+<!ENTITY torpedo.guide.tooltips.specialcase3.image "deref_en.png">
+<!ENTITY torpedo.guide.tooltips.menu.title "You can activate the TORPEDO menu with a right-click of your mouse on the tooltip:">
+<!ENTITY torpedo.guide.tooltips.menu.description1 "As of now you have the option either to...">
+<!ENTITY torpedo.guide.tooltips.menu.description2 "<li>Whitelist the current domain to your personal low-risk list.</li><li>Use the integrated search engine to check a URL.</li><li>Open the TORPEDO settings window.</li><li>Open the tutorial.</li>">
+<!ENTITY torpedo.guide.tooltips.menu.image "menu_en.png">
+<!ENTITY torpedo.guide.settings.delay.title "In the settings you have three different tabs (Link delay, Domains, Referrer): ">
+<!ENTITY torpedo.guide.settings.delay.description "1)  Activate or deactivate the link delay or change the link activation delay. Additionally you can activate the timer for the green and/or blue cases, too.">
+<!ENTITY torpedo.guide.settings.delay.image "delay_en.png">
+<!ENTITY torpedo.guide.settings.domains.title "Settings: List of domains">
+<!ENTITY torpedo.guide.settings.domains.description "2) View the low-risk domains provided by the developers or modify the list to reflect your preferences. You can add or delete single domains to your own list of low-risk considered domains, delete single domains or delete your complete list.">
+<!ENTITY torpedo.guide.settings.domains.image "domains_en.png">
+<!ENTITY torpedo.guide.settings.referrer.title "Settings: List of referrers ">
+<!ENTITY torpedo.guide.settings.referrer.description "3) Referrers redirect to another URL (just like short URLs, see special case 3). TORPEDO lists web.de and gmx.net as default referrers. You can add your own referrers, which TORPEDO can then deduce automatically in the future.">
+<!ENTITY torpedo.guide.settings.referrer.image "referrer_en.png">
