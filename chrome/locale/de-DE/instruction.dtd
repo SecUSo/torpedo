@@ -73,7 +73,7 @@
 <!ENTITY torpedo.guide.basic.welcome.intro1 "Das TORPEDO Add-on wurde erfolgreich installiert. Im Folgen­den wird Ihnen erklärt, wie Sie mit Hilfe des Add-ons schad­hafte E-Mails erkennen können.">
 <!ENTITY torpedo.guide.basic.welcome.intro2 "Wir empfehlen auch denen, die TORPEDO bereits benutzen, das Tutorial anzuschauen, da es viele Neuerungen gibt. ">
 <!ENTITY torpedo.guide.basic.welcome.footnote "Dieses Add-on wurde in Zusammenarbeit mit der Forschungsgruppe SECUSO - Security, Usability and Society der TU Darmstadt, der Human-Centered Security Gruppe der Universität Glasgow und der Privacy und Security Gruppe der Universität Karlstad entwickelt.">
-<!ENTITY torpedo.guide.basic.why.title "Warum Sie den TORPEDO nutzen sollten?">
+<!ENTITY torpedo.guide.basic.why.title "Warum Sie TORPEDO nutzen sollten?">
 <!ENTITY torpedo.guide.basic.why.description1 "TORPEDO hilft Ihnen dabei, Phishing E-Mails, d.h. gefährliche Links in E-Mails, zu erkennen.">
 <!ENTITY torpedo.guide.basic.why.description2 "Gefährliche Links verlinken auf...">
 <!ENTITY torpedo.guide.basic.why.description3 "...Malware, die Sie beim Anklicken herunterladen und die Ihnen schaden könnte, oder">
