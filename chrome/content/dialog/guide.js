@@ -4,7 +4,6 @@ const {utils: Cu} = Components;
 
 Cu.import("chrome://torpedo/content/utils/Defaults.jsm");
 Cu.import("chrome://torpedo/content/utils/RiskRatings.jsm");
-Cu.import("chrome://torpedo/content/views/Tooltip.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
