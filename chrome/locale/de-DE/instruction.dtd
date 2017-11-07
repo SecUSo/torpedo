@@ -77,7 +77,7 @@
 <!ENTITY torpedo.guide.basic.why.description1 "TORPEDO hilft Ihnen dabei, Phishing E-Mails, d.h. gefährliche Links in E-Mails, zu erkennen.">
 <!ENTITY torpedo.guide.basic.why.description2 "Gefährliche Links verlinken auf...">
 <!ENTITY torpedo.guide.basic.why.description3 "...Malware, die Sie beim Anklicken herunterladen und die Ihnen schaden könnte, oder">
-<!ENTITY torpedo.guide.basic.why.description4 "... gefälschte Webseiten, die legitim aussehen. Wenn Sie auf einen solchen Link klicken und auf der Webseite Daten eingeben, können diese missbraucht werden.">
+<!ENTITY torpedo.guide.basic.why.description4 "...gefälschte Webseiten, die legitim aussehen. Wenn Sie auf einen solchen Link klicken und auf der Webseite Daten eingeben, können diese missbraucht werden.">
 <!ENTITY torpedo.guide.basic.why.usage.title "TORPEDO wird folgendermaßen verwendet:">
 <!ENTITY torpedo.guide.basic.why.usage.list "<li>Bewegen Sie die Maus über den Link. TORPEDO zeigt die tatsächliche URL hinter dem Link dann in einem Tooltip an. </li><li>Achten Sie auf die Farbe des Tooltip-Rahmens, die Informationen und die Instruktionen im Tooltip.</li>">
 <!ENTITY torpedo.guide.basic.why.image "start_de.png">
