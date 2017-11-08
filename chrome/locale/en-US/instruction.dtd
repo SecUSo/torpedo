@@ -68,7 +68,7 @@
 <!ENTITY torpedo.guide.basic.welcome.title "A warm welcome!">
 <!ENTITY torpedo.guide.basic.welcome.intro1 "The TORPEDO add-on has been installed successfully. Next you can find out how to detect phishing e-mails with the help of this add-on. ">
 <!ENTITY torpedo.guide.basic.welcome.intro2 "We recommend that you watch the tutorial even if you already use TORPEDO, because there are a number of new features in this new version. ">
-<!ENTITY torpedo.guide.basic.welcome.footnote "This add-on was developed in collaboration with the research group SECUSO - Security, Usability and Society at the TU Darmstadt, the Human Centred Security Group at the University of Glasgow and the Privacy and Security Group at the University of Karlstad.">
+<!ENTITY torpedo.guide.basic.welcome.footnote "This add-on was developed in collaboration with the research group SECUSO - Security, Usability and Society at the TU Darmstadt, the Abertay University's Division of Cybersecurity and the Privacy and Security Group at the University of Karlstad.">
 <!ENTITY torpedo.guide.basic.why.title "Why you should use TORPEDO? ">
 <!ENTITY torpedo.guide.basic.why.description1 "TORPEDO helps you to detect phishing e-mails, i.e. dangerous links in e-mails.">
 <!ENTITY torpedo.guide.basic.why.description2 '"Dangerous links" means...'>

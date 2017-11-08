@@ -1,5 +1,5 @@
 var torpedo = torpedo || {};
-torpedo.installName = "torpedobeta@tu-darmstadt.de";
+torpedo.installName = "torpedo@tu-darmstadt.de";
 
 torpedo.prefs = function () {
 	const contentPrefService = Components.classes["@mozilla.org/content-pref/service;1"]

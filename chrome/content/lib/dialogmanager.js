@@ -1,7 +1,7 @@
 var torpedo = torpedo || {};
 torpedo.dialogmanager = torpedo.dialogmanager || {};
 
-//Cu.import("resource://gre/modules/Services.jsm");
+Cu.import("resource://gre/modules/Services.jsm");
 
 torpedo.dialogmanager.createDelete = function ()  {
   windowWidth=700;
@@ -39,5 +39,5 @@ torpedo.dialogmanager.createUnknownInfo = function(){
 };
 
 torpedo.dialogmanager.openTutorial = function(){
-	window.openDialog("chrome://torpedo/content/dialog/guide.xul", "tutorial", "chrome=yes, dialog,resizable=no, modal");
+	window.openDialog("chrome://torpedo/content/dialog/guide.xul", "torpedo-guide", "chrome=yes, dialog,resizable=no, modal");
 };

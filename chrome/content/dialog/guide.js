@@ -2,8 +2,6 @@
 
 const {utils: Cu} = Components;
 
-Cu.import("chrome://torpedo/content/utils/Defaults.jsm");
-Cu.import("chrome://torpedo/content/utils/RiskRatings.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 
 var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
@@ -125,20 +123,6 @@ const Guide = {
          */
         get isFirstPage() {
             return this.currentPageNumber === 0;
-        },
-        /**
-         * The object handles the Tooltip.
-         */
-        tooltipHandler: {
-            /**
-             * Update the Tooltip with low risk data.
-             *
-             * @returns {void}
-             */
-            showTooltip(id) {
-              var target = document.getElementById(id);
-              torpedo.handler.mouseOverHref(target,true,target);
-            }
         }
     },
     /**

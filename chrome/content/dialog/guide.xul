@@ -1,13 +1,10 @@
-<?xml version="1.0" standalone="no" ?>
+<?xml version="1.0"?>
 <?xml-stylesheet href="chrome://torpedo/skin/torpedo-guide.css" type="text/css"?>
-<?xml-stylesheet href="chrome://torpedo/skin/tooltippanel.css" type="text/css"?>
-<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd"[
-<!ENTITY overlay SYSTEM "chrome://torpedo/content/overlay.xul">
-]>
-<?xul-overlay href="chrome://torpedo/content/overlay.xul"?>
+<!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
-<dialog id="torpedo-guide" title="&torpedo.guide.windowTitle;"
-        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="torpedo-guide"
+        title="&torpedo.guide.windowTitle;"
         buttons="cancel,extra1,extra2,accept"
         buttonlabelaccept="&torpedo.guide.finish;"
         buttonaccesskeyaccept="&torpedo.guide.finish.key;"
@@ -19,16 +16,9 @@
         buttonaccesskeycancel="C"
         defaultButton="extra2"
         onload="Guide.onLoad(event)">
-
-    <script type="application/x-javascript" src="chrome://torpedo/content/dialog/guide.js"/>
-  	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-3.2.1.slim.min.js"/>
-  	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
-  	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
-  	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
-  	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
-  	<script type="application/javascript" src="chrome://torpedo/content/main.js"/>
-  	<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
-  	<script type="application/javascript" src="chrome://torpedo/content/lib/texts.js"/>
+        
+    <script type="application/javascript" src="chrome://torpedo/content/dialog/guide.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 
     <vbox id="guide-wrapper" flex="1">
         <hbox flex="1">
