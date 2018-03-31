@@ -66,16 +66,15 @@ tooltippanel > description {
   float: right;
   white-space: pre-wrap;
   width: 400px;
-  margin: 2px 0 2px 0;
+  margin: 2px 0 2px 5px;
   padding-top: 3px;
 }
 #advice-pic{
   float: left;
   display: inline;
   width: 27px;
-  height: 27px;
-  margin: 5px 5px 5px 0;
-  padding: 2px;
+  height: 28px;
+  margin: 5px 2px 5px 3px;
 }
 #infos{
   display: block;
