@@ -1,7 +1,6 @@
 var torpedo = torpedo || {};
 var lastBrowserStatus;
 torpedo.instructionSize = {width: 800,height: 460};
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.baseDomain;
 torpedo.textSize;

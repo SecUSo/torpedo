@@ -1,7 +1,6 @@
 var torpedo = torpedo || {};
 var clickTimer = null, countDownTimer = null;
 var alreadyClicked = "";
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.handler = torpedo.handler || {};
 torpedo.handler.Url;

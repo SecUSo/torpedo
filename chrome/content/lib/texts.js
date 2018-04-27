@@ -1,7 +1,6 @@
 var torpedo = torpedo || {};
 torpedo.texts = torpedo.texts || {};
 
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.texts.assignTexts = function (url)
 {

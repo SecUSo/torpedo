@@ -4,7 +4,6 @@ const {utils: Cu} = Components;
 
 Cu.import("resource://gre/modules/Services.jsm");
 
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 const stringBundle = Services.strings.createBundle("chrome://torpedo/locale/main-strings.properties?" + Math.random()); // Randomize URI to work around bug 719376
 
 /**

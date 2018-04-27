@@ -1,6 +1,5 @@
 var torpedo = torpedo || {};
 torpedo.redirect = torpedo.redirect || {};
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.redirect.getRedirects = function(){
   var reList = document.getElementById('redirectsList');

@@ -1,7 +1,6 @@
 var torpedo = torpedo || {};
 torpedo.db = torpedo.db || {};
 
-var Application = Components.classes["@mozilla.org/steel/application;1"].getService(Components.interfaces.steelIApplication);
 
 torpedo.db.pushUrl = function (website)
 {
