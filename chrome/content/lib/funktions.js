@@ -86,7 +86,7 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
 
 torpedo.functions.traceUrl = function (url, redirect) {
     // check if url is redirect and already in our list of saved entries
-    var requestList = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
+    var requestList = torpedo.prefs.getStringPref("URLRequestList");
     if(redirect && requestList.includes(torpedo.functions.getDomainWithFFSuffix(url)+",")){
       unknown = false;
       var requestArray = requestList.split(",");
@@ -97,7 +97,7 @@ torpedo.functions.traceUrl = function (url, redirect) {
           urlPos = i;
         }
       }
-      var answerList = torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data;
+      var answerList = torpedo.prefs.getStringPref("URLAnswerList");
       var answerArray = answerList.split(",");
       torpedo.currentUrl = answerArray[urlPos];
     }
@@ -132,8 +132,8 @@ torpedo.functions.saveRedirection = function(url, response){
   // save redirection URL in user data
   var str1 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
   var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-  var preVal1 = torpedo.prefs.getComplexValue("URLRequestList", Components.interfaces.nsISupportsString).data;
-  var preVal2 = torpedo.prefs.getComplexValue("URLAnswerList", Components.interfaces.nsISupportsString).data;
+  var preVal1 = torpedo.prefs.getStringPref("URLRequestList");
+  var preVal2 = torpedo.prefs.getStringPref("URLAnswerList");
   var request = preVal1 + url + ",";
   var answer = preVal2 + response + ",";
   str1.data = request;
@@ -371,8 +371,8 @@ torpedo.functions.isMismatch = function(domain){
 torpedo.gmxRedirect;
 torpedo.gmxRedirectIndex;
 torpedo.functions.resolveRedirect = function(url){
-  var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
-  var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+  var sites = torpedo.prefs.getStringPref("redirectUrls");
+  var sites2 = torpedo.prefs.getStringPref("redirectUrls2");
   sites = sites.split(",");
   sites2 = sites2.split(",");
   if(torpedo.gmxRedirectIndex > -1){
@@ -389,7 +389,7 @@ torpedo.functions.resolveRedirect = function(url){
 };
 
 torpedo.functions.isGmxRedirect = function(url){
-  var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
+  var sites = torpedo.prefs.getStringPref("redirectUrls");
   sites = sites.split(",");
   for(var i = 0; i < sites.length-1; i++){
     if(url.startsWith(sites[i])) {

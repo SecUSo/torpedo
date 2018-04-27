@@ -5,7 +5,7 @@ var Application = Components.classes["@mozilla.org/steel/application;1"].getServ
 torpedo.redirect.getRedirects = function(){
   var reList = document.getElementById('redirectsList');
   var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-	var redirects = torpedo.prefs.getComplexValue("RedirectionList", Components.interfaces.nsISupportsString).data;
+	var redirects = torpedo.prefs.getStringPref("RedirectionList");
 
   // remove all elements first
   while (reList.firstChild) reList.removeChild(reList.firstChild);
@@ -89,7 +89,7 @@ torpedo.redirect.add = function(){
 };
 
 torpedo.redirect.inList = function(url){
-  var redirects = torpedo.prefs.getComplexValue("RedirectionList", Components.interfaces.nsISupportsString).data;
+  var redirects = torpedo.prefs.getStringPref("RedirectionList");
   var split = redirects.split(",");
   var i;
   for(i=0; i<split.length; i++){
@@ -100,19 +100,19 @@ torpedo.redirect.inList = function(url){
 
 torpedo.redirect.append = function(url){
   var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-  var redirects = torpedo.prefs.getComplexValue("RedirectionList", Components.interfaces.nsISupportsString).data;
+  var redirects = torpedo.prefs.getStringPref("RedirectionList");
   str.data = redirects + url + ",";
-  torpedo.prefs.setComplexValue("RedirectionList", Components.interfaces.nsISupportsString, str);
-};
+  torpedo.prefs.setStringPref("RedirectionList", str);
+  };
 
 torpedo.redirect.delete = function(){
   var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-  var redirects = torpedo.prefs.getComplexValue("RedirectionList", Components.interfaces.nsISupportsString).data;
+  var redirects = torpedo.prefs.getStringPref("RedirectionList");
   var selected = document.getElementById('redirectsList').selectedItem.label + ",";
 	if(selected != null && redirects.length > 0){
 		// cut selected element out of list of redirect domains
 		str.data = redirects.replace(selected, "");
-    torpedo.prefs.setComplexValue("RedirectionList", Components.interfaces.nsISupportsString, str);
-    torpedo.redirect.getRedirects();
+    torpedo.prefs.setStringPref("RedirectionList",str);
+	torpedo.redirect.getRedirects();
 	}
 };

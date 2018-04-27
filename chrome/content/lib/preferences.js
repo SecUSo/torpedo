@@ -3,7 +3,7 @@ torpedo.installName = "torpedo@tu-darmstadt.de";
 
 torpedo.prefs = function () {
 	const contentPrefService = Components.classes["@mozilla.org/content-pref/service;1"]
-                         .getService(Components.interfaces.nsIContentPrefService);
+                         .getService(Components.interfaces.nsIContentPrefService2);
 
     const prefManager =
         Components.classes["@mozilla.org/preferences-service;1"]
@@ -17,11 +17,9 @@ torpedo.prefs = function () {
         getBoolPref: prefManager.getBoolPref,
         getIntPref: prefManager.getIntPref,
         getStringPref: prefManager.getCharPref,
-        getComplexValue: prefManager.getComplexValue,
         setBoolPref: prefManager.setBoolPref,
         setIntPref: prefManager.setIntPref,
         setStringPref: prefManager.setCharPref,
-        setComplexValue: prefManager.setComplexValue,
 
         addonUninstallingListener: function ()
 		{

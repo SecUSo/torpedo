@@ -26,7 +26,7 @@ torpedo.db.inList = function (website, list){
 	if(torpedo.functions.isRedirect(website) || (list == "URLDefaultList" && (!torpedo.functions.isChecked("green")))){
 		return false;
 	}
-	var sites = torpedo.prefs.getComplexValue(list, Components.interfaces.nsISupportsString).data;
+	var sites = torpedo.prefs.getStringPref(list);
 	website = website.toLowerCase();
 	if(sites.indexOf(website) != 0 && sites.charAt(sites.indexOf(website)-1) != ','){
 		return false;
@@ -45,9 +45,9 @@ torpedo.db.putInsideDefault = function(website){
 	var str = Components.classes["@mozilla.org/supports-string;1"]
 		      .createInstance(Components.interfaces.nsISupportsString);
 
-	var defaultSites = torpedo.prefs.getComplexValue("URLDefaultList", Components.interfaces.nsISupportsString).data;
+	var defaultSites = torpedo.prefs.getStringPref("URLDefaultList");
 	str.data = defaultSites + website + ",";
-	torpedo.prefs.setComplexValue("URLDefaultList", Components.interfaces.nsISupportsString, str);
+	torpedo.prefs.setStringPref("URLDefaultList", str);
 };
 
 torpedo.db.putInsideSecond = function(url){
@@ -56,26 +56,26 @@ torpedo.db.putInsideSecond = function(url){
 		url = torpedo.baseDomain;
 	}
 	// put website into user list
-	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
+	var secondSites = torpedo.prefs.getStringPref("URLSecondList");
 	str.data = secondSites + url + ",";
-	torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
-
+	torpedo.prefs.setStringPref("URLSecondList", str);
+	
 	// delete website out of first clicked links
-	var firstSites = torpedo.prefs.getComplexValue("URLFirstList", Components.interfaces.nsISupportsString).data;
+	var firstSites = torpedo.prefs.getStringPref("URLFirstList");
 	var website = firstSites.substring(firstSites.indexOf(url), firstSites.indexOf(url)+url.length+1);
 	if(website.indexOf(",") >= 0) url = url + ",";
 
 	str.data = firstSites.replace(url, "");
-	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
+	torpedo.prefs.setStringPref("URLFirstList", str);
 };
 
 torpedo.db.putInsideFirst = function(website){
 	var str = Components.classes["@mozilla.org/supports-string;1"]
 		      .createInstance(Components.interfaces.nsISupportsString);
 
-	var firstSites = torpedo.prefs.getComplexValue("URLFirstList", Components.interfaces.nsISupportsString).data;
+	var firstSites = torpedo.prefs.getStringPref("URLFirstList");
 	str.data = firstSites + "," +  website;
-	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
+	torpedo.prefs.setStringPref("URLFirstList", str);
 };
 
 secondList = [];
@@ -84,13 +84,13 @@ newList = [];
 
 torpedo.db.deleteSomeSecond = function () {
 	var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
+	var secondSites = torpedo.prefs.getStringPref("URLSecondList");
 	var selected = document.getElementById('theList').selectedItem.label + ",";
 
 	if(selected != null && secondSites.length > 0){
 		// cut selected element out of list of trustworthy domains
 		str.data = secondSites.replace(selected, "");
-		torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
+		torpedo.prefs.setStringPref("URLSecondList", str);
 		torpedo.db.getSecond();
 	}
 };
@@ -100,14 +100,14 @@ torpedo.db.deleteAllSecond = function () {
 		      .createInstance(Components.interfaces.nsISupportsString);
 
     str.data = "";
-	torpedo.prefs.setComplexValue("URLSecondList", Components.interfaces.nsISupportsString, str);
-	torpedo.prefs.setComplexValue("URLFirstList", Components.interfaces.nsISupportsString, str);
+	torpedo.prefs.setStringPref("URLSecondList", str);
+	torpedo.prefs.setStringPref("URLFirstList", str);
 };
 
 torpedo.db.getSecond = function () {
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
   document.getElementById('addEntryDialog').textContent = torpedo.stringsBundle.getString('addentries');
-	var secondSites = torpedo.prefs.getComplexValue("URLSecondList", Components.interfaces.nsISupportsString).data;
+	var secondSites = torpedo.prefs.getStringPref("URLSecondList");
 	var theList = document.getElementById("theList");
 
 	// remove all elements first
@@ -132,7 +132,7 @@ torpedo.db.getSecond = function () {
 
 torpedo.db.getDefaults = function (){
 	var defaultList = document.getElementById('defaultList');
-	var defaultSites = torpedo.prefs.getComplexValue("URLDefaultList", Components.interfaces.nsISupportsString).data;
+	var defaultSites = torpedo.prefs.getStringPref("URLDefaultList");
 	firstList = defaultSites.split(",");
 	firstList.sort();
 	for (i = 0; i < firstList.length; i++) {
@@ -147,8 +147,8 @@ torpedo.db.getDefaults = function (){
 torpedo.db.getReferrer = function (){
 	var referrerList = document.getElementById('referrerList');
 	var referrerList2 = document.getElementById('referrerList2');
-	var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
-	var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+	var sites = torpedo.prefs.getStringPref("redirectUrls");
+	var sites2 = torpedo.prefs.getStringPref("redirectUrls2");
 
 	// remove all elements first
 	while (referrerList.firstChild) referrerList.removeChild(referrerList.firstChild);
@@ -188,12 +188,12 @@ torpedo.db.addReferrer = function (){
 
 		var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 		var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-		var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
-		var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+		var sites = torpedo.prefs.getStringPref("redirectUrls");
+		var sites2 = torpedo.prefs.getStringPref("redirectUrls2");
 		str.data = sites+add1;
-		torpedo.prefs.setComplexValue("redirectUrls", Components.interfaces.nsISupportsString, str);
+		torpedo.prefs.setStringPref("redirectUrls", str);
 		str2.data = sites2+add2;;
-		torpedo.prefs.setComplexValue("redirectUrls2", Components.interfaces.nsISupportsString, str2);
+		torpedo.prefs.setStringPref("redirectUrls2", str2);
 
 		document.getElementById("addPart1").value = "";
 		document.getElementById("addPart2").value = "";
@@ -209,16 +209,16 @@ torpedo.db.deleteReferrer = function (){
 	if(del > -1){
 		var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 		var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-		var sites = torpedo.prefs.getComplexValue("redirectUrls", Components.interfaces.nsISupportsString).data;
-		var sites2 = torpedo.prefs.getComplexValue("redirectUrls2", Components.interfaces.nsISupportsString).data;
+		var sites = torpedo.prefs.getStringPref("redirectUrls");
+		var sites2 = torpedo.prefs.getStringPref("redirectUrls2");
 		sites = sites.split(",");
 		sites.splice(del,1);
 		str.data = sites.toString();
 		sites2 = sites2.split(",");
 		sites2.splice(del,1);
 		str2.data = sites2.toString();
-		torpedo.prefs.setComplexValue("redirectUrls", Components.interfaces.nsISupportsString, str);
-		torpedo.prefs.setComplexValue("redirectUrls2", Components.interfaces.nsISupportsString, str2);
+		torpedo.prefs.setStringPref("redirectUrls", str);
+		torpedo.prefs.setStringPref("redirectUrls2", str2);
 		torpedo.db.getReferrer();
 	}
 };
@@ -228,8 +228,8 @@ torpedo.db.deleteAllReferrer = function (){
 	var str2 = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 	str.data = "";
 	str2.data = "";
-	torpedo.prefs.setComplexValue("redirectUrls", Components.interfaces.nsISupportsString, str);
-	torpedo.prefs.setComplexValue("redirectUrls2", Components.interfaces.nsISupportsString, str2);
+	torpedo.prefs.setStringPref("redirectUrls", str);
+	torpedo.prefs.setStringPref("redirectUrls2", str2);
 
 	torpedo.db.getReferrer();
 };
