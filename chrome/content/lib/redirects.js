@@ -56,7 +56,7 @@ torpedo.redirect.add = function(){
   		  url = torpedo.functions.getDomainWithFFSuffix(url);
   			if(torpedo.redirect.inList(url)){
           erase = false;
-  				error.textContent = torpedo.stringsBundle.getString('alreadyinredirect');
+  				error.textContent = torpedo.stringsBundle.getString('alreadyInReferrerList');
   				openpopup = true;
   			}
         else{
@@ -66,7 +66,7 @@ torpedo.redirect.add = function(){
   		}
   		else{
   			erase = false;
-  			error.textContent = torpedo.stringsBundle.getString('wrongurl');
+  			error.textContent = torpedo.stringsBundle.getString('nonValidUrl');
   			openpopup = true;
   		}
   	}

@@ -6,7 +6,7 @@
 	title="&redirectList;"
 	buttons="accept,cancel, extra1"
 	buttonalign="start"
-	buttonlabelaccept="&add;"
+	buttonlabelaccept="&addentries;"
 	buttonlabelcancel="&close;"
 	buttonlabelextra1="&delete;"
 	ondialogaccept="torpedo.redirect.add(); return false;"

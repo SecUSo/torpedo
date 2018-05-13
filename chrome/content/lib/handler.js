@@ -211,11 +211,11 @@ torpedo.handler.mouseClickAddButton = function(event){
 torpedo.handler.loadOptions = function (){
 	torpedo.stringsBundle = document.getElementById("torpedo-string-bundle");
 	// TODO document.getElementById('countdown').disabled = !torpedo.prefs.getBoolPref('checkedTimer');
-  document.getElementById('listofdefaults').textContent = torpedo.stringsBundle.getString('listofdefaults');
-  document.getElementById('activategreen').textContent = torpedo.stringsBundle.getString('activategreen');
-  document.getElementById('activateorange').textContent = torpedo.stringsBundle.getString('activateorange');
-  document.getElementById('referrerDialog').textContent = torpedo.stringsBundle.getString('referrer');
-  document.getElementById('referrerInfo').textContent = torpedo.stringsBundle.getString('referrerInfo');
+  document.getElementById('lowRiskDomains').textContent = torpedo.stringsBundle.getString('lowRiskDomains');
+  document.getElementById('activateTimerOnLowRisk').textContent = torpedo.stringsBundle.getString('activateTimerOnLowRisk');
+  document.getElementById('activateTimerOnUserList').textContent = torpedo.stringsBundle.getString('activateTimerOnUserList');
+  document.getElementById('referrerDialog').textContent = torpedo.stringsBundle.getString('referrerInfo1');
+  document.getElementById('referrerInfo').textContent = torpedo.stringsBundle.getString('referrerInfo2');
 	torpedo.db.getReferrer();
   var element = document.getElementById("editor");
   element.style.fontSize=""+torpedo.prefs.getIntPref("textsize")+"%";

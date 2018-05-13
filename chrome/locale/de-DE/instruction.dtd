@@ -6,15 +6,10 @@
 <!ENTITY sure_defaultsettings "Standard-Einstellungen wiederherstellen?">
 <!ENTITY attention_defaultsettings "Alle von Ihnen als geringes Risiko eingestufte Domains löschen">
 <!ENTITY sure "Wollen Sie wirklich alle Einträge löschen?">
-<!ENTITY remainingTime "Verbleibende Zeit:">
 <!ENTITY seconds "Sekunde(n)">
-<!ENTITY language "Gekürzte Texte für dieses Add On verwenden">
-<!ENTITY general "Allgemein">
-<!ENTITY lists "Listen">
 <!ENTITY userdomains "Domains, die mind. 2x aufgerufen wurden">
 <!ENTITY editentries "Bearbeiten / Löschen von Einträgen">
 <!ENTITY addentries "Hinzufügen">
-<!ENTITY add "Hinzufügen">
 <!ENTITY clearentries "Alle Einträge löschen">
 <!ENTITY showdefaults "Anzeigen der Einträge">
 <!ENTITY activated "Liste der Entwickler aktivieren">
@@ -28,15 +23,7 @@
 <!ENTITY settings "Einstellungen">
 <!ENTITY checkedtimer "Link-Verzögerung aktiviert">
 <!ENTITY messagetimer "Link-Verzögerung Zeit auf:">
-<!ENTITY next "Weiter">
-<!ENTITY skip "Überspringen">
-<!ENTITY back "Zurück">
-<!ENTITY end "Beenden">
-<!ENTITY redirection "Weiterleitungen">
-<!ENTITY noredirect "Domains nicht auf Weiterleitungen prüfen">
 <!ENTITY manualredirect "Domains manuell auf Weiterleitungen prüfen">
-<!ENTITY autoredirect "Domains automatisch auf Weiterleitungen prüfen">
-<!ENTITY secs "Sekunde(n)">
 <!ENTITY entries_gone "Erfolgreich gelöscht">
 <!ENTITY showredirects "Zeige Liste der Weiterleitungs-Domains">
 <!ENTITY redirectList "Liste der Weiterleitungs-Domains">
@@ -45,7 +32,6 @@
 <!ENTITY opensettings "Einstellungen öffnen">
 <!ENTITY addtotrusted "Domain als geringes Risiko einstufen">
 <!ENTITY searchfor "Überprüfe Domain mit google.de">
-<!ENTITY toTutorial ">> Weiter zum Tutorial (Empfehlung bei Erstinstallation)">
 <!ENTITY opentutorial "Tutorial öffnen">
 <!ENTITY thunderbird "Zurück zu Thunderbird">
 <!ENTITY kapitel1 "Basisinformationen">

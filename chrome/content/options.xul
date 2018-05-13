@@ -47,17 +47,17 @@
               </hbox>
               <hbox>
                 <checkbox id="greenlistactivated" preference="firefox-checked-greenlistactivated" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen(false);" />
-                <description id="activategreen" style="width:330px; margin-top:10px" onclick="torpedo.functions.changeActivatedGreen(true)"/>
+                <description id="activateTimerOnLowRisk" style="width:330px; margin-top:10px" onclick="torpedo.functions.changeActivatedGreen(true)"/>
               </hbox>
               <hbox>
                 <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:15px;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange(false);" />
-                <description id="activateorange" style="width:330px; margin-top:15px" tooltiptext="&userdomains;" onclick="torpedo.functions.changeActivatedOrange(true)"/>
+                <description id="activateTimerOnUserList" style="width:330px; margin-top:15px" tooltiptext="&userdomains;" onclick="torpedo.functions.changeActivatedOrange(true)"/>
               </hbox>
             </vbox>
           </tabpanel>
           <tabpanel id="listtab" orient="horizontal">
             <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:350px;">
-              <description id="listofdefaults" style="font-weight:bold; margin-top:10px; margin-bottom:20px; width:350px;"/>
+              <description id="lowRiskDomains" style="font-weight:bold; margin-top:10px; margin-bottom:20px; width:350px;"/>
               <checkbox id="greenlist" label="&activated;" preference="firefox-checked-greenlist" oncommand="torpedo.functions.changeChecked();" />
               <button id="showDefaults" label="&showdefaults;" style="margin-top:10px;margin-bottom:10px;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
               <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>

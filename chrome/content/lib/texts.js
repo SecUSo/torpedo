@@ -10,7 +10,7 @@ torpedo.texts.assignTexts = function (url)
   var button = torpedo.stringsBundle.getString('ButtonWeiterleitung');
   var ueberschrift = torpedo.stringsBundle.getString(state+"Ueberschrift");
   var erklaerung = torpedo.stringsBundle.getString(state+"Erklaerung");
-  var mehrInfo = torpedo.stringsBundle.getString("MehrInfo");
+  var mehrInfo = torpedo.stringsBundle.getString("mehrInfo");
   var infotext = torpedo.stringsBundle.getString(state+"Infotext").replace("<URL>", url);
   var infoCheck = torpedo.stringsBundle.getString("Info");
   var gluehbirneText = torpedo.stringsBundle.getString(state+"GluehbirneText");
@@ -25,15 +25,13 @@ torpedo.texts.assignTexts = function (url)
 	if(suffix.length > 75) suffix = suffix.substring(0,75) +  "...";
 	//avoid unnessecary slash
 	if(suffix == "/") suffix = "";
-  var url1Text = torpedo.stringsBundle.getString("URLPrefix").replace("<PREFIX>", prefix);
-  var baseDomain = torpedo.stringsBundle.getString("URLDomain").replace("<DOMAIN>", domain);
-  var url2Text = torpedo.stringsBundle.getString("URLSuffix").replace("<SUFFIX>", suffix);
+ 
 
   // assign texts
   $("#phish").html(ueberschrift);
-  $("#url1").html(url1Text);
+  $("#url1").html(prefix);
   $("#baseDomain").html(domain);
-  $("#url2").html(url2Text);
+  $("#url2").html(suffix);
   $("#redirect").html(erklaerung);
   $("#advice").html(gluehbirneText);
   $("#infotext").html(mehrInfo);

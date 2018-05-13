@@ -271,12 +271,12 @@ torpedo.db.addEntries = function(){
 				url = torpedo.functions.getDomainWithFFSuffix(url);
 				if(torpedo.db.inList(url, "URLDefaultList")){
 					erase = false;
-					error.textContent = torpedo.stringsBundle.getString('alreadyinside');
+					error.textContent = torpedo.stringsBundle.getString('alreadyInTrustedUrls');
 					openpopup = true;
 				}
 				else if(torpedo.db.inList(url,"URLSecondList")){
 					erase = false;
-					error.textContent = torpedo.stringsBundle.getString('alreadyinlist');
+					error.textContent = torpedo.stringsBundle.getString('alreadyInUserDefinedDomains');
 					openpopup = true;
 				}
 				else{
@@ -286,7 +286,7 @@ torpedo.db.addEntries = function(){
 			}
 			else{
 				erase = false;
-				error.textContent = torpedo.stringsBundle.getString('wrongurl');
+				error.textContent = torpedo.stringsBundle.getString('nonValidUrl');
 				openpopup = true;
 			}
 		}

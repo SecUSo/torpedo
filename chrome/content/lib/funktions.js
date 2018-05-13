@@ -180,7 +180,7 @@ torpedo.functions.countdown = function (timee, id, url) {
         strZeit = (second < 10) ? ((second == 0)? second : "0" + second) : second;
         if(alreadyVisited) strZeit = 0;
         document.getElementById("countdown").textContent = torpedo.stringsBundle.getString('VerbleibendeZeit');
-        var remainingTimeText = document.getElementById("countdown").textContent.replace("<TIME>",strZeit);
+        var remainingTimeText = document.getElementById("countdown").textContent.replace("$TIME$",strZeit);
         document.getElementById("countdown").textContent = remainingTimeText;
 
         if (strZeit == 0 ) {
@@ -308,19 +308,19 @@ torpedo.functions.changeCheckedTimer = function (){
         torpedo.prefs.setIntPref("blockingTimer", 0);
         // TODO document.getElementById("countdown").disabled = true;
         document.getElementById("greenlistactivated").disabled = true;
-        document.getElementById("activategreen").setAttribute("style","color:grey;width:330px; margin-top:10px");
+        document.getElementById("activateTimerOnLowRisk").setAttribute("style","color:grey;width:330px; margin-top:10px");
         document.getElementById("orangelistactivated").disabled = true;
-        document.getElementById("activateorange").setAttribute("style","color:grey;width:330px; margin-top:15px");
+        document.getElementById("activateTimerOnUserList").setAttribute("style","color:grey;width:330px; margin-top:15px");
     }
     else{
         torpedo.prefs.setIntPref("blockingTimer", 3);
       // TODO  document.getElementById("countdown").disabled = false;
         document.getElementById("greenlistactivated").disabled = false;
-        document.getElementById("activategreen").removeAttribute("style");
-        document.getElementById("activategreen").setAttribute("style","width:330px; margin-top:10px");
+        document.getElementById("activateTimerOnLowRisk").removeAttribute("style");
+        document.getElementById("activateTimerOnLowRisk").setAttribute("style","width:330px; margin-top:10px");
         document.getElementById("orangelistactivated").disabled = false;
-        document.getElementById("activateorange").removeAttribute("style");
-        document.getElementById("activateorange").setAttribute("style","width:330px; margin-top:15px");
+        document.getElementById("activateTimerOnUserList").removeAttribute("style");
+        document.getElementById("activateTimerOnUserList").setAttribute("style","width:330px; margin-top:15px");
     }
 }
 
