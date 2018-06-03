@@ -74,7 +74,7 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
   }
   try{
     const href = new URL(url);
-    var host = href.hostname;
+    var host = href.host;
     split = host.split(".");
     if(split.length > 2){
       host = split[split.length-2] + "." + split[split.length-1];

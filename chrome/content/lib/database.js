@@ -239,7 +239,6 @@ torpedo.db.restoreSettings = function(){
 	return true;
 };
 
-addList=[];
 torpedo.db.addEntries = function(){
 	var addSites = document.getElementById("addEntries").value;
 	var message = document.getElementById("errormessage");
@@ -267,7 +266,6 @@ torpedo.db.addEntries = function(){
 			if (!url.startsWith("http")) url = "http://" + url;
 			if(torpedo.functions.isURL(url)){
 				var split = url.indexOf("://");
-				url = url.substring(split+3,url.length);
 				url = torpedo.functions.getDomainWithFFSuffix(url);
 				if(torpedo.db.inList(url, "URLDefaultList")){
 					erase = false;
