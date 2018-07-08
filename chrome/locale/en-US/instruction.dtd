@@ -6,7 +6,7 @@
 <!ENTITY sure_defaultsettings "Restore default settings?">
 <!ENTITY attention_defaultsettings "Delete all domains you considered as 'low-risk'">
 <!ENTITY sure "Do you really want to delete all entries?">
-!ENTITY seconds "second(s)">
+<!ENTITY seconds "second(s)">
 <!ENTITY activated "Activate list of domains the developers consider as 'low-risk'">
 <!ENTITY userlinks "Domains you considered as 'low-risk' (blue)">
 <!ENTITY editentries "Edit and delete entries">
