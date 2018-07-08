@@ -6,16 +6,11 @@
 <!ENTITY sure_defaultsettings "Restore default settings?">
 <!ENTITY attention_defaultsettings "Delete all domains you considered as 'low-risk'">
 <!ENTITY sure "Do you really want to delete all entries?">
-<!ENTITY remainingTime "Time remaining:">
-<!ENTITY seconds "second(s)">
-<!ENTITY lists "Lists">
-<!ENTITY language "Use shortened texts for this addon">
-<!ENTITY general "General">
+!ENTITY seconds "second(s)">
 <!ENTITY activated "Activate list of domains the developers consider as 'low-risk'">
 <!ENTITY userlinks "Domains you considered as 'low-risk' (blue)">
 <!ENTITY editentries "Edit and delete entries">
 <!ENTITY addentries "Add entries">
-<!ENTITY add "Add">
 <!ENTITY userdomains "Domains which were called at least 2 times">
 <!ENTITY clearentries "Delete all entries">
 <!ENTITY showdefaults "Show entries">
@@ -27,12 +22,6 @@
 <!ENTITY settings "Settings">
 <!ENTITY checkedtimer "Link deactivation delay timer activated">
 <!ENTITY messagetimer "Link deactivation timer set to">
-<!ENTITY next "Next">
-<!ENTITY skip "Skip">
-<!ENTITY back "Back">
-<!ENTITY end "Exit">
-<!ENTITY redirection "Redirections">
-<!ENTITY secs "second(s)">
 <!ENTITY entries_gone "Successfully deleted">
 <!ENTITY showredirects "Show all redirection domains">
 <!ENTITY redirectList "List of redirection domains">
@@ -41,7 +30,6 @@
 <!ENTITY opensettings "Open settings window">
 <!ENTITY addtotrusted "Mark domain as trustworthy">
 <!ENTITY searchfor "Check domain with google.com">
-<!ENTITY toTutorial ">> Continue to tutorial (recommended for first time users)">
 <!ENTITY opentutorial "Open tutorial">
 <!ENTITY thunderbird "Back to Thunderbird">
 <!ENTITY kapitel1 "Basic informations">
