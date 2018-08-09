@@ -138,8 +138,8 @@ torpedo.functions.saveRedirection = function(url, response){
   str1.data = request;
   str2.data = answer;
   if(!preVal1.includes(url + ",")){
-    torpedo.prefs.setComplexValue("URLRequestList", Components.interfaces.nsISupportsString, str1);
-    torpedo.prefs.setComplexValue("URLAnswerList", Components.interfaces.nsISupportsString, str2);
+    torpedo.prefs.setStringPref("URLRequestList", Components.interfaces.nsISupportsString, str1);
+    torpedo.prefs.setStringPref("URLAnswerList", Components.interfaces.nsISupportsString, str2);
     var requestArray = request.split(",");
 
     // if list of saved redirections has more than 100 entries
@@ -148,8 +148,8 @@ torpedo.functions.saveRedirection = function(url, response){
       var ansWithoutFirst = answer.substr(answer.indexOf(",")+1,answer.length);
       str1.data = reqWithoutFirst;
       str2.data = ansWithoutFirst;
-      torpedo.prefs.setComplexValue("URLRequestList", Components.interfaces.nsISupportsString, str1);
-      torpedo.prefs.setComplexValue("URLAnswerList", Components.interfaces.nsISupportsString, str2);
+      torpedo.prefs.setStringPref("URLRequestList", Components.interfaces.nsISupportsString, str1);
+      torpedo.prefs.setStringPref("URLAnswerList", Components.interfaces.nsISupportsString, str2);
     }
   }
 }
