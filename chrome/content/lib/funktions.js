@@ -357,7 +357,7 @@ torpedo.functions.isRedirect = function(url){
 torpedo.functions.isMismatch = function(domain){
   var title = torpedo.handler.title;
   if(title == "" || title == undefined) return false;
-  if(!torpedo.functions.isURL(title)) return false;
+  //if(!torpedo.functions.isURL(title)) return false;
   var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
   //var a = titleDomain.split(".");
   //var b = domain.split(".");
