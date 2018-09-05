@@ -53,16 +53,23 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 
 torpedo.functions.isURL = function (url) {
   try{
-    const href = new URL(url);
+	if(!url.includes("https://") && !url.includes("http://")){
+	  url = "http://" + url;
+	}
+	const href = new URL(url);
     if(href.hostname)
       return true;
     else return false;
-  }catch(e){
+    }catch(e){
     return false;
   }
 };
 
 torpedo.functions.getDomainWithFFSuffix = function (url) {
+  if(!url.includes("https://") && !url.includes("http://")){
+	  url = "http://" + url;
+	}
+	
   if(torpedo.functions.isURL(url)){
     var eTLDService = Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService);
     try {
@@ -72,15 +79,6 @@ torpedo.functions.getDomainWithFFSuffix = function (url) {
     }
     catch(err) {}
   }
-  try{
-    const href = new URL(url);
-    var host = href.host;
-    split = host.split(".");
-    if(split.length > 2){
-      host = split[split.length-2] + "." + split[split.length-1];
-    }
-    return host;
-  }catch(e){}
 };
 
 torpedo.functions.traceUrl = function (url, redirect) {
@@ -357,7 +355,7 @@ torpedo.functions.isRedirect = function(url){
 torpedo.functions.isMismatch = function(domain){
   var title = torpedo.handler.title;
   if(title == "" || title == undefined) return false;
-  //if(!torpedo.functions.isURL(title)) return false;
+  if(!torpedo.functions.isURL(title)) return false;
   var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
   //var a = titleDomain.split(".");
   //var b = domain.split(".");
