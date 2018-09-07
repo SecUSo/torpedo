@@ -52,6 +52,11 @@ torpedo.functions.findParentTagTarget = function (event, aTag) {
 }
 
 torpedo.functions.isURL = function (url) {
+  
+  if(!url.includes("https://") && !url.includes("http://") && !url.includes("www")){
+	return false;	
+  }
+  
   try{
 	if(!url.includes("https://") && !url.includes("http://")){
 	  url = "http://" + url;
