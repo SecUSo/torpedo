@@ -36,9 +36,11 @@ torpedo.texts.assignTexts = function (url)
   $("#advice").html(gluehbirneText);
   $("#infotext").html(mehrInfo);
   $("#moreinfos").html(infotext);
-  $("#redirectButton").html(button);
   $("#linkDeactivate").html(linkDeaktivierung);
-  $("#infocheck").html(infoCheck);
+
+  
+  document.getElementById("redirectButton").setAttribute("label", button);
+  document.getElementById("infocheck").setAttribute("label", infoCheck);
 
   // hide light bulb if no text is there
   if(gluehbirneText) $("#advicebox").show()
