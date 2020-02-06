@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://torpedo/skin/torpedo-guide.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/content/bindings.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -23,101 +24,28 @@
     <vbox id="guide-wrapper" flex="1">
         <hbox flex="1">
             <vbox id="guide-section-list-wrapper">
-                <ul id="guide-section-list" xmlns="http://www.w3.org/1999/xhtml">
+                    <!--<ul id="guide-section-list" xmlns="http://www.w3.org/1999/xhtml">
                     <li id="section-basic-item">&torpedo.guide.basic;</li>
                     <li id="section-tooltips-item">&torpedo.guide.tooltips;</li>
-                    <li id="section-extras-item">&torpedo.guide.extras;</li>
-                    <li id="section-specialcases-item">&torpedo.guide.specialcases;</li>
-                    <li id="section-menu-item">&torpedo.guide.menu;</li>
                     <li id="section-settings-item">&torpedo.guide.settings;</li>
-                </ul>
+                </ul>-->
             </vbox>
             <vbox flex="1" id="guide-content-wrapper-holder">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper guide-content-wrapper-flex guide-logo" id="guide-page-welcome">
-                    <h1>&torpedo.guide.basic.welcome.title;</h1>
                     <p>&torpedo.guide.basic.welcome.intro1;</p>
                     <p style="flex: 1">&torpedo.guide.basic.welcome.intro2;</p>
-                    <p class="footnote">&torpedo.guide.basic.welcome.footnote;</p>
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper guide-content-wrapper-flex" id="guide-page-why">
-                    <h2>&torpedo.guide.basic.why.title;</h2>
                     <h3>&torpedo.guide.basic.why.description1;</h3>
-                    <h4>&torpedo.guide.basic.why.description2;</h4>
-                    <p>&torpedo.guide.basic.why.description3;</p>
-                    <p>&torpedo.guide.basic.why.description4;</p>
-                    <h3>&torpedo.guide.basic.why.usage.title;</h3>
                     <ol>
-                        &torpedo.guide.basic.why.usage.list;
+                       <li>&torpedo.guide.basic.why.usage.list;</li>
+                       <li>&torpedo.guide.basic.why.usage.list2;</li>
+                       <li>&torpedo.guide.basic.why.usage.list3;</li>
+                       <li>&torpedo.guide.basic.why.usage.list4;</li>
                     </ol>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.basic.why.image;"/>
                 </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-case1">
-                    <h2>&torpedo.guide.tooltips.case1.title;</h2>
-                    <p>&torpedo.guide.tooltips.case1.description;</p>
-                    <p class="guide-link">https://www.google.de/</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.case1.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-case2">
-                    <h2>&torpedo.guide.tooltips.case2.title;</h2>
-                    <p>&torpedo.guide.tooltips.case2.description1;</p>
-                    <p>&torpedo.guide.tooltips.case2.description2;</p>
-                    <p>&torpedo.guide.tooltips.case2.description3;</p>
-                    <p class="guide-link">https://www.secuso.org/</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.case2.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-case3">
-                    <h2>&torpedo.guide.tooltips.case3.title;</h2>
-                    <p>&torpedo.guide.tooltips.case3.description;</p>
-                    <p class="guide-link">https://www.iconfinder.com/</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.case3.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-URL">
-                    <h2>&torpedo.guide.extras.URL.title;</h2>
-                    <ol>
-                        &torpedo.guide.extras.URL.description;
-                    </ol>
-                    <p>&torpedo.guide.extras.URL.tooltipinfo;</p>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-specialcase1">
-                    <h2>&torpedo.guide.tooltips.specialcase1.title;</h2>
-                    <p>&torpedo.guide.tooltips.specialcase1.description;</p>
-                    <p class="guide-link">https://www.google.de/</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.specialcase1.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-specialcase2">
-                    <h2>&torpedo.guide.tooltips.specialcase2.title;</h2>
-                    <p>&torpedo.guide.tooltips.specialcase2.description;</p>
-                    <p class="guide-link">http://www.tinyurl.com/21342/</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.specialcase2.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-specialcase3">
-                    <h2>&torpedo.guide.tooltips.specialcase3.title;</h2>
-                    <p>&torpedo.guide.tooltips.specialcase3.description;</p>
-                    <p class="guide-link">https://deref-web-02.de/mail/client/beHwAYUTrMc/dereferrer/?redirectUrl=https%3A%2F%2Fgoogle.de%2F/</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.specialcase3.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-menu">
-                    <h2>&torpedo.guide.tooltips.menu.title;</h2>
-                    <p>&torpedo.guide.tooltips.menu.description1;</p>
-                    <ol>
-                        &torpedo.guide.tooltips.menu.description2;
-                    </ol>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.menu.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-settings-delay">
-                  <h2>&torpedo.guide.settings.delay.title;</h2>
-                  <p>&torpedo.guide.settings.delay.description;</p>
-                  <img src="chrome://torpedo/skin/guide/&torpedo.guide.settings.delay.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-settings-domains">
-                    <h2>&torpedo.guide.settings.domains.title;</h2>
-                    <p>&torpedo.guide.settings.domains.description;</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.settings.domains.image;"/>
-                </div>
-                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-settings-referrer">
-                    <h2>&torpedo.guide.settings.referrer.title;</h2>
-                    <p>&torpedo.guide.settings.referrer.description;</p>
-                    <img src="chrome://torpedo/skin/guide/&torpedo.guide.settings.referrer.image;"/>
+                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-settings">
+                    <p>&torpedo.guide.tooltips.settings.description;</p>
                 </div>
             </vbox>
         </hbox>
@@ -126,7 +54,7 @@
             <spacer flex="1"/>
             <button dlgtype="extra1" disabled="true"/>
             <button dlgtype="extra2"/>
-            <button dlgtype="accept" disabled="true"/>
+            <button dlgtype="accept" disabled="false"/>
         </hbox>
     </vbox>
 </dialog>

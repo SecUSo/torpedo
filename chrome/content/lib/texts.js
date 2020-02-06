@@ -1,20 +1,20 @@
 var torpedo = torpedo || {};
 torpedo.texts = torpedo.texts || {};
 
-
 torpedo.texts.assignTexts = function (url)
 {
   var state = torpedo.state+"";
 
   // get texts from textfile
-  var button = torpedo.stringsBundle.getString('ButtonWeiterleitung');
-  var ueberschrift = torpedo.stringsBundle.getString(state+"Ueberschrift");
-  var erklaerung = torpedo.stringsBundle.getString(state+"Erklaerung");
-  var mehrInfo = torpedo.stringsBundle.getString("mehrInfo");
-  var infotext = torpedo.stringsBundle.getString(state+"Infotext").replace("<URL>", url);
-  var infoCheck = torpedo.stringsBundle.getString("Info");
-  var gluehbirneText = torpedo.stringsBundle.getString(state+"GluehbirneText");
-  var linkDeaktivierung = torpedo.stringsBundle.getString(state+"LinkDeaktivierung");
+  var buttontext = torpedo.stringsBundle.GetStringFromName("ButtonWeiterleitung");
+  var ueberschrift = torpedo.stringsBundle.GetStringFromName(state+"Ueberschrift");
+  var erklaerung = torpedo.stringsBundle.GetStringFromName(state+"Erklaerung");
+  var mehrInfo = torpedo.stringsBundle.GetStringFromName("mehrInfo");
+  var infotext = torpedo.stringsBundle.GetStringFromName(state+"Infotext").replace("<URL>", url);
+  var infoCheck = torpedo.stringsBundle.GetStringFromName("Info");
+  var gluehbirneInfo = torpedo.stringsBundle.GetStringFromName("GluehbirneInfo");
+  var gluehbirneText = torpedo.stringsBundle.GetStringFromName(state+"GluehbirneText");
+  var linkDeaktivierung = torpedo.stringsBundle.GetStringFromName(state+"LinkDeaktivierung");
   
   // get parts of URL: Prefix, Domain and Suffix
   var domain = torpedo.functions.getDomainWithFFSuffix(url);
@@ -26,21 +26,20 @@ torpedo.texts.assignTexts = function (url)
 	//avoid unnessecary slash
 	if(suffix == "/") suffix = "";
  
-
+ 
   // assign texts
   $("#phish").html(ueberschrift);
   $("#url1").html(prefix);
   $("#baseDomain").html(domain);
   $("#url2").html(suffix);
   $("#redirect").html(erklaerung);
-  $("#advice").html(gluehbirneText);
+  $("#advice").html(gluehbirneInfo);
+  $("#moreadviceinfos").html(gluehbirneText);
   $("#infotext").html(mehrInfo);
   $("#moreinfos").html(infotext);
+  document.getElementById("redirectButton").setAttribute("label", buttontext);
   $("#linkDeactivate").html(linkDeaktivierung);
-
-  
-  document.getElementById("redirectButton").setAttribute("label", button);
-  document.getElementById("infocheck").setAttribute("label", infoCheck);
+ // document.getElementById("infocheck").setAttribute("label", infoCheck);
 
   // hide light bulb if no text is there
   if(gluehbirneText) $("#advicebox").show()

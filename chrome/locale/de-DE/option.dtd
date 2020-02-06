@@ -1,0 +1,18 @@
+<!ENTITY windowheader "TORPEDO - TOoltip-poweRed Phishing Email DetectiOn">
+
+<!ENTITY prefwindow.title "Torpedo">
+
+<!ENTITY hostPart "Host (z.B. 'deref-gmx.net')">
+<!ENTITY pathPart "Pfad (z.B. '/mail/client/[...]/dereferrer/')">
+<!ENTITY attributePart "Attribut (z.B. 'redirectUrl=')">
+<!ENTITY gmxRedirectDescription "Referrer sind Dienste, die die Weiterleitung über den eigenen Server zu einer fremden Webseite anbieten. Die Referrer-URLs sind bei jedem Anbieter nach dem gleichen Schema aufgebaut und können hier voreingestellt werden, sodass TORPEDO diese Weiterleitungen automatisch auflösen kann. Viele Referrer nutzen einen zufallsgenerierten Code in der Weiterleitungs-URL.">
+
+<!ENTITY getDefaultReferrer "Standard-Einstellung">
+<!ENTITY addentries "Hinzufügen">
+<!ENTITY clearentries "Alle Einträge löschen">
+<!ENTITY addMainRedirect "Als Haupt-Weiterleitung markieren">
+
+
+<!ENTITY deleteEntries "Einträge löschen">
+<!ENTITY close "Schließen">
+<!ENTITY delete "Löschen">

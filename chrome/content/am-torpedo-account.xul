@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="chrome://messenger/skin/accountManage.css" type="text/css"?>
+
+<!DOCTYPE page SYSTEM "chrome://torpedo/locale/option.dtd">
+
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+      onload="parent.onPanelLoaded('am-torpedo-account.xul');">
+
+  <script type="application/javascript" src="chrome://messenger/content/AccountManager.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/am-torpedo-account.js"/> 
+  <script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
+
+  
+  <dialogheader title="&prefwindow.title;"/>
+
+   
+  <vbox style="overflow:auto">
+          		<description id="referrerDialog" style="width:370px; margin-top:10px" />
+              <hbox>
+                <vbox>
+                  <label id="hostPart" />
+                  <richlistbox id="referrerList" width="300" height="160" onselect="document.getElementById('deleteReferrer').disabled = false;" />
+                </vbox>
+              </hbox>
+			  <vbox>
+          		<hbox>
+            		<button id="deleteReferrer" label="&deleteEntries;" onclick="torpedo.db.deleteReferrer()" disabled="true"/>
+            		<button id="clearReferrer" label="&clearentries;" onclick="torpedo.db.deleteAllReferrer()" />
+					<button id="defaultReferrer" label="&getDefaultReferrer;" onclick="torpedo.db.getDefaultReferrer()" />
+              </hbox>
+			  <button id="addMainRedirect" label="&addMainRedirect;" style="width:100px;" onclick="torpedo.db.addMainRedirect()" />
+              </vbox>
+			  <label value="&addentries;" style="font-weight:bold; margin-top: 10px;"/>
+              <description id="referrerInfo" style="width:370px; margin-top:10px" />
+              <label value="&hostPart;" />
+              <textbox id="addPart1" prefstring="mail.server.%serverkey%.torpedo.adv_redirectUrls" onclick='document.getElementById("editReferrer").disabled = false; document.getElementById("addPart2").disabled = false;' style="width:350px; max-height:30px"/>
+              <label value="&pathPart;" disabled="true"/>
+              <textbox id="addPart2" prefstring="mail.server.%serverkey%.torpedo.adv_redirectUrls2" style="width:350px; max-height:30px; margin-bottom: 10px"/>
+			  <label value="&attributePart;" disabled="true"/>
+              <textbox id="addPart3" prefstring="mail.server.%serverkey%.torpedo.adv_redirectUrls3" style="width:350px; max-height:30px; margin-bottom: 10px"/>
+              <button id="editReferrer" label="&addentries;" onclick="torpedo.db.addReferrer();" disabled="true"/>
+          	</vbox>
+			<popupset>
+			<panel type="arrow" id="errormessage" fade="slow">
+				<hbox class="mainBox">
+					<label id="error"/>
+				</hbox>
+			</panel>
+	</popupset>
+
+</page>

@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/content/bindings.css" type="text/css"?>
+<?xml-stylesheet type="text/css" href="chrome://global/skin/"?>
 <?xml-stylesheet type="text/css" href="chrome://messenger/skin/preferences/preferences.css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
-<prefwindow id="optionwindow" title="TORPEDO &settings;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+<dialog id="optionwindow" title="TORPEDO &settings;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
         buttons="extra1,accept,cancel"
         buttonlabelextra1="&default_settings;"
         buttonlabelcancel="&close;"
@@ -11,94 +14,70 @@
         ondialogextra1="torpedo.dialogmanager.createDefaultDelete();"
         onload="torpedo.handler.loadOptions();">
 
-	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	
   <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
-    <stringbundleset>
-        <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
-    </stringbundleset>
-
-    <prefpane>
-      <preferences>
-        <preference id="firefox-checked-timer" name="extensions.torpedo.checkedTimer" type="bool"/>
-  			<preference id="firefox-blocking-timer" name="extensions.torpedo.blockingTimer" type="int"/>
-        <preference id="firefox-checked-greenlist" name="extensions.torpedo.checkedGreenList" type="bool"/>
-        <preference id="firefox-checked-greenlistactivated" name="extensions.torpedo.activatedGreenList" type="bool"/>
-        <preference id="firefox-checked-orangelistactivated" name="extensions.torpedo.activatedOrangeList" type="bool"/>
-      </preferences>
-
+   
       <tabbox id="editor" style="width:400px;">
         <tabs>
           <tab label="&delay;"/>
           <tab label="Domains"/>
-          <tab label="Referrer"/>
+		  <tab label="Redirect"/>
+		  <tab label="&redirect;"/>
         </tabs>
         <tabpanels>
           <tabpanel orient="horizontal">
             <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:350px;">
-              <checkbox id="checkedtimer" label="&checkedtimer;" preference="firefox-checked-timer" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('checkedTimer'));" oncommand="torpedo.functions.changeCheckedTimer();"/>
+              <checkbox id="checkedtimer" label="&checkedtimer;" preference="extensions.torpedo.checkedTimer"  type = "bool" style="margin-top:10px" disabled="!(torpedo.prefs.getBoolPref('checkedTimer'));" oncommand="torpedo.functions.changeCheckedTimer();"/>
               <hbox>
                 <label value="&messagetimer;" style="margin-top:15px" />
-                <textbox type="number" id="countdown" preference="firefox-blocking-timer" min="0" max="100" style="margin-top:10px; max-width:70px; max-height:30px"/>
+                <textbox type="number" id="countdown" preference="extensions.torpedo.blockingTimer" min="0" max="100" style="margin-top:10px; max-width:70px; max-height:30px"/>
                 <label value="&seconds;" style="margin-top:15px" />
               </hbox>
               <hbox>
-                <checkbox id="greenlistactivated" preference="firefox-checked-greenlistactivated" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen(false);" />
+                <checkbox id="greenlistactivated" preference="extensions.torpedo.activatedGreenList" style="margin-top:10px" oncommand="torpedo.functions.changeActivatedGreen();" />
                 <description id="activateTimerOnLowRisk" style="width:330px; margin-top:10px" onclick="torpedo.functions.changeActivatedGreen(true)"/>
               </hbox>
               <hbox>
-                <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:15px;" preference="firefox-checked-orangelistactivated" oncommand="torpedo.functions.changeActivatedOrange(false);" />
+                <checkbox id="orangelistactivated" tooltiptext="&userdomains;" style="margin-top:15px;" preference="extensions.torpedo.activatedOrangeList" oncommand="torpedo.functions.changeActivatedOrange();" />
                 <description id="activateTimerOnUserList" style="width:330px; margin-top:15px" tooltiptext="&userdomains;" onclick="torpedo.functions.changeActivatedOrange(true)"/>
               </hbox>
+                <checkbox id="checkedprivacymode" label="&privacymode;" preference="extensions.torpedo.privacyMode" style="margin-top:10px" disabled="torpedo.prefs.getBoolPref('privacyMode');" oncommand="torpedo.functions.changePrivacyMode();"/>
+				<checkbox id="checkedsecuritymode" label="&securitymode;" preference="extensions.torpedo.securityMode" style="margin-top:10px" disabled="torpedo.prefs.getBoolPref('securityMode');" oncommand="torpedo.functions.changeSecurityMode();"/>
+				<checkbox id="checkconfig" label="&config;" preference="extensions.torpedo.config" style="margin-top:10px" disabled="torpedo.prefs.getBoolPref('config');" oncommand="torpedo.functions.changeConfig();"/>
             </vbox>
           </tabpanel>
           <tabpanel id="listtab" orient="horizontal">
             <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:350px;">
               <description id="lowRiskDomains" style="font-weight:bold; margin-top:10px; margin-bottom:20px; width:350px;"/>
-              <checkbox id="greenlist" label="&activated;" preference="firefox-checked-greenlist" oncommand="torpedo.functions.changeChecked();" />
+              <checkbox id="greenlist" label="&activated;" preference="extensions.torpedo.checkedGreenList" oncommand="torpedo.functions.changeChecked();" />
               <button id="showDefaults" label="&showdefaults;" style="margin-top:10px;margin-bottom:10px;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
               <label id="userlinks" value="&userlinks;" tooltiptext="&userdomains;" style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>
               <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButton();" />
+			        <!--<label id="cloudDomainsList" value="&cloudDomainsList;" style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>
+              <button id="editCloudDomains" label="&editentries;" onclick="torpedo.handler.mouseClickEditButtonCloudDomains();" />-->
             </vbox>
           </tabpanel>
-          <tabpanel id="listtab" orient="horizontal">
+		  <tabpanel id="listtab" orient="horizontal">
             <vbox style="overflow:auto">
-          		<description id="referrerDialog" style="width:370px; margin-top:10px" />
-              <hbox>
-                <vbox>
-                  <label value="Part 1" />
-                  <richlistbox id="referrerList" width="170" height="160" onselect="document.getElementById('deleteReferrer').disabled = false; document.getElementById('referrerList2').selectedIndex = this.selectedIndex;" />
-                </vbox>
-                <spacer flex="1" />
-                <vbox>
-                  <label value="Part 2" />
-                  <richlistbox id="referrerList2" width="170" height="160" onselect="document.getElementById('deleteReferrer').disabled = false; document.getElementById('referrerList').selectedIndex = this.selectedIndex;" />
-                </vbox>
-              </hbox>
-          		<hbox>
-            		<button id="deleteReferrer" label="&deleteEntries;" onclick="torpedo.db.deleteReferrer()" disabled="true"/>
-            		<button id="clearReferrer" label="&clearentries;" onclick="torpedo.db.deleteAllReferrer()" />
-              </hbox>
-              <label value="&addentries;" style="font-weight:bold; margin-top: 10px;"/>
-              <description id="referrerInfo" style="width:370px; margin-top:10px" />
-              <label value="Part 1:" />
-              <textbox id="addPart1" onclick='document.getElementById("editReferrer").disabled = false; document.getElementById("addPart2").disabled = false;' style="width:350px; max-height:30px"/>
-              <label value="Part 2:" disabled="true"/>
-              <textbox id="addPart2" style="width:350px; max-height:30px; margin-bottom: 10px"/>
-              <button id="editReferrer" label="&addentries;" onclick="torpedo.db.addReferrer();" disabled="true"/>
-          	</vbox>
-          	<popupset>
-          		<panel type="arrow" id="errormessage" fade="slow">
-          			<hbox class="mainBox">
-          				<label id="error"/>
-          			</hbox>
-          		</panel>
-          	</popupset>
+				<description id="referrerDialogAdvHint" style="width:370px; margin-top:10px" />
+			</vbox>
+          </tabpanel>
+		  <tabpanel id="listtab" orient="horizontal">
+            <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:350px;">
+              <description id="redirectInfo" style="width:370px; margin-top:10px" />
+              <label id="redirectList" value="&redirectList;"  style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>
+              <button id="editSecond" label="&editentries;" onclick="torpedo.handler.mouseClickEditButtonRedirect();" />
+            </vbox>
           </tabpanel>
         </tabpanels>
       </tabbox>
-    </prefpane>
-</prefwindow>
+	  
+	  
+  <script src="chrome://global/content/preferencesBindings.js" type="application/javascript"/>
+  <script src="chrome://torpedo/content/options.js" type="application/javascript"/>
+</dialog>
