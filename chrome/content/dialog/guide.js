@@ -22,41 +22,13 @@ const Guide = {
             section: "basic"
         }, {
             id: "guide-page-why",
-            section: "basic"
-        }, {
-            id: "guide-page-tooltips-case1",
             section: "tooltips"
         }, {
-            id: "guide-page-tooltips-case2",
-            section: "tooltips"
-        }, {
-            id: "guide-page-tooltips-case3",
-            section: "tooltips"
-        }, {
-            id: "guide-page-tooltips-URL",
-            section: "extras"
-        }, {
-            id: "guide-page-tooltips-specialcase1",
-            section: "specialcases"
-        }, {
-            id: "guide-page-tooltips-specialcase2",
-            section: "specialcases"
-        }, {
-            id: "guide-page-tooltips-specialcase3",
-            section: "specialcases"
-        },{
-            id: "guide-page-tooltips-menu",
-            section: "menu"
-        }, {
-            id: "guide-page-settings-delay",
+            id: "guide-page-tooltips-settings",
             section: "settings"
-        }, {
-            id: "guide-page-settings-domains",
-            section: "settings"
-        }, {
-            id: "guide-page-settings-referrer",
-            section: "settings"
-        }],
+        } ],
+
+
         /**
          * The DOM node of the current page.
          */
@@ -91,7 +63,7 @@ const Guide = {
 
             if (offset !== 0) {
                 this.currentPageNode.classList.remove("active");
-                this.currentSection.classList.remove("active");
+                //this.currentSection.classList.remove("active");
 
                 this.currentPageNumber = this.currentPageNumber + offset;
             }
@@ -103,9 +75,9 @@ const Guide = {
             }
 
             this.currentPageNode = document.getElementById(currentPage.id);
-            this.currentSection = document.getElementById("section-" + currentPage.section + "-item");
+            //this.currentSection = document.getElementById("section-" + currentPage.section + "-item");
             this.currentPageNode.classList.add("active");
-            this.currentSection.classList.add("active");
+            //this.currentSection.classList.add("active");
         },
         /**
          * Indicates if the current page is the last one.

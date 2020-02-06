@@ -3,6 +3,11 @@ skin torpedo classic/1.0 chrome/skin/
 
 overlay	chrome://messenger/content/messenger.xul	chrome://torpedo/content/overlay.xul
 
-locale torpedo en-US chrome/locale/en-US/
 locale torpedo de-DE chrome/locale/de-DE/
+locale torpedo en-US chrome/locale/en-US/
+
+
+component {C1441ACE-1836-11E9-BF6B-382C69511AEB} components/accountManagerExtension.js
+contract @mozilla.org/accountmanager/extension;1?name=torpedo-account {C1441ACE-1836-11E9-BF6B-382C69511AEB}
+category mailnews-accountmanager-extensions torpedo-account-manager-extension @mozilla.org/accountmanager/extension;1?name=torpedo-account
 

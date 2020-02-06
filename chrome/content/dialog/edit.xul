@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/content/bindings.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -9,7 +10,7 @@
 		buttonlabelaccept="&addentries;"
 		buttonlabelcancel="&close;"
 		buttonlabelextra1="&delete;"
-		ondialogaccept="torpedo.db.addEntries(); return false;"
+		ondialogaccept="torpedo.db.addEntries('second'); return false;"
 		ondialogcancel="return true;"
 		ondialogextra1="torpedo.db.deleteSomeSecond();"
 		onfocus="torpedo.db.getSecond();"
@@ -17,18 +18,16 @@
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
   <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
-	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
   <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
-	<script type="application/x-javascript" src="chrome://torpedo/content/lib/funktions.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/edit.js"/>
 
-	<stringbundleset>
-		<stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
-  </stringbundleset>
 
 	<vbox>
 		<label value="&userlinks;" />
-		<listbox id="theList" width="350" height="160" onselect="document.documentElement.getButton('extra1').disabled = false;"/>
+		<richlistbox id="theList" width="350" height="160" onselect="document.documentElement.getButton('extra1').disabled = false;"/>
 		<description id="addEntryDialog" style="width:350px; margin-top:10px" />
 		<hbox>
 			<textbox id="addEntries" onclick='document.documentElement.getButton("accept").disabled = false;' style="margin-top:10px; width:350px; max-height:30px"/>

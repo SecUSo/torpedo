@@ -1,9 +1,19 @@
 var torpedo = torpedo || {};
 torpedo.redirect = torpedo.redirect || {};
 
+document.addEventListener('dialogaccept', function() {
+	torpedo.redirect.add(); return false;
+});
+
+document.addEventListener('dialogextra1', function() {
+	torpedo.redirect.delete();
+});
+
+
+
+
 torpedo.redirect.getRedirects = function(){
   var reList = document.getElementById('redirectsList');
-  var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 	var redirects = torpedo.prefs.getStringPref("RedirectionList");
 
   // remove all elements first
@@ -11,17 +21,10 @@ torpedo.redirect.getRedirects = function(){
 
   document.documentElement.getButton("extra1").disabled = true;
   document.documentElement.getButton("accept").disabled = true;
-  var redirectList = redirects.split(",");
-  redirectList = redirectList.sort();
-  var i;
-  for (i = 0; i < redirectList.length; i++) {
-    var row = document.createElement('listitem');
-    if(redirectList[i].length > 0) {
-      row.setAttribute('label',redirectList[i]);
-      row.setAttribute('style',"height:100%;width:300px");
-      reList.appendChild(row);
-    }
-  }
+
+  
+	torpedo.db.createRichList(redirects, reList);
+
 };
 
 addList=[];
@@ -53,10 +56,10 @@ torpedo.redirect.add = function(){
   		if(torpedo.functions.isURL(url)){
   			var split = url.indexOf("://");
   			url = url.substring(split+3,url.length);
-  		  url = torpedo.functions.getDomainWithFFSuffix(url);
+  		    url = torpedo.functions.getDomainWithFFSuffix(url);
   			if(torpedo.redirect.inList(url)){
-          erase = false;
-  				error.textContent = torpedo.stringsBundle.getString('alreadyInReferrerList');
+				erase = false;
+  				error.textContent = torpedo.stringsBundle.getStringFromName('alreadyInReferrerList');
   				openpopup = true;
   			}
         else{
@@ -66,7 +69,7 @@ torpedo.redirect.add = function(){
   		}
   		else{
   			erase = false;
-  			error.textContent = torpedo.stringsBundle.getString('nonValidUrl');
+  			error.textContent = torpedo.stringsBundle.getStringFromName('nonValidUrl');
   			openpopup = true;
   		}
   	}
@@ -98,20 +101,16 @@ torpedo.redirect.inList = function(url){
 };
 
 torpedo.redirect.append = function(url){
-  var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-  var redirects = torpedo.prefs.getStringPref("RedirectionList");
-  str.data = redirects + url + ",";
-  torpedo.prefs.setStringPref("RedirectionList", str);
+  torpedo.db.appendStringPref(url, "RedirectionList");
   };
 
 torpedo.redirect.delete = function(){
-  var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
   var redirects = torpedo.prefs.getStringPref("RedirectionList");
   var selected = document.getElementById('redirectsList').selectedItem.label + ",";
-	if(selected != null && redirects.length > 0){
-		// cut selected element out of list of redirect domains
-		str.data = redirects.replace(selected, "");
-    torpedo.prefs.setStringPref("RedirectionList",str);
+  if(selected != null && redirects.length > 0){
+	// cut selected element out of list of redirect domains
+	var str  = redirects.replace(selected, "");
+  torpedo.prefs.setStringPref("RedirectionList",str);
 	torpedo.redirect.getRedirects();
-	}
+  }
 };

@@ -24,6 +24,14 @@ torpedo.dialogmanager.createEdit = function () {
 	window.openDialog("chrome://torpedo/content/dialog/edit.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen, width='300px'");
 };
 
+torpedo.dialogmanager.createEditCloudDomains = function () {
+	window.openDialog("chrome://torpedo/content/dialog/cloud.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen, width='300px'");
+};
+
+torpedo.dialogmanager.createEditRedirect = function () {
+	window.openDialog("chrome://torpedo/content/dialog/redirects.xul", "bmarks", "chrome=yes, dialog,resizable=no, modal, centerscreen, width='300px'");
+};
+//
 torpedo.dialogmanager.createInfo = function () {
 	window.openDialog("chrome://torpedo/content/dialog/info.xul", "bmarksinfo", "chrome=yes, dialog,resizable=no, modal, centerscreen");
 };

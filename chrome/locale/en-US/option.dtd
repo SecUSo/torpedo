@@ -1,0 +1,23 @@
+<!ENTITY windowheader "TORPEDO - TOoltip-poweRed Phishing Email DetectiOn">
+
+<!ENTITY prefwindow.title "Torpedo">
+
+<!ENTITY hostPart "Host (e.g. 'deref-gmx.net')">
+<!ENTITY pathPart "Path (e.g. '/mail/client/[...]/dereferrer/')">
+<!ENTITY attributePart "Attribute (e.g. 'redirectUrl=')">
+
+<!ENTITY yes "Yes">
+<!ENTITY no "No">
+<!ENTITY save "Save">
+<!ENTITY getDefaultReferrer "Default settings">
+<!ENTITY addMainRedirect "Add main redirect">
+
+<!ENTITY editentries "Edit and delete entries">
+<!ENTITY addentries "Add entries">
+<!ENTITY userdomains "Domains which were called at least 2 times">
+<!ENTITY clearentries "Delete all entries">
+<!ENTITY showdefaults "Show entries">
+<!ENTITY deleteEntries "Delete entries">
+
+<!ENTITY delete "Delete">
+<!ENTITY settings "Settings">

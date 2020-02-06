@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "torpedo@tu-darmstadt.de",
+      "strict_min_version": "68.0"
+    }
+  },
+  "name": "TORPEDO",
+  "description": "TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.",
+  "version": "2.2.9",
+  "icons": {
+    "64": "skin/icon64.png"
+  },
+  "legacy": {
+    "type": "xul",
+    "options": {
+      "page": "chrome://torpedo/content/options.xul",
+      "open_in_tab": true
+    }
+  }
+}

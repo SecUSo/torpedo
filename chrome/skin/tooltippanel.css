@@ -17,6 +17,8 @@ tooltippanel > description {
   font-weight: bold;
   margin: 0;
 }
+
+
 #warning-pic{
   width: 30px;
   height: 25px;
@@ -62,10 +64,12 @@ tooltippanel > description {
   width: 400px;
 }
 #advice{
+  text-decoration: underline;
+  cursor: pointer;
   display: inline;
-  float: right;
+  /*float: right;*/
   white-space: pre-wrap;
-  width: 400px;
+  /*width: 400px;*/
   margin: 2px 0 2px 5px;
   padding-top: 3px;
 }
@@ -87,7 +91,7 @@ tooltippanel > description {
   display: block;
   overflow-y: scroll;
   width: 430px;
-  height: 50px;
+  height: 100px;
 }
 #moreinfos{
   display: block;

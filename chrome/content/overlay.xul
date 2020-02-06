@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
+<?xml-stylesheet href="chrome://messenger/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/content/bindings.css" type="text/css"?>
 <?xml-stylesheet href="chrome://torpedo/skin/tooltippanel.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 <overlay
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript" src="chrome://torpedo/content/jquery-3.2.1.slim.min.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/jquery-3.2.1.slim.min.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
@@ -18,6 +20,7 @@
 				<vbox id="clickbox">
 		   		<hbox id="phishBox">
 						<image id="warning-pic" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning.png" />
+						<image id="warning-pic2" tooltiptext="&warning;" hidden="true" src="chrome://torpedo/skin/warning2.png" />
 						<description id="phish" flex="1" />
 					</hbox>
 					<vbox id="url-box">
@@ -28,12 +31,19 @@
 						<description id="url2" />
 					</vbox>
 				</vbox>
-				<description id="redirect" flex="1" />
-				<hbox id="advicebox">
-					<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
-					<description id="advice" flex="1"> </description>
-				</hbox>
-				<vbox id="infos" onclick="$('#moreinfobox').toggle(); $('#infocheck').toggle();">
+				<vbox>
+					<description id="redirect" flex="1" />
+				</vbox>
+				<vbox id="advices" onclick="$('#moreadviceinfo').toggle();">
+					<hbox id="advicebox">
+						<image id="advice-pic" src="chrome://torpedo/skin/lightbulb.png"/>
+						<description id="advice" flex="1"> </description>
+					</hbox>
+					<hbox id="moreadviceinfo" flex="1">
+						<description id="moreadviceinfos" flex="1"/>
+					</hbox>
+				</vbox>
+				<vbox id="infos" onclick="$('#moreinfobox').toggle();"><!--$('#infocheck').toggle();-->
 					<hbox id="infobox">
 						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 						<description id="infotext" flex="1" />
@@ -41,9 +51,9 @@
 					<hbox id="moreinfobox" flex="1">
 						<description id="moreinfos" flex="1"/>
 					</hbox>
-					<button id="infocheck" flex="1" style="display:none" onclick="torpedo.dialogmanager.createUnknownInfo();"/>
+					<!--<button id="infocheck" label="" flex="1" style="display:none" onclick="torpedo.dialogmanager.createUnknownInfo();"/>-->
 				</vbox>
-				<button id="redirectButton" hidden="true"/>
+				<button id="redirectButton" label="" hidden="true"/>
 				<vbox id="seconds-box">
 					<description id="linkDeactivate"/>
 					<description id="countdown"/>
@@ -69,7 +79,5 @@
 		</menupopup>
 	</popupset>
 
-	<stringbundleset>
-    <stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
-  </stringbundleset>
+	
 </overlay>

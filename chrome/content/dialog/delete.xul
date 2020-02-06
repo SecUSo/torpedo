@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/content/bindings.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -15,11 +16,12 @@
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
     <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
-	<script type="application/x-javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/delete.js"/>
 
-	<stringbundleset>
+	<!--<stringbundleset>
 		<stringbundle id="torpedo-string-bundle" src="chrome://torpedo/locale/main-strings.properties"/>
-  </stringbundleset>
+  </stringbundleset>-->
 
 	<vbox>
 		<label id="deleteInfo" value="&sure;"/>
