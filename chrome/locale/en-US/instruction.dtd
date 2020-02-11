@@ -70,3 +70,8 @@
 <!ENTITY torpedo.guide.basic.why.usage.list3 " “Gray” - the web address leads to a web server that TORPEDO does not know. Here you have to check on your own whether it is a website that you trust or whether it is a phishing attack. TORPEDO explains to you how you can check the web address. By default, so that you don't click the link accidently, the click is disabled for three seconds.">
 <!ENTITY torpedo.guide.basic.why.usage.list4 " “Gray with warning symbol” - here too the web address leads to a web server that TORPEDO does not know. The warning symbol is used because TORPEDO has found indicators in the email and / or in the web address that are also used in phishing attacks. You should therefore check this web address very carefully in this case. Examples of such indicators are e.g. For example: (1) the fact that the web server name in the web address is similar to a web server name in the green or blue list; (2) the link is a web address and it is different from the web address that is stored behind this link">
 <!ENTITY torpedo.guide.tooltips.settings.description "TORPEDO supports a number of special cases, such as Short URLs and redirects. To ensure that these are configured according to your needs, we recommend that you take a look at the settings.">
+<!ENTITY torpedo.guide.tooltips.settings.image "open_settings_rightclick_en.png">
+<!ENTITY torpedo.guide.tooltips.settings2.image "open_settings_1_en.png">
+<!ENTITY torpedo.guide.tooltips.settings3.image "open_settings_2_en.png">
+<!ENTITY torpedo.guide.tooltips.settings.image.title1 "Either via ...">
+<!ENTITY torpedo.guide.tooltips.settings.image.title2 "... or via ...">

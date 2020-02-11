@@ -467,6 +467,3 @@ torpedo.db.addMainRedirect = function () {
 	}
 
 };
-
-
-

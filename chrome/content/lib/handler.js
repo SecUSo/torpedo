@@ -231,6 +231,3 @@ torpedo.handler.loadOptions = function () {
 	var element = document.getElementById("editor");
 	element.style.fontSize = "" + torpedo.prefs.getIntPref("textsize") + "%";
 }
-
-
-

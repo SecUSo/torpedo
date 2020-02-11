@@ -4,23 +4,23 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	title="&cloudDomainsList;"
+	title="&redirectList;"
 	buttons="accept,cancel, extra1"
 	buttonalign="start"
 	buttonlabelaccept="&addentries;"
 	buttonlabelcancel="&close;"
 	buttonlabelextra1="&delete;"
 	ondialogcancel="return true;"
-	onload='torpedo.db.getCloudDomains();'>
+	onload='torpedo.db.getExceptions();'>
 
 	<script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
-	<script type="application/javascript" src="chrome://torpedo/content/lib/cloud.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/exceptions.js"/>
 
 
-	<vbox id="cloudDomainBox">
-		<richlistbox id="cloudDomainList" height="200" onselect="document.documentElement.getButton('extra1').disabled = false;" style="width:350px;" />
+	<vbox id="redirectsBox">
+		<richlistbox id="exceptionDomainList" height="200" onselect="document.documentElement.getButton('extra1').disabled = false;" style="width:350px;" />
 		<description id="addDialog" style="width:350px; margin-top:10px" />
 		<hbox>
 			<textbox id="addEntries" onfocus="document.documentElement.getButton('accept').disabled = false;" style="margin-top:10px; width:350px; max-height:30px"/>

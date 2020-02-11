@@ -76,3 +76,8 @@
 <!ENTITY torpedo.guide.basic.why.usage.list3 " “grau” - die Webadresse führt zu einem Webserver, den TORPEDO nicht kennt. Hier müssen Sie selbst überprüfen, ob es eine Webseite ist, der Sie vertrauen, oder es sich um einen Phishing-Angriff handelt. Wie Sie die Webadresse prüfen können, erklärt Ihnen TORPEDO. Damit Sie nicht vorschnell auf den Link klicken, ist das Klicken standardmäßig für drei Sekunden deaktiviert.">
 <!ENTITY torpedo.guide.basic.why.usage.list4 " “grau mit Warnsymbol” - auch hier führt die Webadresse zu einem Webserver, den TORPEDO nicht kennt. Das Warnsymbol wird verwendet, weil TORPEDO in der E-Mail und/oder in der Webadresse Indikatoren gefunden hat, die auch bei Phishing-Angriffen verwendet werden. Hier sollten Sie daher die Webadresse besonders genau prüfen. Beispiele für solche Indikatoren sind z. B.: (1) die Tatsache, dass der  Webservername in der Webadresse ähnlich zu einem Webservernamen in der grünen oder blauen Liste ist; (2) der Link eine Webadresse ist und diese anders ist als die Webadresse, die hinter diesem Link hinterlegt ist.">
 <!ENTITY torpedo.guide.tooltips.settings.description "TORPEDO unterstützt eine Reihe von Sonderfällen, wie z.B. Kurz-URLs und Weiterleitungen. Damit diese nach Ihren Bedürfnissen konfiguriert sind, empfehlen wir Ihnen einen Blick in die Einstellungen zu werfen.">
+<!ENTITY torpedo.guide.tooltips.settings.image "open_settings_rightclick_de.png">
+<!ENTITY torpedo.guide.tooltips.settings2.image "open_settings_1_de.png">
+<!ENTITY torpedo.guide.tooltips.settings3.image "open_settings_2_de.png">
+<!ENTITY torpedo.guide.tooltips.settings.image.title1 "Entweder über ...">
+<!ENTITY torpedo.guide.tooltips.settings.image.title2 "... oder über ...">

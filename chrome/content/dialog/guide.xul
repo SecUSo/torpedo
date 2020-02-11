@@ -46,15 +46,24 @@
                 </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper" id="guide-page-tooltips-settings">
                     <p>&torpedo.guide.tooltips.settings.description;</p>
+                    <vbox>
+                    <p>&torpedo.guide.tooltips.settings.image.title1;</p>
+                        <hbox>
+                            <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.settings2.image;"/>
+                            <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.settings3.image;"/>
+                        </hbox>
+                        <p>&torpedo.guide.tooltips.settings.image.title2;</p>
+                        <img src="chrome://torpedo/skin/guide/&torpedo.guide.tooltips.settings.image;"/>
+                    </vbox>
                 </div>
             </vbox>
         </hbox>
         <hbox id="guide-btn-wrapper">
-            <button dlgtype="cancel"/>
+            <button id="close" dlgtype="cancel"/>
             <spacer flex="1"/>
-            <button dlgtype="extra1" disabled="true"/>
-            <button dlgtype="extra2"/>
-            <button dlgtype="accept" disabled="false"/>
+            <button id="previousPage" dlgtype="extra1" disabled="true"  style="display:none;"/>
+            <button id="nextPage" dlgtype="extra2"/>
+            <button id="finishButton" dlgtype="accept" disabled="false"/>
         </hbox>
     </vbox>
 </dialog>

@@ -112,4 +112,3 @@ torpedo.prefs = function () {
 
 	};
 }();
-

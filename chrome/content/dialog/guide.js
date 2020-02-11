@@ -147,14 +147,17 @@ const Guide = {
      */
     nextPage() {
         this.pageHandler.changePage(1);
+    
 
         if (!this.pageHandler.isFirstPage) {
             this.buttons.prev.disabled = false;
+            this.buttons.prev.style.display ="block";
         }
 
         if (this.pageHandler.isLastPage) {
             this.buttons.next.disabled = true;
             this.buttons.finish.disabled = false;
+            this.buttons.next.style.display ="none";
         }
     },
     /**
@@ -164,13 +167,15 @@ const Guide = {
      */
     previousPage() {
         this.pageHandler.changePage(-1);
-
+        
         if (this.pageHandler.isFirstPage) {
             this.buttons.prev.disabled = true;
+            this.buttons.prev.style.display ="none";
         }
 
         if (!this.pageHandler.isLastPage) {
             this.buttons.next.disabled = false;
+            this.buttons.next.style.display ="block";
             this.buttons.finish.disabled = true;
         }
     },

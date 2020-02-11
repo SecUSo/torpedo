@@ -41,6 +41,13 @@
     background-color: white;
 }
 
+  #nextPage, #previousPage, #finishButton {
+    padding-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+
 #guide-content-wrapper-holder {
     background-color: #FFF;
 }
