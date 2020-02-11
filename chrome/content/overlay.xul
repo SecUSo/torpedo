@@ -5,7 +5,7 @@
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 <overlay
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/javascript" src="chrome://torpedo/content/jquery-3.2.1.slim.min.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/jquery-3.4.1.slim.min.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
