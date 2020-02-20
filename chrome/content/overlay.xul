@@ -1,6 +1,4 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://messenger/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://messenger/content/bindings.css" type="text/css"?>
 <?xml-stylesheet href="chrome://torpedo/skin/tooltippanel.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://torpedo/locale/instruction.dtd">
 <overlay
@@ -43,7 +41,7 @@
 						<description id="moreadviceinfos" flex="1"/>
 					</hbox>
 				</vbox>
-				<vbox id="infos" onclick="$('#moreinfobox').toggle();"><!--$('#infocheck').toggle();-->
+				<vbox id="infos" onclick="$('#moreinfobox').toggle();">
 					<hbox id="infobox">
 						<image id="info-pic" src="chrome://torpedo/skin/info.png"/>
 						<description id="infotext" flex="1" />
@@ -51,7 +49,6 @@
 					<hbox id="moreinfobox" flex="1">
 						<description id="moreinfos" flex="1"/>
 					</hbox>
-					<!--<button id="infocheck" label="" flex="1" style="display:none" onclick="torpedo.dialogmanager.createUnknownInfo();"/>-->
 				</vbox>
 				<button id="redirectButton" label="" hidden="true"/>
 				<vbox id="seconds-box">
@@ -72,7 +69,7 @@
 
   <popupset>
 	  <menupopup id="menuwindow" onpopupshowing="$('#tooltippanel').unbind('mouseleave',torpedo.handler.mouseDownTooltipPane)" onpopuphiding="$('#tooltippanel').bind('mouseenter',torpedo.handler.mouseOverTooltipPane)">
-	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.handler.Url);"/>
+	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.initialURL);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
 			<menuitem label="&opensettings;" onclick="torpedo.dialogmanager.options(); torpedo.handler.TempTarget = ''"/>
 			<menuitem label="&opentutorial;" onclick="torpedo.dialogmanager.openTutorial()"/>

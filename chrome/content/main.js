@@ -14,12 +14,11 @@ torpedo.baseDomain;
 torpedo.textSize;
 torpedo.gmxRedirect;
 torpedo.redirectClicked;
-torpedo.oldUrl;
 torpedo.currentURL;
 torpedo.redirectURL;
 torpedo.currentDomain;
-torpedo.info;
-torpedo.currentMessage;
+//torpedo.info;
+//torpedo.currentMessage;
 torpedo.progURL;
 torpedo.hasTooltip;
 torpedo.state;
@@ -96,7 +95,7 @@ torpedo.updateTooltip = function (url) {
 	}
 	else if (torpedo.numberGmxRedirects == 1 || torpedo.functions.configExists()) {
 		if (torpedo.functions.matchesRedirect(torpedo.redirectURL)) {
-			if ((torpedo.functions.isMismatch(torpedo.baseDomain) && torpedo.functions.isMismatchAfterRedirect(torpedo.baseDomain, torpedo.currentDomain)) || torpedo.functions.isDomainExtension(torpedo.currentURL)) { // mismatch  
+			if ((torpedo.functions.isMismatch(torpedo.baseDomain) && torpedo.functions.isMismatch(torpedo.currentDomain)) || torpedo.functions.isDomainExtension(torpedo.currentURL)) { // mismatch  
 				torpedo.state = "T32";
 				warningpic2.hidden = false;
 			} else {

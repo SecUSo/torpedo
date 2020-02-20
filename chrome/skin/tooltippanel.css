@@ -75,7 +75,7 @@ tooltippanel > description {
 }
 #advice-pic{
   float: left;
-  display: inline;
+  /*display: inline;*/
   width: 27px;
   height: 28px;
   margin: 5px 2px 5px 3px;

@@ -8,7 +8,6 @@ var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 Components.utils.import("resource://gre/modules/Services.jsm");
 
 torpedo.handler = torpedo.handler || {};
-torpedo.handler.Url;
 torpedo.initialURL;
 torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
@@ -75,14 +74,20 @@ torpedo.handler.mouseOverHref = function (event, elem) {
 	if (elem == "href") {
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 		var url = tempTarget.getAttribute("href");
-		if (event.target.hasAttribute("title")) torpedo.hasTooltip = true;
+		var tooltipURL = torpedo.functions.hasTooltip(event);
+		if (tooltipURL != "<HAS_NO_TOOLTIP>") {
+			torpedo.hasTooltip = torpedo.functions.isTooltipMismatch(url, tooltipURL);		
+		} 
 	} else if (elem == "form") {
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'FORM');
 		var url = tempTarget.getAttribute("action");
 	}
 
+
 	// make sure that popup opens up even if popup from another URL is opened
-	if (torpedo.oldUrl != url) panel.hidePopup();
+	if (torpedo.baseDomain != url) {
+		panel.hidePopup();
+	} 
 	if (panel.state == "closed") {
 		// Initializaion of tooltip
 		torpedo.handler.TempTarget = tempTarget;
@@ -91,11 +96,9 @@ torpedo.handler.mouseOverHref = function (event, elem) {
 		torpedo.state = 0;
 		torpedo.functions.loopTimer = 2000;
 		torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
-		torpedo.handler.Url = url;
 		torpedo.initialURL = url;
-		torpedo.oldUrl = torpedo.baseDomain;
 		clearTimeout(torpedo.handler.MouseLeavetimer);
-		$('#moreinfobox').hide();// $('#infocheck').hide();
+		$('#moreinfobox').hide();
 		$('#moreadviceinfo').hide();
 		alreadyClicked = "";
 		var redirect = false;

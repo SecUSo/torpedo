@@ -1,9 +1,8 @@
 var torpedo = torpedo || {};
 torpedo.dialogmanager = torpedo.dialogmanager || {};
 
-const {utils: Cu} = Components;
 
-Cu.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 torpedo.dialogmanager.createDelete = function ()  {
   windowWidth=700;
