@@ -139,7 +139,6 @@ torpedo.functions.containsRedirect = function (url) {
   $("#clickbox").unbind("click", torpedo.handler.mouseClickHref);
   setTimeout(function (e) {
     $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
-    //torpedo.handler.Url = url;
     torpedo.functions.trace(url);
   }, 2000);
 };
@@ -215,12 +214,16 @@ torpedo.functions.countdown = function (timee, id, url) {
       a.classList ? a.classList.add('torpedoVisited') : a.className += ' torpedoVisited';
     }
     else {
-      $("#clickbox").unbind("click");
-      $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
-      $(torpedo.handler.TempTarget).unbind("click");
-      $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
-      $("#clickbox").css("cssText", "cursor:wait !important;");
-      torpedo.currentlyRunning = true;
+      try {
+        $("#clickbox").unbind("click");
+        $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
+        $(torpedo.handler.TempTarget).unbind("click");
+        $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
+        $("#clickbox").css("cssText", "cursor:wait !important;");
+        torpedo.currentlyRunning = true;
+      } catch (e) {
+        consoleService.logStringMessage(e);
+      }
     }
   }
 
@@ -382,6 +385,20 @@ torpedo.functions.isRedirect = function (url) {
   return false;
 };
 
+/**
+ * checks if link contains a tooltip
+ * @param event
+ * @return url from tooltip or <HAS_NO_TOOLTIP> if there is no tooltip
+ */
+
+torpedo.functions.hasTooltip = function (event) {
+  if (event.target.hasAttribute("title")) {
+    tooltipURL = event.target.getAttribute("title");
+    return tooltipURL;
+  }
+  return "<HAS_NO_TOOLTIP>"
+};
+
 torpedo.functions.isMismatch = function (domain) {
   var title = torpedo.handler.title;
   if (title == "" || title == undefined) return false;
@@ -390,12 +407,12 @@ torpedo.functions.isMismatch = function (domain) {
   return (titleDomain != domain);
 };
 
-torpedo.functions.isMismatchAfterRedirect = function (baseDomain, currentDomain) {
-  var title = torpedo.handler.title;
-  if (title == "" || title == undefined) return false;
-  if (!torpedo.functions.isURL(title)) return false;
-  var titleDomain = torpedo.functions.getDomainWithFFSuffix(title);
-  return (titleDomain != currentDomain);
+torpedo.functions.isTooltipMismatch = function (tooltipURL, hrefURL) {
+  if (tooltipURL == "" || tooltipURL == undefined || hrefURL == "" || hrefURL == undefined) return false;
+  if (!torpedo.functions.isURL(tooltipURL)) return false;
+  var tooltipDomain = torpedo.functions.getDomainWithFFSuffix(tooltipURL);
+  var hrefDomain = torpedo.functions.getDomainWithFFSuffix(hrefURL);
+  return (tooltipDomain != hrefDomain);
 };
 
 /**
