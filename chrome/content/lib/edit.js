@@ -1,7 +1,8 @@
 document.addEventListener('dialogextra1', function() {
-	torpedo.db.deleteSomeSecond();
+	torpedoOptions.deleteSomeSecond();
 });
 
-document.addEventListener('dialogaccept', function() {
-	torpedo.db.addEntries('second'); return false;
+document.addEventListener('dialogaccept', function(event) {
+	torpedoOptions.addEntries('URLSecondList'); 
+	event.preventDefault();
 });

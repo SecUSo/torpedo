@@ -5,22 +5,22 @@
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		title="&editentries;"
-		buttons="accept,cancel, extra1"
+		buttons="accept,cancel,extra1"
 		buttonalign="start"
 		buttonlabelaccept="&addentries;"
 		buttonlabelcancel="&close;"
 		buttonlabelextra1="&delete;"
-		ondialogaccept="torpedo.db.addEntries('second'); return false;"
+		ondialogaccept="torpedoOptions.addEntries('URLSecondList');"
 		ondialogcancel="return true;"
-		ondialogextra1="torpedo.db.deleteSomeSecond();"
-		onfocus="torpedo.db.getSecond();"
-		onload='torpedo.db.getSecond();'>
+		ondialogextra1="torpedoOptions.deleteSomeSecond();"
+		onfocus="torpedoOptions.displaySecond();"
+		onload='torpedoOptions.displaySecond();'>
 
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
-  <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
+  	<script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript"  src="chrome://torpedo/content/dialog/instruction.js" />
-  <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+  	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/edit.js"/>
 

@@ -7,7 +7,7 @@
 		buttons="accept,cancel"
 		buttonlabelcancel="&no;"
 		buttonlabelaccept="&yes;"
-		ondialogaccept="torpedo.dialogmanager.createInfo(); torpedo.db.deleteAllSecond(); return true;"
+		ondialogaccept="torpedo.dialogmanager.createInfo(); torpedoOptions.deleteAllSecond(); return true;"
 		ondialogcancel="return true;"
 		onload='var torpedo = torpedo || {};
 				if(torpedo.textSize="100%") document.getElementById("deleteInfo").style.fontSize="100%";

@@ -29,11 +29,11 @@
               </hbox>
 			  <vbox>
           		<hbox>
-            		<button id="deleteReferrer" label="&deleteEntries;" onclick="torpedo.db.deleteReferrer()" disabled="true"/>
-            		<button id="clearReferrer" label="&clearentries;" onclick="torpedo.db.deleteAllReferrer()" />
-					<button id="defaultReferrer" label="&getDefaultReferrer;" onclick="torpedo.db.getDefaultReferrer()" />
+            		<button id="deleteReferrer" label="&deleteEntries;" onclick="torpedoOptions.deleteReferrer()" disabled="true"/>
+            		<button id="clearReferrer" label="&clearentries;" onclick="torpedoOptions.deleteAllReferrer()" />
+					<button id="defaultReferrer" label="&getDefaultReferrer;" onclick="torpedoOptions.getDefaultReferrer()" />
               </hbox>
-			  <button id="addMainRedirect" label="&addMainRedirect;" style="width:100px;" onclick="torpedo.db.addMainRedirect()" />
+			  <button id="addMainRedirect" label="&addMainRedirect;" style="width:100px;" onclick="torpedoOptions.addMainReferrer()" />
               </vbox>
 			  <label value="&addentries;" style="font-weight:bold; margin-top: 10px;"/>
               <description id="referrerInfo" style="width:370px; margin-top:10px" />
@@ -43,7 +43,7 @@
               <textbox id="addPart2" prefstring="mail.server.%serverkey%.torpedo.adv_redirectUrls2" style="width:350px; max-height:30px; margin-bottom: 10px"/>
 			  <label value="&attributePart;" disabled="true"/>
               <textbox id="addPart3" prefstring="mail.server.%serverkey%.torpedo.adv_redirectUrls3" style="width:350px; max-height:30px; margin-bottom: 10px"/>
-              <button id="editReferrer" label="&addentries;" onclick="torpedo.db.addReferrer();" disabled="true"/>
+              <button id="editReferrer" label="&addentries;" onclick="torpedoOptions.addReferrer();" disabled="true"/>
           	</vbox>
 			<popupset>
 			<panel type="arrow" id="errormessage" fade="slow">

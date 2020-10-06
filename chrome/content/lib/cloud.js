@@ -1,7 +1,8 @@
 document.addEventListener('dialogextra1', function () {
-	torpedo.db.deleteCloudDomain();
+	torpedoOptions.deleteCloudDomain();
 });
 
 document.addEventListener('dialogaccept', function () {
-	torpedo.db.addEntries('exception'); return false;
+	torpedoOptions.addEntries('CloudDomainList'); 
+	event.preventDefault();
 });

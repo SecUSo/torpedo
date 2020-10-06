@@ -1,7 +1,7 @@
 document.addEventListener('dialogextra1', function () {
-	torpedo.db.deleteSomeException();
+	torpedoOptions.deleteSomeException();
 });
 
 document.addEventListener('dialogaccept', function () {
-	torpedo.db.addEntries('exception'); return false;
+	torpedoOptions.addEntries('exception'); return false;
 });
