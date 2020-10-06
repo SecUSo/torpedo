@@ -8,6 +8,8 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/timer.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/status.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/main.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/texts.js"/>
@@ -69,10 +71,10 @@
 
   <popupset>
 	  <menupopup id="menuwindow" onpopupshowing="$('#tooltippanel').unbind('mouseleave',torpedo.handler.mouseDownTooltipPane)" onpopuphiding="$('#tooltippanel').bind('mouseenter',torpedo.handler.mouseOverTooltipPane)">
-	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedo.db.putInsideSecond('add');  torpedo.updateTooltip(torpedo.initialURL);"/>
+	    <menuitem id="addtotrusted" label="&addtotrusted;" disabled="false" onclick="torpedoOptions.addToSecond(torpedo.currentDomain);  torpedo.updateTooltip(torpedo.initialURL);"/>
 	    <menuitem label="&searchfor;" onclick='torpedo.handler.open("http://google.de/#q="+torpedo.baseDomain); torpedo.handler.TempTarget = ""'/>
-			<menuitem label="&opensettings;" onclick="torpedo.dialogmanager.options(); torpedo.handler.TempTarget = ''"/>
-			<menuitem label="&opentutorial;" onclick="torpedo.dialogmanager.openTutorial()"/>
+		<menuitem label="&opensettings;" onclick="torpedo.dialogmanager.options(); torpedo.handler.TempTarget = ''"/>
+		<menuitem label="&opentutorial;" onclick="torpedo.dialogmanager.openTutorial()"/>
 		</menupopup>
 	</popupset>
 

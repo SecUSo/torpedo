@@ -25,7 +25,7 @@
 <!ENTITY messagetimer "Link deactivation timer set to">
 <!ENTITY privacymode "Privacy Mode">
 <!ENTITY securitymode "Security Mode">
-<!ENTITY config "Redirect Mode">
+<!ENTITY redirectMode "Redirect Mode">
 <!ENTITY entries_gone "Successfully deleted">
 <!ENTITY showredirects "Show all redirection domains">
 <!ENTITY redirect "Short-URL">

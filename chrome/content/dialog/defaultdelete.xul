@@ -9,7 +9,7 @@
 		buttons="accept,cancel"
 		buttonlabelcancel="&no;"
 		buttonlabelaccept="&yes;"
-		ondialogaccept="torpedo.db.restoreSettings();">
+		ondialogaccept="torpedoOptions.restoreSettings();">
 
 		<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
 		<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>

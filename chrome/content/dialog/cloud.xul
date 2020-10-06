@@ -10,7 +10,7 @@
 	buttonlabelcancel="&close;"
 	buttonlabelextra1="&delete;"
 	ondialogcancel="return true;"
-	onload='torpedo.db.getCloudDomains();'>
+	onload='torpedoOptions.displayCloudDomains();'>
 
 	<script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>

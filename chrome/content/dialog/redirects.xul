@@ -11,7 +11,7 @@
 	buttonlabelcancel="&close;"
 	buttonlabelextra1="&delete;"
 	ondialogcancel="return true;"
-	onload='torpedo.redirect.getRedirects();'>
+	onload='torpedo.redirect.displayRedirects();'>
 
     <script type="application/javascript"  src="chrome://torpedo/content/lib/redirects.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
@@ -22,7 +22,7 @@
 		<richlistbox id="redirectsList" height="200" onselect="document.documentElement.getButton('extra1').disabled = false;" style="width:350px;" />
 		<description id="addDialog" style="width:350px; margin-top:10px" />
 		<hbox>
-			<textbox id="add" onfocus="document.documentElement.getButton('accept').disabled = false;" style="margin-top:10px; width:350px; max-height:30px"/>
+			<textbox id="addEntries" onfocus="document.documentElement.getButton('accept').disabled = false;" style="margin-top:10px; width:350px; max-height:30px"/>
 		</hbox>
 	</vbox>
 

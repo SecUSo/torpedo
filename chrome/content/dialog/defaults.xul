@@ -7,7 +7,7 @@
 		buttons="cancel"
 		buttonlabelcancel="&close;"
 		ondialogcancel="return true;"
-		onload='torpedo.db.getDefaults();'>
+		onload='torpedoOptions.displayDefaults();'>
 
     <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
 		<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>

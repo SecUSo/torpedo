@@ -20,7 +20,7 @@ function onInit()  {
 	torpedo.stringsBundle = Services.strings.createBundle("chrome://torpedo/locale/main-strings.properties");
 	document.getElementById('referrerDialog').textContent = torpedo.stringsBundle.GetStringFromName('referrerInfo1');
 	
-	torpedo.db.getReferrer();
+	torpedoOptions.displayReferrer();
    
 	
 };

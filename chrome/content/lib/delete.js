@@ -1,3 +1,3 @@
 document.addEventListener('dialogaccept', function() {
-	torpedo.dialogmanager.createInfo(); torpedo.db.deleteAllSecond(); return true;
+	torpedo.dialogmanager.createInfo(); torpedoOptions.deleteAllSecond(); return true;
 });

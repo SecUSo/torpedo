@@ -28,7 +28,7 @@
 <!ENTITY messagetimer "Link-Verzögerung Zeit auf:">
 <!ENTITY privacymode "Privacy Mode">
 <!ENTITY securitymode "Security Mode">
-<!ENTITY config "Redirect Mode">
+<!ENTITY redirectMode "Redirect Mode">
 <!ENTITY manualredirect "Domains manuell auf Weiterleitungen prüfen">
 <!ENTITY entries_gone "Erfolgreich gelöscht">
 <!ENTITY redirect "Kurz-URL">
@@ -62,7 +62,6 @@
 <!ENTITY torpedo.guide.specialcases "Spezialfälle">
 <!ENTITY torpedo.guide.menu "Menü">
 <!ENTITY torpedo.guide.settings "Einstellungen">
-<!ENTITY torpedo.guide.basic.welcome.title "Ein herzliches Willkommen!">
 <!ENTITY torpedo.guide.basic.welcome.intro1 "TORPEDO ist ein Add-On zur Benutzerunterstützung bei der Erkennung von betrügerischen E-Mails mit gefährlichen Links (oft auch als Phishing E-Mails bezeichnet). Es setzt auf dem NoPhish-Konzept von SECUSO auf bzw. kann auch als Ergänzung zu diesem eingesetzt werden.">
 <!ENTITY torpedo.guide.basic.welcome.intro2 "Hintergrund: Technisch ist es leider derzeit nicht möglich, dass keine Phishing- E-Mails in den E-Mail-Posteingängen landen. Gut gemachte Phishing-E-Mails erkennt man als Empfänger nur dann, wenn man die Webadresse hinter den Links prüft bevor man auf diese klickt. Die Awareness hierfür - bis hin zum Wissen, wie Webadressen zu prüfen sind - zu schaffen ist wichtig und geschieht über die Maßnahmen im NoPhish-Konzept. Gleichzeitig ist es aber auch klar, dass Empfänger von E-Mails nicht jede Webadresse (in der Statusleiste nach Berühren des Links) so genau prüfen, wie dies notwendig wäre, um Phishing-E-Mails zuverlässig als solche zu erkennen. Hier fehlt den Empfängern bei der Masse an E-Mails einfach die Zeit und oft auch das Wissen.">
 <!ENTITY torpedo.guide.basic.welcome.footnote "Dieses Add-on wurde in Zusammenarbeit mit der Forschungsgruppe SECUSO - Security, Usability and Society der TU Darmstadt, der Abertay University's Division of Cybersecurity und der Privacy und Security Gruppe der Universität Karlstad entwickelt.">

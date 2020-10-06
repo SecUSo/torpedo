@@ -1,9 +1,9 @@
 var torpedo = torpedo || {};
 torpedo.texts = torpedo.texts || {};
 
-torpedo.texts.assignTexts = function (url)
+torpedo.texts.assignTexts = function (url, state)
 {
-  var state = torpedo.state+"";
+  //var state = torpedo.state+"";
 
   // get texts from textfile
   var buttontext = torpedo.stringsBundle.GetStringFromName("ButtonWeiterleitung");

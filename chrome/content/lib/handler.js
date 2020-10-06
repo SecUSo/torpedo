@@ -1,6 +1,6 @@
 var torpedo = torpedo || {};
 var clickTimer = null, countDownTimer = null;
-var alreadyClicked = "";
+var alreadyClicked = false;
 
 var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 	.getService(Components.interfaces.nsIConsoleService);
@@ -11,53 +11,48 @@ torpedo.handler = torpedo.handler || {};
 torpedo.initialURL;
 torpedo.handler.TempTarget;
 torpedo.handler.MouseLeavetimer;
-torpedo.handler.timeOut;
 torpedo.numberGmxRedirects;
 mouseon = false;
-mouseout = [false, false];
+
 
 torpedo.handler.mouseOverTooltipPane = function (event) {
 	mouseon = true;
-	mouseout[0] = true;
+	
 	clearTimeout(torpedo.handler.MouseLeavetimer);
 	var panel = document.getElementById("tooltippanel");
 	$(panel).contextmenu(function () {
 		var menuwindow = document.getElementById("menuwindow");
 		var urlbox = document.getElementById("url-box");
-		if (torpedo.db.inList(torpedo.baseDomain, "URLDefaultList") ||
-			torpedo.db.inList(torpedo.baseDomain, "URLSecondList") ||
-			torpedo.functions.matchReferrer(torpedo.functions.getHref()) ||
+		if (torpedoOptions.inList(torpedo.baseDomain, "URLDefaultList") ||
+			torpedoOptions.inList(torpedo.baseDomain, "URLSecondList") ||
 			torpedo.functions.isRedirect(torpedo.functions.getHref())) {
 			document.getElementById("addtotrusted").disabled = true;
 		}
-		else document.getElementById("addtotrusted").disabled = false;
+		else {
+			document.getElementById("addtotrusted").disabled = false;
+		}
 		menuwindow.openPopup(urlbox, "after_start", 0, 0, false, false);
 	});
 };
 
 torpedo.handler.mouseDownTooltipPane = function (event) {
 	var menuwindow = document.getElementById("menuwindow");
-	var moreinfos = document.getElementById("moreinfos");
-	if (!torpedo.redirectClicked && menuwindow.state != "open" && moreinfos.textContent == "" && !torpedo.redirectClicked) {
+	if (!torpedo.redirectClicked && menuwindow.state != "open") {
 		mouseon = false;
-		torpedo.handler.timeOut = 1500;
-		if (torpedo.functions.loop >= 0) {
-			torpedo.handler.timeOut = 3000;
-		}
 		torpedo.handler.MouseLeavetimer = setTimeout(function (e) {
 			if (!mouseon) {
-				document.getElementById("tooltippanel").hidePopup();
-				torpedo.handler.TempTarget = undefined;
-				if (countDownTimer != null) {
-					clearInterval(countDownTimer);
-					countDownTimer = null;
-				}
-
-				if (clickTimer != null) {
-					clearTimeout(clickTimer);
-				}
+			document.getElementById("tooltippanel").hidePopup();
+			torpedo.handler.TempTarget = undefined;
+			if (countDownTimer != null) {
+				clearInterval(countDownTimer);
+				countDownTimer = null;
 			}
-		}, torpedo.handler.timeOut);
+
+			if (clickTimer != null) {
+				clearTimeout(clickTimer);
+			}
+			}
+		}, 1500);
 	}
 };
 
@@ -70,14 +65,15 @@ torpedo.handler.mouseOverHref = function (event, elem) {
 	if (panel.state == "open" && (torpedo.redirectClicked || $("#moreinfos").css("display") != "none"))
 		return;
 	torpedo.redirectClicked = false;
-	mouseout = mouseout[0] ? [false, true] : [false, false];
+
 	if (elem == "href") {
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'A');
 		var url = tempTarget.getAttribute("href");
 		var tooltipURL = torpedo.functions.hasTooltip(event);
 		if (tooltipURL != "<HAS_NO_TOOLTIP>") {
-			torpedo.hasTooltip = torpedo.functions.isTooltipMismatch(url, tooltipURL);		
-		} 
+			var hrefDomain = torpedo.functions.getDomainWithFFSuffix(url);
+			torpedo.hasTooltip = torpedo.functions.isMismatch(hrefDomain, tooltipURL);
+		}
 	} else if (elem == "form") {
 		tempTarget = torpedo.functions.findParentTagTarget(event, 'FORM');
 		var url = tempTarget.getAttribute("action");
@@ -87,31 +83,20 @@ torpedo.handler.mouseOverHref = function (event, elem) {
 	// make sure that popup opens up even if popup from another URL is opened
 	if (torpedo.baseDomain != url) {
 		panel.hidePopup();
-	} 
+	}
 	if (panel.state == "closed") {
 		// Initializaion of tooltip
 		torpedo.handler.TempTarget = tempTarget;
 		torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ", "");
-		torpedo.handler.clickEnabled = true;
+		//torpedo.handler.clickEnabled = true;
 		torpedo.state = 0;
-		torpedo.functions.loopTimer = 2000;
 		torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 		torpedo.initialURL = url;
 		clearTimeout(torpedo.handler.MouseLeavetimer);
 		$('#moreinfobox').hide();
 		$('#moreadviceinfo').hide();
-		alreadyClicked = "";
-		var redirect = false;
-		// check if url is a "redirectUrl=" url (gmxredirect)
-		torpedo.gmxRedirect = false;
-		if (torpedo.functions.matchReferrer(url)) {
-			torpedo.gmxRedirect = true;
-		}
-		// check if url is a normal redirect (tinyurl)
-		if (torpedo.functions.isRedirect(url) && torpedo.prefs.getBoolPref("redirection2")) {
-			redirect = true;
-		}
-		torpedo.functions.traceUrl(url, redirect);
+		alreadyClicked = false;
+
 		// now open tooltip
 		torpedo.numberGmxRedirects = 0;
 		torpedo.updateTooltip(url);
@@ -127,9 +112,8 @@ torpedo.handler.resetCountDownTimer = function () {
 		clearTimeout(clickTimer);
 	}
 	if (countDownTimer == null) {
-		if (torpedo.state != 6)
-			countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer"), 'countdown', Url);
-		else countDownTimer = torpedo.functions.countdown(torpedo.prefs.getIntPref("blockingTimer") + 2, 'countdown', Url);
+		
+		countDownTimer = torpedoTimer.countdown();
 		clickTimer = setTimeout(function () {
 			if (clickTimer != null) {
 				clearTimeout(clickTimer);
@@ -140,8 +124,7 @@ torpedo.handler.resetCountDownTimer = function () {
 
 torpedo.handler.mouseDownHref = function (event) {
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e) {
-		if (mouseout[1]) torpedo.handler.mouseDownTooltipPane(event);
-		else if (!mouseon) {
+		//if (!mouseon) {
 			document.getElementById("tooltippanel").hidePopup();
 			torpedo.handler.TempTarget = undefined;
 			if (countDownTimer != null) {
@@ -152,7 +135,7 @@ torpedo.handler.mouseDownHref = function (event) {
 			if (clickTimer != null) {
 				clearTimeout(clickTimer);
 			}
-		}
+		//}
 	}, 100);
 };
 
@@ -160,10 +143,10 @@ torpedo.handler.mouseClickHref = function (event) {
 	//only do sth if left mouse button is clicked
 	if (event.button == 0) {
 		var url = torpedo.functions.getHref();
-		if (alreadyClicked == "") {
-			alreadyClicked = url;
+		if (!alreadyClicked) {
+			alreadyClicked = true;
 			if (!torpedo.functions.isRedirect(url)) {
-				torpedo.db.pushUrl(torpedo.currentDomain);
+				torpedoOptions.addToClickedList(torpedo.currentDomain);
 			}
 			torpedo.handler.open(url);
 		}
@@ -177,13 +160,11 @@ torpedo.handler.open = function (url) {
 	var extps = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"].getService(Components.interfaces.nsIExternalProtocolService);
 	extps.loadURI(uriToOpen, null);
 }
+
 torpedo.handler.mouseClickHrefError = function (event) {
 	if (event.button == 0) {
 		var panel = document.getElementById("errorpanel");
-		panel.openPopup(torpedo.handler.TempTarget, "before_start", 0, 0, false, false);
-		setTimeout(function (e) {
-			panel.hidePopup();
-		}, 2500);
+		torpedoOptions.displayPopup(panel, torpedo.handler.TempTarget, 2500);
 		return false;
 	}
 };
@@ -210,11 +191,13 @@ torpedo.handler.mouseClickDefaultsButton = function (event) {
 	torpedo.dialogmanager.showDefaults();
 };
 
-torpedo.handler.clickEnabled = true;
+//torpedo.handler.clickEnabled = true;
+
 torpedo.handler.mouseClickRedirectButton = function (event) {
 	torpedo.redirectClicked = true;
 	event.stopPropagation();
-	if (torpedo.handler.clickEnabled) torpedo.functions.containsRedirect(torpedo.currentURL);
+	//if (torpedo.handler.clickEnabled) 
+	torpedo.functions.containsRedirect(torpedo.currentURL);
 };
 
 torpedo.handler.mouseClickRedirectShow = function (event) {
@@ -230,7 +213,6 @@ torpedo.handler.loadOptions = function () {
 	document.getElementById('activateTimerOnUserList').textContent = torpedo.stringsBundle.GetStringFromName('activateTimerOnUserList');
 	document.getElementById('referrerDialogAdvHint').textContent = torpedo.stringsBundle.GetStringFromName('referrerDialogAdvHint');
 	document.getElementById('redirectInfo').textContent = torpedo.stringsBundle.GetStringFromName('redirectInfo');
-	torpedo.db.getReferrer();
 	var element = document.getElementById("editor");
 	element.style.fontSize = "" + torpedo.prefs.getIntPref("textsize") + "%";
 }
