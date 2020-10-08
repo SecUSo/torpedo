@@ -18,6 +18,9 @@ const Guide = {
          * All pages with their IDs and sections in order.
          */
         pages: [{
+            id: "guide-page-blacklist",
+            section: "basic"
+        },{
             id: "guide-page-welcome",
             section: "basic"
         }, {

@@ -18,7 +18,9 @@
 	
   <script type="application/javascript" src="chrome://torpedo/content/lib/dialogmanager.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/handler.js"/>
-  <script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/general-options.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/db.js"/>
+  <script type="application/javascript" src="chrome://torpedo/content/lib/blacklist.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/timer.js"/>
   <script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
@@ -27,8 +29,8 @@
         <tabs>
           <tab label="&delay;"/>
           <tab label="Domains"/>
-		  <tab label="Redirect"/>
-		  <tab label="&redirect;"/>
+		      <tab label="Redirect"/>
+		      <tab label="&redirect;"/>
         </tabs>
         <tabpanels>
           <tabpanel orient="horizontal">
@@ -54,6 +56,8 @@
           </tabpanel>
           <tabpanel id="listtab" orient="horizontal">
             <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:350px;">
+              <description id="blacklistDomains" style="font-weight:bold; margin-top:10px; margin-bottom:20px; width:350px;"/>
+              <checkbox id="blacklist" label="&activateHighRiskList;" preference="extensions.torpedo.blacklistActivated" oncommand="torpedo.functions.changeBoolPref('blacklistActivated');" />
               <description id="lowRiskDomains" style="font-weight:bold; margin-top:10px; margin-bottom:20px; width:350px;"/>
               <checkbox id="greenlist" label="&activated;" preference="extensions.torpedo.activatedGreenList" oncommand="torpedo.functions.changeBoolPref('activatedGreenList');" />
               <button id="showDefaults" label="&showdefaults;" style="margin-top:10px;margin-bottom:10px;" onclick="torpedo.handler.mouseClickDefaultsButton();" />
@@ -63,12 +67,12 @@
               <button id="editCloudDomains" label="&editentries;" onclick="torpedo.handler.mouseClickEditButtonCloudDomains();" />-->
             </vbox>
           </tabpanel>
-		  <tabpanel id="listtab" orient="horizontal">
+		      <tabpanel id="listtab" orient="horizontal">
             <vbox style="overflow:auto">
-				<description id="referrerDialogAdvHint" style="width:370px; margin-top:10px" />
-			</vbox>
+				      <description id="referrerDialogAdvHint" style="width:370px; margin-top:10px" />
+			      </vbox>
           </tabpanel>
-		  <tabpanel id="listtab" orient="horizontal">
+		      <tabpanel id="listtab" orient="horizontal">
             <vbox align="left" wrap="true"  flex="1" style="overflow:auto; height:350px;">
               <description id="redirectInfo" style="width:370px; margin-top:10px" />
               <label id="redirectList" value="&redirectList;"  style="font-weight:bold; margin-top:30px; margin-bottom:10px;"/>

@@ -15,7 +15,7 @@
 
     <script type="application/javascript"  src="chrome://torpedo/content/lib/redirects.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
-	<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/general-options.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 
 	<vbox id="redirectsBox">

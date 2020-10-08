@@ -2,12 +2,15 @@
 <!ENTITY yes "Yes">
 <!ENTITY no "No">
 <!ENTITY save "Save">
+<!ENTITY deleteDatabaseTitle "Delete database">
+<!ENTITY deleteDatabase "Do you want to delete the database of TORPEDO?">
 <!ENTITY default_settings "Default settings">
 <!ENTITY sure_defaultsettings "Restore default settings?">
 <!ENTITY attention_defaultsettings "Delete all domains you considered as 'low-risk'">
 <!ENTITY sure "Do you really want to delete all entries?">
 <!ENTITY seconds "second(s)">
 <!ENTITY activated "Activate list of domains the developers consider as 'low-risk'">
+<!ENTITY activateHighRiskList "Activate Blacklist (Corona-Blacklist of Cyber Threat Coalition)">
 <!ENTITY userlinks "Domains you considered as 'low-risk' (blue)">
 <!ENTITY editentries "Edit and delete entries">
 <!ENTITY addentries "Add entries">
@@ -56,6 +59,7 @@
 <!ENTITY torpedo.guide.tooltips "Tooltip Types">
 <!ENTITY torpedo.guide.menu "Menu">
 <!ENTITY torpedo.guide.settings "Settings">
+<!ENTITY torpedo.guide.blacklist.intro "Due to recent events we have decided to make a central change to TORPEDO. Since there are currently a lot of fraudulent messages with links to Covid-19, we have integrated a blacklist. This blacklist is maintained by the Cyber Threat Coalition (https://www.cyberthreatcoalition.org). For this reason there is currently a new case. If a domain is detected from the Cyber Threat Coalition's list, clicking on the link will be completely prevented. You can unlock the link by clicking on 'Activate Link'. You will then be shown a second tooltip with our usual tips for checking domains.For domains that are recognized as part of the active blacklist, the link can currently only be accessed via the TORPEDO tooltip. Calling via the actual link is blocked.">
 <!ENTITY torpedo.guide.basic.welcome.title "A warm welcome!">
 <!ENTITY torpedo.guide.basic.welcome.intro1 "TORPEDO is an add-on for user support in the detection of fraudulent emails with dangerous links (often referred to as phishing emails). It is based on the NoPhish concept from SECUSO. It can also be used as a supplement to the NoPhish concept.">
 <!ENTITY torpedo.guide.basic.welcome.intro2 "Background: Unfortunately, technically it is nowadays not possible that no phishing emails end up in the email inboxes. Well-made phishing emails can only be recognized as recipients if you check the web address behind the links before clicking on them. It is important to create awareness for this - including knowing how to check web addresses - and this is done through the measures in the NoPhish concept. At the same time, it is also clear that email recipients do not check every web address (in the status bar after touching the link) as precisely as it would be necessary to reliably identify phishing emails as such. With the mass of emails, the recipients simply lack the time and often the knowledge.">

@@ -32,6 +32,9 @@
                 </ul>-->
             </vbox>
             <vbox flex="1" id="guide-content-wrapper-holder">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper guide-content-wrapper-flex guide-logo" id="guide-page-blacklist">
+                    <p>&torpedo.guide.blacklist.intro;</p>
+                </div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="guide-content-wrapper guide-content-wrapper-flex guide-logo" id="guide-page-welcome">
                     <p>&torpedo.guide.basic.welcome.intro1;</p>
                     <p style="flex: 1">&torpedo.guide.basic.welcome.intro2;</p>

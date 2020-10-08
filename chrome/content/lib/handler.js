@@ -17,7 +17,7 @@ mouseon = false;
 
 torpedo.handler.mouseOverTooltipPane = function (event) {
 	mouseon = true;
-	
+
 	clearTimeout(torpedo.handler.MouseLeavetimer);
 	var panel = document.getElementById("tooltippanel");
 	$(panel).contextmenu(function () {
@@ -41,16 +41,16 @@ torpedo.handler.mouseDownTooltipPane = function (event) {
 		mouseon = false;
 		torpedo.handler.MouseLeavetimer = setTimeout(function (e) {
 			if (!mouseon) {
-			document.getElementById("tooltippanel").hidePopup();
-			torpedo.handler.TempTarget = undefined;
-			if (countDownTimer != null) {
-				clearInterval(countDownTimer);
-				countDownTimer = null;
-			}
+				document.getElementById("tooltippanel").hidePopup();
+				torpedo.handler.TempTarget = undefined;
+				if (countDownTimer != null) {
+					clearInterval(countDownTimer);
+					countDownTimer = null;
+				}
 
-			if (clickTimer != null) {
-				clearTimeout(clickTimer);
-			}
+				if (clickTimer != null) {
+					clearTimeout(clickTimer);
+				}
 			}
 		}, 1500);
 	}
@@ -89,7 +89,6 @@ torpedo.handler.mouseOverHref = function (event, elem) {
 		torpedo.handler.TempTarget = tempTarget;
 		torpedo.handler.title = torpedo.handler.TempTarget.textContent.replace(" ", "");
 		//torpedo.handler.clickEnabled = true;
-		torpedo.state = 0;
 		torpedo.baseDomain = torpedo.functions.getDomainWithFFSuffix(url);
 		torpedo.initialURL = url;
 		clearTimeout(torpedo.handler.MouseLeavetimer);
@@ -103,7 +102,7 @@ torpedo.handler.mouseOverHref = function (event, elem) {
 	}
 };
 
-torpedo.handler.resetCountDownTimer = function () {
+torpedo.handler.resetCountDownTimer = function (state) {
 	if (countDownTimer != null) {
 		clearInterval(countDownTimer);
 		countDownTimer = null;
@@ -112,8 +111,8 @@ torpedo.handler.resetCountDownTimer = function () {
 		clearTimeout(clickTimer);
 	}
 	if (countDownTimer == null) {
-		
-		countDownTimer = torpedoTimer.countdown();
+
+		countDownTimer = torpedoTimer.countdown(state);
 		clickTimer = setTimeout(function () {
 			if (clickTimer != null) {
 				clearTimeout(clickTimer);
@@ -125,16 +124,16 @@ torpedo.handler.resetCountDownTimer = function () {
 torpedo.handler.mouseDownHref = function (event) {
 	torpedo.handler.MouseLeavetimer = setTimeout(function (e) {
 		//if (!mouseon) {
-			document.getElementById("tooltippanel").hidePopup();
-			torpedo.handler.TempTarget = undefined;
-			if (countDownTimer != null) {
-				clearInterval(countDownTimer);
-				countDownTimer = null;
-			}
+		document.getElementById("tooltippanel").hidePopup();
+		torpedo.handler.TempTarget = undefined;
+		if (countDownTimer != null) {
+			clearInterval(countDownTimer);
+			countDownTimer = null;
+		}
 
-			if (clickTimer != null) {
-				clearTimeout(clickTimer);
-			}
+		if (clickTimer != null) {
+			clearTimeout(clickTimer);
+		}
 		//}
 	}, 100);
 };
@@ -200,6 +199,13 @@ torpedo.handler.mouseClickRedirectButton = function (event) {
 	torpedo.functions.containsRedirect(torpedo.currentURL);
 };
 
+torpedo.handler.mouseClickActivateLinkButton = function (state) {
+	var url = torpedo.functions.getHref();
+	torpedo.handler.resetCountDownTimer(state);
+	torpedo.texts.assignTexts(url, state);
+	$("#torpedoActivateLinkButton").hide();
+};
+
 torpedo.handler.mouseClickRedirectShow = function (event) {
 	torpedo.dialogmanager.showRedirects();
 };
@@ -209,6 +215,7 @@ torpedo.handler.mouseClickAddButton = function (event) {
 torpedo.handler.loadOptions = function () {
 	torpedo.stringsBundle = Services.strings.createBundle("chrome://torpedo/locale/main-strings.properties");
 	document.getElementById('lowRiskDomains').textContent = torpedo.stringsBundle.GetStringFromName('lowRiskDomains');
+	document.getElementById('blacklistDomains').textContent = torpedo.stringsBundle.GetStringFromName('blacklistDomains');
 	document.getElementById('activateTimerOnLowRisk').textContent = torpedo.stringsBundle.GetStringFromName('activateTimerOnLowRisk');
 	document.getElementById('activateTimerOnUserList').textContent = torpedo.stringsBundle.GetStringFromName('activateTimerOnUserList');
 	document.getElementById('referrerDialogAdvHint').textContent = torpedo.stringsBundle.GetStringFromName('referrerDialogAdvHint');

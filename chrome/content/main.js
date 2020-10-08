@@ -1,4 +1,5 @@
 var torpedo = torpedo || {};
+var lastBrowserStatus;
 torpedo.instructionSize = { width: 800, height: 460 };
 
 var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
@@ -18,67 +19,7 @@ torpedo.redirectURL;
 torpedo.currentDomain;
 torpedo.progURL;
 torpedo.hasTooltip;
-torpedo.state;
 
-torpedo.getSecurityStatus = function (url) {
-
-	torpedo.currentURL = url;
-	torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
-
-	var state = "0";
-	var referrerURL = torpedo.functions.matchReferrer(torpedo.currentURL);
-
-	while (referrerURL != "<NO_RESOLVED_REFERRER>") {
-		torpedo.redirectURL = torpedo.currentURL;
-		torpedo.currentURL = referrerURL;
-		referrerURL = torpedo.functions.matchReferrer(torpedo.currentURL);
-		torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(torpedo.currentURL);
-		torpedo.numberGmxRedirects = torpedo.numberGmxRedirects + 1;
-	}
-
-	if (torpedo.functions.isRedirect(torpedo.currentURL)) {
-		if (torpedo.prefs.getBoolPref("privacyMode")) {
-			state = "DetermineUrlButton";
-		} else {
-			//openTooltip = false;
-			torpedo.functions.trace(torpedo.currentURL);
-			return state;
-		}
-	} else if (torpedoOptions.inList(torpedo.currentDomain, "URLDefaultList") && torpedo.functions.settingIsChecked("activatedGreenList")) {
-		state = "T1";
-	} else if (torpedoOptions.inList(torpedo.currentDomain, "URLSecondList")) {
-		state = "T2";
-	} else if (torpedo.progURL || torpedo.functions.isIP(torpedo.currentURL) || torpedo.hasTooltip) {
-		state = "T33";
-	} else if (torpedo.numberGmxRedirects == 0) {
-		if (torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title) || torpedo.functions.isDomainExtension(url)) { // mismatch or domain extension
-			torpedo.currentURL = url;
-			torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
-			state = "T32";
-		} else {
-			state = "T31";
-		}
-	}
-	else if (torpedo.numberGmxRedirects == 1 || torpedo.prefs.getBoolPref("redirectMode")) {
-		if (torpedo.functions.matchesMainReferrer(torpedo.redirectURL) && !(torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title) && torpedo.functions.isMismatch(torpedo.currentDomain, torpedo.handler.title))
-			&& !torpedo.functions.isDomainExtension(torpedo.currentURL)) {
-			state = "T31"
-		} else {
-			state = "T32";
-		}
-	} else {
-		state = "T32";
-	}
-
-	torpedo.texts.assignTexts(torpedo.currentURL, state);
-	if (torpedo.prefs.getBoolPref("privacyMode")) {
-		torpedo.functions.setHref(torpedo.currentURL);
-	} else {
-		torpedo.functions.setHref(torpedo.initialURL);
-	}
-
-	return state;
-};
 
 torpedo.updateTooltip = function (url) {
 
@@ -86,6 +27,7 @@ torpedo.updateTooltip = function (url) {
 	// Initializaion
 	var panel = document.getElementById("tooltippanel");
 	var redirectButton = document.getElementById("redirectButton");
+	var activateLinkButton = document.getElementById("torpedoActivateLinkButton")
 	var redirect = document.getElementById("redirect");
 	var secondsbox = document.getElementById("seconds-box");
 	var warningpic = document.getElementById("warning-pic");
@@ -94,6 +36,8 @@ torpedo.updateTooltip = function (url) {
 
 	redirectButton.disabled = true;
 	redirectButton.hidden = true;
+	activateLinkButton.disabled = true;
+	activateLinkButton.hidden = true;
 	redirect.hidden = false;
 	secondsbox.hidden = false;
 	warningpic.hidden = true;
@@ -116,6 +60,11 @@ torpedo.updateTooltip = function (url) {
 			break;
 		case "T33":
 			warningpic.hidden = false;
+			break;
+		case "T4":
+			panel.style.borderColor = "red";
+			activateLinkButton.hidden = false;
+			$("#torpedoActivateLinkButton").css("cssText", "cursor:pointer !important;");
 			break;
 		case "DetermineUrlButton":
 			redirectButton.disabled = false;
@@ -147,6 +96,10 @@ torpedo.processDOM = function () {
 		$("#editSecond").bind("click", torpedo.handler.mouseClickEditButton);
 		$("#redirectButton").click(function (event) { torpedo.handler.mouseClickRedirectButton(event) });
 
+
+		document.getElementById("torpedoActivateLinkButton").disabled = true;
+
+
 		var messagepane = document.getElementById("messagepane");
 		if (messagepane) {
 			messagepane.addEventListener("load", function (event) { onPageLoad(event); }, true);
@@ -160,7 +113,6 @@ torpedo.processDOM = function () {
 	}
 
 	function onPageLoad(event) {
-
 		torpedo.doc = event.originalTarget;  // doc is document that triggered "onload" event
 		torpedo.progURL = false;
 		var linkElement = torpedo.doc.getElementsByTagName("a");
@@ -222,11 +174,32 @@ torpedo.processDOM = function () {
 	init();
 };
 
+
+
+
 window.addEventListener("load", function load(event) {
 	window.removeEventListener("load", load, false);
+
 	torpedo.stringsBundle = Services.strings.createBundle("chrome://torpedo/locale/main-strings.properties");
 
 	torpedo.prefs.addonUninstallingListener();
 	torpedo.prefs.addonInstallingListener();
+
+	torpedo.prefs.setBoolPref("blacklistIsReady", false);
+	
+	if (torpedo.prefs.getBoolPref("blacklistActivated")) {
+		// blacklist is read if the last request was done one hour ago or the last try to update the blacklist failed
+		if (torpedoBlacklist.calcTimeSinceLastRequest() > 3600000 || !torpedo.prefs.getBoolPref("blacklistWasUpdated")) {
+			torpedoBlacklist.readInBlacklist();
+		} else {
+			var blacklistDomainArr = DB.getBlacklistDomains();
+			blacklistDomainArr.then(function (blacklistDomains) {
+				torpedoBlacklist.setBlacklistArray(blacklistDomains);
+				torpedo.prefs.setBoolPref("blacklistIsReady", true);
+			});
+		}
+	} 
 	torpedo.processDOM();
+
 }, false);
+

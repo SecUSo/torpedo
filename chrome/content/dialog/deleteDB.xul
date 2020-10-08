@@ -5,18 +5,18 @@
 
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		title="&default_settings;"
+		title="&deleteDatabaseTitle;"
 		buttons="accept,cancel"
 		buttonlabelcancel="&no;"
 		buttonlabelaccept="&yes;"
-		ondialogaccept="torpedoOptions.restoreSettings();">
+		ondialogaccept="DB.deleteDB();">
 
 		<script type="application/javascript" src="chrome://torpedo/content/lib/general-options.js"/>
+		<script type="application/javascript" src="chrome://torpedo/content/lib/db.js"/>
 		<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
-		<script type="application/javascript" src="chrome://torpedo/content/lib/defaultdelete.js"/>
+		<script type="application/javascript" src="chrome://torpedo/content/lib/deleteDB.js"/>
 		
 		<vbox>
-			<label value="&sure_defaultsettings;"/>
-      <checkbox id="defaultdelete" label="&attention_defaultsettings;"/>
+			<p>&deleteDatabase;</p>
 		</vbox>
 </dialog>

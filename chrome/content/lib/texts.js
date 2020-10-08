@@ -3,10 +3,9 @@ torpedo.texts = torpedo.texts || {};
 
 torpedo.texts.assignTexts = function (url, state)
 {
-  //var state = torpedo.state+"";
-
   // get texts from textfile
   var buttontext = torpedo.stringsBundle.GetStringFromName("ButtonWeiterleitung");
+  var activateLinkButtonText = torpedo.stringsBundle.GetStringFromName("LinkAktivierung");
   var ueberschrift = torpedo.stringsBundle.GetStringFromName(state+"Ueberschrift");
   var erklaerung = torpedo.stringsBundle.GetStringFromName(state+"Erklaerung");
   var mehrInfo = torpedo.stringsBundle.GetStringFromName("mehrInfo");
@@ -38,6 +37,7 @@ torpedo.texts.assignTexts = function (url, state)
   $("#infotext").html(mehrInfo);
   $("#moreinfos").html(infotext);
   document.getElementById("redirectButton").setAttribute("label", buttontext);
+  document.getElementById("torpedoActivateLinkButton").setAttribute("label", activateLinkButtonText);
   $("#linkDeactivate").html(linkDeaktivierung);
  // document.getElementById("infocheck").setAttribute("label", infoCheck);
 
