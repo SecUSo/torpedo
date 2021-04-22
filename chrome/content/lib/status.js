@@ -28,6 +28,8 @@ var torpedoStatus = {
                 torpedo.functions.trace(torpedo.currentURL);
                 return state;
             }
+        } else if (torpedoBlacklist.inBlacklist(torpedo.currentDomain) && torpedo.functions.settingIsChecked("blacklistActivated")) {
+            state = "T4";
         } else if (torpedoOptions.inList(torpedo.currentDomain, "URLDefaultList") && torpedo.functions.settingIsChecked("activatedGreenList")) {
             state = "T1";
         } else if (torpedoOptions.inList(torpedo.currentDomain, "URLSecondList")) {
@@ -35,7 +37,7 @@ var torpedoStatus = {
         } else if (torpedo.progURL || torpedo.functions.isIP(torpedo.currentURL) || torpedo.hasTooltip) {
             state = "T33";
         } else if (torpedo.numberGmxRedirects == 0) {
-            if (torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title) || torpedoStatus.isDomainExtension(url)) { // mismatch or domain extension
+            if (torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title)) { // mismatch, domain extension is temporarily removed
                 torpedo.currentURL = url;
                 torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
                 state = "T32";
@@ -44,14 +46,8 @@ var torpedoStatus = {
             }
         }
         else if (torpedo.numberGmxRedirects == 1 || torpedo.prefs.getBoolPref("redirectMode")) {
-            if (torpedoStatus.matchesMainReferrer(torpedo.redirectURL) && !(torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title) && torpedo.functions.isMismatch(torpedo.currentDomain, torpedo.handler.title))
-                && !torpedoStatus.isDomainExtension(torpedo.currentURL)) {
+            if (torpedoStatus.matchesMainReferrer(torpedo.redirectURL) && !(torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title) && torpedo.functions.isMismatch(torpedo.currentDomain, torpedo.handler.title))) {
                 state = "T31"
-                /*if ((torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title) && torpedo.functions.isMismatch(torpedo.currentDomain, torpedo.handler.title)) || torpedoStatus.isDomainExtension(torpedo.currentURL)) {
-                    state = "T32";
-                } else {
-                    state = "T31";
-                }*/
             } else {
                 state = "T32";
             }
@@ -61,9 +57,9 @@ var torpedoStatus = {
 
         torpedo.texts.assignTexts(torpedo.currentURL, state);
         if (torpedo.prefs.getBoolPref("privacyMode")) {
-            torpedo.functions.setHref(torpedo.currentURL);
+            torpedo.functions.setHref(torpedo.currentURL, state);
         } else {
-            torpedo.functions.setHref(torpedo.initialURL);
+            torpedo.functions.setHref(torpedo.initialURL, state);
         }
         return state;
     },

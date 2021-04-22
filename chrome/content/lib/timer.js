@@ -7,21 +7,33 @@ var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 
 var torpedoTimer = {
 
-    isTimerRequired: function (timerSetting) {
+    isTimerRequired: function (timerSetting, state) {
         var greenListDelayActivated = !torpedo.functions.settingIsChecked("greenListDelayActivated") && torpedoOptions.inList(torpedo.currentDomain, "URLDefaultList");
         var blueListDelayActivated = !torpedo.functions.settingIsChecked("blueListDelayActivated") && torpedoOptions.inList(torpedo.currentDomain, "URLSecondList");
+        var isInBlacklist = state == "T4" || state == "T4a";
         var redirectResolving = document.getElementById("redirect").textContent == torpedo.stringsBundle.GetStringFromName('wait');
 
-        if (greenListDelayActivated || blueListDelayActivated || redirectResolving || timerSetting == 0) {
+        if ((greenListDelayActivated || blueListDelayActivated  || timerSetting == 0) && !isInBlacklist) { //redirectResolving?
             return false;
         }
         return true;
     },
 
+    isAlreadyVisited: function (timerIsCurrentlyRunning, state) {
+        var isInBlacklist = state == "T4" || state == "T4a";
+        var a = torpedo.handler.TempTarget;
+        var hrefIsVisited = a.classList.contains("torpedoVisited");
 
-    countdown: function () {
+        if(!timerIsCurrentlyRunning && !isInBlacklist && hrefIsVisited) {
+            return true;
+        }
+        return false;
+    },
+
+
+    countdown: function (state) {
         var startTime = torpedo.prefs.getIntPref("blockingTimer");
-        if (!torpedoTimer.isTimerRequired(startTime)) {
+        if (!torpedoTimer.isTimerRequired(startTime, state)) { 
             startTime = 0;
             $("#seconds-box").hide();
         } else {
@@ -32,7 +44,7 @@ var torpedoTimer = {
         function showTime() {
             var second = startTime % 60;
             var a = torpedo.handler.TempTarget;
-            var alreadyVisited = !currentlyRunning && a.classList.contains("torpedoVisited");
+            var alreadyVisited = torpedoTimer.isAlreadyVisited(currentlyRunning, state);
 
             strZeit = (second < 10) ? ((second == 0) ? second : "0" + second) : second;
             if (alreadyVisited) strZeit = 0;
@@ -41,17 +53,24 @@ var torpedoTimer = {
             document.getElementById("countdown").textContent = remainingTimeText;
 
             if (strZeit == 0) {
-                // make URL in tooltip clickable
-                $("#clickbox").unbind("click");
-                $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
-                $(torpedo.handler.TempTarget).unbind("click");
-                $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
-                $("#clickbox").css("cssText", "cursor:pointer !important");
-                currentlyRunning = false;
+                if (state != "T4") {
+                    // make URL in tooltip clickable
+                    $("#clickbox").unbind("click");
+                    $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
+                    $(torpedo.handler.TempTarget).unbind("click");
+                    $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
+                    $("#clickbox").css("cssText", "cursor:pointer !important");
+                    currentlyRunning = false;
 
-                // make sure countdown is not started all over again if we visit the same link again
-                // by adding "torpedoVisited" to the class of the visited link tag
-                a.classList ? a.classList.add('torpedoVisited') : a.className += ' torpedoVisited';
+                    // make sure countdown is not started all over again if we visit the same link again
+                    // by adding "torpedoVisited" to the class of the visited link tag
+                    a.classList ? a.classList.add('torpedoVisited') : a.className += ' torpedoVisited';
+                } else {
+                    $("#torpedoActivateLinkButton").prop("disabled", false);
+                    $("#torpedoActivateLinkButton").click(function () {
+                        torpedo.handler.mouseClickActivateLinkButton("T4a");
+                    });
+                }
             }
             else {
                 try {

@@ -8,7 +8,7 @@
   },
   "name": "TORPEDO",
   "description": "TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "icons": {
     "64": "chrome/skin/icon_64.png"
   },

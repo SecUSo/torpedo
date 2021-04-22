@@ -43,6 +43,8 @@ torpedo.prefs = function () {
 					if (addon.id == torpedo.installName) {
 						// It will be automatically removed if the default value is set
 						torpedo.prefs.resetPrefs(true);
+						torpedo.prefs.resetBlacklistPrefs();
+						torpedo.dialogmanager.deleteDB();
 					}
 
 				}
@@ -81,6 +83,14 @@ torpedo.prefs = function () {
 				account.incomingServer.setCharValue("torpedo.adv_redirectUrls3", "redirectUrl=,redirectUrl=,q=,url=,");
 			}
 		},
+
+		resetBlacklistPrefs: function () {
+			prefManager.clearUserPref("lastCtcBlacklistRequest");
+			prefManager.clearUserPref("blacklistWasUpdated");
+			prefManager.clearUserPref("blacklistIsReady");
+			prefManager.clearUserPref("currentCtcBlacklistVersion");
+
+		},
 		resetPrefs: function (all) {
 			// reset all prefs manually
 			if (all) {
@@ -97,11 +107,12 @@ torpedo.prefs = function () {
 			prefManager.clearUserPref("checkedTimer");
 			prefManager.clearUserPref("blockingTimer");
 			prefManager.clearUserPref("activatedGreenList");
+			prefManager.clearUserPref("blacklistActivated");
 			prefManager.clearUserPref("greenListDelayActivated");
 			prefManager.clearUserPref("blueListDelayActivated");
 			prefManager.clearUserPref("redirectMode");
+			prefManager.clearUserPref("blueListDelayActivated");
 			//prefManager.clearUserPref("CloudDomainList");
 		},
-
 	};
 }();

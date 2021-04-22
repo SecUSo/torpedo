@@ -10,6 +10,10 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 
 
 var torpedoOptions = {
+
+	blacklistDomains: null,
+
+
 	/**
 	 * set referrer preferences
 	 * @param {String} referrerDomain 
@@ -141,6 +145,7 @@ var torpedoOptions = {
 		document.getElementById("editReferrer").disabled = true;
 		document.getElementById("addPart2").disabled = true;
 		if (referrer.domain && referrer.path && referrer.attribute) {
+
 			//add main redirect
 			var mainReferrerLabel = referrer.domain[0] + referrer.path[0] + referrer.attribute[0];
 			var mainReferrerRow = torpedoOptions.createRichListItem(mainReferrerLabel, "color:blue");
@@ -200,8 +205,8 @@ var torpedoOptions = {
 
 
 	restoreSettings: function () {
-		var del = document.getElementById("defaultdelete").checked;
-		torpedo.prefs.resetPrefs(del);
+		var resetAll = document.getElementById("defaultdelete").checked;
+		torpedo.prefs.resetPrefs(resetAll);
 		return true;
 	},
 
@@ -440,11 +445,11 @@ var torpedoOptions = {
 	},
 
 	/**
- 	* opens a popup and closes it after some time
- 	* @param message 
- 	* @param panel 
- 	* @param time time after the popup should be closed
- 	*/
+	  * opens a popup and closes it after some time
+	  * @param message 
+	  * @param panel 
+	  * @param time time after the popup should be closed
+	  */
 
 	displayPopup: function (message, panel, time) {
 		message.openPopup(panel, "before_start", 0, 0, false, false);

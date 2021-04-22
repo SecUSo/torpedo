@@ -9,7 +9,7 @@
 		ondialogcancel="return true;"
 		onload='torpedoOptions.displayDefaults();'>
 
-    <script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
+    <script type="application/javascript"  src="chrome://torpedo/content/lib/general-options.js" />
 		<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 
 		

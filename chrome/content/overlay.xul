@@ -11,7 +11,9 @@
 	<script type="application/javascript" src="chrome://torpedo/content/lib/timer.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/status.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/main.js"/>
-	<script type="application/javascript" src="chrome://torpedo/content/lib/database.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/general-options.js"/>
+	<script type="application/javascript" src="chrome://torpedo/content/lib/db.js"/>
+	  <script type="application/javascript" src="chrome://torpedo/content/lib/blacklist.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/texts.js"/>
 
 	<popupset>
@@ -53,6 +55,7 @@
 					</hbox>
 				</vbox>
 				<button id="redirectButton" label="" hidden="true"/>
+				<button id="torpedoActivateLinkButton" label="" hidden="true" value="disabled"/>
 				<vbox id="seconds-box">
 					<description id="linkDeactivate"/>
 					<description id="countdown"/>

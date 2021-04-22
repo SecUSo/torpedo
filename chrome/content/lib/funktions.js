@@ -161,6 +161,7 @@ torpedo.functions.trace = function (url) {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4) {
       torpedo.functions.saveRedirection(url, xhr.responseURL);
+      //torpedo.updateShortUrlResolved(xhr.responseURL);
       torpedo.updateTooltip(xhr.responseURL);
     }
   };
@@ -168,6 +169,7 @@ torpedo.functions.trace = function (url) {
 };
 
 torpedo.functions.containsRedirect = function (url) {
+  // torpedo.handler.clickEnabled = false;
   var redirect = document.getElementById("redirect");
   redirect.textContent = torpedo.stringsBundle.GetStringFromName('wait');
   document.getElementById("redirectButton").disabled = true;
@@ -200,9 +202,9 @@ torpedo.functions.saveRedirection = function (url, response) {
 
 
 
-torpedo.functions.setHref = function (url) {
+torpedo.functions.setHref = function (url, state) {
   Url = url;
-  torpedo.handler.resetCountDownTimer();
+  torpedo.handler.resetCountDownTimer(state);
 }
 torpedo.functions.getHref = function () {
   return Url;

@@ -12,7 +12,7 @@
 	ondialogcancel="return true;"
 	onload='torpedoOptions.displayCloudDomains();'>
 
-	<script type="application/javascript"  src="chrome://torpedo/content/lib/database.js" />
+	<script type="application/javascript"  src="chrome://torpedo/content/lib/general-options.js" />
 	<script type="application/javascript" src="chrome://torpedo/content/lib/preferences.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/funktions.js"/>
 	<script type="application/javascript" src="chrome://torpedo/content/lib/cloud.js"/>
