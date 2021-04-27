@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="utf-8"/>
+  	<title id="title"></title>
+    <link type="text/css" rel="stylesheet" href="css/options.css" />
+  	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  	<script type="text/javascript" src="js/publicsuffixlist.js"></script>
+  	<script type="text/javascript" src="js/punycode.min.js"></script>
+  	<script type="text/javascript" src="js/options.js"></script>
+  	<script type="text/javascript" src="js/status.js"></script>
+  	<script type="text/javascript" src="js/tooltip.js"></script>
+	</head>
+	<body>
+    <h1 id="options"></h1>
+    <div class="tabs">
+      <ul class="tab-links">
+          <li class="active"><a href="#tab1">Timer</a></li>
+          <li><a href="#tab2">Domains</a></li>
+          <li id="ref"><a href="#tab3">Redirect</a></li>
+		  <li id="ref"><a href="#tab4">Short-URL</a></li>
+      </ul>
+
+      <div class="tab-content">
+          <div id="tab1" class="tab active">
+            <div>
+              <input id="timerCheckbox" class="left" type="checkbox">
+              <p id="timerCheckboxText" class="right"></p>
+            </div>
+            <div class="clear">
+              <p id="timerAmountText" class="left"></p>
+              <input id="timerInput" class="left right" type="number" value="3" min="0" max="100">
+              <p id="seconds" class="last"></p>
+            </div>
+            <div class="clear">
+              <div>
+                <input id="trustedTimerCheckbox" class="left" type="checkbox">
+                <p id="trustedTimerActivated" class="right"></p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <input id="userTimerCheckbox" class="left" type="checkbox" >
+                <p id="userTimerActivated" class="right"></p>
+              </div>
+            </div>
+			<div>
+              <div>
+                <input id="privacyModeCheckbox" class="left" type="checkbox" >
+                <p id="privacyModeActivated" class="right"></p>
+              </div>
+            </div>
+			<div>
+              <div>
+                <input id="securityModeCheckbox" class="left" type="checkbox" >
+                <p id="securityModeActivated" class="right"></p>
+              </div>
+            </div>
+			<div>
+              <div>
+                <input id="redirectModeCheckbox" class="left" type="checkbox" >
+                <p id="redirectModeActivated" class="right"></p>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab2" class="tab">
+            <p id="blackListText"></p>
+            <div>
+              <input id="blackListActivated" class="left" type="checkbox">
+              <p id="activateBlackList" class="right"></p>
+            </div>
+            <p id="trustedListText"></p>
+            <div>
+              <input id="trustedListActivated" class="left" type="checkbox">
+              <p id="activateTrustedList" class="right"></p>
+            </div>
+            <div>
+              <button id="showTrustedDomains"></button>
+            </div>
+            <p id="userListText"></p>
+						<button id="editUserDefined"></button>
+            <div>
+            	<input id="userDefinedInput" type="text" autofocus/>
+              <button id="addUserDefined"></button>
+							<p id="errorAddUserDefined"></p>
+            </div>
+          </div>
+
+         <div id="tab3" class="tab">
+            <p id="referrerDialog1"></p>
+	           <p id="referrerExample"></p>
+ 	           <button id="addDefaultReferrer"></button>
+            <table id="referrerList">
+              <tr>
+                <th id="referrerListTitle"></th>
+              </tr>
+            </table>
+            <button id="clearReferrer"></button>
+            <p id="referrerHeadline"></p>
+            <p id="referrerDialog2"></p>
+			<p id="exampleReferrerHost"></p>
+            <input id="referrerInputHost" type="text" autofocus/>
+			<p id="exampleReferrerPath"></p>
+			<input id="referrerInputPath" type="text" autofocus/>
+			<p id="exampleReferrerAttribute"></p>
+			<input id="referrerInputAttribute" type="text" autofocus/>
+			<button id="addReferrerAttribute"></button>
+			<p id="errorAddReferrer"></p>
+		</div>
+		
+		<div id="tab4" class="tab">
+            <p id="shortURLText"></p>
+            <p id="shortURLListText"></p>
+						<button id="editShortURL"></button>
+			<table id="shortURLList">
+              <tr>
+                <th id="shortURLListTitle"></th>
+              </tr>
+            </table>
+			<div>
+            	<input id="userDefinedShortURLInput" type="text" autofocus/>
+              <button id="addUserDefinedShortURL"></button>
+							<p id="errorAddUserDefinedShortURL"></p>
+            </div>
+         </div>
+    </div>
+
+    <div id="optionButtons">
+      <button id="saveChanges"></button>
+      <button id="revertChanges"></button>
+      <button id="defaultSettings"></button>
+    </div>
+
+    <p id="statusSettings"></p>
+		<div>
+		<table id="trustedList">
+			<tr>
+				<th id="trustedListTitle"></th>
+			</tr>
+		</table>
+
+		<table id="userList">
+			<tr>
+				<th id="userListTitle"></th>
+			</tr>
+		</table>
+	</div>
+	</body>
+</html>

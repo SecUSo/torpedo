@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Tutorial of the use of TORPEDO. Different examples to undertsand how it works."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" href="css/tutorial/tutorial.css" />
+    <link rel="icon" href="img/icon64.png" />
+    <title>TORPEDO Tutorial</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/tutorial.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-wrapper">
+        <h1 class="torpedo-title-wrapper">
+          <img
+            id="torpedo-title"
+            src="img/TORPEDO_fullLockup.svg"
+            alt="TORPEDO"
+          />
+        </h1>
+        <div class="overview">
+          <!--
+           * match order to pages setup in tutorial.js!
+           * if you want to add an icon, use fontawesome icons inside the overview-case div
+          -->
+          <div class="overview-case beta-notice not-colored"><i class="fas fa-vial"></i></div>
+          <div class="overview-case welcome not-colored"><i class="fas fa-hand-paper angled"></i></div>
+          <div class="overview-case explanation not-colored"><i class="fas fa-info-circle"></i></div>
+          <div class="overview-case green-case"></div>
+          <div class="overview-case blue-case"></div>
+          <div class="overview-case simple-grey-case-phish"></div>
+          <div class="overview-case simple-grey-case-no-phish"></div>
+          <div class="overview-case warning-grey-case-phish"></div>
+          <div class="overview-case warning-grey-case-no-phish"></div>
+          <div class="overview-case red-case"></div>
+          <div class="overview-case configurations not-colored"><i class="fas fa-cog"></i></div>
+        </div>
+      </div>
+    </header>
+    <div class="tut-content-wrapper">
+      <div class="tut-content">
+        <div class="beta-notice card off">
+          <h3 id="beta-title"></h3>
+          <p id="beta-introduction-txt">
+          </p>
+          <ul style="padding-left: 3rem;">
+            <li id="beta-key-point-1"></li>
+            <li id="beta-key-point-2"></li>
+          </ul>
+          <p id="beta-feedback-hint">
+          </p>
+          <p id="beta-txt">
+          </p>
+        </div>
+        <div class="welcome card off">
+          <h2 id="welcome-title"></h2>
+          <p id="introduction-txt">
+          </p>
+          <h3 id="technical-bg-title"></h3>
+          <p id="technical-bg-txt">
+          </p>
+          <h3 id="functionality-title"></h3>
+          <p id="functionality-txt">
+          </p>
+        </div>
+        <div class="explanation off">
+          <div class="explanation-general card">
+            <h2 id="functionality-explanation-title"></h2>
+            <p id="functionality-explanation-txt-1"></p>
+            <p>
+              <span id="functionality-explanation-txt-2"></span><span id="domain-explain" class="domain-mark"></span><span id="functionality-explanation-txt-3"></span>
+            </p>
+            <p id="functionality-explanation-txt-4"></p>
+            <p class="link-like">https://www.mail.<span class="domain-mark">google.de</span>/path/<wbr/>somewhere/index.php</p>
+            <p>
+              <span id="functionality-explanation-txt-5"></span><span class="domain-mark">google.de</span><span id="functionality-explanation-txt-6"></span>
+            </p>
+            <p id="functionality-explanation-txt-7">
+           
+            </p>
+          </div>
+          <div class="explanation-summary-cases show-case-card">
+            <div class="green-case-showcase card show-case-card">
+              <h4 class="showcase-title" id="green-case-showcase-title"></h4>
+              <img src="/img/examples/en/green_case_en.svg" alt="cases showing" id="green-case-showcase-img" class="case-img-summary">
+            </div>
+            <div class="blue-case-showcase card show-case-card">
+              <h4 class="showcase-title" id="blue-case-showcase-title"></h4>
+              <img src="/img/examples/en/blue_case_en.svg" alt="cases showing" id="blue-case-showcase-img" class="case-img-summary">
+            </div>
+            <div class="simple-grey-case-showcase card show-case-card">
+              <h4 class="showcase-title" id="simple-grey-case-showcase-title"></h4>
+              <img src="/img/examples/en/simple-grey_case_no-phish_en.svg" alt="cases showing" id="simple-grey-case-showcase-img" class="case-img-summary">
+            </div>
+            <div class="warning-grey-case-showcase card show-case-card">
+              <h4 class="showcase-title" id="warning-grey-case-showcase-title"></h4>
+              <img src="/img/examples/en/warning-grey_case_no-phish_en.svg" alt="cases showing" id="warning-grey-case-showcase-img" class="case-img-summary">
+            </div>
+            <div class="red-case-showcase card show-case-card">
+              <h4 class="showcase-title" id="red-case-showcase-title"></h4>
+              <img src="/img/examples/en/red_case_en.svg" alt="cases showing" id="red-case-showcase-img" class="case-img-summary">
+            </div>
+          </div>
+        </div>
+        <div class="example-wrapper off">
+          <div class="explanation-card card">
+            <h2 id="example-title" class="example-explain-title"></h2>
+            <p id="category-explanation" class="example-explain-txt"></p>
+            <div class="optional-addtional-info off" id="additional-info">
+              <div id="more-than-one" class="off">
+                <p id="more-than-one-example" class="example-two-instances"><span class="fat">Phishing</span><span class="fat">legitimes</span></p>
+                <hr class="visual-seperator">
+              </div>
+              <p id="example-context" class="example-explain-context"></p>
+            </div>
+            <p id="explanation-of-specific-link" class="example-explain-specific-link"></p>
+          </div>
+          <div class="example-svg ">
+            <img class="svg-in-img" src="./img/examples/en/green_case_en.svg" alt="green_example">
+          </div>
+        </div>
+        <div class="configurations off">
+          <div class="special-cases-card card card-append">
+            <div class="special-cases-wrapper">
+              <div class="special-cases-img">
+                <img id="contextmenu-img" src="img/examples/en/simple-grey_case_contextmenu_en.svg" alt="picture showing that you can get to settings via contextmenue">
+              </div>
+              <div class="special-cases-explanation">
+                <h3 id="special-cases-title"></h3>
+                <p id="special-cases-txt"></p>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card card">
+            <div class="settings-wrapper">
+              <div class="settings-explanation">
+                <h3 id="settings-title"></h3>
+                <h4 id="settings-subtitle"></h4>
+                <ol>
+                  <li id="settings-option-1" class="settings-option"></li>
+                  <li id="settings-option-2" class="settings-option"></li>
+                  <li id="settings-option-3" class="settings-option"></li>
+                  <li id="settings-option-4" class="settings-option"></li>
+                </ol>
+              </div>
+              <div class="settings-img-wrapper">
+                <img src="img/examples/en/settings_en.png" alt="showing different options for TORPEDO" id="settings-img">
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="navigation-btns">
+        <button id="prev">
+          <div  class="square-div">
+            <i
+              class="fas fa-chevron-left"
+            ></i>
+          </div>
+        </button>
+        <button id="next">
+          <div  class="square-div">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+        <button id="finish" class="disabled">
+          <div class="square-div">
+          <i class="fas fa-times"></i></button>
+      </div>
+  </body>
+</html>
