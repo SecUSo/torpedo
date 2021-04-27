@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 25rem;
+  font-size: 2rem;
+}
+
+.buttons {
+  width: 90%;
+  margin: 2rem auto;
+}
+
+button {
+  border-radius: 10px;
+  border: none;
+  background-color: #1a509d;
+  color: white;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+button:hover:not(:last-child) {
+  background-color: #2166c9;
+}
+
+.working {
+  background: green;
+  cursor: initial;
+}
+
+.error {
+  background: #cc0000;
+  cursor: help;
+}
+
+.error:hover {
+  background: red;
+}
+/*# sourceMappingURL=icon.css.map */

@@ -1,0 +1,262 @@
+.torpedoTooltip {
+  border: solid 0.3rem #bfb9b9;
+  border-radius: 5px;
+  background-color: white;
+  min-width: 430px;
+  font-size: 14px !important;
+  font-family: Helvetica !important;
+  line-height: 130% !important;
+}
+
+#torpedoContextMenu {
+  border: 0.1rem solid #bfb9b9;
+  background-color: white;
+  font-size: 14px !important;
+  font-family: Helvetica !important;
+  line-height: 130% !important;
+}
+
+#torpedoContextMenu ul {
+  padding: 5px;
+  list-style: none;
+  margin: 0;
+}
+#torpedoContextMenu li {
+  list-style: none;
+  padding: 0 10px 0 10px;
+  margin: 1px 0 1px 0;
+  background-color: white;
+  color: black;
+}
+#torpedoContextMenu li:hover {
+  background-color: #cce0ff;
+}
+.qtip-content {
+  background-color: white !important;
+}
+div.torpedoTooltip div.torpedoTooltip div,
+div.torpedoTooltip span,
+div.torpedoTooltip applet,
+div.torpedoTooltip object,
+div.torpedoTooltip iframe,
+div.torpedoTooltip h1,
+div.torpedoTooltip h2,
+div.torpedoTooltip h3,
+div.torpedoTooltip h4,
+div.torpedoTooltip h5,
+div.torpedoTooltip h6,
+div.torpedoTooltip p,
+div.torpedoTooltip blockquote,
+div.torpedoTooltip pre,
+div.torpedoTooltip a,
+div.torpedoTooltip abbr,
+div.torpedoTooltip acronym,
+div.torpedoTooltip address,
+div.torpedoTooltip big,
+div.torpedoTooltip cite,
+div.torpedoTooltip code,
+div.torpedoTooltip del,
+div.torpedoTooltip dfn,
+div.torpedoTooltip em,
+div.torpedoTooltip img,
+div.torpedoTooltip ins,
+div.torpedoTooltip kbd,
+div.torpedoTooltip q,
+div.torpedoTooltip s,
+div.torpedoTooltip samp,
+div.torpedoTooltip small,
+div.torpedoTooltip strike,
+div.torpedoTooltip strong,
+div.torpedoTooltip sub,
+div.torpedoTooltip sup,
+div.torpedoTooltip tt,
+div.torpedoTooltip var,
+div.torpedoTooltip b,
+div.torpedoTooltip u,
+div.torpedoTooltip i,
+div.torpedoTooltip center,
+div.torpedoTooltip dl,
+div.torpedoTooltip dt,
+div.torpedoTooltip dd,
+div.torpedoTooltip ol,
+div.torpedoTooltip ul,
+div.torpedoTooltip li,
+div.torpedoTooltip fieldset,
+div.torpedoTooltip form,
+div.torpedoTooltip label,
+div.torpedoTooltip legend,
+div.torpedoTooltip table,
+div.torpedoTooltip caption,
+div.torpedoTooltip tbody,
+div.torpedoTooltip tfoot,
+div.torpedoTooltip thead,
+div.torpedoTooltip tr,
+div.torpedoTooltip th,
+div.torpedoTooltip td,
+div.torpedoTooltip article,
+div.torpedoTooltip aside,
+div.torpedoTooltip canvas,
+div.torpedoTooltip details,
+div.torpedoTooltip embed,
+div.torpedoTooltip figure,
+div.torpedoTooltip figcaption,
+div.torpedoTooltip footer,
+div.torpedoTooltip header,
+div.torpedoTooltip hgroup,
+div.torpedoTooltip menu,
+div.torpedoTooltip nav,
+div.torpedoTooltip output,
+div.torpedoTooltip ruby,
+div.torpedoTooltip section,
+div.torpedoTooltip summary,
+div.torpedoTooltip time,
+div.torpedoTooltip mark,
+div.torpedoTooltip audio,
+div.torpedoTooltip video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  background-color: white;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+div.torpedoTooltip aside,
+div.torpedoTooltip details,
+div.torpedoTooltip figcaption,
+div.torpedoTooltip figure,
+div.torpedoTooltip footer,
+div.torpedoTooltip header,
+div.torpedoTooltip hgroup,
+div.torpedoTooltip menu,
+div.torpedoTooltip nav,
+div.torpedoTooltip section {
+  display: block;
+}
+
+div.torpedoTooltip ol,
+div.torpedoTooltip ul {
+  list-style: none;
+}
+div.torpedoTooltip blockquote,
+div.torpedoTooltip q {
+  quotes: none;
+}
+div.torpedoTooltip blockquote:before,
+div.torpedoTooltip blockquote:after,
+div.torpedoTooltip q:before,
+div.torpedoTooltip q:after {
+  content: "";
+  content: none;
+}
+div.torpedoTooltip table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.torpedoPopup {
+  max-width: none !important;
+  background-color: white;
+  border: 2px solid black;
+}
+.torpedoTooltip div {
+  margin: 0 0 10px 0;
+}
+.torpedoTooltip p {
+  overflow: hidden !important;
+  color: black !important;
+}
+.torpedoTooltip img {
+  float: left;
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+.torpedoTooltip .torpedoHighlight,
+.torpedoHighlight {
+  font-weight: bold;
+  display: inline;
+  margin-bottom: 0px !important;
+  margin-right: 2px;
+}
+.torpedoTrusted {
+  border: 0.3rem solid green !important;
+}
+.torpedoUserDefined {
+  border: 0.3rem solid #1a509d !important;
+}
+
+.torpedoPhish {
+  border: 0.3rem solid red !important;
+}
+
+#torpedoDomain {
+  font-weight: bold !important;
+  letter-spacing: 3px !important;
+  margin: 10px 2px 25px 2px;
+}
+#torpedoInfoImage,
+#torpedoAdviceImage,
+#torpedoWarningImage {
+  padding-right: 10px;
+}
+
+#torpedoAdviceText {
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+#torpedoAdviceText:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#torpedoInfoText {
+  text-decoration: underline;
+  cursor: help;
+  font-weight: normal;
+}
+#torpedoInfoText:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+#torpedoInfoDiv {
+  overflow-y: scroll;
+  height: 90px;
+}
+#torpedoInfoDiv,
+#torpedoLinkDelay,
+#torpedoURL,
+#torpedoMoreInfoButton,
+#torpedoRedirectButton,
+#torpedoActivateLinkButton {
+  clear: both;
+  width: 100%;
+  margin-top: 5px;
+}
+#torpedoPopupImage {
+  width: 600px;
+  height: 380px;
+}
+#torpedoMoreInfoButton {
+  margin: 10px 0 0 10px;
+}
+#torpedoURL {
+  color: black !important;
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-bottom: 13px;
+  text-decoration: none;
+}
+#torpedoSecurityStatus {
+  margin-top: 5px;
+}
+#torpedoInfo,
+#torpedoAdvice {
+  padding-bottom: 5px;
+}

@@ -1,0 +1,381 @@
+// VARIABLES
+$torpedo-grey: #bfb9b9;
+$torpedo-green: green;
+$torpedo-blue: #1a509d;
+$torpedo-red: red;
+$size-overview: 3vw;
+// bubble dark colors for radial gradient need to be adapted at the place in code
+
+// MIXINS
+@mixin flex($justify, $align, $flex-direction) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $flex-direction;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 2rem;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 255, 255),
+    rgb(245, 245, 245) 20%,
+    rgb(201, 201, 201)
+  );
+}
+h2 {
+  font-size: 4rem;
+  margin: 2rem 1rem 3rem 1rem;
+}
+h3 {
+  font-size: 2.5rem;
+  margin: 2rem 1rem;
+}
+h4 {
+  font-size: 2rem;
+  margin: 1.5rem 1rem;
+}
+p {
+  margin: 1rem 1rem 2rem 1rem;
+}
+ol {
+  margin: 1rem inherit;
+}
+li {
+  padding: 1rem 0;
+}
+
+.fat {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
+.underlined {
+  text-decoration: underline;
+}
+.link-like {
+  color: blue;
+  text-decoration: underline;
+}
+.green {
+  color: $torpedo-green;
+}
+.grey {
+  color: $torpedo-grey;
+}
+.blue {
+  color: $torpedo-blue;
+}
+.red {
+  color: $torpedo-red;
+}
+
+// OVERVIEW
+header {
+  position: sticky;
+  top: 0;
+  height: 17vh;
+  background-color: white;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.383),
+    0 0.2rem 1rem rgba(0, 0, 0, 0.4);
+}
+.header-wrapper {
+  width: 85%;
+  height: 100%;
+  margin: auto;
+  @include flex(space-between, center, row);
+}
+#torpedo-title {
+  width: 15vw;
+}
+.torpedo-title-wrapper {
+  margin-right: auto;
+}
+.overview {
+  @include flex(space-between, center, row);
+  // display none will be removed as soon as within examples
+  display: none;
+  width: 60%;
+  .overview-case {
+    opacity: 0.4;
+    height: $size-overview;
+    width: $size-overview;
+    border-radius: 60%;
+    flex-shrink: 0;
+    @include flex(center, center, row);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0.25rem 1rem rgba(121, 93, 93, 0.383),
+      0 0.1rem 0.5rem rgba(0, 0, 0, 0.4);
+    &:hover {
+      // box-shadow: 0 0 1rem $torpedo-blue;
+      box-shadow: 0 0 1rem $torpedo-blue;
+      opacity: 0.9;
+    }
+  }
+  .angled {
+    transform: rotateZ(25deg);
+  }
+  .fas {
+    font-size: calc(#{$size-overview} / 2);
+  }
+  .selected {
+    opacity: 1;
+  }
+  .not-colored {
+    background-image: radial-gradient(
+      circle at 35% 35%,
+      white,
+      hsl(0, 0%, 75%)
+    );
+  }
+
+  .welcome {
+    border: torpedo;
+  }
+  .green-case {
+    background-image: radial-gradient(
+      circle at 35% 35%,
+      $torpedo-green,
+      hsl(120, 100%, 12%)
+    );
+    background-color: $torpedo-green;
+  }
+  .blue-case {
+    background-image: radial-gradient(
+      circle at 35% 35%,
+      $torpedo-blue,
+      hsl(215, 72%, 18%)
+    );
+    background-color: $torpedo-blue;
+  }
+  .simple-grey-case-no-phish,
+  .simple-grey-case-phish,
+  .warning-grey-case-no-phish,
+  .warning-grey-case-phish {
+    background-image: radial-gradient(
+      circle at 35% 35%,
+      $torpedo-grey,
+      hsl(0, 4%, 40%)
+    );
+    background-color: $torpedo-grey;
+  }
+  .warning-grey-case-no-phish,
+  .warning-grey-case-phish {
+    background-image: url("../../img/warning2.png"),
+      radial-gradient(circle at 35% 35%, $torpedo-grey, hsl(0, 4%, 40%));
+    background-size: 50%, 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+  .red-case {
+    background-image: radial-gradient(
+      circle at 35% 35%,
+      $torpedo-red,
+      hsl(0, 100%, 25%)
+    );
+    background-color: $torpedo-red;
+  }
+}
+
+// CONTENT TUTORIAL
+// introduction
+.card {
+  background-color: white;
+  width: 100%;
+  padding: 2rem 5rem;
+  border-radius: 20px;
+  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2),
+    0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.4);
+  &.card-append {
+    margin-bottom: 3rem;
+  }
+}
+
+.explanation {
+  .domain-mark {
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    background-color: yellow;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+  }
+}
+.explanation-summary-cases {
+  margin-top: 4rem;
+  margin-right: -2rem;
+  margin-left: -2rem;
+  @include flex(space-between, stretch, row);
+  flex-wrap: wrap;
+  & > * {
+    flex: 1 1 40rem;
+  }
+  .show-case-card {
+    margin: 2rem;
+    cursor: pointer;
+  }
+  .showcase-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem;
+    margin-bottom: 4rem;
+  }
+  .case-img-summary {
+    margin: auto;
+  }
+}
+// examples in tutorial
+.tut-content-wrapper {
+  min-height: 83vh;
+  padding: 6rem 0 12rem 0;
+  @include flex(center, center, row);
+}
+.tut-content {
+  margin: auto;
+  width: 85%;
+}
+.example-wrapper {
+  margin: auto -3rem;
+  @include flex(space-between, flex-end, row);
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+.example-explain-title {
+  text-align: center;
+}
+.example-svg {
+  order: 2;
+  flex: 1 1 40rem;
+  margin: 5rem 3rem;
+}
+.explanation-card {
+  order: 1;
+  flex: 2 2 70rem;
+  margin: auto 3rem;
+}
+.visual-seperator {
+  background-image: linear-gradient(
+    to right,
+    white 0%,
+    $torpedo-grey 15%,
+    $torpedo-grey 85%,
+    white 100%
+  );
+  width: 60%;
+  margin: 3rem auto;
+  border: none;
+  height: 2px;
+}
+
+// CONFUGARTIONS
+$flex-gap-contextmenu: 3rem;
+
+.special-cases-wrapper {
+  margin-left: -$flex-gap-contextmenu;
+  margin-right: -$flex-gap-contextmenu;
+  @include flex(space-between, center, row-reverse);
+  flex-wrap: wrap;
+}
+.special-cases-img {
+  order: 2;
+  #contextmenu-img {
+    width: 100%;
+  }
+  flex: 1 1 40rem;
+  margin: 2rem $flex-gap-contextmenu;
+}
+.special-cases-explanation {
+  order: 1;
+  flex: 1.5 1 70rem;
+  margin: 2rem $flex-gap-contextmenu;
+}
+.settings-wrapper {
+  @include flex(space-between, center, row);
+  flex-wrap: wrap;
+  margin-left: -$flex-gap-contextmenu;
+  margin-right: -$flex-gap-contextmenu;
+}
+.settings-explanation {
+  margin: 2rem $flex-gap-contextmenu;
+  flex: 2 1 70rem;
+  ol {
+    padding-left: 3rem;
+  }
+}
+.settings-img-wrapper {
+  margin: 2rem $flex-gap-contextmenu;
+  flex: 1 1 50rem;
+  @include flex(center, center, row);
+}
+
+// NAV-BUTTONS
+.navigation-btns {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  min-width: 30rem;
+  margin: 3rem auto;
+  @include flex(space-around, center, row);
+  button {
+    display: block;
+    padding: 2rem 2rem;
+    background-color: $torpedo-blue;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    font-size: 2rem;
+    color: white;
+  }
+  .disabled {
+    background-color: $torpedo-blue;
+    filter: saturate(30%);
+    cursor: default;
+    &:hover {
+      animation: denied 250ms forwards ease;
+    }
+    > * {
+      pointer-events: none;
+    }
+    @keyframes denied {
+      0% {
+        transform: translateX(0);
+      }
+      15% {
+        transform: translateX(1rem);
+      }
+      35% {
+        transform: translateX(-1rem);
+      }
+      55% {
+        transform: translateX(1rem);
+      }
+      80% {
+        transform: translateX(-1rem);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+  }
+  .square-div {
+    height: 2rem;
+    width: 2rem;
+    @include flex(center, center, row);
+  }
+}
+
+.off {
+  display: none !important;
+}
