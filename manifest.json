@@ -1,22 +1,67 @@
 {
   "manifest_version": 2,
+  "author": "SECUSO",
   "applications": {
     "gecko": {
-      "id": "torpedo@tu-darmstadt.de",
-      "strict_min_version": "68.0"
+      "id": "{53319828-3750-4619-836e-10f3c736a61f}"
     }
   },
-  "name": "TORPEDO",
-  "description": "TORPEDO is a tool for recognizing untrustworthy links (phishing). Move the mouse pointer over a link in your email. TORPEDO displays the correct web address in a tooltip and helps you to analyze it.",
-  "version": "2.4.3",
+  "name": "__MSG_extensionName__",
+  "version": "3.0.0",
+  "default_locale": "de",
+  "description": "__MSG_extensionDescription__",
+  "background": {
+    "scripts": ["js/jquery-3.4.1.min.js", "js/punycode.min.js", "background.js"]
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "messagesRead",
+    "messagesModify",
+    "compose"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "icons": {
-    "64": "chrome/skin/icon_64.png"
+    "38": "img/icon38.png",
+    "64": "img/icon64.png"
   },
-  "legacy": {
-    "type": "xul",
-    "options": {
-      "page": "chrome://torpedo/content/options.xul",
-      "open_in_tab": true
+  "web_accessible_resources": ["img/*.png"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mg.mail.yahoo.com/*",
+        "https://mail.yahoo.com/*",
+        "https://email.t-online.de/*",
+        "https://outlook.live.com/*",
+        "https://mail.aol.com/*",
+        "https://navigator.web.de/*",
+        "https://bap.navigator.web.de/*",
+        "https://3c-bap.web.de/*",
+        "https://3c.web.de/*",
+        "https://bap.navigator.gmx.net/*",
+        "https://navigator.gmx.net/*",
+        "https://3c.gmx.net/*",
+        "https://3c-bap.gmx.net/*",
+        "https://mail.google.com/*",
+        "https://owa.kit.edu/*"
+      ],
+      "css": ["css/jquery.qtip.min.css", "css/tooltip.css"],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "js/jquery.qtip.min.js",
+        "js/punycode.min.js",
+        "js/contentscript.js",
+        "js/publicsuffixlist.js",
+        "js/timer.js",
+        "js/tooltip.js",
+        "js/status.js",
+        "js/redirect.js"
+      ],
+      "all_frames": true
     }
-  }
+  ]
 }
