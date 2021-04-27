@@ -1,129 +1,126 @@
-var torpedo = torpedo || {};
+torpedo.timerInterval = null;
 
-var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
-    .getService(Components.interfaces.nsIConsoleService);
+/**
+ * countdown function for the temporal deactivation of URLs
+ */
 
+function countdown(time, state) {
+  if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
 
+  var tooltip = torpedo.tooltip;
 
-var torpedoTimer = {
+  $(tooltip.find("#torpedoTimer")[0]).show();
 
-    isTimerRequired: function (timerSetting, state) {
-        var greenListDelayActivated = !torpedo.functions.settingIsChecked("greenListDelayActivated") && torpedoOptions.inList(torpedo.currentDomain, "URLDefaultList");
-        var blueListDelayActivated = !torpedo.functions.settingIsChecked("blueListDelayActivated") && torpedoOptions.inList(torpedo.currentDomain, "URLSecondList");
-        var isInBlacklist = state == "T4" || state == "T4a";
-        var redirectResolving = document.getElementById("redirect").textContent == torpedo.stringsBundle.GetStringFromName('wait');
+  /**
+   * assert time to tooltip text
+   */
+  function showTime() {
+    try {
+      tooltip.find("#torpedoTimer")[0].remove();
+      $(
+        '<p id="torpedoTimer">' +
+          chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
+          "</p>"
+      ).appendTo(tooltip);
+    } catch (e) {}
+  }
 
-        if ((greenListDelayActivated || blueListDelayActivated  || timerSetting == 0) && !isInBlacklist) { //redirectResolving?
+  // deactivate link (on page and on tooltip)
+  const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+  $(torpedo.target).addClass("torpedoTimerShowing");
+  eventTypes.forEach(function (eventType) {
+    $(torpedo.target).unbind(eventType);
+  });
+  const onWebsite = new URL(window.location.href);
+  if (onWebsite.hostname === "owa.kit.edu") {
+    $(
+      "div._rp_U4.ms-font-weight-regular.ms-font-color-neutralDark.rpHighlightAllClass.rpHighlightBodyClass"
+    ).unbind("click");
+    // document.removeEventListener('click', getEventListeners(document).click[0].listener)
+    /* 
+      once script from owa can be used to remove eventlistener properly - insert here
+    */
+  }
+  eventTypes.forEach(function (eventType) {
+    $(torpedo.target).on(eventType, function (event) {
+      event.preventDefault();
+      return false;
+    });
+  });
+
+  try {
+    $(tooltip.find("#torpedoURL")[0]).unbind("click");
+    $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
+      event.preventDefault();
+      return false;
+    });
+  } catch (e) {}
+
+  showTime();
+  if (time > 0) time--;
+
+  var timerInterval = setInterval(function timer() {
+    showTime();
+    if (time == 0) {
+      clearInterval(timerInterval);
+      if (!isRedirect(torpedo.domain) && state != "T4" && state != "T4a") {
+        $(torpedo.target).addClass("torpedoTimerFinished");
+      }
+      // reactivate link
+      if (state != "T4") {
+        eventTypes.forEach(function (eventType) {
+          $(torpedo.target).unbind(eventType);
+        });
+        eventTypes.forEach(function (eventType) {
+          $(torpedo.target).bind(eventType, function (event) {
+            processClick();
+          });
+        });
+        try {
+          $(tooltip.find("#torpedoURL")[0]).unbind("click");
+          $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
+            event.preventDefault();
+            chrome.storage.sync.get(null, function (r) {
+              if (r.privacyModeActivated) {
+                chrome.runtime.sendMessage({
+                  name: "open",
+                  url: torpedo.oldUrl,
+                });
+              } else {
+                chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
+              }
+            });
+            processClick();
             return false;
-        }
-        return true;
-    },
+          });
+        } catch (e) {}
+      } else {
+        $(tooltip.find("#torpedoActivateLinkButton")[0]).prop(
+          "disabled",
+          false
+        );
+        $(tooltip.find("#torpedoActivateLinkButton")[0]).click(function () {
+          var ueberschrift = chrome.i18n.getMessage("T4aUeberschrift");
+          var erklaerung = chrome.i18n.getMessage("T4aErklaerung");
+          var gluehbirneText = chrome.i18n.getMessage("T4aGluehbirneText");
+          var linkDeaktivierung = chrome.i18n.getMessage(
+            "T4aLinkDeaktivierung"
+          );
 
-    isAlreadyVisited: function (timerIsCurrentlyRunning, state) {
-        var isInBlacklist = state == "T4" || state == "T4a";
-        var a = torpedo.handler.TempTarget;
-        var hrefIsVisited = a.classList.contains("torpedoVisited");
+          // assign texts
+          $(tooltip.find("#torpedoWarningText")[0]).html(ueberschrift);
+          $(tooltip.find("#torpedoSecurityStatus")[0]).html(erklaerung);
+          $(tooltip.find("#torpedoMoreAdvice")[0]).html(gluehbirneText);
+          $(tooltip.find("#torpedoLinkDelay")[0]).html(linkDeaktivierung);
 
-        if(!timerIsCurrentlyRunning && !isInBlacklist && hrefIsVisited) {
-            return true;
-        }
-        return false;
-    },
-
-
-    countdown: function (state) {
-        var startTime = torpedo.prefs.getIntPref("blockingTimer");
-        if (!torpedoTimer.isTimerRequired(startTime, state)) { 
-            startTime = 0;
-            $("#seconds-box").hide();
-        } else {
-            $("#seconds-box").show();
-        }
-        var currentlyRunning = false;
-
-        function showTime() {
-            var second = startTime % 60;
-            var a = torpedo.handler.TempTarget;
-            var alreadyVisited = torpedoTimer.isAlreadyVisited(currentlyRunning, state);
-
-            strZeit = (second < 10) ? ((second == 0) ? second : "0" + second) : second;
-            if (alreadyVisited) strZeit = 0;
-            document.getElementById("countdown").textContent = torpedo.stringsBundle.GetStringFromName('VerbleibendeZeit');
-            var remainingTimeText = document.getElementById("countdown").textContent.replace("$TIME$", strZeit);
-            document.getElementById("countdown").textContent = remainingTimeText;
-
-            if (strZeit == 0) {
-                if (state != "T4") {
-                    // make URL in tooltip clickable
-                    $("#clickbox").unbind("click");
-                    $("#clickbox").bind("click", torpedo.handler.mouseClickHref);
-                    $(torpedo.handler.TempTarget).unbind("click");
-                    $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHref);
-                    $("#clickbox").css("cssText", "cursor:pointer !important");
-                    currentlyRunning = false;
-
-                    // make sure countdown is not started all over again if we visit the same link again
-                    // by adding "torpedoVisited" to the class of the visited link tag
-                    a.classList ? a.classList.add('torpedoVisited') : a.className += ' torpedoVisited';
-                } else {
-                    $("#torpedoActivateLinkButton").prop("disabled", false);
-                    $("#torpedoActivateLinkButton").click(function () {
-                        torpedo.handler.mouseClickActivateLinkButton("T4a");
-                    });
-                }
-            }
-            else {
-                try {
-                    $("#clickbox").unbind("click");
-                    $("#clickbox").bind("click", torpedo.handler.mouseClickHrefError);
-                    $(torpedo.handler.TempTarget).unbind("click");
-                    $(torpedo.handler.TempTarget).bind("click", torpedo.handler.mouseClickHrefError);
-                    $("#clickbox").css("cssText", "cursor:wait !important;");
-                    currentlyRunning = true;
-                } catch (e) {
-                    consoleService.logStringMessage(e);
-                }
-            }
-        }
-
-        showTime();
-        if (startTime > 0) {
-            --startTime;
-        }
-
-        var timerInterval = setInterval(function timer() {
-            showTime();
-            if (startTime == 0) {
-                clearInterval(timerInterval);
-            }
-            else {
-                --startTime;
-            }
-
-        }, 1000);
-
-        return timerInterval;
-    },
-
-    changeCheckedTimer: function () {
-        var d = torpedo.prefs.getBoolPref("checkedTimer");
-        d = !d;
-        torpedo.prefs.setBoolPref("checkedTimer", d);
-        if (d == false) {
-            torpedo.prefs.setIntPref("blockingTimer", 0);
-            document.getElementById("greenlistactivated").disabled = true;
-            document.getElementById("activateTimerOnLowRisk").setAttribute("style", "color:grey;width:330px; margin-top:10px");
-            document.getElementById("orangelistactivated").disabled = true;
-            document.getElementById("activateTimerOnUserList").setAttribute("style", "color:grey;width:330px; margin-top:15px");
-        }
-        else {
-            torpedo.prefs.setIntPref("blockingTimer", 3);
-            document.getElementById("greenlistactivated").disabled = false;
-            document.getElementById("activateTimerOnLowRisk").removeAttribute("style");
-            document.getElementById("activateTimerOnLowRisk").setAttribute("style", "width:330px; margin-top:10px");
-            document.getElementById("orangelistactivated").disabled = false;
-            document.getElementById("activateTimerOnUserList").removeAttribute("style");
-            document.getElementById("activateTimerOnUserList").setAttribute("style", "width:330px; margin-top:15px");
-        }
+          $(tooltip.find("#torpedoActivateLinkButton")[0]).hide();
+          countdown(r.timer, "T4a");
+        });
+      }
+    } else {
+      --time;
     }
+  }, 1000);
+
+  torpedo.timerInterval = timerInterval;
 }

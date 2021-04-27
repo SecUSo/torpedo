@@ -1,193 +1,239 @@
 var torpedo = torpedo || {};
+torpedo.state = "unknown";
+r = null;
 
-var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
-    .getService(Components.interfaces.nsIConsoleService);
+/**
+ * determine security status of domain by
+ * looking up trusted, redirect, and user defined domains
+ */
+function getSecurityStatus(storage, storage_local) {
+  r = storage;
+  re = storage_local;
 
-var torpedoStatus = {
+  var referrerURL = matchReferrer(torpedo.url);
 
-    getSecurityStatus: function (url) {
+  while (referrerURL != "<NO_RESOLVED_REFERRER>") {
+    try {
+      const href = new URL(referrerURL);
+      setNewUrl(href);
+    } catch (e) { }
 
-        torpedo.currentURL = url;
-        torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
+    referrerURL = matchReferrer(torpedo.url);
+    torpedo.countRedirect++;
+  }
+  if (isRedirect(torpedo.domain)) {
+    // short url
+    torpedo.countShortURL++;
+    if (!r.privacyModeActivated) {
+      resolveRedirect(event);
+      return "URLnachErmittelnButtonPrivacyMode";
+    }
+    return "URLnachErmittelnButton2";
+    // Check whether domain is part of blacklist => If yes, status T4
+  } else if (inBlacklist(torpedo.domain)) {
+    return "T4";
+  } else if (inTrusted(torpedo.domain)) {
+    return "T1";
+  } else if (inUserList(torpedo.domain)) {
+    return "T2";
+  } else if (torpedo.progUrl || torpedo.hasTooltip || isIP(torpedo.url)) {
+    return "T33";
+  } else if (torpedo.countRedirect == 0) {
+    if (isMismatch(torpedo.domain)) {
+      return "T32";
+    } else {
+      return "T31";
+    }
+  } else if (torpedo.countRedirect == 1) {
+    if (torpedo.redirectMatching) {
+      if (!isMismatch(torpedo.domain)) {
+        return "T31";
+      } else {
+        return "T32";
+      }
+    } else {
+      return "T32";
+    }
+  } else if (r.redirectModeActivated) {
+    if (!isMismatch(torpedo.domain)) {
+      return "T31";
+    } else {
+      return "T32";
+    }
+  } else {
+    return "T32";
+  }
+}
 
-        var state = "0";
-        var referrerURL = torpedoStatus.matchReferrer(torpedo.currentURL);
+/**
+ * checks if link contains a tooltip
+ * @param eventTarget
+ * @return url from tooltip or <HAS_NO_TOOLTIP> if there is no tooltip
+ */
 
-        while (referrerURL != "<NO_RESOLVED_REFERRER>") {
-            torpedo.redirectURL = torpedo.currentURL;
-            torpedo.currentURL = referrerURL;
-            referrerURL = torpedoStatus.matchReferrer(torpedo.currentURL);
-            torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(torpedo.currentURL);
-            torpedo.numberGmxRedirects = torpedo.numberGmxRedirects + 1;
-        }
+function hasTooltip(eventTarget) {
+  if (eventTarget.hasAttribute("title")) {
+    tooltipURL = eventTarget.getAttribute("title");
+    return tooltipURL;
+  }
+  return "<HAS_NO_TOOLTIP>";
+}
 
-        if (torpedo.functions.isRedirect(torpedo.currentURL)) {
-            if (torpedo.prefs.getBoolPref("privacyMode")) {
-                state = "DetermineUrlButton";
-            } else {
-                torpedo.functions.trace(torpedo.currentURL);
-                return state;
-            }
-        } else if (torpedoBlacklist.inBlacklist(torpedo.currentDomain) && torpedo.functions.settingIsChecked("blacklistActivated")) {
-            state = "T4";
-        } else if (torpedoOptions.inList(torpedo.currentDomain, "URLDefaultList") && torpedo.functions.settingIsChecked("activatedGreenList")) {
-            state = "T1";
-        } else if (torpedoOptions.inList(torpedo.currentDomain, "URLSecondList")) {
-            state = "T2";
-        } else if (torpedo.progURL || torpedo.functions.isIP(torpedo.currentURL) || torpedo.hasTooltip) {
-            state = "T33";
-        } else if (torpedo.numberGmxRedirects == 0) {
-            if (torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title)) { // mismatch, domain extension is temporarily removed
-                torpedo.currentURL = url;
-                torpedo.currentDomain = torpedo.functions.getDomainWithFFSuffix(url);
-                state = "T32";
-            } else {
-                state = "T31";
-            }
-        }
-        else if (torpedo.numberGmxRedirects == 1 || torpedo.prefs.getBoolPref("redirectMode")) {
-            if (torpedoStatus.matchesMainReferrer(torpedo.redirectURL) && !(torpedo.functions.isMismatch(torpedo.baseDomain, torpedo.handler.title) && torpedo.functions.isMismatch(torpedo.currentDomain, torpedo.handler.title))) {
-                state = "T31"
-            } else {
-                state = "T32";
-            }
-        } else {
-            state = "T32";
-        }
+function isRedirect(url) {
+  var lst = r.redirectDomains;
+  for (var i = 0; i < lst.length; i++) {
+    if (lst[i].indexOf(url) > -1) return true;
+  }
+  return false;
+}
 
-        torpedo.texts.assignTexts(torpedo.currentURL, state);
-        if (torpedo.prefs.getBoolPref("privacyMode")) {
-            torpedo.functions.setHref(torpedo.currentURL, state);
-        } else {
-            torpedo.functions.setHref(torpedo.initialURL, state);
-        }
-        return state;
-    },
+function isURLwithoutProtocol(string) {
+  var isURLorDomainRegEx = /^(https?:\/\/)|^(www.)/;
+  var matchesURLorDomain = string.match(isURLorDomainRegEx);
 
-    /**
-	 * checks if the current url is a referrer 
-	 * @param url
-	 * @return resolved referrer or <NO_RESOLVED_REFERRER> if the current url is no referrer or there was an error 
-	 */
-    matchReferrer: function (url) {
-        const href = new URL(url);
-        var hostnameURL = href.hostname;
+  if (matchesURLorDomain.length > 0) {
+    if (matchesURLorDomain[0] == "www.") {
+      return true;
+    }
+  }
+  return false;
+}
 
-        var referrer = torpedoOptions.getReferrerSites(torpedo.message.folder.server);
-        if (referrer.domain === null || referrer.path === null || !hostnameURL) {
-            return "<NO_RESOLVED_REFERRER>";
-        }
+function isMismatch(domain) {
+  try {
+    var displayedLinkText = torpedo.target.innerText;
+    if (isURLwithoutProtocol(displayedLinkText)) {
+      displayedLinkText = "http://" + displayedLinkText;
+    }
 
-        var referrerDomainArr = referrer.domain;
-        var referrerPathArr = referrer.path;
-        var referrerAttributeArr = referrer.attribute;
+    const uri = new URL(displayedLinkText);
+    var displayedLinkTextDom = extractDomain(uri.hostname);
 
-        if (referrerDomainArr != "") {
-            var indices = referrerDomainArr.map(function (element, i) {
-                var domainParts = element.split("*").filter(String);
-                return domainParts.every(function (el) {
-                    return hostnameURL.includes(el);
-                }, hostnameURL) ? i : '';
-            }, hostnameURL).filter(String);
+    if (displayedLinkTextDom != torpedo.oldDomain && displayedLinkTextDom != domain) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
 
-            for (var i = indices.length - 1; i >= 0; i--) {
-                var ind = indices[i];
-                var pathParts = referrerPathArr[ind].split("[...]").filter(String);
-                for (path of pathParts) {
-                    if (!url.includes(path)) {
-                        indices = indices.splice(i, 1);
-                        break;
-                    }
-                }
-            }
+function isTooltipMismatch(tooltipURL, hrefURL) {
+  if (tooltipURL == "" || tooltipURL == undefined || hrefURL == "" || hrefURL == undefined) {
+    return false;
+  }
+  try {
+    if (isURLwithoutProtocol(tooltipURL)) {
+      tooltipURL = "http://" + tooltipURL;
+    }
+    var hrefDomain = extractDomain(hrefURL);
+    var tooltipDomain = extractDomain(tooltipURL);
+    return tooltipDomain != hrefDomain;
+  } catch (e) {
+    return false;
+  }
+}
 
-            for (index of indices) {
-                var cut = referrerAttributeArr[index];
-                var urlAttrIndex = url.indexOf(cut);
-                var temp = url.substring(urlAttrIndex + cut.length, url.length);
-                temp = decodeURIComponent(temp);
-                if (torpedo.functions.isURL(temp)) {
-                    url = temp;
-                    return url;
-                }
-            }
-        }
-        return "<NO_RESOLVED_REFERRER>";
-    },
+// Method for checking whether domain is part of blacklist
+function inBlacklist(url) {
+  // Only relevant if blacklist is enabled => otherwise return false
+  if (r.blackListActivated) {
+    var lst = re.dangerousDomains;
+    // Iterate through array and determine whether domain is part of array entry => If yes, return true
+    for (var i = 0; i < lst.length; i++) {
+      if (lst[i] == url) {
+        return true;
+      }
+    }
+  }
+  // Domain is not part of blacklist or blacklist is not enabled
+  return false;
+}
 
-	/**
-	 * checks if url matches main referrer in settings
-	 * @param url
-	 * @return {boolean}
-	 */
+function inTrusted(url) {
+  if (r.trustedListActivated) {
+    var lst = r.trustedDomains;
+    for (var i = 0; i < lst.length; i++) {
+      if (lst[i].indexOf(url) > -1) return true;
+    }
+  }
+  return false;
+}
 
-    matchesMainReferrer: function (url) {
+function inUserList(url) {
+  var lst = r.userDefinedDomains;
+  for (var i = 0; i < lst.length; i++) {
+    if (lst[i].indexOf(url) > -1) return true;
+  }
+  return false;
+}
 
-        const href = new URL(url);
-        hostnameURL = href.hostname;
+function isIP(address) {
+  const ipWithProtocol = new RegExp(
+    "^http[s]?://((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])"
+  );
+  const ipWithoutProtocol = new RegExp(
+    "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])"
+  );
+  return ipWithProtocol.test(address) || ipWithoutProtocol.test(address);
+}
 
-        var referrer = torpedoOptions.getReferrerSites(torpedo.message.folder.server);
+function getSimilarTrustedList() {
+  var similarTrustedList = r.similiarTrustedDomains;
+  var userList = r.userDefinedDomains;
 
-        var referrerDomain = referrer.domain[0];
-        var referrerPath = referrer.path[0];
-        var referrerAttribute = referrer.attribute[0];
+  for (var i = 0; i < userList.length; i++) {
+    var domainUserList = userList[i];
+    var similarDomain = domainUserList.replace("-", "");
+    similarTrustedList.push(domainUserList);
 
-        if (referrerDomain === null || referrerPath === null || referrerAttribute == null || !hostnameURL) {
-            return false;
-        }
+    var regEx = /^[0-9]+$/;
+    similarDomain = similarDomain.replace(regEx, "");
 
-        referrerDomain = referrerDomain.split("*").filter(String);
-        referrerPath = referrerPath.split("[...]").filter(String);
+    if (similarDomain.length >= 4) similarTrustedList.push(similarDomain);
+  }
 
-        var containsDomain = referrerDomain.every(function (el) {
-            return hostnameURL.includes(el);
-        }, hostnameURL);
-        if (containsDomain) {
-            var containsPath = referrerPath.every(function (el) {
-                return url.includes(el);
-            }, url);
-            if (containsPath && url.includes(referrerAttribute)) {
-                return true;
-            }
-        }
-        return false;
+  return similarTrustedList;
+}
 
-    },
+/**
+ * checks if the domain of the url is similar to a domain name in the green or blue list
+ * @param url
+ * @return {boolean}
+ */
 
-    /**
-    * checks if the domain of the url is similar to a domain name in the green or blue list
-    * @param url
-    * @return {boolean}
-    */
+function isDomainExtension(domain) {
+  var domainWithoutTLD = domain.split(".")[0];
+  var similarTrustedList = getSimilarTrustedList();
 
-    isDomainExtension: function (url) {
-        var domain = torpedo.functions.getDomainWithFFSuffix(url);
-        var domainWithoutTLD = domain.split(".")[0];
-        var similarOkDomainList = torpedoOptions.getSimilarOkDomainList();
+  var okDomainList = r.trustedDomains;
+  var userList = r.userDefinedDomains;
 
-        var okDomains = torpedo.prefs.getStringPref("URLDefaultList") + torpedo.prefs.getStringPref("URLSecondList");
-        var okDomainList = okDomains.split(",");
-        okDomainList = okDomainList.concat(similarOkDomainList);
+  okDomainList = okDomainList.concat(userList);
+  okDomainList = okDomainList.concat(similarTrustedList);
 
-        for (var j = 0; j < okDomainList.length; j++) {
-            var okDomain = okDomainList[j];
-            var okDomainSplit = okDomainList[j].split(".");
-            var okDomainWithoutTLD = okDomainSplit[0];
+  for (var j = 0; j < okDomainList.length; j++) {
+    var okDomain = okDomainList[j];
+    var okDomainSplit = okDomainList[j].split(".");
+    var okDomainWithoutTLD = okDomainSplit[0];
 
-            //check if a domain from the green, blue, or ok domain similar list was shortened and used in the link, e.g. immobilienscout.co.uk -> immobilienscout24.de
-            if (okDomain.includes(domainWithoutTLD)) {
-                var domainTLD = eTLDService.getPublicSuffixFromHost(domain);
-                var domain2TLD = eTLDService.getPublicSuffixFromHost(okDomain);
+    //check if a domain from the green, blue, or ok domain similar list was shortened and used in the link, e.g. immobilienscout.co.uk -> immobilienscout24.de
+    if (okDomain.includes(domainWithoutTLD)) {
+      var domainTLD = extractTLDfromDomain(domain);
+      var domain2TLD = extractTLDfromDomain(okDomain);
 
-                if (domainTLD != domain2TLD && domainTLD != "de" && domainTLD != "com") {
-                    return true;
-                }
-            };
-            // does the link domain include a domain name from the green/blue list or from the ok domain similar list, e.g google-shop includes google
-            if (domain.includes(okDomainWithoutTLD) && okDomainWithoutTLD != "" && domainWithoutTLD != okDomainWithoutTLD) {
-                return true;
-            }
-        }
-        return false;
-    },
+      if (domainTLD != domain2TLD && domainTLD != "de" && domainTLD != "com") {
+        return true;
+      }
+    }
+    // does the link domain include a domain name from the green/blue list or from the ok domain similar list, e.g google-shop includes google
+    if (
+      domain.includes(okDomainWithoutTLD) &&
+      okDomainWithoutTLD != "" &&
+      domainWithoutTLD != okDomainWithoutTLD
+    ) {
+      return true;
+    }
+  }
+  return false;
 }
