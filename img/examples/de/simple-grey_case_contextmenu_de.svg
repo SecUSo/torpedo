@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 576 348" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <style>
+        #contextmenu {
+        -webkit-animation: glow 10s 2s infinite ease-in-out;
+                animation: glow 10s 2s infinite ease-in-out;
+        }
+
+        #open-settings {
+        -webkit-animation: mark 10s 2s infinite ease-in-out;
+                animation: mark 10s 2s infinite ease-in-out;
+        }
+
+        @-webkit-keyframes glow {
+        0% {
+            opacity: 0;
+        }
+        2% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 1;
+        }
+        52% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 0;
+        }
+        }
+
+        @keyframes glow {
+        0% {
+            opacity: 0;
+        }
+        2% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 1;
+        }
+        52% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 0;
+        }
+        }
+
+        @-webkit-keyframes mark {
+        10% {
+            fill: black;
+        }
+        12% {
+            fill: red;
+        }
+        40% {
+            fill: red;
+        }
+        42% {
+            fill: black;
+        }
+        }
+
+        @keyframes mark {
+        10% {
+            fill: black;
+        }
+        12% {
+            fill: red;
+        }
+        40% {
+            fill: red;
+        }
+        42% {
+            fill: black;
+        }
+        }
+
+    </style>
+    <g transform="matrix(1,0,0,1,-1244,-92)">
+        <g id="simple-grey_case_contextmenu_de" transform="matrix(1,0,0,1,1223.22,-861.75)">
+            <g id="border_template" transform="matrix(4.87356,0,0,3.5867,-149.336,870.674)">
+                <path d="M153,31.394C153,30.625 152.54,30 151.974,30L36.026,30C35.46,30 35,30.625 35,31.394L35,118.606C35,119.375 35.46,120 36.026,120L151.974,120C152.54,120 153,119.375 153,118.606L153,31.394Z" style="fill:white;"/>
+                <path d="M153,31.394C153,30.625 152.54,30 151.974,30L36.026,30C35.46,30 35,30.625 35,31.394L35,118.606C35,119.375 35.46,120 36.026,120L151.974,120C152.54,120 153,119.375 153,118.606L153,31.394ZM36.231,31.673L36.231,118.327L151.769,118.327L151.769,31.673L36.231,31.673Z" style="fill:rgb(191,185,185);"/>
+            </g>
+            <g transform="matrix(1,0,0,1,-3,-2)">
+                <text x="26.239px" y="969.476px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;fill:rgb(25,90,206);">h<tspan x="35.878px 40.467px 45.056px 54.695px 63.316px 67.904px 72.493px 77.081px 89.734px 102.387px 114.038px 118.626px 124.216px 136.869px 141.458px 151.097px 156.687px 166.327px 175.967px 184.587px 194.227px 203.866px 213.506px 218.095px 227.734px 237.374px 241.963px 250.583px 265.247px 273.868px 278.456px 288.601px 298.241px 302.829px 308.419px 318.059px 327.699px 332.287px 336.876px 340.454px 344.032px 353.672px 362.293px 366.881px " y="969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px 969.476px ">ttps://www.rwth-aachen.de/cms/~a/root/lidx/1</tspan></text>
+                <rect x="26.239" y="971.398" width="350.282" height="1.329" style="fill:rgb(25,90,206);"/>
+            </g>
+            <g id="text_in_border" transform="matrix(1,0,0,1,-16.2752,651.512)">
+                <g id="URL_optimized_readability" transform="matrix(1,0,0,1,0,-3)">
+                    <text x="57px" y="399px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">https://www</text>
+                    <text x="149.79px" y="399px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">.</text>
+                    <text x="158.825px" y="399px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:18.149px;">r<tspan x="169.88px 187.99px 198.026px 213.105px 223.141px 237.227px 251.313px 265.399px 280.478px 294.564px 309.642px 318.677px 333.756px " y="399px 399px 399px 399px 399px 399px 399px 399px 399px 399px 399px 399px 399px ">wth-aachen.de</tspan></text>
+                    <text x="347.842px" y="399px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">/cms/~a/root/lidx/1</text>
+                </g>
+                <g id="first_line" transform="matrix(1,0,0,1,-2.25699,0)">
+                    <text x="58px" y="362px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">Hinterlegte URL<tspan x="186.44px 191.483px " y="362px 362px "> (</tspan>auch W<tspan x="258.725px 268.818px " y="362px 362px ">eb</tspan>adresse genannt):</text>
+                </g>
+                <g transform="matrix(1,0,0,1,-5.45944,-3)">
+                    <text x="62px" y="434.787px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:18.149px;">U<tspan x="75.233px 86.446px 97.659px 107.88px 118.1px 128.321px 139.533px 150.746px 156.917px 167.137px 177.358px 182.527px 195.761px 200.93px 211.15px 216.32px 226.54px 237.753px " y="434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px ">nbekanntes Risiko:</tspan></text>
+                    <text x="249.093px" y="434.787px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"><tspan x="249.093px 262.326px 272.547px 281.748px 286.917px 300.151px 304.31px 313.511px 317.67px 326.872px 337.092px 342.261px 347.431px 357.651px 363.822px 368.991px 379.211px 389.432px 398.633px 403.803px 416.035px 420.194px 424.353px 433.554px 442.755px 452.976px 463.196px 468.366px 478.586px 488.806px 493.976px 499.145px 509.365px 519.586px 529.806px 534.976px 545.196px 549.355px 559.576px " y="434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px ">Das Risiko für das Klicken auf den Link</tspan></text>
+                    <text x="62px" y="458.53px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">k<tspan x="71.201px 81.422px 91.642px 101.863px 107.032px 117.252px 121.411px 130.613px 140.833px 146.003px 151.172px 161.392px 171.613px 180.814px 185.983px 190.142px 205.387px 220.632px 225.802px 230.971px 244.204px 254.425px 260.595px 270.816px 281.036px 291.257px 296.426px 301.595px 313.827px 317.986px 328.207px 333.376px 348.621px 358.842px 368.043px 377.244px 387.465px 397.685px 402.854px 413.075px 417.234px 427.454px 433.625px 438.794px 449.015px 459.235px 468.436px 473.606px 486.839px 490.998px 500.2px 504.359px 513.56px 523.78px 528.95px 538.151px 548.371px 552.531px 562.751px 571.952px " y="458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px ">ann nicht bestimmt werden. Sie müssen hier das Risiko selbst</tspan></text>
+                    <text x="62px" y="482.272px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">e<tspan x="72.22px 76.38px 86.6px 95.801px 100.971px 111.191px 116.36px 126.581px 136.801px 141.97px 147.14px 160.373px 164.532px 174.753px 180.923px 190.125px 200.345px 205.514px 215.735px 221.905px 232.126px 237.295px 247.516px 257.736px 262.905px 275.137px 279.296px 289.517px 294.686px 304.907px 309.066px 319.286px 324.455px 337.689px 347.909px 363.154px 373.375px 377.534px " y="482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px ">instufen. Hierzu prüfen Sie die Domain</tspan></text>
+                    <text x="62px" y="506.014px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">(</text>
+                    <text x="68.171px" y="506.014px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:18.149px;">f<tspan x="74.341px 84.562px 90.732px 96.903px 102.072px 113.285px 123.506px 130.696px 140.916px 152.129px 159.319px 170.532px 180.752px 191.965px 203.178px 214.391px 224.611px 235.824px 246.045px 253.234px 258.404px 271.637px 281.857px 289.047px 299.268px 304.437px 314.657px " y="506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px ">ett hervorgehobener Bereich</tspan></text>
+                    <text x="325.87px" y="506.014px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">)<tspan x="332.041px " y="506.014px ">.</tspan></text>
+                </g>
+                <g transform="matrix(1,0,0,1,14.875,-257.954)">
+                    <text x="40.921px" y="853px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">D<tspan x="54.155px 64.375px 70.546px 75.715px 85.935px 90.094px 100.315px 109.516px 114.686px 127.919px 138.139px 144.31px 154.53px 164.751px 169.92px 180.141px 190.361px 200.581px 209.783px 214.952px 219.111px 228.313px 232.472px 242.692px 248.863px 254.032px 259.201px 264.371px 274.591px 284.811px 300.056px 304.215px 309.385px 314.554px 326.786px 330.945px 341.166px 346.335px 356.555px 360.714px 370.935px 376.104px 389.338px 399.558px 414.803px 425.023px 429.182px 439.403px 444.572px 448.731px 458.952px 464.121px 477.354px 487.575px 497.795px 508.016px 513.185px 523.405px 529.576px 539.796px 544.966px 555.186px 565.407px " y="853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px ">er Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.</tspan></text>
+                </g>
+                <g transform="matrix(1,0,0,1,16.1954,-253.707)">
+                    <text x="40.921px" y="884.54px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;">V<tspan x="52.17px 62.409px 68.597px 78.836px 83.013px 93.252px 97.429px 107.668px 117.906px 128.145px 138.383px 148.622px 153.809px 165.04px 175.279px 179.456px 184.644px 189.831px 195.019px 205.257px 210.445px 222.695px 232.933px 242.153px 252.391px 262.63px 272.869px 283.107px 289.296px 299.535px 305.723px " y="884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px ">erbleibende Zeit: 2 Sekunde(n).</tspan></text>
+                </g>
+                <g id="more_information_classification" transform="matrix(1,0,0,1,0.98364,-43.2288)">
+                    <g transform="matrix(1,0,0,1,-592.961,-556.608)">
+                        <text x="695px" y="1149.09px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:19px;">M<tspan x="710.352px 720.444px 730.536px 736.388px 741.192px 745.996px 756.088px 760.891px 770.983px 776.835px 792.188px 802.279px 807.083px 810.829px 820.921px 831.013px 841.105px 851.197px 856.001px 865.026px 875.118px 879.922px 890.013px 893.76px 903.852px 912.877px 922.968px 928.821px 933.624px 945.822px 949.568px 959.66px 968.685px 973.489px 983.581px 988.385px 998.477px 1008.57px " y="1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px ">ehr Informationen zu dieser Einstufung</tspan></text>
+                        <rect x="695" y="1151.1" width="323.661" height="1.392"/>
+                    </g>
+                    <g id="info_icon" transform="matrix(1,0,0,1,-591.961,-552.438)">
+                        <g id="information_icon_text" transform="matrix(1,0,0,1,0,0.499922)">
+                            <g transform="matrix(30,0,0,30,658.802,1148.72)">
+                                <path d="M0.199,-0C0.181,0.004 0.177,0.008 0.127,0.009C0.118,0.009 0.108,0.006 0.102,0.005C0.076,-0 0.064,-0.008 0.065,-0.018L0.065,-0.021C0.081,-0.113 0.09,-0.166 0.093,-0.181C0.103,-0.243 0.107,-0.297 0.107,-0.342C0.107,-0.352 0.103,-0.359 0.093,-0.363C0.083,-0.366 0.071,-0.368 0.056,-0.368C0.041,-0.368 0.031,-0.367 0.026,-0.367L0.028,-0.393C0.037,-0.391 0.045,-0.391 0.053,-0.391L0.077,-0.391C0.093,-0.391 0.116,-0.395 0.146,-0.403C0.177,-0.411 0.199,-0.415 0.213,-0.415C0.224,-0.415 0.231,-0.411 0.233,-0.403C0.236,-0.396 0.237,-0.388 0.237,-0.382C0.237,-0.326 0.233,-0.259 0.224,-0.179C0.218,-0.138 0.214,-0.097 0.209,-0.057L0.261,-0.068L0.266,-0.037C0.256,-0.029 0.246,-0.022 0.236,-0.017C0.226,-0.011 0.212,-0.003 0.199,-0Z" style="fill:rgb(10,20,87);fill-rule:nonzero;"/>
+                            </g>
+                            <g transform="matrix(1.75018,0,0,1.75018,-498.398,-849.473)">
+                                <circle cx="664.369" cy="1132.35" r="1.333" style="fill:rgb(10,20,87);"/>
+                            </g>
+                        </g>
+                        <g transform="matrix(0.9375,0,0,0.9375,41.6198,72.1875)">
+                            <circle cx="663" cy="1139" r="16" style="fill:none;stroke:rgb(10,20,87);stroke-width:3px;"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g id="contextmenu" style="opacity: 0;">
+                <g id="contextmenu-box" transform="matrix(0.967871,0,0,0.892068,-1188.8,876.26)">
+                    <path d="M1600.38,210.92C1600.38,209.616 1599.4,208.558 1598.2,208.558L1291.31,208.558C1290.11,208.558 1289.13,209.616 1289.13,210.92L1289.13,324.275C1289.13,325.579 1290.11,326.637 1291.31,326.637L1598.2,326.637C1599.4,326.637 1600.38,325.579 1600.38,324.275L1600.38,210.92Z" style="fill:white;stroke:rgb(191,185,185);stroke-width:1.73px;"/>
+                </g>
+                <g id="contextmenu-txt">
+                    <g transform="matrix(1,0,0,1,-1422.39,766.75)">
+                        <text x="1492.12px" y="316.137px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18px;">D<tspan x="1504.67px 1514.23px 1528.77px 1538.33px 1541.88px 1551.44px 1555.99px 1565.55px 1569.1px 1577.65px 1582.2px 1591.77px 1601.33px 1606.87px 1610.42px 1619.98px 1629.54px 1639.1px 1647.65px 1652.2px 1664.75px 1668.3px 1676.85px 1680.4px 1688.95px 1698.51px 1703.06px 1712.62px 1716.17px 1725.73px 1734.28px 1738.83px 1748.39px 1752.94px 1762.51px " y="316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px ">omain als geringes Risiko einstufen</tspan></text>
+                    </g>
+                    <g transform="matrix(1,0,0,1,-1422.39,791.16)">
+                        <text x="1492.12px" y="316.137px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18px;">Ü<tspan x="1504.67px 1514.23px 1523.79px 1529.33px 1538.89px 1544.44px 1554px 1558.55px 1568.11px 1572.66px 1585.21px 1594.77px 1609.32px 1618.88px 1622.42px 1631.99px 1636.54px 1651.08px 1654.63px 1659.18px 1663.73px 1673.29px 1682.85px 1692.41px 1701.97px 1705.52px 1715.08px 1719.63px 1728.18px 1737.75px " y="316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px ">berprüfe Domain mit google.com</tspan></text>
+                    </g>
+                    <g transform="matrix(1,0,0,1,-1422.39,815.57)">
+                        <text id="open-settings" x="1492.12px" y="316.137px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18px;">E<tspan x="1503.67px 1507.22px 1516.78px 1525.33px 1529.88px 1539.44px 1542.99px 1546.54px 1556.1px 1565.66px 1575.23px 1584.79px 1594.35px 1598.9px 1608.46px 1617.62px 1627.18px 1636.75px " y="316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px ">instellungen öﬀnen</tspan></text>
+                    </g>
+                    <g transform="matrix(1,0,0,1,-1422.39,839.98)">
+                        <text x="1492.12px" y="316.137px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18px;">T<tspan x="1502px 1511.56px 1516.11px 1525.67px 1531.21px 1534.76px 1544.32px 1547.87px 1552.42px 1561.98px 1571.15px 1580.71px 1590.27px " y="316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px 316.137px ">utorial öﬀnen</tspan></text>
+                    </g>
+                </g>
+            </g>
+            <g id="mouse_cursor" transform="matrix(0.600152,0,0,0.600152,-123.051,892.958)">
+                <path d="M353,272C353.833,273.715 355.845,275.407 357,277.292C358.544,279.815 362.266,287.133 362.266,287.133C362.266,287.133 364.95,291.689 367,293C369.05,294.311 372.233,295 374.566,295C376.812,295 379.134,294.25 381,293C383.239,291.5 386.774,289.064 388,286C389.333,282.667 389,276.833 389,273C389,269.65 388.588,264.878 388,263C386.962,259.685 382.287,260.866 382.357,262.065C382.507,264.632 382.434,266.133 382.434,266.133C382.434,266.133 382.572,261.355 382,260C381.533,258.893 380.031,258 379,258C377.969,258 375.532,258.29 375.816,260C376.1,261.71 375.816,266 375.816,266C375.816,266 376.119,261.5 375.816,260C375.585,258.854 374.803,257.5 374,257C373.197,256.5 371.769,256.862 371,257C370.405,257.107 369.388,257.829 369.388,257.829L369.434,266C369.434,266 369.426,247.097 368.96,245.231C368.394,242.967 362.732,242.649 361.96,245.231C361.187,247.812 362,272 362,272C362,272 357.188,265.357 356,265C354.812,264.643 352.277,264.877 352,267C351.723,269.123 352.257,270.471 353,272Z" style="fill:white;stroke:black;stroke-width:2.03px;"/>
+            </g>
+        </g>
+    </g>
+</svg>
