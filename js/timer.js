@@ -19,10 +19,10 @@ function countdown(time, state) {
       tooltip.find("#torpedoTimer")[0].remove();
       $(
         '<p id="torpedoTimer">' +
-          chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
-          "</p>"
+        chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
+        "</p>"
       ).appendTo(tooltip);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   // deactivate link (on page and on tooltip)
@@ -54,7 +54,7 @@ function countdown(time, state) {
       event.preventDefault();
       return false;
     });
-  } catch (e) {}
+  } catch (e) { }
 
   showTime();
   if (time > 0) time--;
@@ -71,11 +71,11 @@ function countdown(time, state) {
         eventTypes.forEach(function (eventType) {
           $(torpedo.target).unbind(eventType);
         });
-        eventTypes.forEach(function (eventType) {
-          $(torpedo.target).bind(eventType, function (event) {
-            processClick();
-          });
+
+        $(torpedo.target).bind("click", function (event) {
+          processClick();
         });
+
         try {
           $(tooltip.find("#torpedoURL")[0]).unbind("click");
           $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
@@ -93,7 +93,7 @@ function countdown(time, state) {
             processClick();
             return false;
           });
-        } catch (e) {}
+        } catch (e) { }
       } else {
         $(tooltip.find("#torpedoActivateLinkButton")[0]).prop(
           "disabled",
