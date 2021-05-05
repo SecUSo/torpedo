@@ -44,8 +44,8 @@ function getSecurityStatus(storage, storage_local) {
     } else {
       return "T31";
     }
-  } else if (torpedo.countRedirect == 1) {
-    if (torpedo.redirectMatching) {
+  } else if (torpedo.countRedirect >= 1) {
+    if (r.redirectModeActivated) {
       if (!isMismatch(torpedo.domain)) {
         return "T31";
       } else {
@@ -54,14 +54,6 @@ function getSecurityStatus(storage, storage_local) {
     } else {
       return "T32";
     }
-  } else if (r.redirectModeActivated) {
-    if (!isMismatch(torpedo.domain)) {
-      return "T31";
-    } else {
-      return "T32";
-    }
-  } else {
-    return "T32";
   }
 }
 

@@ -2,7 +2,6 @@ var torpedo = torpedo || {};
 torpedo.tooltip;
 torpedo.countRedirect = 0;
 torpedo.countShortURL;
-torpedo.redirectMatching;
 torpedo.oldDomain = "";
 torpedo.oldUrl = "";
 
@@ -60,7 +59,6 @@ function initTooltip() {
   var tooltip = torpedo.tooltip;
   torpedo.countRedirect = 0;
   torpedo.countShortURL = 0;
-  torpedo.redirectMatching = false;
   torpedo.oldDomain = torpedo.domain;
   torpedo.oldUrl = torpedo.url;
 
