@@ -121,7 +121,6 @@ function openTooltip(e, type) {
         position: {
           my: "top left",
           at: "bottom left",
-          viewport: true,
           target: $(torpedo.target),
           adjust: {
             y: 0,

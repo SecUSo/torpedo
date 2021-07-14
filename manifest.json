@@ -3,11 +3,11 @@
   "author": "SECUSO",
   "applications": {
     "gecko": {
-      "id": "{53319828-3750-4619-836e-10f3c736a61f}"
+      "id": "torpedo@tu-darmstadt.de"
     }
   },
   "name": "__MSG_extensionName__",
-  "version": "3.0.1",
+  "version": "3.0.3",
   "default_locale": "de",
   "description": "__MSG_extensionDescription__",
   "background": {
