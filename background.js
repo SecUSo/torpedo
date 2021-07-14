@@ -590,10 +590,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       showTutorial();
       break;
     case "google":
-      var website = "http://google.de/#q=" + request.url;
-      chrome.tabs.create({
-        url: website,
-      });
+      var website = "https://google.de/?q=" + request.url;
+      browser.windows.openDefaultBrowser(website);
       break;
     case "open":
       browser.windows.openDefaultBrowser(request.url);
