@@ -575,6 +575,7 @@ function addEvents() {
   });
 }
 
+// checks if that change in ui has been saved as a recently commited change
 function save(list, value) {
   var i = 0;
   for (i = 0; i < changes.length; i++) {
