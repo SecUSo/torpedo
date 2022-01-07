@@ -16,7 +16,7 @@ function getSecurityStatus(storage, storage_local) {
     try {
       const href = new URL(referrerURL);
       setNewUrl(href);
-    } catch (e) { }
+    } catch (e) {}
 
     referrerURL = matchReferrer(torpedo.url);
     torpedo.countRedirect++;
@@ -37,7 +37,7 @@ function getSecurityStatus(storage, storage_local) {
   } else if (inUserList(torpedo.domain)) {
     return "T2";
   } else if (torpedo.progUrl || torpedo.hasTooltip || isIP(torpedo.url)) {
-    return "T33";
+    return "T32";
   } else if (torpedo.countRedirect == 0) {
     if (isMismatch(torpedo.domain)) {
       return "T32";
@@ -101,7 +101,10 @@ function isMismatch(domain) {
     const uri = new URL(displayedLinkText);
     var displayedLinkTextDom = extractDomain(uri.hostname);
 
-    if (displayedLinkTextDom != torpedo.oldDomain && displayedLinkTextDom != domain) {
+    if (
+      displayedLinkTextDom != torpedo.oldDomain &&
+      displayedLinkTextDom != domain
+    ) {
       return true;
     }
   } catch (e) {
@@ -111,7 +114,12 @@ function isMismatch(domain) {
 }
 
 function isTooltipMismatch(tooltipURL, hrefURL) {
-  if (tooltipURL == "" || tooltipURL == undefined || hrefURL == "" || hrefURL == undefined) {
+  if (
+    tooltipURL == "" ||
+    tooltipURL == undefined ||
+    hrefURL == "" ||
+    hrefURL == undefined
+  ) {
     return false;
   }
   try {
