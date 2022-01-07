@@ -161,99 +161,95 @@ function assignText(state, url, tooltip) {
  * fill the basic tooltip structure with corresponding texts
  */
 function updateTooltip() {
-  // Values of sync storage (r) and local storage (re) are relevant for further processing
+  // Values of sync storage (r) are relevant for further processing
   chrome.storage.sync.get(null, function (r) {
-    chrome.storage.local.get("dangerousDomains", function (re) {
-      // check for security level
-      var state = getSecurityStatus(r, re);
+    // check for security level
+    var state = getSecurityStatus(r);
 
-      var t = torpedo.tooltip;
-      var url = torpedo.url;
-      var pathname = torpedo.pathname;
+    var t = torpedo.tooltip;
+    var url = torpedo.url;
+    var pathname = torpedo.pathname;
 
-      if (pathname.length > 100) {
-        var replace = pathname.substring(0, 100) + "...";
-        url = url.replace(pathname, replace);
-      }
-      $(t.find("#torpedoURL")[0]).html(
-        url.replace(
-          torpedo.domain,
-          '<span id="torpedoDomain">' + torpedo.domain + "</span>"
-        )
-      );
+    if (pathname.length > 100) {
+      var replace = pathname.substring(0, 100) + "...";
+      url = url.replace(pathname, replace);
+    }
+    $(t.find("#torpedoURL")[0]).html(
+      url.replace(
+        torpedo.domain,
+        '<span id="torpedoDomain">' + torpedo.domain + "</span>"
+      )
+    );
 
-      assignText(state, url, t);
+    assignText(state, url, t);
 
-      if (
-        r.referrerPart1.indexOf(torpedo.domain) > -1 ||
-        r.userDefinedDomains.indexOf(torpedo.domain) > -1 ||
-        r.trustedDomains.indexOf(torpedo.domain) > -1 ||
-        r.redirectDomains.indexOf(torpedo.domain) > -1
-      ) {
-        $(t.find("#torpedoMarkTrusted")[0]).hide();
-      } else $(t.find("#torpedoMarkTrusted")[0]).show();
+    if (
+      r.referrerPart1.indexOf(torpedo.domain) > -1 ||
+      r.userDefinedDomains.indexOf(torpedo.domain) > -1 ||
+      r.trustedDomains.indexOf(torpedo.domain) > -1 ||
+      r.redirectDomains.indexOf(torpedo.domain) > -1
+    ) {
+      $(t.find("#torpedoMarkTrusted")[0]).hide();
+    } else $(t.find("#torpedoMarkTrusted")[0]).show();
 
-      if (isRedirect(torpedo.domain) && r.privacyModeActivated) {
-        $(torpedo.tooltip.find("#torpedoRedirectButton")[0]).show();
-      }
+    if (isRedirect(torpedo.domain) && r.privacyModeActivated) {
+      $(torpedo.tooltip.find("#torpedoRedirectButton")[0]).show();
+    }
 
-      if (state == "T4") {
-        $(torpedo.tooltip.find("#torpedoActivateLinkButton")[0]).show();
-      }
+    if (state == "T4") {
+      $(torpedo.tooltip.find("#torpedoActivateLinkButton")[0]).show();
+    }
 
-      $(t.find("#torpedoMarkTrusted")[0]).html(
-        chrome.i18n.getMessage("markAsTrusted")
-      );
-      $(t.find("#torpedoGoogle")[0]).html(
-        chrome.i18n.getMessage("googleCheck")
-      );
-      $(t.find("#torpedoOpenSettings")[0]).html(
-        chrome.i18n.getMessage("openSettings")
-      );
-      $(t.find("#torpedoOpenTutorial")[0]).html(
-        chrome.i18n.getMessage("openTutorial")
-      );
+    $(t.find("#torpedoMarkTrusted")[0]).html(
+      chrome.i18n.getMessage("markAsTrusted")
+    );
+    $(t.find("#torpedoGoogle")[0]).html(chrome.i18n.getMessage("googleCheck"));
+    $(t.find("#torpedoOpenSettings")[0]).html(
+      chrome.i18n.getMessage("openSettings")
+    );
+    $(t.find("#torpedoOpenTutorial")[0]).html(
+      chrome.i18n.getMessage("openTutorial")
+    );
 
-      $(".torpedoTooltip").removeClass(
-        "torpedoUserDefined torpedoTrusted torpedoPhish"
-      );
-      switch (state) {
-        case "T2":
-          $(".torpedoTooltip").addClass("torpedoUserDefined");
-          if (r.userTimerActivated) countdown(r.timer, state);
-          break;
-        case "T1":
-          $(".torpedoTooltip").addClass("torpedoTrusted");
-          if (r.trustedTimerActivated) countdown(r.timer, state);
-          break;
-        case "ShortURL":
-          countdown(r.timer, state);
-          break;
-        case "T33":
-          $(t.find("#torpedoMarkTrusted")[0]).show();
-          $(t.find("#torpedoWarningImage")[0]).show();
-          $(t.find("#torpedoWarningText")[0]).show();
-          countdown(r.timer, state);
-          break;
-        case "T1":
-          $(t.find("#torpedoMarkTrusted")[0]).show();
-          if (r.trustedTimerActivated) countdown(r.timer, state);
-          break;
-        case "T32":
-          $(t.find("#torpedoMarkTrusted")[0]).show();
-          $(t.find("#torpedoWarningImage2")[0]).show();
-          $(t.find("#torpedoWarningText")[0]).show();
-          countdown(r.timer, state);
-          break;
-        case "T4":
-          $(".torpedoTooltip").addClass("torpedoPhish");
-          countdown(r.timer, state);
-          break;
-        default:
-          countdown(r.timer, state);
-          break;
-      }
-    });
+    $(".torpedoTooltip").removeClass(
+      "torpedoUserDefined torpedoTrusted torpedoPhish"
+    );
+    switch (state) {
+      case "T2":
+        $(".torpedoTooltip").addClass("torpedoUserDefined");
+        if (r.userTimerActivated) countdown(r.timer, state);
+        break;
+      case "T1":
+        $(".torpedoTooltip").addClass("torpedoTrusted");
+        if (r.trustedTimerActivated) countdown(r.timer, state);
+        break;
+      case "ShortURL":
+        countdown(r.timer, state);
+        break;
+      case "T33":
+        $(t.find("#torpedoMarkTrusted")[0]).show();
+        $(t.find("#torpedoWarningImage")[0]).show();
+        $(t.find("#torpedoWarningText")[0]).show();
+        countdown(r.timer, state);
+        break;
+      case "T1":
+        $(t.find("#torpedoMarkTrusted")[0]).show();
+        if (r.trustedTimerActivated) countdown(r.timer, state);
+        break;
+      case "T32":
+        $(t.find("#torpedoMarkTrusted")[0]).show();
+        $(t.find("#torpedoWarningImage2")[0]).show();
+        $(t.find("#torpedoWarningText")[0]).show();
+        countdown(r.timer, state);
+        break;
+      case "T4":
+        $(".torpedoTooltip").addClass("torpedoPhish");
+        countdown(r.timer, state);
+        break;
+      default:
+        countdown(r.timer, state);
+        break;
+    }
   });
 }
 

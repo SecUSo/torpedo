@@ -14,7 +14,6 @@ chrome.runtime.onInstalled.addListener(function () {
         privacyModeActivated: true,
         securityModeActivated: false,
         redirectModeActivated: false,
-        blackListActivated: true,
         trustedListActivated: true,
         referrerPart1: [
           "deref-gmx.net",
@@ -438,92 +437,8 @@ chrome.runtime.onInstalled.addListener(function () {
         publicSuffixList: {},
       });
     }
-    // Initialize local storage
-    // Local storage is used because of higher storage volume
-    chrome.storage.local.set({
-      dangerousDomains: [],
-      lastCtcBlacklistRequest: 0,
-      currentCtcBlacklistVersion: 0,
-      blacklistWasUpdated: false,
-    });
   });
 });
-
-// Method for reading in the blacklist
-function readInBlacklist() {
-  // Check whether blacklist is enabled
-  chrome.storage.sync.get("blackListActivated", function (result_sync) {
-    if (result_sync.blackListActivated == true) {
-      // Read in timestamp of current version of blacklist, read in timestamp of last request to CTC server
-      chrome.storage.local.get(
-        ["lastCtcBlacklistRequest", "currentCtcBlacklistVersion"],
-        function (result_local) {
-          var currentTime = new Date().getTime();
-          var lastCtcBlacklistRequest = result_local.lastCtcBlacklistRequest;
-          var currentCtcBlacklistVersion =
-            result_local.currentCtcBlacklistVersion;
-          // Send only one request per hour to the CTC server => Avoids blocking of user IPs by the server firewall
-          if (currentTime - lastCtcBlacklistRequest > 3600000) {
-            // Send request to CTC server, HTTP request with "If-Modified-Since" header makes sure that only if the blacklist has changed the whole blacklist will be sent by the server => Reduction of required bandwith
-            lastCtcBlacklistRequest = new Date().getTime();
-            chrome.storage.local.set(
-              { lastCtcBlacklistRequest: lastCtcBlacklistRequest },
-              function () {
-                var ctcBlacklistRequest = new XMLHttpRequest();
-                ctcBlacklistRequest.open(
-                  "GET",
-                  "https://blocklist.cyberthreatcoalition.org/vetted/domain.txt",
-                  true
-                );
-                ctcBlacklistRequest.setRequestHeader(
-                  "If-Modified-Since",
-                  currentCtcBlacklistVersion
-                );
-                ctcBlacklistRequest.send(null);
-                ctcBlacklistRequest.onreadystatechange = function () {
-                  // Blacklist has changed
-                  if (
-                    ctcBlacklistRequest.readyState === 4 &&
-                    ctcBlacklistRequest.status === 200
-                  ) {
-                    // Read in new blacklist version
-                    currentCtcBlacklistVersion =
-                      ctcBlacklistRequest.getResponseHeader("Last-Modified");
-                    // Check content type whether it is suitable for further processing
-                    var contentType =
-                      ctcBlacklistRequest.getResponseHeader("Content-Type");
-                    if (contentType == "text/plain") {
-                      var dangerousDomains = [];
-                      // Read in text line by line (each line is one domain in file) and create array
-                      var extractedLines =
-                        ctcBlacklistRequest.responseText.split("\n");
-                      // Investigate each line whether it is a well formed domain and if yes, put it into array dangerousDomains
-                      for (var i = 1; i < extractedLines.length - 1; i++) {
-                        if (extractedLines[i].length <= 253) {
-                          var domainWithoutSpaces = extractedLines[i].replace(
-                            /(\r\n|\n|\r)/gm,
-                            ""
-                          );
-                          dangerousDomains.push(domainWithoutSpaces);
-                        }
-                      }
-                      // Save dangerousDomains and timestamp of current version of the CTC blacklist in chrome local storage
-                      chrome.storage.local.set({
-                        currentCtcBlacklistVersion: currentCtcBlacklistVersion,
-                        dangerousDomains: dangerousDomains,
-                        blacklistWasUpdated: true,
-                      });
-                    }
-                  }
-                };
-              }
-            );
-          }
-        }
-      );
-    }
-  });
-}
 
 function showTutorial() {
   chrome.tabs.create({
@@ -534,7 +449,6 @@ function showTutorial() {
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason == "install") {
     showTutorial();
-    readInBlacklist();
   }
 });
 
