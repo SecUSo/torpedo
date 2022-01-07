@@ -40,7 +40,7 @@ function getSecurityStatus(storage) {
     } else {
       return "T31";
     }
-  } else if (torpedo.countRedirect >= 1) {
+  } else {
     if (r.redirectModeActivated) {
       if (!isMismatch(torpedo.domain)) {
         return "T31";
