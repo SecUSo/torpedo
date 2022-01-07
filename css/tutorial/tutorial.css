@@ -260,8 +260,8 @@ header {
 
 .explanation-summary-cases > * {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 40rem;
-          flex: 1 1 40rem;
+      -ms-flex: 1 1 60rem;
+          flex: 1 1 60rem;
 }
 
 .explanation-summary-cases .show-case-card {
@@ -575,5 +575,13 @@ header {
 
 .off {
   display: none !important;
+}
+
+@media (min-width: 2200px) {
+  .explanation-summary-cases > * {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 40rem;
+            flex: 1 1 40rem;
+  }
 }
 /*# sourceMappingURL=tutorial.css.map */

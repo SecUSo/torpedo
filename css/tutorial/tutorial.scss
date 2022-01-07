@@ -218,7 +218,7 @@ header {
   @include flex(space-between, stretch, row);
   flex-wrap: wrap;
   & > * {
-    flex: 1 1 40rem;
+    flex: 1 1 60rem;
   }
   .show-case-card {
     margin: 2rem;
@@ -378,4 +378,12 @@ $flex-gap-contextmenu: 3rem;
 
 .off {
   display: none !important;
+}
+
+@media (min-width: 2200px) {
+  .explanation-summary-cases {
+    & > * {
+      flex: 1 1 40rem;
+    }
+  }
 }

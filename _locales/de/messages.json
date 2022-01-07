@@ -190,56 +190,6 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T4Ueberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
-  },
-
-  "T4Erklaerung": {
-    "message": "<span class='torpedoHighlight'>Hohes Risiko:</span> Diese Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) wurde bereits mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht. Sollten Sie dennoch der Ansicht sein, dass es sich hier um eine legitime URL handelt, dann können Sie unten auf 'Link aktivieren' klicken. Danach sollten Sie die URL nochmal sorgfältig prüfen.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T4Infotext": {
-    "message": "Die Cyber Threat Coalition hat sich zum Ziel gemacht eine Liste von betrügerischen URLs zu sammeln, die im Zusammenhang mit Phishing und Corona bzw. Covid-19 aufgetaucht sind in einer Blacklist zu sammeln. Dies geschieht aus dem Grund, da diese URLs aktuell in einer großen Menge und in sich schnell wandelnden Varianten auftreten. Wir wollen dazu einen Beitrag leisten und vorübergehend auch eine Blacklist in TORPEDO integrieren, damit Sie gegen diese URLs geschützt sind.</div>",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T4GluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T4LinkDeaktivierung": {
-    "message": "Der Link wurde deaktiviert, damit Sie in Ruhe überlegen können, ob Sie ihn aktivieren wollen.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T4aUeberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
-  },
-
-  "T4aErklaerung": {
-    "message": "Sie haben diese URL aktiviert, obwohl Sie in der Vergangenheit mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht wurde. Bitte überprüfen Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) nochmal besonders sorgfältig.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T4aInfotext": {
-    "message": "Die Cyber Threat Coalition hat sich zum Ziel gemacht eine Liste von betrügerischen URLs zu sammeln, die im Zusammenhang mit Phishing und Corona bzw. Covid-19 aufgetaucht sind in einer Blacklist zu sammeln. Dies geschieht aus dem Grund, da diese URLs aktuell in einer großen Menge und in sich schnell wandelnden Varianten auftreten. Wir wollen dazu einen Beitrag leisten und vorübergehend auch eine Blacklist in TORPEDO integrieren, damit Sie gegen diese URLs geschützt sind.</div>",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T4aGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T4aLinkDeaktivierung": {
-    "message": "Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.",
-    "description": "Text for Deactivation of the link"
-  },
-
   "ShortURLUeberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
     "description": "Header for tooltip"
@@ -350,11 +300,6 @@
     "description": "Seconds"
   },
 
-  "highRiskDomains": {
-    "message": "Domains, die auf einer Blacklist (Corona-Blacklist der Cyber Threat Coalition) stehen",
-    "description": "List of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
-  },
-
   "lowRiskDomains": {
     "message": "Domains, die von den Entwicklern als 'geringes Risiko' eingestuft wurden (grün)",
     "description": "List of trusted domains."
@@ -363,11 +308,6 @@
   "activateTimerOnLowRisk": {
     "message": "Aktiviert Verzögerung auf Domains, die vom Entwickler als niedrig riskant eingestuft wurden.",
     "description": "Activate timer on list of trusted domains."
-  },
-
-  "activateHighRiskList": {
-    "message": "Blacklist (Corona-Blacklist der Cyber Threat Coalition) aktivieren",
-    "description": "Activate list of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
   "activateLowRiskList": {
@@ -707,22 +647,6 @@
     "message": "In diesem Beispiel ist <span class='link-like'>www.rwth-aachenn.de</span> ein <span class='fat'>legitimer</span> Link. Es wird hier ein Warndreieck angezeigt, weil festgestellt wird, dass die Domain des Link-Texts nicht zu der hinterlegten Domain passt: Im Link-Text hat sich ein Tippfehler eingeschlichen. Dort steht Aachen mit zwei “n”. Dies kann wie jeder andere Tippfehler in einer E-Mail schon einmal passieren. Da die hinterlegte Domain aber die der RWTH Aachen ist, handelt es sich hier um <span class='italic'>keinen</span> Phishing Angriff.",
     "description": "Explains the image specifically for the warning_grey-case"
   },
-  "red_case_title": {
-    "message": "Roter Fall",
-    "description": "Title for the red_case tutorial"
-  },
-  "red_case_category": {
-    "message": "<span class='red fat'>Rot</span> - das Risiko des Klickens auf diesen Link wird als <span class='red'>hohes Risiko</span> eingestuft. Der Link wird als Phishing von der Cyber Threat Coalition gelistet. Das bedeutet, dass die Webseite mit Phishing im Kontext von Covid-19 aufgetreten ist. Die Blacklist wird auch von der Cyber Threat Coalition verwaltet und von uns übernommen (https://www.cyberthreatcoalition.org). Deshalb ist das Klicken auf den Link deaktiviert. Sie können den Link freischalten, indem sie auf „Link aktivieren“ klicken. Anschließend bekommen Sie nochmal einen zweiten Tooltip angezeigt mit unseren üblichen Tipps zum Prüfen von Domains. Bei Links die als Teil der aktiven Blacklist erkannt werden, kann der Link aktuell nur über den Tooltip aufgerufen werden. Ein Aufrufen über den eigentlichen Link ist blockiert.",
-    "description": "Category explanation for the red_case tutorial"
-  },
-  "red_case_context": {
-    "message": "Stellen Sie sich vor, dass Sie eine E-Mail öffnen. Die E-Mail sieht aus als käme sie von der Stadt Karlsruhe und würde Links zu Webseite der Stadt Karlsruhe beinhalten.",
-    "description": "Context which will draw the scenario simulated by the screenshot."
-  },
-  "red_case_specific_link_explanation": {
-    "message": "In dem folgenden Beispiel ist hinter “<span style='color:#00A8F3;'>Hier klicken</span>” ein Phishing-Link. Sie sehen den roten Fall, weil 247covid.info bereits als Phishing Domain bekannt ist.",
-    "description": "Explains the image specifically for the red-case"
-  },
   "example": {
     "message": "Beispiel",
     "description": "translation of example for dynamic use"
@@ -748,7 +672,7 @@
     "description": "translations for tut on configurations page"
   },
   "settings_option_1": {
-    "message": "Unter „Domains“ können Sie sowohl die integrierte Blacklist, als auch die Liste der meist besuchten Webseiten für den Grünen Fall deaktivieren. Außerdem können Sie hier auch eigene Fälle zur Liste des Blauen Fall ergänzen.",
+    "message": "Unter „Domains“ können Sie sowohl die die Liste der meist besuchten Webseiten für den Grünen Fall deaktivieren. Außerdem können Sie hier auch eigene Fälle zur Liste des Blauen Fall ergänzen.",
     "description": "translations for tut on configurations page"
   },
   "settings_option_2": {
