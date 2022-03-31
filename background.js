@@ -526,6 +526,7 @@ async function registerContentScripts() {
       // Any number of code or file objects could be listed here.
       { file: "css/jquery.qtip.min.css" },
       { file: "css/tooltip.css" },
+      { file: "css/loader/loader.css" },
     ],
 
     js: [

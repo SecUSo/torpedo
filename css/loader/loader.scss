@@ -1,0 +1,136 @@
+$size: 100px;
+$blue: rgb(6, 77, 117);
+$animation-length: 1.4s;
+$dots: (
+  "0": (
+    "x": 10 / 100 * $size,
+    "y": 66 / 100 * $size,
+  ),
+  "1": (
+    "x": 20/ 100 * $size,
+    "y": 10/ 100 * $size,
+  ),
+  "2": (
+    "x": 40/ 100 * $size,
+    "y": 20/ 100 * $size,
+  ),
+  "3": (
+    "x": 45/ 100 * $size,
+    "y": 80/ 100 * $size,
+  ),
+  "4": (
+    "x": 66/ 100 * $size,
+    "y": 25/ 100 * $size,
+  ),
+  "5": (
+    "x": 55/ 100 * $size,
+    "y": 50/ 100 * $size,
+  ),
+  "6": (
+    "x": 70/ 100 * $size,
+    "y": 70/ 100 * $size,
+  ),
+  "7": (
+    "x": 80/ 100 * $size,
+    "y": 20/ 100 * $size,
+  ),
+  "8": (
+    "x": 30/ 100 * $size,
+    "y": 40/ 100 * $size,
+  ),
+  "9": (
+    "x": 35/ 100 * $size,
+    "y": 65/ 100 * $size,
+  ),
+);
+div.loader {
+  &:not(.loader-active) {
+    display: none;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  width: $size;
+  height: $size;
+  position: relative;
+  margin: auto;
+  .dots {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    .dot {
+      position: absolute;
+      width: calc(#{$size} / 8);
+      height: calc(#{$size} / 8);
+      border-radius: 50%;
+      background-color: $blue;
+    }
+    @each $x, $val in $dots {
+      $index: index($dots, $x $val);
+      .dot-#{$x} {
+        opacity: 0;
+        @if $index > 0 and $index < 7 {
+          background-color: mix(black, $blue, ($index - 1) * 15);
+        } @else if $index >= 7 {
+          background-color: mix(white, $blue, ($index - 5) * 15);
+        }
+        left: map-get($val, $key: "x");
+        top: map-get($val, $key: "y");
+        animation: dots
+          $animation-length
+          ease-in-out
+          ($index * $animation-length / 14)
+          infinite
+          normal;
+      }
+    }
+  }
+  .lens {
+    perspective: $size * 5;
+    height: 50%;
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    img {
+      animation: loader $animation-length alternate ease-in-out infinite;
+      background: none;
+      width: auto;
+      height: auto;
+    }
+  }
+  .load-text {
+    position: absolute;
+    top: $size;
+    width: 100%;
+    margin: 1rem auto;
+    text-align: center;
+  }
+}
+@keyframes loader {
+  0% {
+    transform: rotateY(-35deg) rotateZ(-70deg) translateZ($size);
+  }
+  100% {
+    transform: rotateY(35deg) rotateZ(-30deg) translateZ($size);
+  }
+}
+
+@keyframes dots {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}

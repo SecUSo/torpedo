@@ -33,6 +33,8 @@
 }
 .qtip-content {
   background-color: white !important;
+  min-height: 100px;
+  position: relative;
 }
 div.torpedoTooltip div.torpedoTooltip div,
 div.torpedoTooltip span,
@@ -121,6 +123,10 @@ div.torpedoTooltip video {
   font: inherit;
   vertical-align: baseline;
 }
+div.torpedoTooltip .loader-active:not(.loader):not(.loader-bg) {
+  display: none;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 div.torpedoTooltip aside,
@@ -162,7 +168,7 @@ div.torpedoTooltip table {
   border: 2px solid black;
 }
 .torpedoTooltip div {
-  margin: 0 0 10px 0;
+  padding-bottom: 10px;
 }
 .torpedoTooltip p {
   overflow: hidden !important;

@@ -29,7 +29,7 @@
     "38": "img/icon38.png",
     "64": "img/icon64.png"
   },
-  "web_accessible_resources": ["img/*.png"],
+  "web_accessible_resources": ["img/*.png", "img/*.svg"],
   "content_scripts": [
     {
       "matches": [
@@ -49,7 +49,11 @@
         "https://mail.google.com/*",
         "https://owa.kit.edu/*"
       ],
-      "css": ["css/jquery.qtip.min.css", "css/tooltip.css"],
+      "css": [
+        "css/jquery.qtip.min.css",
+        "css/tooltip.css",
+        "css/loader/loader.css"
+      ],
       "js": [
         "js/jquery-3.4.1.min.js",
         "js/jquery.qtip.min.js",

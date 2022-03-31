@@ -73,12 +73,7 @@ function countdown(time, state, clickLinkEventTypes) {
    */
   function showTime() {
     try {
-      tooltip.find("#torpedoTimer")[0].remove();
-      $(
-        '<p id="torpedoTimer">' +
-          chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
-          "</p>"
-      ).appendTo(tooltip);
+      tooltip.find("#torpedoTimer")[0].textContent = chrome.i18n.getMessage("verbleibendeZeit", "" + time);
     } catch (e) {}
   }
 
