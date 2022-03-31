@@ -269,9 +269,8 @@ function updateTooltip() {
         default:
           break;
       }
+      deactivateLoader();
     });
-
-    deactivateLoader();
   });
 }
 
