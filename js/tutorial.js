@@ -28,8 +28,7 @@ const pages = {
   6: "simple-grey_case_no-phish",
   7: "warning-grey_case_phish",
   8: "warning-grey_case_no-phish",
-  9: "red_case",
-  10: "configurations",
+  9: "configurations",
 };
 const lastPage = Object.keys(pages).reduce((a, b) =>
   parseInt(a) > parseInt(b) ? parseInt(a) : parseInt(b)

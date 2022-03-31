@@ -6,9 +6,8 @@ r = null;
  * determine security status of domain by
  * looking up trusted, redirect, and user defined domains
  */
-function getSecurityStatus(storage, storage_local) {
+function getSecurityStatus(storage) {
   r = storage;
-  re = storage_local;
 
   var referrerURL = matchReferrer(torpedo.url);
 
@@ -16,7 +15,7 @@ function getSecurityStatus(storage, storage_local) {
     try {
       const href = new URL(referrerURL);
       setNewUrl(href);
-    } catch (e) { }
+    } catch (e) {}
 
     referrerURL = matchReferrer(torpedo.url);
     torpedo.countRedirect++;
@@ -29,22 +28,19 @@ function getSecurityStatus(storage, storage_local) {
       return "URLnachErmittelnButtonPrivacyMode";
     }
     return "URLnachErmittelnButton2";
-    // Check whether domain is part of blacklist => If yes, status T4
-  } else if (inBlacklist(torpedo.domain)) {
-    return "T4";
   } else if (inTrusted(torpedo.domain)) {
     return "T1";
   } else if (inUserList(torpedo.domain)) {
     return "T2";
   } else if (torpedo.progUrl || torpedo.hasTooltip || isIP(torpedo.url)) {
-    return "T33";
+    return "T32";
   } else if (torpedo.countRedirect == 0) {
     if (isMismatch(torpedo.domain)) {
       return "T32";
     } else {
       return "T31";
     }
-  } else if (torpedo.countRedirect >= 1) {
+  } else {
     if (r.redirectModeActivated) {
       if (!isMismatch(torpedo.domain)) {
         return "T31";
@@ -101,7 +97,10 @@ function isMismatch(domain) {
     const uri = new URL(displayedLinkText);
     var displayedLinkTextDom = extractDomain(uri.hostname);
 
-    if (displayedLinkTextDom != torpedo.oldDomain && displayedLinkTextDom != domain) {
+    if (
+      displayedLinkTextDom != torpedo.oldDomain &&
+      displayedLinkTextDom != domain
+    ) {
       return true;
     }
   } catch (e) {
@@ -111,7 +110,12 @@ function isMismatch(domain) {
 }
 
 function isTooltipMismatch(tooltipURL, hrefURL) {
-  if (tooltipURL == "" || tooltipURL == undefined || hrefURL == "" || hrefURL == undefined) {
+  if (
+    tooltipURL == "" ||
+    tooltipURL == undefined ||
+    hrefURL == "" ||
+    hrefURL == undefined
+  ) {
     return false;
   }
   try {
@@ -124,22 +128,6 @@ function isTooltipMismatch(tooltipURL, hrefURL) {
   } catch (e) {
     return false;
   }
-}
-
-// Method for checking whether domain is part of blacklist
-function inBlacklist(url) {
-  // Only relevant if blacklist is enabled => otherwise return false
-  if (r.blackListActivated) {
-    var lst = re.dangerousDomains;
-    // Iterate through array and determine whether domain is part of array entry => If yes, return true
-    for (var i = 0; i < lst.length; i++) {
-      if (lst[i] == url) {
-        return true;
-      }
-    }
-  }
-  // Domain is not part of blacklist or blacklist is not enabled
-  return false;
 }
 
 function inTrusted(url) {

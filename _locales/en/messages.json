@@ -190,56 +190,6 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T4Ueberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
-  },
-
-  "T4Erklaerung": {
-    "message": "<div class='torpedoHighlight'>High risk:</div> This domain (<div class='torpedoHighlight'>bold area</div>) has already been associated with phishing about Corona or Covid-19. However, if you believe that this is a legitimate URL you may click on 'Activate Link' below. You should then carefully check the URL again.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T4Infotext": {
-    "message": "The Cyber Threat Coalition aims to collect a list of fraudulent URLs that have appeared in connection with phishing and Corona or Covid-19 in a blacklist. This is because these URLs are currently appearing in a large number and in rapidly changing variants. We want to contribute to this and temporarily integrate a blacklist into TORPEDO so that you are protected against these URLs.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T4GluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T4LinkDeaktivierung": {
-    "message": "The link was deactivated so that you can take your time to consider whether you want to activate it.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T4aUeberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
-  },
-
-  "T4aErklaerung": {
-    "message": "You have activated this URL, although it has been associated with phishing in the past on the subject of Corona or Covid-19. Please check the domain (<span class='torpedoHighlight'>bold area</span>) again very carefully.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T4aInfotext": {
-    "message": "The Cyber Threat Coalition aims to collect a list of fraudulent URLs that have appeared in connection with phishing and Corona or Covid-19 in a blacklist. This is because these URLs are currently appearing in a large number and in rapidly changing variants. We want to contribute to this and temporarily integrate a blacklist into TORPEDO so that you are protected against these URLs.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T4aGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T4aLinkDeaktivierung": {
-    "message": "The link was deactivated to give you time to check the domain.",
-    "description": "Text for Deactivation of the link"
-  },
-
   "ShortURLUeberschrift": {
     "message": "Referred URL (also known as web address):",
     "description": "Header for tooltip"
@@ -355,11 +305,6 @@
     "description": "Seconds"
   },
 
-  "highRiskDomains": {
-    "message": "Domains which are listed as dangerous (Corona-Blacklist of the Cyber Threat Coalition is used)",
-    "description": "List of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
-  },
-
   "lowRiskDomains": {
     "message": "Domains the developer considered as 'low-risk' (green)",
     "description": "Activate timer on list of trusted domains."
@@ -368,11 +313,6 @@
   "activateTimerOnLowRisk": {
     "message": "Activate timer on domains the developer considered as 'low-risk' (green border).",
     "description": "Activate timer on list of trusted domains."
-  },
-
-  "activateHighRiskList": {
-    "message": "Activate Blacklist (Corona-Blacklist of Cyber Threat Coalition)",
-    "description": "Activate list of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
   "activateLowRiskList": {
@@ -712,22 +652,6 @@
     "message": "In this example <span class='link-like'>www.youtubee.com</span> is a <span class='fat'>legitimate</span> link. The warning symbol is displayed since the link text does not match the domain of the deposited link: the link text contains a typo. YouTube is spelled with two “e” instead of just one. Typos happen in emails. Since the domain of the deposited link is from YouTube this is <span class='italic'>not</span> a phishing attack.",
     "description": "Explains the image specifically for the warning_grey-case"
   },
-  "red_case_title": {
-    "message": "Red Case",
-    "description": "Title for the red_case tutorial"
-  },
-  "red_case_category": {
-    "message": "<span class='red fat'>Red</span> – the risk of clicking the link <span class='red'>is rated as high</span>. This website is listed as a phishing website by the Cyber Threat Coalition. This means that the website has been associated with phishing in the context of Covid-19. The blacklist is administered by the Cyber Threat Coalition (https://www.cyberthreatcoalition.org). To avoid unintentional security breaches/problems, clicking the link is not possible. You may activate the link manually by clicking the button “activate link”.",
-    "description": "Category explanation for the red_case tutorial"
-  },
-  "red_case_context": {
-    "message": "Imagine you open an email. The email looks like it came from amazon and contains links to the website of amazon.",
-    "description": "Context which will draw the scenario simulated by the screenshot."
-  },
-  "red_case_specific_link_explanation": {
-    "message": "In this example ”<span style='color:#00A8F3;'>Click here</span>“ is a phishing link. The red case is active because this domain has been associated with phishing in the past and is therefore known to Google.",
-    "description": "Explains the image specifically for the red-case"
-  },
   "example": {
     "message": "Example",
     "description": "translation of example for dynamic use"
@@ -753,7 +677,7 @@
     "description": "translations for tut on configurations page"
   },
   "settings_option_1": {
-    "message": "\"Domains\" lets you deactivate both the integrated blacklist and the list of most visited websites for the green case. You can also add your own cases to the Blue Case list here.",
+    "message": "\"Domains\" lets you deactivate the list of most visited websites for the green case. You can also add your own cases to the Blue Case list here.",
     "description": "translations for tut on configurations page"
   },
   "settings_option_2": {
