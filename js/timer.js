@@ -19,10 +19,10 @@ function countdown(time, state) {
       tooltip.find("#torpedoTimer")[0].remove();
       $(
         '<p id="torpedoTimer">' +
-        chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
-        "</p>"
+          chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
+          "</p>"
       ).appendTo(tooltip);
-    } catch (e) { }
+    } catch (e) {}
   }
 
   // deactivate link (on page and on tooltip)
@@ -54,7 +54,7 @@ function countdown(time, state) {
       event.preventDefault();
       return false;
     });
-  } catch (e) { }
+  } catch (e) {}
 
   showTime();
   if (time > 0) time--;
@@ -67,56 +67,32 @@ function countdown(time, state) {
         $(torpedo.target).addClass("torpedoTimerFinished");
       }
       // reactivate link
-      if (state != "T4") {
-        eventTypes.forEach(function (eventType) {
-          $(torpedo.target).unbind(eventType);
-        });
+      eventTypes.forEach(function (eventType) {
+        $(torpedo.target).unbind(eventType);
+      });
 
-        $(torpedo.target).bind("click", function (event) {
-          processClick();
-        });
+      $(torpedo.target).bind("click", function (event) {
+        processClick();
+      });
 
-        try {
-          $(tooltip.find("#torpedoURL")[0]).unbind("click");
-          $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
-            event.preventDefault();
-            chrome.storage.sync.get(null, function (r) {
-              if (r.privacyModeActivated) {
-                chrome.runtime.sendMessage({
-                  name: "open",
-                  url: torpedo.oldUrl,
-                });
-              } else {
-                chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
-              }
-            });
-            processClick();
-            return false;
+      try {
+        $(tooltip.find("#torpedoURL")[0]).unbind("click");
+        $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
+          event.preventDefault();
+          chrome.storage.sync.get(null, function (r) {
+            if (r.privacyModeActivated) {
+              chrome.runtime.sendMessage({
+                name: "open",
+                url: torpedo.oldUrl,
+              });
+            } else {
+              chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
+            }
           });
-        } catch (e) { }
-      } else {
-        $(tooltip.find("#torpedoActivateLinkButton")[0]).prop(
-          "disabled",
-          false
-        );
-        $(tooltip.find("#torpedoActivateLinkButton")[0]).click(function () {
-          var ueberschrift = chrome.i18n.getMessage("T4aUeberschrift");
-          var erklaerung = chrome.i18n.getMessage("T4aErklaerung");
-          var gluehbirneText = chrome.i18n.getMessage("T4aGluehbirneText");
-          var linkDeaktivierung = chrome.i18n.getMessage(
-            "T4aLinkDeaktivierung"
-          );
-
-          // assign texts
-          $(tooltip.find("#torpedoWarningText")[0]).html(ueberschrift);
-          $(tooltip.find("#torpedoSecurityStatus")[0]).html(erklaerung);
-          $(tooltip.find("#torpedoMoreAdvice")[0]).html(gluehbirneText);
-          $(tooltip.find("#torpedoLinkDelay")[0]).html(linkDeaktivierung);
-
-          $(tooltip.find("#torpedoActivateLinkButton")[0]).hide();
-          countdown(r.timer, "T4a");
+          processClick();
+          return false;
         });
-      }
+      } catch (e) {}
     } else {
       --time;
     }

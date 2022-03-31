@@ -161,7 +161,7 @@ function assignText(state, url, tooltip) {
  * fill the basic tooltip structure with corresponding texts
  */
 function updateTooltip() {
-  // Values of sync storage (r) are relevant for further processing
+  // Values of sync storage (r) and local storage (re) are relevant for further processing
   chrome.storage.sync.get(null, function (r) {
     // check for security level
     var state = getSecurityStatus(r);
@@ -240,10 +240,6 @@ function updateTooltip() {
         $(t.find("#torpedoMarkTrusted")[0]).show();
         $(t.find("#torpedoWarningImage2")[0]).show();
         $(t.find("#torpedoWarningText")[0]).show();
-        countdown(r.timer, state);
-        break;
-      case "T4":
-        $(".torpedoTooltip").addClass("torpedoPhish");
         countdown(r.timer, state);
         break;
       default:
