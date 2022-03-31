@@ -12,10 +12,10 @@ function tooltipText() {
   var text =
     "<div id='torpedoWarning'> \
                 <img id='torpedoWarningImage' src='" +
-    chrome.extension.getURL("img/warning.png") +
+    chrome.runtime.getURL("img/warning.png") +
     "'> \
 				        <img id='torpedoWarningImage2' src='" +
-    chrome.extension.getURL("img/warning2.png") +
+    chrome.runtime.getURL("img/warning2.png") +
     "'> \
                 <p id='torpedoWarningText'></p>\
               </div>\
@@ -33,14 +33,14 @@ function tooltipText() {
               <div><p id='torpedoSecurityStatus'></p></div> \
               <div id='torpedoAdvice'> \
                 <img id='torpedoAdviceImage' src='" +
-    chrome.extension.getURL("img/advice.png") +
+    chrome.runtime.getURL("img/advice.png") +
     "'> \
                 <p id='torpedoAdviceText'></p> \
               </div> \
 			        <div id='torpedoAdviceDiv'><p id='torpedoMoreAdvice'></p></div> \
               <div id='torpedoInfo'>  \
                 <img id='torpedoInfoImage' src='" +
-    chrome.extension.getURL("img/info.png") +
+    chrome.runtime.getURL("img/info.png") +
     `'> \
                 <p id='torpedoInfoText'></p> \
               </div>\
@@ -263,7 +263,7 @@ function openInfoImage(event) {
     content: {
       text:
         "<img id='torpedoPopupImage' src='" +
-        chrome.extension.getURL(chrome.i18n.getMessage("infoImage")) +
+        chrome.runtime.getURL(chrome.i18n.getMessage("infoImage")) +
         "'> ",
       button: true,
     },
