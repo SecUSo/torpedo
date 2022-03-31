@@ -39,6 +39,9 @@ function openTooltip(e, type) {
   torpedo.progUrl = false;
   torpedo.hasTooltip = false;
 
+  const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+  preventClickEvent(torpedo.target, eventTypes);
+
   if (type == "a") {
     if (
       torpedo.target.href.indexOf("mailto:") > -1 ||
@@ -117,6 +120,8 @@ function openTooltip(e, type) {
           render: function (event, api) {
             torpedo.api = api;
             torpedo.tooltip = api.elements.content;
+
+            preventClickEvent(torpedo.tooltip.find("#torpedoURL")[0], ["click"]);
 
             $(torpedo.tooltip).on("mouseenter", function () {
               torpedo.opened = true;

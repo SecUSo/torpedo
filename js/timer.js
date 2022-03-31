@@ -1,10 +1,67 @@
 torpedo.timerInterval = null;
 
+function preventClickEvent(eventTarget, eventTypes) {
+  eventTypes.forEach(function (eventType) {
+    $(eventTarget).unbind(eventType);
+  });
+
+  eventTypes.forEach(function (eventType) {
+    $(eventTarget).on(eventType, function (event) {
+      event.preventDefault();
+      return false;
+    });
+  });
+}
+
+function reactivateLink(eventTarget, eventTypes) {
+  eventTypes.forEach(function (eventType) {
+    $(eventTarget).unbind(eventType);
+  });
+
+  $(torpedo.target).bind("click", function (event) {
+    processClick();
+  });
+}
+
+function reactivateTooltipURL(tooltipURL) {
+  try {
+    tooltipURL.unbind("click");
+    tooltipURL.bind("click", function (event) {
+      event.preventDefault();
+      chrome.storage.sync.get(null, function (r) {
+        if (r.privacyModeActivated) {
+          chrome.runtime.sendMessage({
+            name: "open",
+            url: torpedo.oldUrl,
+          });
+        } else {
+          chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
+        }
+      });
+      processClick();
+      return false;
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function isTimerActivated(storage, securityStatus) {
+  switch (securityStatus) {
+    case "T1":
+      return storage.trustedTimerActivated;
+    case "T2":
+      return storage.userTimerActivated;
+    default:
+      return true;
+  }
+}
+
 /**
  * countdown function for the temporal deactivation of URLs
  */
 
-function countdown(time, state) {
+function countdown(time, state, clickLinkEventTypes) {
   if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
 
   var tooltip = torpedo.tooltip;
@@ -25,12 +82,8 @@ function countdown(time, state) {
     } catch (e) {}
   }
 
-  // deactivate link (on page and on tooltip)
-  const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
   $(torpedo.target).addClass("torpedoTimerShowing");
-  eventTypes.forEach(function (eventType) {
-    $(torpedo.target).unbind(eventType);
-  });
+
   const onWebsite = new URL(window.location.href);
   if (onWebsite.hostname === "owa.kit.edu") {
     $(
@@ -41,20 +94,6 @@ function countdown(time, state) {
       once script from owa can be used to remove eventlistener properly - insert here
     */
   }
-  eventTypes.forEach(function (eventType) {
-    $(torpedo.target).on(eventType, function (event) {
-      event.preventDefault();
-      return false;
-    });
-  });
-
-  try {
-    $(tooltip.find("#torpedoURL")[0]).unbind("click");
-    $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
-      event.preventDefault();
-      return false;
-    });
-  } catch (e) {}
 
   showTime();
   if (time > 0) time--;
@@ -66,33 +105,9 @@ function countdown(time, state) {
       if (!isRedirect(torpedo.domain) && state != "T4" && state != "T4a") {
         $(torpedo.target).addClass("torpedoTimerFinished");
       }
-      // reactivate link
-      eventTypes.forEach(function (eventType) {
-        $(torpedo.target).unbind(eventType);
-      });
 
-      $(torpedo.target).bind("click", function (event) {
-        processClick();
-      });
-
-      try {
-        $(tooltip.find("#torpedoURL")[0]).unbind("click");
-        $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
-          event.preventDefault();
-          chrome.storage.sync.get(null, function (r) {
-            if (r.privacyModeActivated) {
-              chrome.runtime.sendMessage({
-                name: "open",
-                url: torpedo.oldUrl,
-              });
-            } else {
-              chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
-            }
-          });
-          processClick();
-          return false;
-        });
-      } catch (e) {}
+      reactivateLink(torpedo.target, clickLinkEventTypes);
+      reactivateTooltipURL($(tooltip.find("#torpedoURL")[0]));
     } else {
       --time;
     }

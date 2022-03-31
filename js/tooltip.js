@@ -55,13 +55,13 @@ function tooltipText() {
 }
 
 function initTooltip() {
-  // context menu
   var tooltip = torpedo.tooltip;
   torpedo.countRedirect = 0;
   torpedo.countShortURL = 0;
   torpedo.oldDomain = torpedo.domain;
   torpedo.oldUrl = torpedo.url;
 
+  // context menu
   $(tooltip).contextmenu(function (event) {
     $(tooltip.find("#torpedoContextMenu")[0]).toggle(); // .toggle() switches between displaying and hiding items
     $(tooltip.find("#torpedoContextMenu")[0]).css({ position: "absolute" });
@@ -214,36 +214,28 @@ function updateTooltip() {
     $(".torpedoTooltip").removeClass(
       "torpedoUserDefined torpedoTrusted torpedoPhish"
     );
+    const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+
+    if(isTimerActivated(r, state)) {
+      countdown(r.timer, state, eventTypes);
+    } else {
+      reactivateLink(torpedo.target, eventTypes);
+    }
+
     switch (state) {
       case "T2":
         $(".torpedoTooltip").addClass("torpedoUserDefined");
-        if (r.userTimerActivated) countdown(r.timer, state);
         break;
       case "T1":
         $(".torpedoTooltip").addClass("torpedoTrusted");
-        if (r.trustedTimerActivated) countdown(r.timer, state);
-        break;
-      case "ShortURL":
-        countdown(r.timer, state);
-        break;
-      case "T33":
         $(t.find("#torpedoMarkTrusted")[0]).show();
-        $(t.find("#torpedoWarningImage")[0]).show();
-        $(t.find("#torpedoWarningText")[0]).show();
-        countdown(r.timer, state);
-        break;
-      case "T1":
-        $(t.find("#torpedoMarkTrusted")[0]).show();
-        if (r.trustedTimerActivated) countdown(r.timer, state);
         break;
       case "T32":
         $(t.find("#torpedoMarkTrusted")[0]).show();
         $(t.find("#torpedoWarningImage2")[0]).show();
         $(t.find("#torpedoWarningText")[0]).show();
-        countdown(r.timer, state);
         break;
       default:
-        countdown(r.timer, state);
         break;
     }
   });
