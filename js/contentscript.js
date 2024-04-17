@@ -40,11 +40,16 @@ function openTooltip(e, type) {
   torpedo.hasTooltip = false;
 
   const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+
+  // do not prevent click event on mailto links
+  if (type == "a") {
+    if (torpedo.target.href.indexOf("mailto:") > -1)
+      return;
+  }
   preventClickEvent(torpedo.target, eventTypes);
 
   if (type == "a") {
     if (
-      torpedo.target.href.indexOf("mailto:") > -1 ||
       torpedo.opened ||
       $(torpedo.target).hasClass("qtip-close")
     )
@@ -52,7 +57,7 @@ function openTooltip(e, type) {
     if (torpedo.target.href == "") {
       try {
         $(torpedo.target).attr("href", e.relatedTarget.href);
-      } catch (err) {}
+      } catch (err) { }
     }
   }
 
