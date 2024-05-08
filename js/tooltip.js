@@ -347,22 +347,25 @@ function setNewUrl(uri) {
  */
 function processClick() {
   chrome.storage.sync.get(null, function (r) {
-    var domains = r.onceClickedDomains;
-    // was domain clicked before ?
-    if (domains.indexOf(torpedo.domain) > -1) {
-      // remove domain from once clicked domains
-      var index = domains.indexOf(torpedo.domain);
-      domains.splice(index, 1);
-      chrome.storage.sync.set({ onceClickedDomains: domains });
-      // add domain to user defined domains
-      domains = r.userDefinedDomains;
-      domains[domains.length] = torpedo.domain;
-      chrome.storage.sync.set({ userDefinedDomains: domains });
-    }
-    // add domain to once clicked domains
-    else {
-      domains[domains.length] = torpedo.domain;
-      chrome.storage.sync.set({ onceClickedDomains: domains });
+    // check if not already in user defined or trusted domain lists
+    if (r.userDefinedDomains.indexOf(torpedo.domain) == -1 && r.trustedDomains.indexOf(torpedo.domain) == -1) {
+      var domains = r.onceClickedDomains;
+      // was domain clicked before ?
+      if (domains.indexOf(torpedo.domain) > -1) {
+        // remove domain from once clicked domains
+        var index = domains.indexOf(torpedo.domain);
+        domains.splice(index, 1);
+        chrome.storage.sync.set({ onceClickedDomains: domains });
+        // add domain to user defined domains
+        domains = r.userDefinedDomains;
+        domains[domains.length] = torpedo.domain;
+        chrome.storage.sync.set({ userDefinedDomains: domains });
+      }
+      // add domain to once clicked domains
+      else {
+        domains[domains.length] = torpedo.domain;
+        chrome.storage.sync.set({ onceClickedDomains: domains });
+      }
     }
   });
 }
