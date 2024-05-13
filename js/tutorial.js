@@ -19,16 +19,15 @@ let overviewVisible = true;
     same name as css class; "-" in css, "_" in js
 */
 const pages = {
-  0: "beta_notice",
-  1: "welcome",
-  2: "explanation",
-  3: "green_case",
-  4: "blue_case",
-  5: "simple-grey_case_phish",
-  6: "simple-grey_case_no-phish",
-  7: "warning-grey_case_phish",
-  8: "warning-grey_case_no-phish",
-  9: "configurations",
+  0: "welcome",
+  1: "explanation",
+  2: "green_case",
+  3: "blue_case",
+  4: "simple-grey_case_phish",
+  5: "simple-grey_case_no-phish",
+  6: "warning-grey_case_phish",
+  7: "warning-grey_case_no-phish",
+  8: "configurations",
 };
 const lastPage = Object.keys(pages).reduce((a, b) =>
   parseInt(a) > parseInt(b) ? parseInt(a) : parseInt(b)
@@ -122,13 +121,6 @@ function init() {
   // see if we want overview or not
   activateCurrentPageElements();
   // at beginning for language´
-  // page 'beta'
-  $("#beta-title").html(getMsg("beta_title"));
-  $("#beta-introduction-txt").html(getMsg("beta_introduction_txt"));
-  $("#beta-key-point-1").html(getMsg("beta_key_point_1"));
-  $("#beta-key-point-2").html(getMsg("beta_key_point_2"));
-  $("#beta-feedback-hint").html(getMsg("beta_feedback_hint"));
-  $("#beta-txt").html(getMsg("beta_txt"));
 
   // page 'welcome'
   $("#welcome-title").html(getMsg("welcome_title"));
