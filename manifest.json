@@ -11,15 +11,17 @@
   "default_locale": "de",
   "description": "__MSG_extensionDescription__",
   "background": {
-    "scripts": ["js/jquery-3.4.1.min.js", "js/punycode.min.js", "background.js"]
+    "scripts": [
+      "js/jquery-3.4.1.min.js",
+      "js/punycode.min.js",
+      "background.js"
+    ]
   },
   "permissions": [
     "<all_urls>",
     "tabs",
     "storage",
-    "messagesRead",
-    "messagesModify",
-    "compose"
+    "messagesModify"
   ],
   "options_ui": {
     "page": "options.html",
@@ -29,43 +31,8 @@
     "38": "img/icon38.png",
     "64": "img/icon64.png"
   },
-  "web_accessible_resources": ["img/*.png", "img/*.svg"],
-  "content_scripts": [
-    {
-      "matches": [
-        "https://mg.mail.yahoo.com/*",
-        "https://mail.yahoo.com/*",
-        "https://email.t-online.de/*",
-        "https://outlook.live.com/*",
-        "https://mail.aol.com/*",
-        "https://navigator.web.de/*",
-        "https://bap.navigator.web.de/*",
-        "https://3c-bap.web.de/*",
-        "https://3c.web.de/*",
-        "https://bap.navigator.gmx.net/*",
-        "https://navigator.gmx.net/*",
-        "https://3c.gmx.net/*",
-        "https://3c-bap.gmx.net/*",
-        "https://mail.google.com/*",
-        "https://owa.kit.edu/*"
-      ],
-      "css": [
-        "css/jquery.qtip.min.css",
-        "css/tooltip.css",
-        "css/loader/loader.css"
-      ],
-      "js": [
-        "js/jquery-3.4.1.min.js",
-        "js/jquery.qtip.min.js",
-        "js/punycode.min.js",
-        "js/contentscript.js",
-        "js/publicsuffixlist.js",
-        "js/timer.js",
-        "js/tooltip.js",
-        "js/status.js",
-        "js/redirect.js"
-      ],
-      "all_frames": true
-    }
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.svg"
   ]
 }
