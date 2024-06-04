@@ -1,45 +1,5 @@
 # TORPEDO - TOoltip-poweRed Phishing Email DetectiOn
 
-## Development of TORPEDO
-
-###### Deutsch / German
-
-Sehr geehrte Nutzerinnen und Nutzer,
-
-Wir möchten über aktuellen Entwicklungstand von TORPEDO informieren.
-TORPEDO für Thunderbird ist gerade auf dem Weg eine vollwertige Webextension zu werden.
-Leider unterstützt Thunderbird Webextensions noch nicht in der Form, die wir uns gewünscht hätten.
-Deshalb haben wir uns nach einer längeren Wartezeit zu folgenden Schritten entschieden:
-
-- Die Funktionalität kann nur für Thunderbird 87.0b3 und aufwärts garantiert werden
-- Wir stellen diese Thunderbird Version sowieso die dazugehörige TORPEDO Version auch auf unserer Webseite zu Verfügung
-
-Über Feedback zu Problemen oder anderen Sachen die auffallen, sind wir weiterhin sehr dankbar (torpedo@secuso.org).
-Wir hoffen mit dem nächsten großen Update von Thunderbird auch ein vollständiges TORPEDO bereitstellen zu können.
-
-Solange bedanken wir uns bei den Nutzerinnern und Nutzern
-
-Ihre Forschungsgruppe SECUSO
-
-###### Englisch / English
-
-Dear users,
-
-We would like to inform you about the current development status of TORPEDO.
-TORPEDO for Thunderbird is on its way to become a full-fledged web extension.
-Unfortunately Thunderbird does not yet support webextension in the way we would have liked.
-Therefore, after a long wait, we have decided to take the following steps:
-
-- The functionality can only be guaranteed for Thunderbird 87.0b3 and upwards
-- We provide this Thunderbird version with the corresponding TORPEDO version on our website
-
-Feedback on problems or other things that stand out, we are still very grateful (torpedo@secuso.org).
-We hope to provide a complete TORPEDO with the next major update of Thunderbird.
-
-Until then we would like to thank all our users
-
-Your research group SECUSO
-
 ## Download
 
 Das Add-on kann von der offiziellen [Add-on Webseite](https://addons.mozilla.org/de/thunderbird/addon/torpedo-phishing-detection/) von Mozilla heruntergeladen werden.
