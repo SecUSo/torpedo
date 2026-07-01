@@ -1,3 +1,6 @@
+> :warning: :warning: :warning: **Please note:** Moved: The TORPEDO Thunderbird extension has been merged with the Browser Version of TORPEDO. Both are now developed together in [the new repository](https://github.com/SecUSo/TORPEDO-Webextension)
+
+> :warning: :warning: :warning: **Bitte beachten:** Umgezogen: Das Add-On TORPEDO für Thunderbird wurde mit TORPEDO Browser zusammengelegt. Beide versionen werden nun im [neuen Repository](https://github.com/SecUSo/TORPEDO-Webextension) weiter entwickelt.
 # TORPEDO - TOoltip-poweRed Phishing Email DetectiOn
 
 ## Download
